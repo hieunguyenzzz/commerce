@@ -88,7 +88,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
                 </Link>
                 <div className="absolute left-0 top-0 pt-32 hidden w-full group-hover:block ">
                   <Container className="w-full grid grid-cols-7 gap-6 py-6 shadow-lg bg-accents-0 relative">
-                    {new Array(megamenu).map((megamenu, i) => {
+                    {new Array(5).fill(megamenu).map((megamenu, i) => {
                       {
                         const item = megamenu[i]
                         if (!item || !item.length) return null
@@ -101,12 +101,12 @@ const Navbar: FC<Props> = ({ transparent }) => {
                             <div className="uppercase text-sm font-semibold">
                               {title}
                             </div>
-                            {rest.map((menu, i) => (
+                            {rest.map((menu: any, i: any) => (
                               <div
                                 key={i}
                                 className={cn(s.link, 'inline-block')}
                               >
-                                {menu}
+                                {menu as any}
                               </div>
                             ))}
                           </div>
