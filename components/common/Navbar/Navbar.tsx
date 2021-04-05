@@ -10,6 +10,54 @@ import NavbarRoot from './NavbarRoot'
 export interface Props {
   transparent?: boolean
 }
+const megamenuImage = '/mega-menu.png'
+const megamenu = [
+  [
+    'HEADER',
+    'Header v1',
+    'Header v2',
+    'Header v3',
+    'Header v4',
+    'Header v5',
+    'Header v6',
+    'Header v7',
+    'Header v8',
+    'Header v9',
+    'Header v10',
+  ],
+  ['FOOTER', 'Footer v1', 'Footer v2', 'Footer v3', 'Footer v4', 'Footer v5'],
+  [
+    'PRODUCT',
+    'Product v1 – Classic',
+    'Product v2 – Slider',
+    'Product v3 – Zoom',
+    'Product v4 – Fadein',
+    'Product v5 – Simple',
+  ],
+  [
+    'ELEMENTS',
+    'Accordion',
+    'Pricing Table',
+    'Google Maps',
+    'Message Box',
+    'Progress Bars',
+    'Charts',
+    'Icon Box',
+    'Product Tabs',
+    'Products Grid',
+  ],
+  [
+    'ELEMENTS 2',
+    'Tabs',
+    'Video Players',
+    'Team',
+    'Buttons',
+    'Testimonials',
+    'Social Icons',
+    'Blog Posts',
+  ],
+  [''],
+]
 const Navbar: FC<Props> = ({ transparent }) => {
   const { openSidebar, setModalView } = useUI()
   return (
@@ -40,16 +88,31 @@ const Navbar: FC<Props> = ({ transparent }) => {
                 </Link>
                 <div className="absolute left-0 top-0 pt-32 hidden w-full group-hover:block ">
                   <Container className="w-full grid grid-cols-7 gap-6 py-6 shadow-lg bg-accents-0 relative">
-                    {new Array(5).fill(
-                      <div className="leading-extra-loose  flex flex-col items-start space-y-3">
-                        <div className="uppercase text-sm font-semibold">
-                          Group
-                        </div>
-                        {new Array(8).fill(
-                          <div className={cn(s.link, 'inline-block')}>Item</div>
-                        )}
-                      </div>
-                    )}
+                    {new Array(megamenu).map((megamenu, i) => {
+                      {
+                        const item = megamenu[i]
+                        if (!item || !item.length) return null
+                        const [title, ...rest] = item
+                        return (
+                          <div
+                            key={i}
+                            className="leading-extra-loose  flex flex-col items-start space-y-3"
+                          >
+                            <div className="uppercase text-sm font-semibold">
+                              {title}
+                            </div>
+                            {rest.map((menu, i) => (
+                              <div
+                                key={i}
+                                className={cn(s.link, 'inline-block')}
+                              >
+                                {menu}
+                              </div>
+                            ))}
+                          </div>
+                        )
+                      }
+                    })}
                     <div className="col-span-2 h-96"></div>
                     <div className="absolute bottom-0 right-0 w-96 h-96">
                       <Image
@@ -57,7 +120,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
                         width={800}
                         height={800}
                         objectFit="cover"
-                        src="/mega-menu.png"
+                        src={megamenuImage}
                       ></Image>
                     </div>
                   </Container>
