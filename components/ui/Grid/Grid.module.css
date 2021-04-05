@@ -2,18 +2,14 @@
   --row-height: calc(100vh - 88px);
   @apply grid grid-cols-1 gap-0;
   min-height: var(--row-height);
-
-  @screen lg {
-    @apply grid-cols-3 grid-rows-2;
-  }
+  @apply lg:grid-cols-3 lg:grid-rows-2;
 
   & > * {
     @apply row-span-1 bg-transparent box-border overflow-hidden;
     height: 500px;
     max-height: 800px;
-
+    @apply lg:col-span-1;
     @screen lg {
-      @apply col-span-1;
       height: inherit;
     }
   }
@@ -38,10 +34,7 @@
   & > *:nth-child(6n + 5) {
     @apply row-span-2;
     height: var(--row-height);
-
-    @screen lg {
-      @apply col-span-2;
-    }
+    @apply lg:col-span-2;
   }
 
   &.filled {
@@ -69,10 +62,7 @@
   & > *:nth-child(6n + 4) {
     @apply row-span-2;
     height: var(--row-height);
-
-    @screen lg {
-      @apply col-span-2;
-    }
+    @apply lg:col-span-2;
   }
 
   &.filled {
@@ -99,10 +89,7 @@
   & > *:nth-child(12n + 8) {
     @apply row-span-2;
     height: var(--row-height);
-
-    @screen lg {
-      @apply col-span-2;
-    }
+    @apply lg:col-span-2;
   }
 
   &.filled {
@@ -127,10 +114,7 @@
   & > *:nth-child(12n + 7) {
     @apply row-span-2;
     height: var(--row-height);
-
-    @screen lg {
-      @apply col-span-2;
-    }
+    @apply lg:col-span-2;
   }
 
   &.filled {

@@ -79,6 +79,9 @@ module.exports = {
   variants: {
     extend: {
       translate: ['active', 'group-hover'],
+      display: ['active', 'group-hover'],
+      margin: ['group-hover'],
+      pointerEvents: ['group-hover'],
     },
     lineClamp: ['responsive', 'hover', 'focus'],
   },

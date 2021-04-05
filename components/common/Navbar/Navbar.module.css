@@ -9,7 +9,7 @@
 }
 
 .link {
-  @apply inline-flex items-center text-sm transition ease-in-out duration-75 cursor-pointer relative overflow-hidden leading-extra-loose;
+  @apply capitalize inline-flex items-center text-sm transition ease-in-out duration-75 cursor-pointer relative overflow-hidden leading-extra-loose;
 }
 .link:after {
   content: '';
