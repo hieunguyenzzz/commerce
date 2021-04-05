@@ -19,9 +19,7 @@ module.exports = {
       maxWidth: {
         '8xl': '1920px',
       },
-      fontFamily: {
-        prata: ['"Prata"', 'serif', 'Georgia'],
-      },
+      fontFamily: {},
       colors: {
         primary: 'var(--primary)',
         'primary-2': 'var(--primary-2)',
@@ -72,6 +70,8 @@ module.exports = {
         xl: '1.4rem',
         '2xl': '1.6rem',
         '3xl': '1.8rem',
+        header: '60px',
+        'header-lg': '120px',
       },
     },
   },

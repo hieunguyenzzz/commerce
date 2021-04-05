@@ -9,6 +9,9 @@ const isBC = provider === 'bigcommerce'
 const isShopify = provider === 'shopify'
 
 module.exports = withCommerceConfig({
+  future: {
+    webpack5: true,
+  },
   commerce,
   i18n: {
     locales: ['en-US', 'es'],

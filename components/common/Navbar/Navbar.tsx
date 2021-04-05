@@ -62,8 +62,8 @@ const Navbar: FC<Props> = ({ transparent }) => {
   const { openSidebar, setModalView } = useUI()
   return (
     <NavbarRoot transparent={transparent}>
-      <Container>
-        <div className="flex justify-center py-4 align-center md:py-6  lg:h-32 space-x-12">
+      <Container className="w-full">
+        <div className="flex w-full py-4 items-center align-center space-x-12">
           <div className="flex-1 lg:flex-none flex items-center">
             <div
               onClick={() => {
@@ -86,7 +86,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
                 <Link href="/home">
                   <a className={cn(s.link, 'z-10')}>home</a>
                 </Link>
-                <div className="absolute left-0 top-0 pt-32 hidden w-full group-hover:block ">
+                <div className="absolute left-0 top-0 pt-header hidden w-full group-hover:block ">
                   <Container className="w-full grid grid-cols-7 gap-6 py-6 shadow-lg bg-accents-0 relative">
                     {new Array(5).fill(megamenu).map((megamenu, i) => {
                       {
