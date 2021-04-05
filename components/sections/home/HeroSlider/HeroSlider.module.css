@@ -20,7 +20,9 @@
 }
 
 .dot {
-  @apply bg-accents-5 transition w-2 h-2 rounded-full;
+  @apply bg-accents-5 transition  rounded-full;
+  width: 6px;
+  height: 6px;
 }
 
 .positionIndicator:hover .dot {
