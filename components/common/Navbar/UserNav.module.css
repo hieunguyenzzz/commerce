@@ -1,8 +1,8 @@
 .root {
-  @apply relative;
-  display: flex;
+  @apply relative flex items-center;
+
   & svg {
-    font-size: 1.6rem;
+    @apply text-xl;
     stroke-width: 1.2;
   }
 }

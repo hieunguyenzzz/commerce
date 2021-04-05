@@ -125,16 +125,40 @@ export default function Home({
     <div className="w-full space-y-12">
       <div className="relative w-full overflow-hidden">
         <HeroSlider list={hero}></HeroSlider>
-        <div className="absolute inset-0">
-          <Container className="pointer-events-none w-full h-full">
+        <div className="absolute inset-0 pointer-events-none">
+          <Container className="w-full h-full">
             <div className="w-full h-full relative">
               <div
                 style={{ width: '100vh', '--tw-translate-x': '22px' } as any}
                 className="pointer-events-auto absolute left-full top-0 flex transform rotate-90 origin-top-left"
               >
                 <div className="flex-1"></div>
-                <div className="flex-1">socials</div>
-                <div className="flex-1">srolldown</div>
+                <div className="flex-1 flex justify-center items-center">
+                  socials
+                </div>
+                <div className="flex-1 flex justify-items-end px-12">
+                  <div>srolldown</div>
+                  <span className="text-xl mr-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlnsXlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      width="32px"
+                      height="32px"
+                      viewBox="0 0 32 32"
+                      enableBackground="new 0 0 32 32"
+                      xmlSpace="preserve"
+                    >
+                      {' '}
+                      <g>
+                        {' '}
+                        <rect fill="none" width={32} height={32} />{' '}
+                        <path d="M17,18V4h-2v14H9l7,10l7-10H17z M15.96,24.512L12.841,20H19h0.079L15.96,24.512z" />{' '}
+                      </g>{' '}
+                    </svg>
+                  </span>
+                </div>
               </div>
             </div>
           </Container>

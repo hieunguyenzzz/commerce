@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react'
-import s from './Countdown.module.css'
 interface Props {
   date: string
 }
@@ -46,7 +45,7 @@ const Countdown: FC<Props> = ({ date }) => {
       <div className="flex flex-col items-center space-y-4">
         <div
           style={{ minWidth: '2em' }}
-          className="text-center text-xl md:text-3xl xl:text-5xl font-prata font-light"
+          className="text-center text-xl md:text-3xl xl:text-5xl font-light"
         >
           {days}{' '}
         </div>
@@ -58,7 +57,7 @@ const Countdown: FC<Props> = ({ date }) => {
       <div className="flex flex-col items-center space-y-4">
         <div
           style={{ minWidth: '2em' }}
-          className="text-center text-xl md:text-3xl xl:text-5xl font-prata font-light"
+          className="text-center text-xl md:text-3xl xl:text-5xl font-light"
         >
           {hours}
         </div>
@@ -70,7 +69,7 @@ const Countdown: FC<Props> = ({ date }) => {
       <div className="flex flex-col items-center space-y-4">
         <div
           style={{ minWidth: '2em' }}
-          className="text-center text-xl md:text-3xl xl:text-5xl font-prata font-light"
+          className="text-center text-xl md:text-3xl xl:text-5xl font-light"
         >
           {minutes}
         </div>
@@ -82,7 +81,7 @@ const Countdown: FC<Props> = ({ date }) => {
       <div className="flex flex-col items-center space-y-4">
         <div
           style={{ minWidth: '2em' }}
-          className="text-center text-xl md:text-3xl xl:text-5xl font-prata font-light"
+          className="text-center text-xl md:text-3xl xl:text-5xl font-light"
         >
           {seconds}
         </div>
