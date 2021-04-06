@@ -129,8 +129,8 @@ const Navbar: FC<Props> = ({ transparent }) => {
                 Helendo
               </a>
             </Link>
-            <div className="space-x-12 hidden lg:flex items-center">
-              <div className="group">
+            <div className="space-x-12 h-header-lg hidden lg:flex items-center">
+              <div className="group flex items-center h-header-lg">
                 <Link href="/home">
                   <a className={cn(s.link, 'z-10')}>home</a>
                 </Link>
@@ -181,7 +181,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
                   </Container>
                 </div>
               </div>
-              <div className="group">
+              <div className="group flex items-center h-header-lg">
                 <Link href="/shop">
                   <a className={cn(s.link, 'z-10')}>shop</a>
                 </Link>
@@ -227,7 +227,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
                   </Container>
                 </div>
               </div>
-              <div className="group">
+              <div className="group flex items-center h-header-lg">
                 <Link href="/features">
                   <a className={cn(s.link, 'z-10')}>features</a>
                 </Link>
@@ -271,11 +271,11 @@ const Navbar: FC<Props> = ({ transparent }) => {
                   </Container>
                 </div>
               </div>
-              <div className="group">
+              <div className="group flex items-center h-header-lg relative">
                 <Link href="/pages">
                   <a className={cn(s.link, 'z-10')}>pages</a>
                 </Link>
-                <div className="absolute top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto transform translate-x-1/2 opacity-0 group-hover:pointevent group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
+                <div className="absolute top-0 left-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto transform -translate-x-1/2 opacity-0 group-hover:pointevent group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
                   <Container className="text-xs flex flex-col py-6 shadow-lg bg-accents-0 relative space-y-3">
                     {new Array(5).fill(pagesMenu).map((menu, i) => {
                       {
