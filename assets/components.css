@@ -3,18 +3,18 @@
 }
 
 .text-effect-1 {
-  @apply inline overflow-hidden;
+  @apply inline overflow-hidden relative;
   &:after {
     content: '';
     position: absolute;
     right: 0;
     bottom: 0;
     width: 0;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid currentColor;
     transition: width 0.3s;
   }
   &:hover:after {
-    @apply text-primary;
+    @apply text-current;
     width: 100%;
     left: 0;
   }
