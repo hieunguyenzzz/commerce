@@ -6,7 +6,6 @@ import Article from '@components/sections/home/Article'
 import HeroSlider from '@components/sections/home/HeroSlider'
 import Subscribe from '@components/subscribe/Subscribe'
 import { Button, Container } from '@components/ui'
-import Link from '@components/ui/Link'
 import { getConfig } from '@framework/api'
 import getAllPages from '@framework/common/get-all-pages'
 import getSiteInfo from '@framework/common/get-site-info'
@@ -104,8 +103,8 @@ export async function getStaticProps({
           </>
         ),
         content: `The standard chunk of Lorem Ipsum used since the 1500s is
-        reproduced for those. Sections 1.10.32 and 1.10.33 from “de
-        Finibus Bonorum et Malorum`,
+    reproduced for those. Sections 1.10.32 and 1.10.33 from “de
+    Finibus Bonorum et Malorum`,
         date: 'Jan 5, 2022 15:37:25',
         path: '#',
       },
@@ -114,14 +113,61 @@ export async function getStaticProps({
     revalidate: 14400,
   }
 }
-
+const featured = [
+  ['Living Room', 'Find Your Favorite', 'Explore Now'],
+  ['Kitchen', 'Your Future Favorites', 'Shop Now'],
+  ['Bedroom', 'Comfort is A Place Called Home', 'Explore Now'],
+  ['Bathroom', 'All New, Picked Just For You', 'See Our News'],
+  ['Accessories', 'Great Design Accessible For All', 'Explore Now'],
+].map(([label, title, actionText], i) => ({
+  label,
+  title,
+  actionText,
+  column: i < 2 ? 'left' : 'right',
+}))
 export default function Home({
   hero,
-  featured,
-  countdown,
+  products,
   bestSelling,
   blogs,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const renderFeaturedItem = (
+    { label, title, actionText, column }: any,
+    i: number
+  ) => {
+    const image = products[i].images[0].url || placeholderImg
+    return (
+      <Container key={i + 1} className="relative">
+        <div className="flex px-4 items-center justify-center w-full flex-shrink-0 flex-col relative">
+          <Image
+            className="w-full bg-accents-2"
+            width={600}
+            height={800}
+            objectFit="cover"
+            quality="85"
+            src={image}
+            alt={title || 'Product Image'}
+          />
+          <div className="w-full flex flex-col justify-center space-y-2 mt-6">
+            <div className="text-xl">{title}</div>
+            <div>
+              <Button variant="link">{actionText}</Button>
+            </div>
+          </div>
+          {column === 'left' && (
+            <div className="absolute text-sm top-0 leading-6 -left-2 transform -rotate-90 -translate-x-full origin-top-right">
+              {label}
+            </div>
+          )}
+          {column === 'right' && (
+            <div className="absolute text-sm top-0 leading-6 right-4 transform -rotate-90 origin-top-right">
+              {label}
+            </div>
+          )}
+        </div>
+      </Container>
+    )
+  }
   return (
     <div className="w-full space-y-12">
       <div className="relative w-full overflow-hidden">
@@ -172,7 +218,7 @@ export default function Home({
                       behavior: 'smooth',
                     })
                   }}
-                  className="flex-1 flex flex-col justify-items-end py-12  cursor-pointer"
+                  className="flex-1 flex flex-col justify-items-end py-12 cursor-pointer"
                 >
                   <div className="relative flex-1">
                     <div
@@ -209,126 +255,26 @@ export default function Home({
           </Container>
         </div>
       </div>
-      {featured &&
-        featured.map((product, i) => {
-          const left = i % 2 === 0
-          if (left) {
-            return (
-              <Container key={i + 1} className="bg-accents-0">
-                <div className="flex items-center w-full lg:py-6 flex-shrink-0 flex-col md:flex-row bg-accents-0 relative">
-                  <div className="flex bg-accents-0 relative items-center lg:w-1/2 w-full h-full object-cover">
-                    <div style={{ paddingTop: '100%', width: '100%' }} />
-                    <Image
-                      layout="fill"
-                      objectFit="contain"
-                      quality="85"
-                      src={product.images[0].url || placeholderImg}
-                      alt={product.name || 'Product Image'}
-                    />
-                  </div>
-                  <div className="relative lg:w-1/2 w-full flex flex-col justify-center">
-                    <Title small subTitle="FEATURED PRODUCT">
-                      {product.name}
-                    </Title>
-                    <div className="w-full">
-                      <p
-                        className="mt-6 max-w-sm lg:mx-w-lg xl:max-w-xl lg:text-lg xl:text-xl"
-                        dangerouslySetInnerHTML={{
-                          __html: product.description,
-                        }}
-                      ></p>
-                    </div>
-                    <div className="mt-6">
-                      <Link href={product.path || '#'}>
-                        <Button secondary>
-                          Only
-                          <span>
-                            {' '}
-                            {product.price.value}
-                            &nbsp;
-                            {product.price.currencyCode}
-                          </span>
-                          <svg
-                            className="inline-block ml-2 text-xl"
-                            stroke="currentColor"
-                            fill="none"
-                            strokeWidth={0}
-                            viewBox="0 0 24 24"
-                            height="1em"
-                            width="1em"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M17 8l4 4m0 0l-4 4m4-4H3"
-                            />
-                          </svg>
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </Container>
-            )
-          }
-          return (
-            <div key={i + 1}>
-              <div className="flex items-center justify-center w-full  lg:py-32 flex-shrink-0 flex-col py-20 bg-accents-0 relative">
-                <div className="absolute right-0 top-0 flex bg-accents-0 items-center w-1/2 h-full object-cover">
-                  <Image
-                    layout="fill"
-                    objectFit="contain"
-                    quality="85"
-                    src={product.images[0].url || placeholderImg}
-                    alt={product.name || 'Product Image'}
-                  />
-                </div>
-                <Container className="w-full relative px-6 flex flex-col justify-center">
-                  <Title small subTitle="FEATURED PRODUCT">
-                    {product.name}
-                  </Title>
-                  <div className="w-full">
-                    <p className="mt-6 max-w-sm lg:max-w-lg xl:max-w-xl lg:text-lg xl:text-xl">
-                      Many desktop publishing packages and web page editors now
-                      use <br />
-                      Lorem Ipsum as their default model text
-                    </p>
-                  </div>
-                  <div className="mt-6">
-                    <Button secondary>
-                      Only
-                      <span>
-                        {' '}
-                        {product.price.value}
-                        &nbsp;
-                        {product.price.currencyCode}
-                      </span>
-                      <svg
-                        className="inline-block ml-2 text-xl"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeWidth={0}
-                        viewBox="0 0 24 24"
-                        height="1em"
-                        width="1em"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
-                    </Button>
-                  </div>
-                </Container>
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-0">
+        <div className="w-full col-span-1 space-y-12">
+          {featured.map(renderFeaturedItem).filter((item, i) => i < 2)}
+          <Container className="relative">
+            <div className="absolute inset-0">
+              <Image
+                layout="fill"
+                objectFit="cover"
+                src="/newsletter.png"
+              ></Image>
             </div>
-          )
-        })}
+            <div className="flex px-4 items-center justify-center w-full flex-shrink-0 flex-col relative">
+              <Subscribe />
+            </div>
+          </Container>
+        </div>
+        <div className="w-full col-span-1 space-y-12">
+          {featured.map(renderFeaturedItem).filter((item, i) => i >= 2)}
+        </div>
+      </div>
       <Container className="py-6 lg:py-12 space-y-6 lg:space-y-10">
         <Title small center>
           Best selling

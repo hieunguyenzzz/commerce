@@ -37,7 +37,7 @@
   background: transparent;
   position: relative;
   box-shadow: none;
-  @apply text-primary leading-loose text-sm  max-w-xs;
+  @apply text-primary leading-loose text-sm  max-w-xs border-none  font-normal;
   white-space: nowrap;
 }
 .link:after {

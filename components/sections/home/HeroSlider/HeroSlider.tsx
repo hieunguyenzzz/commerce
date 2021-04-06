@@ -10,16 +10,15 @@ const HeroSlider: FC<any> = ({ list }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isMounted, setIsMounted] = useState(false)
   const sliderContainerRef = useRef<HTMLDivElement>(null)
-  const [opacities, setOpacities] = React.useState<number[]>([])
   const [ref, slider] = useKeenSlider<HTMLDivElement>({
     slides: list.length,
     loop: true,
+
     mounted: () => setIsMounted(true),
     slideChanged(s) {
       setCurrentSlide(s.details().relativeSlide)
     },
   })
-  console.log(opacities)
   // Stop the history navigation gesture on touch devices
   useEffect(() => {
     const preventNavigation = (event: TouchEvent) => {
