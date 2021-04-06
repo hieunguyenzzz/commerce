@@ -33,7 +33,12 @@
   --font-sans: -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica Neue',
     'Helvetica', sans-serif;
 }
-
+:root {
+  --header-height: 60px;
+  @screen lg {
+    --header-height: 120px;
+  }
+}
 [data-theme='dark'] {
   --primary: #000000;
   --primary-2: #111;
