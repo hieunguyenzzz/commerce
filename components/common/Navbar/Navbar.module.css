@@ -9,7 +9,7 @@
 }
 
 .link {
-  @apply capitalize inline-flex items-center text-sm transition ease-in-out duration-75 cursor-pointer relative overflow-hidden leading-extra-loose;
+  @apply capitalize inline truncate text-sm transition ease-in-out duration-75 cursor-pointer relative overflow-hidden leading-extra-loose;
 }
 .link:after {
   content: '';
@@ -41,11 +41,12 @@
   }
 }
 .item {
+  @apply mr-6 cursor-pointer relative transition ease-in-out duration-100 outline-none;
   & svg {
     @apply text-xl;
     stroke-width: 1.2;
   }
-  @apply mr-6 cursor-pointer relative transition ease-in-out duration-100 outline-none;
+
   &.itemhidden {
     @apply lg:hidden;
   }

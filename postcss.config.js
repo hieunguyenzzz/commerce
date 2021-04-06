@@ -1,6 +1,6 @@
 module.exports = {
   plugins: [
-    '@tailwindcss/jit',
+    'tailwindcss',
     'postcss-nesting',
     'postcss-flexbugs-fixes',
     [
@@ -17,9 +17,3 @@ module.exports = {
     ],
   ],
 }
-// module.exports = {
-//   plugins: {
-//     '@tailwindcss/jit': {},
-//     autoprefixer: {},
-//   }
-// }

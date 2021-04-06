@@ -25,7 +25,7 @@ const UserNav: FC<Props> = ({ className }) => {
     setModalView,
     openModal,
   } = useUI()
-  const itemsCount = data?.lineItems.reduce(countItem, 0) ?? 0
+  const itemsCount = (5 || data?.lineItems.reduce(countItem, 0)) ?? 0
 
   return (
     <nav className={cn(s.root, className)}>
