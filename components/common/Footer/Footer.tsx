@@ -1,6 +1,5 @@
-import { I18nWidget } from '@components/common'
-import { Github, Vercel } from '@components/icons'
-import { Container, Logo } from '@components/ui'
+import { Subscribe3 } from '@components/subscribe/Subscribe'
+import { Container } from '@components/ui'
 import type { Page } from '@framework/common/get-all-pages'
 import getSlug from '@lib/get-slug'
 import cn from 'classnames'
@@ -19,100 +18,102 @@ const LEGAL_PAGES = ['terms-of-use', 'shipping-returns', 'privacy-policy']
 
 const Footer: FC<Props> = ({ className, pages }) => {
   const { sitePages, legalPages } = usePages(pages)
-  const rootClassName = cn(className)
+  const rootClassName = cn(s.root, className)
 
   return (
     <footer className={rootClassName}>
-      <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-accents-2 py-12  bg-accents-0 transition-colors duration-150">
-          <div className="col-span-1 lg:col-span-2">
-            <Link href="/">
-              <a className="flex flex-initial items-center font-bold md:mr-24">
-                <span className="rounded-full border border-gray-700 mr-2">
-                  <Logo />
-                </span>
-                <span>ACME</span>
-              </a>
-            </Link>
+      <Container className="py-12">
+        <div className="grid grid-cols-10 text-accents-2 gap-6  transition-colors duration-150">
+          <div className="space-y-3 space-y-6 col-span-full lg:col-span-3">
+            <a className=" font-semibold transition ease-in-out duration-150 text-xl">
+              Helendo
+            </a>
+            <p className=" leading-loose text-accents-6 text-sm">
+              69 Halsey St, Ny 10002, New York, United States
+              <br />
+              support.center@unero.co
+            </p>
+            <p className=" leading-loose text-accents-6 text-sm">
+              (0091) 8547 632521
+            </p>
           </div>
-          <div className="col-span-1 lg:col-span-2">
-            <ul className="flex flex-initial flex-col md:flex-1">
+          <div className="col-span-5 lg:col-span-2">
+            <ul className="flex flex-initial flex-col md:flex-1 text-sm">
               <li className="py-3 md:py-0 md:pb-4">
                 <Link href="/">
-                  <a className="  hover:text-accents-6 transition ease-in-out duration-150">
+                  <a className="  text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
                     Home
                   </a>
                 </Link>
               </li>
               <li className="py-3 md:py-0 md:pb-4">
-                <Link href="/">
-                  <a className="  hover:text-accents-6 transition ease-in-out duration-150">
+                <Link href="/careers">
+                  <a className="  text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
                     Careers
                   </a>
                 </Link>
               </li>
               <li className="py-3 md:py-0 md:pb-4">
                 <Link href="/blog">
-                  <a className="  hover:text-accents-6 transition ease-in-out duration-150">
+                  <a className="  text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
                     Blog
                   </a>
                 </Link>
               </li>
-              {sitePages.map((page) => (
-                <li key={page.url} className="py-3 md:py-0 md:pb-4">
-                  <Link href={page.url!}>
-                    <a className="  hover:text-accents-6 transition ease-in-out duration-150">
-                      {page.name}
-                    </a>
-                  </Link>
-                </li>
-              ))}
             </ul>
           </div>
-          <div className="col-span-1 lg:col-span-2">
-            <ul className="flex flex-initial flex-col md:flex-1">
-              {legalPages.map((page) => (
-                <li key={page.url} className="py-3 md:py-0 md:pb-4">
-                  <Link href={page.url!}>
-                    <a className="  hover:text-accents-6 transition ease-in-out duration-150">
-                      {page.name}
-                    </a>
-                  </Link>
-                </li>
-              ))}
+          <div className="col-span-5 lg:col-span-2">
+            <ul className="flex flex-initial flex-col md:flex-1 text-sm">
+              {['all', 'clothes', 'accessories', 'shoes'].map((string) => {
+                return (
+                  <li key={string} className="py-3 md:py-0 md:pb-4">
+                    <Link href={`/${string}`}>
+                      <a className="  text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
+                        {string}
+                      </a>
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           </div>
-          <div className="col-span-1 lg:col-span-6 flex items-start lg:justify-end ">
-            <div className="flex space-x-6 items-center h-10">
-              <a
-                aria-label="Github Repository"
-                href="https://github.com/vercel/commerce"
-                className={s.link}
-              >
-                <Github />
-              </a>
-              <I18nWidget />
-            </div>
+          <div className="col-span-full lg:col-span-3 flex items-start lg:justify-end ">
+            <Subscribe3 />
           </div>
         </div>
-        <div className="py-12 flex flex-col md:flex-row justify-between items-center space-y-4">
+        <div className="py-12 text-accents-2 flex flex-col md:flex-row justify-between items-center space-y-4">
+          <ul className="flex  md:flex-1 text-sm space-x-6">
+            <li className="py-3 md:py-0 md:pb-4">
+              <Link href="/">
+                <a className="text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
+                  Home
+                </a>
+              </Link>
+            </li>
+            <li className="py-3 md:py-0 md:pb-4">
+              <Link href="/careers">
+                <a className="text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
+                  Careers
+                </a>
+              </Link>
+            </li>
+            <li className="py-3 md:py-0 md:pb-4">
+              <Link href="/blog">
+                <a className="text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
+                  Blog
+                </a>
+              </Link>
+            </li>
+            <li className="py-3 md:py-0 md:pb-4">
+              <Link href="/contact">
+                <a className="text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
+                  Contact us
+                </a>
+              </Link>
+            </li>
+          </ul>
           <div>
-            <span>&copy; 2020 ACME, Inc. All rights reserved.</span>
-          </div>
-          <div className="flex items-center ">
-            <span className=" ">Crafted by</span>
-            <a
-              rel="noopener"
-              href="https://vercel.com"
-              aria-label="Vercel.com Link"
-              target="_blank"
-              className=" "
-            >
-              <Vercel
-                className="inline-block h-6 ml-4 "
-                alt="Vercel.com Logo"
-              />
-            </a>
+            <span>&copy; 2020 Myteam, Inc. All rights reserved.</span>
           </div>
         </div>
       </Container>
