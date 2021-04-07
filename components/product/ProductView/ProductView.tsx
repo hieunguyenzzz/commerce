@@ -6,7 +6,6 @@ import { Heart } from '@components/icons'
 import { ProductCard, Swatch } from '@components/product'
 import { Button, Container, Text, useUI } from '@components/ui'
 import Link from '@components/ui/Link'
-import WishlistButton from '@components/wishlist/WishlistButton'
 import { useAddItem } from '@framework/cart'
 import usePrice from '@framework/product/use-price'
 import { NextSeo } from 'next-seo'
@@ -225,13 +224,15 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             >
               Add to Cart
             </Button>
-            <ActionButton
-              shape="round"
-              className="rounded-none ml-6 border border-current flex-shrink-0"
-              tooltip={'add to wishlist'}
-            >
-              <Heart />
-            </ActionButton>
+            {process.env.COMMERCE_WISHLIST_ENABLED && (
+              <ActionButton
+                shape="round"
+                className="rounded-none ml-6 border border-current flex-shrink-0"
+                tooltip={'add to wishlist'}
+              >
+                <Heart />
+              </ActionButton>
+            )}
           </div>
           <div className="space-y-2 text-lg font-semibold ">
             <div className="flex items-baseline space-x-3">
@@ -299,13 +300,6 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             </div>
           </div>
         </div>
-        {process.env.COMMERCE_WISHLIST_ENABLED && (
-          <WishlistButton
-            className={s.wishlistButton}
-            productId={product.id}
-            variant={product.variants[0]! as any}
-          />
-        )}
       </Container>
       <Container>
         <Tabs>

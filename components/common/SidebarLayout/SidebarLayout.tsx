@@ -1,5 +1,6 @@
 import { UserNav } from '@components/common'
 import { Cross } from '@components/icons'
+import { Container } from '@components/ui'
 import { useUI } from '@components/ui/context'
 import cn from 'classnames'
 import { FC } from 'react'
@@ -12,8 +13,8 @@ const SidebarLayout: FC<Props> = ({ children, className }) => {
   const handleClose = () => closeSidebar()
   return (
     <div className={cn(s.root, className)}>
-      <header className="px-4 pt-6 pb-4 sm:px-6">
-        <div className="flex justify-between space-x-3 items-center">
+      <header>
+        <Container className="flex justify-between space-x-3 items-center h-header">
           <div className="h-7 flex items-center">
             <button
               onClick={handleClose}
@@ -26,7 +27,7 @@ const SidebarLayout: FC<Props> = ({ children, className }) => {
           <div className="space-y-1">
             <UserNav />
           </div>
-        </div>
+        </Container>
       </header>
       {children}
     </div>

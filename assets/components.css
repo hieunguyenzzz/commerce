@@ -1,6 +1,33 @@
 .fit {
   min-height: calc(100vh - calc(var(--header-height)));
 }
+.hover-effect-1 {
+  @apply relative;
+  &:before {
+    position: absolute;
+    top: -0.2em;
+    left: -0.2em;
+    right: -0.2em;
+    bottom: -0.2em;
+    content: '';
+    background: currentColor;
+    opacity: 0;
+    border-radius: inherit;
+    transition: opacity 0.15s ease-in;
+  }
+  &:hover:before {
+    background: currentColor;
+    opacity: 0.2;
+  }
+  &:active:before {
+    transform: scale(1);
+    animation: rubberBand;
+    animation-duration: 0.5s;
+  }
+  &:focus {
+    outline: none;
+  }
+}
 
 .text-effect-1 {
   @apply inline overflow-hidden relative;
