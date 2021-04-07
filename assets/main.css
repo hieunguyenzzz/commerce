@@ -1,7 +1,17 @@
 @tailwind base;
-@import './base.css';
+/*@import './base.css';*/
 
 @tailwind components;
-@import './components.css';
+/*@import './components.css';*/
 
 @tailwind utilities;
+
+/**
+ * theme
+ */
+@import './css/bootstrap.min.css';
+@import './css/all.min.css';
+@import './css/animate.css';
+@import './css/lightcase.css';
+@import './css/style.css';
+@import './css/custom-select.css';

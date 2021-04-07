@@ -10,6 +10,13 @@ const Head: FC = () => {
       <NextHead>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href="/site.webmanifest" key="site-manifest" />
+
+        {/*include bằng package json*/}
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/swiper@6.5.4/swiper-bundle.min.css"
+        />
+        {/**/}
       </NextHead>
     </>
   )
