@@ -49,7 +49,7 @@
   height: 100%;
   position: absolute;
   top: 0;
-  @apply pointer-events-none opacity-0 transition-all delay-300 duration-700 ease-in-out;
+  @apply pointer-events-none opacity-0 transition-all delay-300 duration-700 ease-in-out lg:text-2xl;
   & .subTitle {
     @apply mb-lg max-w-xs transition-all duration-300 ease-in-out;
     line-height: 1.41;
