@@ -314,7 +314,6 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
         </div>
       </Container>
-      <div style={{ height: 'var(--safe-area-inset-bottom)' }} />
     </NavbarRoot>
   )
 }

@@ -9,6 +9,9 @@
     font-family: 'shop2', sans-serif;
     font-size: 1.125rem;
     @screen lg {
+      font-size: 15px;
+    }
+    @screen xl {
       font-size: 20px;
     }
   }
