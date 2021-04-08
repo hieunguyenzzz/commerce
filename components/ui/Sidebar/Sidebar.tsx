@@ -46,13 +46,7 @@ const Sidebar: FC<Props> = ({ children, open = false, onClose }) => {
               className="absolute inset-0 bg-accents-9 opacity-50 transition-opacity"
               onClick={onClose}
             />
-            <section className={s.sidebar}>
-              <div className="h-full w-screen md:max-w-md">
-                <div className="h-full flex flex-col text-base bg-accents-1 shadow-xl overflow-y-auto">
-                  {children}
-                </div>
-              </div>
-            </section>
+            <section className={s.sidebar}>{children}</section>
           </div>
         </div>
       ) : (
@@ -61,13 +55,7 @@ const Sidebar: FC<Props> = ({ children, open = false, onClose }) => {
             className={'absolute inset-0 overflow-hidden pointer-events-none'}
           >
             <div className="absolute inset-0 bg-accents-9 opacity-0 transition-opacity"></div>
-            <section className={cn(s.sidebar)}>
-              <div className="h-full w-screen md:max-w-md">
-                <div className="h-full flex flex-col text-base bg-accents-1 shadow-xl overflow-y-auto">
-                  {children}
-                </div>
-              </div>
-            </section>
+            <section className={cn(s.sidebar)}>{children}</section>
           </div>
         </div>
       )}

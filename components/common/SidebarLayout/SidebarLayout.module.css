@@ -1,7 +1,9 @@
 .root {
-  @apply h-full flex flex-col;
+  @apply flex flex-col h-full absolute w-screen max-w-md bg-accents-1;
 }
-
+.content {
+  @apply flex flex-col absolute left-0 bottom-0 top-header overflow-y-scroll;
+}
 .root.empty {
   @apply bg-secondary text-secondary;
 }

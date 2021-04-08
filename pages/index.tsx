@@ -266,13 +266,18 @@ export default function Home({
                 >
                   <div className="relative flex-1">
                     <div
-                      style={{ '--tw-translate-y': '-250%' } as any}
-                      className="absolute bottom-0 left-0 transform rotate-90 origin-bottom-left leading-7"
+                      style={
+                        {
+                          '--tw-translate-y': '-250%',
+                          lineHeight: '32px',
+                          bottom: '-20px',
+                        } as any
+                      }
+                      className="absolute left-0 transform rotate-90 origin-bottom-left"
                     >
                       srolldown
                     </div>
                   </div>
-
                   <span className="text-xl mt-4">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

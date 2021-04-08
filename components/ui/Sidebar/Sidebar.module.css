@@ -1,5 +1,5 @@
 .root {
-  @apply fixed inset-0 overflow-hidden h-full z-50 pointer-events-none;
+  @apply fixed bottom-0 left-0 w-full overflow-hidden h-full z-50 pointer-events-none;
   &.open {
     @apply pointer-events-auto;
     & .sidebar {
