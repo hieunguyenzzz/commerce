@@ -3,6 +3,9 @@
   &.large {
     @apply w-16 h-16;
   }
+  &.small {
+    @apply w-10 h-10;
+  }
   &.round {
     @apply rounded-none;
   }
@@ -16,4 +19,9 @@
 }
 .root:hover .tooltip {
   @apply -translate-y-1 opacity-100;
+}
+.root.small {
+  .tooltip {
+    @apply text-xs;
+  }
 }

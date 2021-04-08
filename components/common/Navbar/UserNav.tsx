@@ -58,6 +58,7 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
                   <Heart />
                 </a>
               </Link>
+              <span className={s.bagCount}>0</span>
             </li>
           )}
           <li
