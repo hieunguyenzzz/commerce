@@ -134,8 +134,8 @@ const Navbar: FC<Props> = ({ transparent }) => {
                 <Link href="/home">
                   <a className={cn(s.link, 'z-10')}>home</a>
                 </Link>
-                <div className="absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0 group-hover:pointevent group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
-                  <Container className="w-full text-xs py-6 shadow-lg bg-accents-0 relative">
+                <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0 group-hover:pointevent group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
+                  <Container className="w-full text-xs py-6  relative">
                     <div className="w-full mx-auto max-w-2xl grid grid-cols-7 space-x-8 ">
                       <div className="flex col-span-3 justify-end  space-x-6">
                         {homeMenu.map((item, i) => {
@@ -185,11 +185,8 @@ const Navbar: FC<Props> = ({ transparent }) => {
                 <Link href="/shop">
                   <a className={cn(s.link, 'z-10')}>shop</a>
                 </Link>
-                <div className="absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0 group-hover:pointevent group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
-                  <Container
-                    clean
-                    className="w-full text-xs flex shadow-lg bg-accents-0 relative"
-                  >
+                <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0 group-hover:pointevent group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
+                  <Container clean className="w-full text-xs flex relative">
                     {new Array(5).fill(shopMenu).map((menu, i) => {
                       {
                         const item = menu[i]
@@ -231,8 +228,17 @@ const Navbar: FC<Props> = ({ transparent }) => {
                 <Link href="/features">
                   <a className={cn(s.link, 'z-10')}>features</a>
                 </Link>
-                <div className="absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0 group-hover:pointevent group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
-                  <Container className="w-full text-xs grid grid-cols-7 gap-8 py-6 shadow-lg bg-accents-0 relative">
+                <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0 group-hover:pointevent group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
+                  <Container className="w-full text-xs grid grid-cols-7 gap-8 py-6 relative">
+                    <div className="absolute bottom-0 right-0 w-96 h-96">
+                      <Image
+                        layout="intrinsic"
+                        width={800}
+                        height={800}
+                        objectFit="cover"
+                        src={megamenuImage}
+                      ></Image>
+                    </div>
                     {new Array(5).fill(megamenu).map((megamenu, i) => {
                       {
                         const item = megamenu[i]
@@ -259,15 +265,6 @@ const Navbar: FC<Props> = ({ transparent }) => {
                       }
                     })}
                     <div className="col-span-2 h-96"></div>
-                    <div className="absolute bottom-0 right-0 w-96 h-96">
-                      <Image
-                        layout="intrinsic"
-                        width={800}
-                        height={800}
-                        objectFit="cover"
-                        src={megamenuImage}
-                      ></Image>
-                    </div>
                   </Container>
                 </div>
               </div>
@@ -275,8 +272,8 @@ const Navbar: FC<Props> = ({ transparent }) => {
                 <Link href="/pages">
                   <a className={cn(s.link, 'z-10')}>pages</a>
                 </Link>
-                <div className="absolute top-0 left-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto transform -translate-x-1/2 opacity-0 group-hover:pointevent group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
-                  <Container className="text-xs flex flex-col py-6 shadow-lg bg-accents-0 relative space-y-3">
+                <div className=" absolute top-0 left-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto transform -translate-x-1/2 opacity-0 group-hover:pointevent group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
+                  <Container className="text-xs shadow-lg bg-accents-0 flex flex-col py-6  relative space-y-3">
                     {new Array(5).fill(pagesMenu).map((menu, i) => {
                       {
                         const item = menu[i]
