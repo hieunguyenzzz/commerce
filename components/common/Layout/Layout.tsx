@@ -60,7 +60,7 @@ const Layout: FC<Props> = ({
   const { locale = 'en-US' } = useRouter()
   return (
     <CommerceProvider locale={locale}>
-      <div className={cn(s.root)}>
+      <div>
         <Navbar />
         <main className="fit">{children}</main>
         <Footer pages={pageProps.pages} />

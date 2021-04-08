@@ -1,5 +1,13 @@
 import { Layout } from '@components/common'
-import { Grid, Marquee, Hero } from '@components/ui'
+import {
+  Grid,
+  Marquee,
+  Hero,
+  Banner,
+  Specialty,
+  NewsLetter,
+  Products,
+} from '@components/ui'
 import { ProductCard } from '@components/product'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
@@ -42,7 +50,12 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <Grid>
+      <Banner />
+      <Specialty />
+      <Products />
+      <NewsLetter />
+      <Products />
+      {/*<Grid>
         {products.slice(0, 3).map((product, i) => (
           <ProductCard
             key={product.id}
@@ -101,7 +114,7 @@ export default function Home({
             }}
           />
         ))}
-      </Marquee>
+      </Marquee>*/}
       {/* <HomeAllProductsGrid
         newestProducts={products}
         categories={categories}
