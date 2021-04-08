@@ -5,9 +5,12 @@
     font-family: 'shop2';
     src: local('shop2'), url(./fonts/shop2-book.woff2) format('woff2');
   }
-  body {
+  html {
     font-family: 'shop2', sans-serif;
     font-size: 1.125rem;
+    @screen lg {
+      font-size: 20px;
+    }
   }
   @import './base.css';
 }

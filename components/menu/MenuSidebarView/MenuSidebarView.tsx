@@ -1,4 +1,6 @@
 import { SidebarLayout } from '@components/common'
+import { Search } from '@components/icons'
+import { Container } from '@components/ui'
 import type { Page } from '@framework/common/get-all-pages'
 import getSlug from '@lib/get-slug'
 import Link from 'next/link'
@@ -14,26 +16,18 @@ const MenuSidebarView: FC<Props> = ({ pages }) => {
 
   return (
     <SidebarLayout className={s.root}>
-      <div className="px-4 pt-4 pb-4 sm:px-6 space-y-8">
-        <div className="flex">
-          <div className="flex-1 space-y-1">
-            <div className="font-semibold  mb-2">Language</div>
-            <div className="cursor-pointer hover:text-primary  text-primary">
-              English
-            </div>
-            <div className="cursor-pointer hover:text-primary ">French</div>
-            <div className="cursor-pointer hover:text-primary ">Arabric</div>
-          </div>
-          <div className="w-3" />
-          <div className="flex-1 space-y-1">
-            <div className="font-semibold  mb-2">Currencies</div>
-            <div className="cursor-pointer hover:text-primary  text-primary">
-              USD - US Dollar
-            </div>
-            <div className="cursor-pointer hover:text-primary ">Euro</div>
-            <div className="cursor-pointer hover:text-primary ">Pround</div>
-          </div>
+      <Container className="pt-4 pb-4 space-y-8">
+        <div className="w-full flex space-x-3 border-b-2 border-accents-6 focus-within:border-black text-accents-6 focus-within:text-primary py-2">
+          <span className="focus:outline-none border-none bg-transparent appearance-none text-right inline-flex items-center text-2xl">
+            <Search />
+          </span>
+          <input
+            className="flex-1 bg-transparent appearance-none focus:outline-none block border-none p-0 "
+            type="text"
+            placeholder="Search..."
+          ></input>
         </div>
+
         <div>
           <ul className="flex flex-initial flex-col md:flex-1 space-y-2">
             <li className="">
@@ -87,13 +81,31 @@ const MenuSidebarView: FC<Props> = ({ pages }) => {
           <a className=" font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
             Contact us
           </a>
-          <p className=" leading-loose text-accents-6">
+          <p className=" leading-relaxed text-accents-6">
             69 Halsey St, Ny 10002, New York, United States
-            <br />
             support.center@unero.co
-            <br />
-            (0091) 8547 632521
           </p>
+          <p className=" leading-relaxed text-accents-6">(0091) 8547 632521</p>
+        </div>
+
+        <div className="flex">
+          <div className="flex-1 space-y-1">
+            <div className="font-semibold  mb-2">Language</div>
+            <div className="cursor-pointer hover:text-primary  text-primary">
+              English
+            </div>
+            <div className="cursor-pointer hover:text-primary ">French</div>
+            <div className="cursor-pointer hover:text-primary ">Arabric</div>
+          </div>
+          <div className="w-3" />
+          <div className="flex-1 space-y-1">
+            <div className="font-semibold  mb-2">Currencies</div>
+            <div className="cursor-pointer hover:text-primary  text-primary">
+              USD - US Dollar
+            </div>
+            <div className="cursor-pointer hover:text-primary ">Euro</div>
+            <div className="cursor-pointer hover:text-primary ">Pround</div>
+          </div>
         </div>
         <div className="space-y-3">
           <a className=" font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
@@ -142,7 +154,7 @@ const MenuSidebarView: FC<Props> = ({ pages }) => {
             <span></span>
           </div>
         </div>
-      </div>
+      </Container>
     </SidebarLayout>
   )
 }

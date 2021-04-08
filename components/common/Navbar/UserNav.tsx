@@ -11,11 +11,12 @@ import s from './UserNav.module.css'
 
 interface Props {
   className?: string
+  responsive?: boolean
 }
 
 const countItem = (count: number, item: LineItem) => count + item.quantity
 
-const UserNav: FC<Props> = ({ className }) => {
+const UserNav: FC<Props> = ({ className, responsive }) => {
   const { data } = useCart()
   const { data: customer } = useCustomer()
   const {
@@ -31,7 +32,7 @@ const UserNav: FC<Props> = ({ className }) => {
     <nav className={cn(s.root, className)}>
       <div className={s.mainContainer}>
         <ul className={s.list}>
-          <li className={cn(s.item, s.visibleOnLg)}>
+          <li className={cn(s.item, responsive && s.visibleOnLg)}>
             {customer ? (
               <DropdownMenu />
             ) : (
@@ -51,7 +52,7 @@ const UserNav: FC<Props> = ({ className }) => {
             <Search />
           </li>
           {process.env.COMMERCE_WISHLIST_ENABLED && (
-            <li className={cn(s.item, s.visibleOnLg, 'hidden lg:block')}>
+            <li className={cn(s.item, responsive && s.visibleOnLg)}>
               <Link href="/wishlist">
                 <a onClick={closeSidebarIfPresent} aria-label="Wishlist">
                   <Heart />
