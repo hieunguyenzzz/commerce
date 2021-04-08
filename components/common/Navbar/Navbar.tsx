@@ -310,10 +310,11 @@ const Navbar: FC<Props> = ({ transparent }) => {
             </div>
           </div>
           <div className="flex justify-end flex-1 lg:flex-none space-x-8">
-            <UserNav />
+            <UserNav responsive />
           </div>
         </div>
       </Container>
+      <div style={{ height: 'var(--safe-area-inset-bottom)' }} />
     </NavbarRoot>
   )
 }

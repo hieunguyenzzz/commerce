@@ -188,7 +188,7 @@ export default function Home({
               </div>
             </div>
             {column === 'left' && (
-              <div className="absolute text-sm md:text-lg top-0 leading-6 -left-2 transform -rotate-90 -translate-x-full origin-top-right">
+              <div className="absolute text-sm md:text-lg top-0 leading-6 -left-3 transform -rotate-90 -translate-x-full origin-top-right">
                 {label}
               </div>
             )}
@@ -267,7 +267,7 @@ export default function Home({
                   <div className="relative flex-1">
                     <div
                       style={{ '--tw-translate-y': '-250%' } as any}
-                      className="absolute bottom-0 left-0 transform rotate-90 origin-bottom-left leading-8"
+                      className="absolute bottom-0 left-0 transform rotate-90 origin-bottom-left leading-7"
                     >
                       srolldown
                     </div>
@@ -299,7 +299,10 @@ export default function Home({
           </Container>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 md:gap-0">
+      <Container
+        clean
+        className="mx-auto max-w-7xl grid grid-cols-1 sm:grid-cols-2 gap-12 md:gap-0 "
+      >
         <div className="w-full col-span-1 space-y-12 md:space-y-16">
           {featured
             .filter((item: any, i) => item.column === 'left')
@@ -308,7 +311,7 @@ export default function Home({
             <div className="absolute inset-0">
               <Image
                 layout="fill"
-                objectFit="cover"
+                objectFit="contain"
                 src="/newsletter.png"
               ></Image>
             </div>
@@ -322,7 +325,7 @@ export default function Home({
             .filter((item: any, i) => item.column === 'right')
             .map(renderFeaturedItem)}
         </div>
-      </div>
+      </Container>
       <Container className="py-6 md:py-12 space-y-6 md:space-y-10">
         <Title small center>
           Best selling
