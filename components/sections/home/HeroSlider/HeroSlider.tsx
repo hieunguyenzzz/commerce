@@ -76,13 +76,19 @@ const HeroSlider: FC<any> = ({ list }) => {
                     className="absolute h-full w-full"
                     quality="100"
                     layout="fill"
+                    sizes="(max-width: 400px) 1000px "
                     objectFit="cover"
                     src={item.imageUrl || placeholderImg}
                     alt={'Product Image'}
                   />
+                  {/* <img
+                    className="absolute h-full w-full object-cover"
+                    src={item.imageUrl || placeholderImg}
+                    alt={'Product Image'}
+                  /> */}
                 </div>
                 <Container className="w-full relative h-96 px-6 flex flex-col justify-center">
-                  <div className="space-y-lg" data-testid="Title">
+                  <div className="space-y-lg w-1/2" data-testid="Title">
                     {item.subTitle && (
                       <h4 className={s.subTitle}>{item.subTitle}</h4>
                     )}

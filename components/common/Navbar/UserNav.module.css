@@ -35,8 +35,8 @@
 
 .bagCount {
   @apply bg-primary border flex-shrink-0 border-accents-0 text-accents-0 ml-1 rounded-full flex items-center justify-center font-bold text-xs;
-  width: 1.6em;
-  height: 1.6em;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .avatarButton {

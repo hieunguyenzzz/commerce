@@ -49,23 +49,23 @@
   height: 100%;
   position: absolute;
   top: 0;
-  @apply pointer-events-none opacity-0 transition-all delay-300 duration-700 ease-in-out lg:text-2xl;
+  @apply pointer-events-none opacity-0 transition-opacity delay-300 duration-700 ease-in-out lg:text-2xl;
   & .subTitle {
-    @apply mb-lg max-w-xs transition-all duration-300 ease-in-out;
+    @apply mb-lg max-w-xs transition-transform duration-300 ease-in-out;
     line-height: 1.41;
     transform: translateX(5rem);
     transition: all 0.3s linear 0.3s;
-    font-size: 0.8em;
+    font-size: 0.9em;
   }
   & .title {
-    @apply max-w-sm lg:max-w-xl xl:max-w-2xl transition-all duration-700 ease-in-out;
+    @apply max-w-sm lg:max-w-xl xl:max-w-2xl transition-transform duration-700 ease-in-out;
     line-height: 1.1;
     transform: translateX(5rem);
     font-size: 3em;
   }
   & .buttonText {
-    @apply transition-all duration-1000 ease-in-out;
-    font-size: 0.8em;
+    @apply transition-transform duration-1000 ease-in-out;
+    font-size: 0.9em;
     transform: translateX(5rem);
     font-size: 1.3em;
   }
