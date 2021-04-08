@@ -315,7 +315,7 @@ export default function Home({
                 src="/newsletter.png"
               ></Image>
             </div>
-            <div className="flex px-4 items-center justify-center w-full flex-shrink-0 flex-col relative">
+            <div className="flex px-4 items-center justify-center w-full flex-shrink-0 flex-col relative max-w-sm mx-auto">
               <Subscribe />
             </div>
           </Container>
@@ -351,9 +351,6 @@ export default function Home({
             return <Article key={i} article={article} tags={article?.tags} />
           })}
         </div>
-      </Container>
-      <Container>
-        <Subscribe />
       </Container>
     </div>
   )

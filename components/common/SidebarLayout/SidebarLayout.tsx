@@ -30,6 +30,7 @@ const SidebarLayout: FC<Props> = ({ children, className }) => {
         </Container>
       </header>
       {children}
+      <div style={{ height: 'var(--safe-area-inset-bottom)', width: '100%' }} />
     </div>
   )
 }

@@ -46,3 +46,25 @@
     left: 0;
   }
 }
+
+.text-effect-2 {
+  @apply inline-flex;
+  &:before {
+    content: '';
+    align-self: center;
+    background: currentColor;
+    height: 2px;
+    width: 0;
+    transition: width 0.3s;
+    @apply ease-in-out;
+  }
+
+  &:hover:before {
+    width: 0.8em;
+    margin-right: 0.3em;
+  }
+  &.text-effect-2_active:before {
+    width: 0.8em;
+    margin-right: 0.3em;
+  }
+}
