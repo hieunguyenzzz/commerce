@@ -3,6 +3,7 @@
 }
 .content {
   @apply flex flex-col absolute left-0 bottom-0 top-header overflow-y-scroll;
+  bottom: var(--safe-area-inset-bottom);
 }
 .root.empty {
   @apply bg-secondary text-secondary;

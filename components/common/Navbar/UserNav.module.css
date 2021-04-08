@@ -7,7 +7,7 @@
 }
 
 .item {
-  @apply mr-6 cursor-pointer relative transition ease-in-out duration-100 outline-none flex items-center;
+  @apply mr-3 cursor-pointer relative transition ease-in-out duration-100 outline-none flex items-center;
 
   & svg {
     @apply text-xl;
@@ -17,7 +17,7 @@
     @apply lg:hidden;
   }
   &.visibleOnLg {
-    @apply hidden lg:block;
+    @apply hidden lg:flex;
   }
   &:hover {
     @apply text-primary transition scale-110 duration-100;
@@ -34,7 +34,7 @@
 }
 
 .bagCount {
-  @apply bg-primary border flex-shrink-0 border-accents-0 text-accents-0 ml-1 rounded-full flex items-center justify-center font-bold text-xs;
+  @apply bg-primary border flex-shrink-0 border-accents-0 text-accents-0 ml-px rounded-full flex items-center justify-center font-bold text-xs;
   width: 1.5em;
   height: 1.5em;
 }

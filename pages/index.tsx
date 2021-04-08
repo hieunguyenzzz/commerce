@@ -331,6 +331,25 @@ export default function Home({
             .map(renderFeaturedItem)}
         </div>
       </Container>
+      <div style={{ backgroundColor: '#daeaf2' }}>
+        <Container className="py-12 space-y-6 md:space-y-10 ">
+          <div className="flex space-x-3 justify-between items-baseline">
+            <h2 className="text-xl capitalize">Top picks for your</h2>
+            <div className="text-sm uppercase">see all products</div>
+          </div>
+          <ProductSlider>
+            {[...bestSelling].reverse().map((product, i) => {
+              return (
+                <ProductCard
+                  key={i}
+                  label={product.label as any}
+                  product={product}
+                />
+              )
+            })}
+          </ProductSlider>
+        </Container>
+      </div>
       <Container className="py-6 md:py-12 space-y-6 md:space-y-10">
         <Title small center>
           Best selling
