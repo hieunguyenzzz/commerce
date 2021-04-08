@@ -1,6 +1,6 @@
 import { Layout, Navbar, Title } from '@components/common'
 import { Facebook, Twitter } from '@components/icons'
-import { ProductCard } from '@components/product'
+import { ProductCard, ProductCard2, ProductSlider2 } from '@components/product'
 import ProductSlider from '@components/product/ProductSlider'
 import Article from '@components/sections/home/Article'
 import HeroSlider from '@components/sections/home/HeroSlider'
@@ -84,6 +84,22 @@ export async function getStaticProps({
               label: {
                 position: 'top right',
                 text: 'Out Of Stock',
+                variant: 'out-of-stock',
+              },
+            }
+          : i === 1
+          ? {
+              label: {
+                position: 'top right',
+                text: 'Out Of Stock',
+                variant: 'new',
+              },
+            }
+          : i === 2
+          ? {
+              label: {
+                position: 'top right',
+                text: 'discount',
                 variant: 'out-of-stock',
               },
             }
@@ -335,21 +351,61 @@ export default function Home({
         <Container className="py-12 space-y-6 md:space-y-10 ">
           <div className="flex space-x-3 justify-between items-baseline">
             <h2 className="text-xl capitalize">Top picks for your</h2>
-            <div className="text-sm uppercase">see all products</div>
+            <div className="text-xs uppercase">see all products</div>
           </div>
-          <ProductSlider>
-            {[...bestSelling].reverse().map((product, i) => {
+          <ProductSlider2>
+            {bestSelling.map((product, i) => {
               return (
-                <ProductCard
+                <ProductCard2
                   key={i}
                   label={product.label as any}
                   product={product}
                 />
               )
             })}
-          </ProductSlider>
+          </ProductSlider2>
         </Container>
       </div>
+      <Container className="py-8 lg:py-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="col-span-1 group relative">
+          <Image
+            className="group-hover:scale-110 transform transition-transform duration-1000 ease-in-out"
+            width={640}
+            height={400}
+            layout="responsive"
+            src={'/Campaign-1.jpg'}
+          ></Image>
+          <div className="absolute inset-0 p-6 space-y-6">
+            <div className="text-xl lg:text-3xl font-semibold max-w-sm">
+              Welcome friends and invite good times.
+            </div>
+            <div>
+              <Button className="text-xl" variant="link">
+                Shop This Room
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="col-span-1 group relative">
+          <Image
+            className="group-hover:scale-110 transform transition-transform duration-1000 ease-in-out"
+            width={640}
+            height={400}
+            layout="responsive"
+            src={'/Campaign-2.jpg'}
+          ></Image>
+          <div className="absolute inset-0 p-6 space-y-6">
+            <div className="text-xl lg:text-3xl font-semibold max-w-sm">
+              A minimalistic design featuring masculine
+            </div>
+            <div>
+              <Button className="text-xl" variant="link">
+                Shop Now
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Container>
       <Container className="py-6 md:py-12 space-y-6 md:space-y-10">
         <Title small center>
           Best selling
