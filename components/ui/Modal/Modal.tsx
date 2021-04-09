@@ -1,13 +1,10 @@
 import { Cross } from '@components/icons'
 import FocusTrap from '@lib/focus-trap'
 import Portal from '@reach/portal'
-import {
-  clearAllBodyScrollLocks,
-  disableBodyScroll,
-  enableBodyScroll,
-} from 'body-scroll-lock'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import classNames from 'classnames'
 import { FC, useCallback, useEffect, useRef } from 'react'
+import { Container } from '..'
 import s from './Modal.module.css'
 interface Props {
   className?: string
@@ -28,7 +25,6 @@ const Modal: FC<Props> = ({
   onEnter = null,
 }) => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
-
   const handleKey = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -37,27 +33,28 @@ const Modal: FC<Props> = ({
     },
     [onClose]
   )
-
   useEffect(() => {
-    if (ref.current) {
-      if (open) {
-        disableBodyScroll(ref.current)
-        window.addEventListener('keydown', handleKey)
-      } else {
-        enableBodyScroll(ref.current)
-      }
+    if (open && ref.current) {
+      disableBodyScroll(ref.current)
+    }
+    return () => {
+      ref.current && enableBodyScroll(ref.current)
+    }
+  }, [open])
+  useEffect(() => {
+    if (open) {
+      window.addEventListener('keydown', handleKey)
     }
     return () => {
       window.removeEventListener('keydown', handleKey)
-      clearAllBodyScrollLocks()
     }
   }, [open, handleKey])
-
   return (
     <Portal>
       {open ? (
-        <div className={classNames(s.root, noBackgroud && s.noBackgroud)}>
+        <Container className={classNames(s.root, noBackgroud && s.noBackgroud)}>
           <div className={s.modal} role="dialog" ref={ref}>
+            <FocusTrap focusFirst>{children}</FocusTrap>
             {closable && (
               <button
                 onClick={() => onClose()}
@@ -67,9 +64,8 @@ const Modal: FC<Props> = ({
                 <Cross className="h-6 w-6" />
               </button>
             )}
-            <FocusTrap focusFirst>{children}</FocusTrap>
           </div>
-        </div>
+        </Container>
       ) : null}
     </Portal>
   )

@@ -41,7 +41,7 @@
   }
 }
 .item {
-  @apply mr-6 cursor-pointer relative transition ease-in-out duration-100 outline-none;
+  @apply cursor-pointer relative transition ease-in-out duration-100 outline-none;
   & svg {
     @apply text-xl;
     stroke-width: 1.2;

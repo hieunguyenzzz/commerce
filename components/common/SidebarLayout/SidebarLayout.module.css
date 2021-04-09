@@ -1,8 +1,8 @@
 .root {
-  @apply flex flex-col h-full absolute w-screen max-w-md bg-accents-1;
+  @apply flex flex-col h-full relative w-screen max-w-md bg-accents-1;
 }
 .content {
-  @apply flex flex-col absolute left-0 bottom-0 top-header overflow-y-scroll;
+  @apply flex flex-col w-full absolute left-0 bottom-0 top-header overflow-y-scroll;
   bottom: var(--safe-area-inset-bottom);
 }
 .root.empty {

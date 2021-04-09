@@ -1,9 +1,5 @@
 import Portal from '@reach/portal'
-import {
-  clearAllBodyScrollLocks,
-  disableBodyScroll,
-  enableBodyScroll,
-} from 'body-scroll-lock'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import cn from 'classnames'
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import s from './Sidebar.module.css'
@@ -11,24 +7,19 @@ import s from './Sidebar.module.css'
 interface Props {
   children: any
   open: boolean
+  position?: 'left' | 'right'
   onClose: () => void
 }
 
-const Sidebar: FC<Props> = ({ children, open = false, onClose }) => {
+const Sidebar: FC<Props> = ({
+  children,
+  position = 'right',
+  open = false,
+  onClose,
+}) => {
   const [ready, setReady] = useState(open)
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
-  useEffect(() => {
-    if (ref.current) {
-      if (open) {
-        disableBodyScroll(ref.current)
-      } else {
-        enableBodyScroll(ref.current)
-      }
-    }
-    return () => {
-      clearAllBodyScrollLocks()
-    }
-  }, [open])
+
   useEffect(() => {
     if (!ready && open) {
       setReady(true)
@@ -43,27 +34,28 @@ const Sidebar: FC<Props> = ({ children, open = false, onClose }) => {
     [onClose]
   )
   useEffect(() => {
-    if (ref.current) {
-      if (open) {
-        disableBodyScroll(ref.current)
-        window.addEventListener('keydown', handleKey)
-      } else {
-        enableBodyScroll(ref.current)
-      }
+    if (open && ref.current) {
+      disableBodyScroll(ref.current)
+    }
+    return () => {
+      enableBodyScroll(ref.current)
+    }
+  }, [open])
+  useEffect(() => {
+    if (open) {
+      window.addEventListener('keydown', handleKey)
     }
     return () => {
       window.removeEventListener('keydown', handleKey)
-      clearAllBodyScrollLocks()
     }
   }, [open, handleKey])
   if (!ready) {
     return null
   }
-
   return (
     <Portal>
       {open ? (
-        <div className={cn(s.root, s.open)} ref={ref}>
+        <div className={cn(s.root, s[position], s.open)} ref={ref}>
           <div className={'absolute inset-0 overflow-hidden'}>
             <div
               className="absolute inset-0 bg-accents-9 opacity-50 transition-opacity"
@@ -73,10 +65,8 @@ const Sidebar: FC<Props> = ({ children, open = false, onClose }) => {
           </div>
         </div>
       ) : (
-        <div className={cn(s.root)} ref={ref}>
-          <div
-            className={'absolute inset-0 overflow-hidden pointer-events-none'}
-          >
+        <div className={cn(s.root, s[position])} ref={ref}>
+          <div className={'absolute inset-0 overflow-hidden'}>
             <div className="absolute inset-0 bg-accents-9 opacity-0 transition-opacity"></div>
             <section className={cn(s.sidebar)}>{children}</section>
           </div>

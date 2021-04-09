@@ -1,5 +1,12 @@
 import { UserNav } from '@components/common'
-import { Menu } from '@components/icons'
+import {
+  Cross,
+  Facebook,
+  Instagram,
+  Menu,
+  Pinterest,
+  Twitter,
+} from '@components/icons'
 import { Container, useUI } from '@components/ui'
 import cn from 'classnames'
 import Image from 'next/image'
@@ -110,7 +117,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
   const { openSidebar, setModalView } = useUI()
   return (
     <NavbarRoot transparent={transparent}>
-      <Container className="w-full">
+      <Container className="w-full lg:hidden">
         <div className="flex w-full py-4 items-center align-center space-x-12">
           <div className="flex-1 lg:flex-none flex items-center">
             <div
@@ -121,6 +128,93 @@ const Navbar: FC<Props> = ({ transparent }) => {
               className={cn(s.item, 'z-10')}
             >
               <Menu />
+            </div>
+          </div>
+          <div className="flex items-center flex-1 justify-center lg:justify-start lg:space-x-16">
+            <Link href="/">
+              <a className="text-2xl font-bold z-10" aria-label="Logo">
+                Helendo
+              </a>
+            </Link>
+          </div>
+          <div className="flex justify-end flex-1 lg:flex-none space-x-8">
+            <UserNav responsive />
+          </div>
+        </div>
+      </Container>
+      <div tabIndex={-1} id="hackfocus" className="w-0 absolute" />
+      <Container className="w-full hidden lg:block">
+        <div className="flex w-full py-4 items-center align-center space-x-12">
+          <div
+            tabIndex={-1}
+            className="group flex-1 lg:flex-none flex items-center z-50"
+          >
+            <div className={cn(s.item, 'z-10 group-focus:hidden')}>
+              <Menu />
+            </div>
+
+            <a href="#" className={cn(s.item, 'z-10 hidden group-focus:block')}>
+              <Cross />
+            </a>
+            <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header h-screen lg:pt-header-lg pointer-events-none group-focus:pointer-events-auto  w-full opacity-0  group-focus:block group-focus:opacity-100  transition-all duration-700 ease-in-out">
+              <div className="absolute inset-0 flex">
+                <div className="w-1/2 h-full">
+                  <div className="h-header"></div>
+                  <Container className="relative">
+                    <ul className="pl-24 pr-12 py-6 space-y-6 relative">
+                      {[
+                        'Home',
+                        'Shop',
+                        'Features',
+                        'Pages',
+                        'Portfolio',
+                        'Journal',
+                      ].map((str) => (
+                        <li key={str} className="">
+                          <Link href={'/' + str}>
+                            <a className=" text-effect-2 text-xl  transition ease-in-out duration-150">
+                              {str}
+                            </a>
+                          </Link>
+                        </li>
+                      ))}
+                      <div className="flex-1 flex flex-col absolute bottom-0 left-0 items-center space-y-2 text-sm">
+                        <span className="hover-effect-1 p-2 text-accents-5 hover:text-primary hover:border-primary border border-accents-2 rounded-full">
+                          <Pinterest />
+                        </span>
+                        <span className="hover-effect-1 p-2 text-accents-5 hover:text-primary hover:border-primary border border-accents-2 rounded-full">
+                          <Instagram />
+                        </span>
+                        <span className="hover-effect-1 p-2 text-accents-5 hover:text-primary hover:border-primary border border-accents-2 rounded-full">
+                          <Facebook />
+                        </span>
+                        <span className="hover-effect-1 p-2 text-accents-5 hover:text-primary hover:border-primary border border-accents-2 rounded-full">
+                          <Twitter />
+                        </span>
+                      </div>
+                    </ul>
+                  </Container>
+                </div>
+                <div className="w-1/2 h-full relative">
+                  <div className="absolute inset-0 hidden group-focus:block">
+                    <Image
+                      layout="fill"
+                      src="/fullscreen-menu-image.jpg"
+                      objectFit="cover"
+                    />
+                  </div>
+                </div>
+                <div className="absolute top-0 left-0 w-full h-header flex items-center justify-center pointer-events-none">
+                  <Link href="/">
+                    <a
+                      className="text-2xl font-bold z-10 pointer-events-auto"
+                      aria-label="Logo"
+                    >
+                      Helendo
+                    </a>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex items-center flex-1 justify-center lg:justify-start lg:space-x-16">

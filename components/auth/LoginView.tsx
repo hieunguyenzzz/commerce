@@ -58,7 +58,7 @@ const LoginView: FC<Props> = () => {
   return (
     <form
       onSubmit={handleLogin}
-      className="w-full max-w-lg flex flex-col justify-between "
+      className="max-w-full w-80 flex flex-col justify-between "
     >
       <div className="flex justify-center pb-12 ">
         <Logo width="64px" height="64px" />

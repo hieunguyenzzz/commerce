@@ -5,7 +5,7 @@ import ProductSlider from '@components/product/ProductSlider'
 import Article from '@components/sections/home/Article'
 import HeroSlider from '@components/sections/home/HeroSlider'
 import Subscribe from '@components/subscribe/Subscribe'
-import { Button, Container } from '@components/ui'
+import { Button, Container, Modal } from '@components/ui'
 import { getConfig } from '@framework/api'
 import getAllPages from '@framework/common/get-all-pages'
 import getSiteInfo from '@framework/common/get-site-info'
@@ -14,7 +14,7 @@ import classNames from 'classnames'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { renderToString } from 'react-dom/server'
 
 const placeholderImg = '/product-img-placeholder.svg'
@@ -158,6 +158,48 @@ const featured = [
   actionText,
   column: i < 2 ? 'left' : 'right',
 }))
+const AdsBannerModal = () => {
+  const [open, setOpen] = useState(false)
+  useEffect(() => {
+    setTimeout &&
+      setTimeout(() => {
+        setOpen(true)
+      }, 2000)
+  }, [])
+  if (!open) return null
+  return (
+    <Modal
+      open={open}
+      onClose={() => {
+        setOpen(false)
+      }}
+    >
+      <div className="w-full h-full absolute inset-0 ">
+        <Image layout="fill" src="/2.jpg" objectFit="cover" />
+      </div>
+      <div className="w-screen max-w-full " />
+      <div style={{ width: 600 }} className="max-w-full p-8 isolate mx-auto">
+        <h3 className="text-center text-4xl lg:text-4xl md:font-bold">
+          Get 10% Off & Free Delivery
+        </h3>
+        <p className="pt-6 pb-12 text-center lg:text-xl">
+          For All New Email Subscribers
+        </p>
+        <div className="flex flex-col md:flex-row w-full">
+          <input
+            type="email"
+            placeholder="Your email address"
+            className="w-full flex-1 md:py-4 py-2 px-5 border-black block bg-accents-0 border rounded-none hover:shadow-inner focus:shadow-inner"
+          ></input>
+          <div className="h-3 md:hidden" />
+          <Button className="block w-full  md:w-auto" variant="slim">
+            Subscribe
+          </Button>
+        </div>
+      </div>
+    </Modal>
+  )
+}
 export default function Home({
   hero,
   bestSelling,
@@ -432,6 +474,7 @@ export default function Home({
           })}
         </div>
       </Container>
+      <AdsBannerModal />
     </div>
   )
 }

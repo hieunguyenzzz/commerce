@@ -79,10 +79,11 @@ module.exports = {
   plugins: [require('@tailwindcss/line-clamp')],
   variants: {
     extend: {
-      translate: ['active', 'group-hover'],
-      display: ['active', 'group-hover'],
-      margin: ['group-hover'],
-      pointerEvents: ['group-hover'],
+      translate: ['active', 'group-hover', 'group-focus'],
+      display: ['active', 'group-hover', 'group-focus'],
+      margin: ['group-hover', 'group-focus'],
+      pointerEvents: ['focus', 'group-hover', 'group-focus'],
+      zIndex: ['focus'],
     },
     lineClamp: ['responsive', 'hover', 'focus'],
   },
