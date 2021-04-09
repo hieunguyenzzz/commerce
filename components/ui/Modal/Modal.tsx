@@ -52,7 +52,10 @@ const Modal: FC<Props> = ({
   return (
     <Portal>
       {open ? (
-        <Container className={classNames(s.root, noBackgroud && s.noBackgroud)}>
+        <Container
+          fluid
+          className={classNames(s.root, noBackgroud && s.noBackgroud)}
+        >
           <div className={s.modal} role="dialog" ref={ref}>
             <FocusTrap focusFirst>{children}</FocusTrap>
             {closable && (

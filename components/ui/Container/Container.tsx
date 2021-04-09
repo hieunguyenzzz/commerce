@@ -6,12 +6,20 @@ interface Props {
   children?: any
   el?: HTMLElement
   clean?: boolean
+  fluid?: boolean
 }
 
-const Container: FC<Props> = ({ children, className, el = 'div', clean }) => {
+const Container: FC<Props> = ({
+  children,
+  className,
+  el = 'div',
+  clean,
+  fluid,
+}) => {
   const rootClassName = cn(
     {
-      'mx-auto w-full max-w-7xl px-4 md:px-8 lg:px-12 xl:px-12': !clean,
+      'mx-auto w-full px-4 md:px-8 lg:px-12 xl:px-12': !clean,
+      'max-w-7xl': !fluid,
     },
     className
   )

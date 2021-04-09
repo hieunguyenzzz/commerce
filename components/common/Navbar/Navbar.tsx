@@ -117,7 +117,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
   const { openSidebar, setModalView } = useUI()
   return (
     <NavbarRoot transparent={transparent}>
-      <Container className="w-full lg:hidden">
+      <Container fluid className="w-full lg:hidden">
         <div className="flex w-full py-4 items-center align-center space-x-12">
           <div className="flex-1 lg:flex-none flex items-center">
             <div
@@ -143,7 +143,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
         </div>
       </Container>
       <div tabIndex={-1} id="hackfocus" className="w-0 absolute" />
-      <Container className="w-full hidden lg:block">
+      <Container fluid className="w-full hidden lg:block">
         <div className="flex w-full py-4 items-center align-center space-x-12">
           <div
             tabIndex={-1}
@@ -158,10 +158,10 @@ const Navbar: FC<Props> = ({ transparent }) => {
             </a>
             <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header h-screen lg:pt-header-lg pointer-events-none group-focus:pointer-events-auto  w-full opacity-0  group-focus:block group-focus:opacity-100  transition-all duration-700 ease-in-out">
               <div className="absolute inset-0 flex">
-                <div className="w-1/2 h-full">
+                <div className="w-1/2 h-full flex flex-col">
                   <div className="h-header"></div>
-                  <Container className="relative">
-                    <ul className="pl-24 pr-12 py-6 space-y-6 relative">
+                  <Container className="relative flex-1 py-6 ">
+                    <ul className="pl-24 pr-12 space-y-6 relative min-h-full">
                       {[
                         'Home',
                         'Shop',
@@ -170,13 +170,13 @@ const Navbar: FC<Props> = ({ transparent }) => {
                         'Portfolio',
                         'Journal',
                       ].map((str) => (
-                        <li key={str} className="">
+                        <div key={str} className="">
                           <Link href={'/' + str}>
                             <a className=" text-effect-2 text-xl  transition ease-in-out duration-150">
                               {str}
                             </a>
                           </Link>
-                        </li>
+                        </div>
                       ))}
                       <div className="flex-1 flex flex-col absolute bottom-0 left-0 items-center space-y-2 text-sm">
                         <span className="hover-effect-1 p-2 text-accents-5 hover:text-primary hover:border-primary border border-accents-2 rounded-full">
