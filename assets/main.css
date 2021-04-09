@@ -1,7 +1,7 @@
 @tailwind base;
 @layer base {
   @font-face {
-    font-display: swap;
+    /* font-display: swap; */
     font-family: 'shop2';
     src: local('shop2'), url(./fonts/shop2-book.woff2) format('woff2');
   }

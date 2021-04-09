@@ -5,7 +5,7 @@ import {
   enableBodyScroll,
 } from 'body-scroll-lock'
 import cn from 'classnames'
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import s from './Sidebar.module.css'
 
 interface Props {
@@ -34,9 +34,32 @@ const Sidebar: FC<Props> = ({ children, open = false, onClose }) => {
       setReady(true)
     }
   }, [open])
+  const handleKey = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        return onClose()
+      }
+    },
+    [onClose]
+  )
+  useEffect(() => {
+    if (ref.current) {
+      if (open) {
+        disableBodyScroll(ref.current)
+        window.addEventListener('keydown', handleKey)
+      } else {
+        enableBodyScroll(ref.current)
+      }
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKey)
+      clearAllBodyScrollLocks()
+    }
+  }, [open, handleKey])
   if (!ready) {
     return null
   }
+
   return (
     <Portal>
       {open ? (

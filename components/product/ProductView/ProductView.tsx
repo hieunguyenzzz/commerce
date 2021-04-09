@@ -95,9 +95,10 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                         >
                           <div
                             key={image.url}
-                            className="background-200 border border-accents-2 group-hover:border-primary group-hover:shadow-outline-normal absolute left-0 top-0 w-full h-full flex-1 fadeIn animated"
+                            className=" border border-accents-2 group-hover:border-primary group-hover:shadow-outline-normal absolute left-0 top-0 w-full h-full flex-1 fadeIn animated"
                           >
                             <Image
+                              layout="responsive"
                               src={image.url!}
                               alt={image.alt || 'Product Image'}
                               width={80}
@@ -112,10 +113,10 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                           onClick={() => {
                             handleOpenGallery(i)
                           }}
-                          className="hidden group-hover:block  right-0 top-0 absolute w-5/6"
+                          className="hidden group-hover:block  right-0 top-0 absolute w-5/6  bg-accents-0"
                         >
                           <div
-                            className="w-full bg-gray-200"
+                            className="w-full"
                             style={{ paddingTop: '100%' }}
                           >
                             <div className="absolute top-0 right-0 w-full h-full flex-1 border border-gray-300">
@@ -123,11 +124,11 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                                 className={s.img}
                                 src={image.url!}
                                 alt={image.alt || 'Product Image'}
-                                width={1050}
-                                height={1050}
+                                width={800}
+                                height={800}
                                 priority={i === 0}
                                 quality="85"
-                                objectFit="cover"
+                                objectFit="contain"
                               />
                             </div>
                           </div>
@@ -138,7 +139,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                   return <div key={i} className="flex-1" />
                 })}
               </div>
-              <div className="w-5/6 bg-gray-200">
+              <div className="w-5/6 bg-accents-0">
                 <div
                   onClick={() => {
                     handleOpenGallery(0)
@@ -151,10 +152,10 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                       className={s.img}
                       src={product.images[0]?.url!}
                       alt={product.images[0]?.alt || 'Product Image'}
-                      width={1050}
-                      height={1050}
+                      width={800}
+                      height={800}
                       quality="85"
-                      objectFit="cover"
+                      objectFit="contain"
                     />
                   </div>
                 </div>
