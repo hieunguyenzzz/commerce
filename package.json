@@ -51,7 +51,8 @@
     "shopify-buy": "^2.11.0",
     "swr": "^0.4.0",
     "tabbable": "^5.1.5",
-    "tailwindcss": "^2.1.1"
+    "tailwindcss": "^2.1.1",
+    "tailwindcss-named-groups": "^0.0.5"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.20.0",

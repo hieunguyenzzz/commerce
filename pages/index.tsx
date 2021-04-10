@@ -177,10 +177,17 @@ const AdsBannerModal = () => {
       <div className="w-full h-full absolute inset-0 ">
         <Image layout="fill" src="/2.jpg" objectFit="cover" />
       </div>
-      <div className="w-screen max-w-full " />
-      <div style={{ width: 600 }} className="max-w-full p-8 isolate mx-auto">
+      <div style={{ width: 690 }} className="w-screen max-w-full " />
+      <div
+        style={{
+          width: 800,
+          minHeight:
+            'calc(100vh - var(--header-height) - var(--header-height))',
+        }}
+        className="max-w-full  p-8 isolate mx-auto flex flex-col justify-center"
+      >
         <h3 className="text-center text-4xl lg:text-4xl md:font-bold">
-          Get 10% Off & Free Delivery
+          {'Get 10% Off & Free Delivery'}
         </h3>
         <p className="pt-6 pb-12 text-center lg:text-xl">
           For All New Email Subscribers

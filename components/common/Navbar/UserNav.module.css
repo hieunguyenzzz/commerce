@@ -11,7 +11,6 @@
 
   & svg {
     @apply text-xl;
-    stroke-width: 1.2;
   }
   &.itemhidden {
     @apply lg:hidden;
@@ -34,7 +33,7 @@
 }
 
 .bagCount {
-  @apply bg-primary border flex-shrink-0 border-accents-0 text-accents-0 ml-px rounded-full flex items-center justify-center font-bold text-xs;
+  @apply bg-primary  flex-shrink-0 text-accents-0 ml-px rounded-full flex items-center justify-center font-bold text-xs;
   width: 1.5em;
   height: 1.5em;
 }

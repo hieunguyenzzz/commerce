@@ -84,14 +84,14 @@ const Layout: FC<Props> = ({
           open={displaySidebar && modalView === 'CART'}
           onClose={closeSidebar}
         >
-          {modalView === 'CART' && <CartSidebarView />}
+          <CartSidebarView />
         </Sidebar>
         <Sidebar
           position="left"
           open={displaySidebar && modalView === 'MENU'}
           onClose={closeSidebar}
         >
-          {modalView === 'MENU' && <MenuSidebarView />}
+          <MenuSidebarView />
         </Sidebar>
         <Modal open={displayModal} onClose={closeModal}>
           {modalView === 'LOGIN_VIEW' && <LoginView />}

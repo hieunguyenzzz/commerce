@@ -16,6 +16,7 @@ module.exports = {
     },
   },
   theme: {
+    namedGroups: ['foo', 'bar'],
     extend: {
       maxWidth: {
         '8xl': '1920px',
@@ -76,7 +77,10 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/line-clamp')],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+    require('./tailwind/plugins/nestedGroup'),
+  ],
   variants: {
     extend: {
       translate: ['active', 'group-hover', 'group-focus'],
