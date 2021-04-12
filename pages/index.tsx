@@ -1,7 +1,6 @@
 import { Layout, Navbar, Title } from '@components/common'
 import { Facebook, Twitter } from '@components/icons'
-import { ProductCard, ProductCard2, ProductSlider2 } from '@components/product'
-import ProductSlider from '@components/product/ProductSlider'
+import { ProductCard2, ProductSlider2 } from '@components/product'
 import Article from '@components/sections/home/Article'
 import HeroSlider from '@components/sections/home/HeroSlider'
 import Subscribe from '@components/subscribe/Subscribe'
@@ -454,22 +453,6 @@ export default function Home({
             </div>
           </div>
         </div>
-      </Container>
-      <Container className="py-6 md:py-12 space-y-6 md:space-y-10">
-        <Title small center>
-          Best selling
-        </Title>
-        <ProductSlider>
-          {bestSelling.map((product, i) => {
-            return (
-              <ProductCard
-                key={i}
-                label={product.label as any}
-                product={product}
-              />
-            )
-          })}
-        </ProductSlider>
       </Container>
       <Container className="py-6 md:py-12 space-y-6 md:space-y-10">
         <Title small center>

@@ -1,5 +1,4 @@
-export { default as ProductCard } from './ProductCard'
-export { default as ProductCard2 } from './ProductCard2'
+export { default as ProductCard, default as ProductCard2 } from './ProductCard2'
 export { default as ProductSlider } from './ProductSlider'
 export { default as ProductSlider2 } from './ProductSlider2'
 export { default as ProductView } from './ProductView'
