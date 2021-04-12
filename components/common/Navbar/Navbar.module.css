@@ -1,7 +1,10 @@
 .root {
   @apply sticky flex items-center w-full top-0 bg-accents-0 z-40 transition-colors duration-700 h-header lg:h-header-lg;
   &.transparent {
-    @apply bg-transparent fixed  hover:bg-accents-0;
+    & + * {
+      margin-top: calc(0px - var(--header-height));
+    }
+    @apply bg-transparent   hover:bg-accents-0;
   }
   &.hasScrolled {
     @apply shadow-magical bg-accents-0;
