@@ -7,11 +7,10 @@ import { useUI } from '@components/ui/context'
 import { CommerceProvider } from '@framework'
 import type { Page } from '@framework/common/get-all-pages'
 import { useAcceptCookies } from '@lib/hooks/useAcceptCookies'
-import { clearAllBodyScrollLocks } from 'body-scroll-lock'
 import cn from 'classnames'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import s from './Layout.module.css'
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -52,6 +51,7 @@ const Layout: FC<Props> = ({
   pageProps: { commerceFeatures, ...pageProps },
 }) => {
   const {
+    scrollerRef,
     displaySidebar,
     displayModal,
     closeSidebar,
@@ -60,16 +60,9 @@ const Layout: FC<Props> = ({
   } = useUI()
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies()
   const { locale = 'en-US' } = useRouter()
-  useEffect(() => {
-    if (displaySidebar || displayModal) {
-      return () => {
-        clearAllBodyScrollLocks()
-      }
-    }
-  }, [displaySidebar || displayModal])
   return (
     <CommerceProvider locale={locale}>
-      <div className={cn(s.root)}>
+      <div ref={scrollerRef} className={cn(s.root)}>
         {renderNavbar ? renderNavbar() : <Navbar />}
         <main className="fit">{children}</main>
         <Footer pages={pageProps.pages} />

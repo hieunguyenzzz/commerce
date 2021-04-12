@@ -1,5 +1,5 @@
 import Portal from '@reach/portal'
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import { disableBodyScroll } from 'body-scroll-lock'
 import cn from 'classnames'
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import s from './Sidebar.module.css'
@@ -17,7 +17,7 @@ const Sidebar: FC<Props> = ({
   open = false,
   onClose,
 }) => {
-  const [ready, setReady] = useState(open)
+  const [ready, setReady] = useState<boolean>()
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
 
   useEffect(() => {
@@ -34,13 +34,10 @@ const Sidebar: FC<Props> = ({
     [onClose]
   )
   useEffect(() => {
-    if (open && ref.current) {
+    if (ready && open) {
       disableBodyScroll(ref.current)
-      return () => {
-        enableBodyScroll(ref.current)
-      }
     }
-  }, [open])
+  }, [open, ready])
   useEffect(() => {
     if (open) {
       window.addEventListener('keydown', handleKey)

@@ -1,7 +1,7 @@
 import { Cross } from '@components/icons'
 import FocusTrap from '@lib/focus-trap'
 import Portal from '@reach/portal'
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import { disableBodyScroll } from 'body-scroll-lock'
 import classNames from 'classnames'
 import { FC, useCallback, useEffect, useRef } from 'react'
 import { Container } from '..'
@@ -36,9 +36,6 @@ const Modal: FC<Props> = ({
   useEffect(() => {
     if (open && ref.current) {
       disableBodyScroll(ref.current)
-      return () => {
-        ref.current && enableBodyScroll(ref.current)
-      }
     }
   }, [open])
   useEffect(() => {

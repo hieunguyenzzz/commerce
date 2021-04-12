@@ -4,7 +4,7 @@ import { ProductCard2, ProductSlider2 } from '@components/product'
 import Article from '@components/sections/home/Article'
 import HeroSlider from '@components/sections/home/HeroSlider'
 import Subscribe from '@components/subscribe/Subscribe'
-import { Button, Container, Modal } from '@components/ui'
+import { Button, Container, Modal, useUI } from '@components/ui'
 import { getConfig } from '@framework/api'
 import getAllPages from '@framework/common/get-all-pages'
 import getSiteInfo from '@framework/common/get-site-info'
@@ -211,6 +211,7 @@ export default function Home({
   bestSelling,
   blogs,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { scrollerRef } = useUI()
   const renderFeaturedItem = (
     { label, title, actionText, column, image, subImage }: any,
     i: number
@@ -321,7 +322,8 @@ export default function Home({
                 </div>
                 <div
                   onClick={() => {
-                    window.scrollTo({
+                    if (!scrollerRef.current) return
+                    scrollerRef.current.scrollTo({
                       top: window.innerHeight,
                       behavior: 'smooth',
                     })
