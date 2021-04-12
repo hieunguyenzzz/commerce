@@ -1,5 +1,5 @@
 .root {
-  @apply relative flex items-center;
+  @apply flex items-center h-full;
 }
 
 .list {
@@ -7,7 +7,7 @@
 }
 
 .item {
-  @apply mr-3 cursor-pointer relative transition ease-in-out duration-100 outline-none flex items-center;
+  @apply mr-3 cursor-pointer h-header flex items-center  relative transition ease-in-out duration-100 outline-none;
 
   & svg {
     @apply text-xl;

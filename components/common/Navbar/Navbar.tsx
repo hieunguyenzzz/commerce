@@ -151,7 +151,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           <Menu />
         </div>
 
-        <a href="#" className={cn(s.item, 'z-10 hidden group-focus:block')}>
+        <a href="#" className={cn(s.item, 'z-10 hidden  group-focus:block')}>
           <Cross />
         </a>
         <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header h-screen lg:pt-header-lg pointer-events-none group-focus:pointer-events-auto  w-full opacity-0  group-focus:block group-focus:opacity-100  transition-all duration-700 ease-in-out">
