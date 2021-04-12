@@ -163,7 +163,7 @@ const AdsBannerModal = () => {
     setTimeout &&
       setTimeout(() => {
         setOpen(true)
-      }, 2000)
+      }, 5000)
   }, [])
   if (!open) return null
   return (

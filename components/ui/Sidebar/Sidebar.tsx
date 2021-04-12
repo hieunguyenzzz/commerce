@@ -1,5 +1,4 @@
 import Portal from '@reach/portal'
-import { disableBodyScroll } from 'body-scroll-lock'
 import cn from 'classnames'
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import s from './Sidebar.module.css'
@@ -33,11 +32,7 @@ const Sidebar: FC<Props> = ({
     },
     [onClose]
   )
-  useEffect(() => {
-    if (ready && open) {
-      disableBodyScroll(ref.current)
-    }
-  }, [open, ready])
+
   useEffect(() => {
     if (open) {
       window.addEventListener('keydown', handleKey)
