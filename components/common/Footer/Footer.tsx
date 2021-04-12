@@ -24,7 +24,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
     <footer className={rootClassName}>
       <Container className="py-12">
         <div className="grid grid-cols-10 text-accents-2 gap-6  transition-colors duration-150">
-          <div className="space-y-3 space-y-6 col-span-full lg:col-span-3">
+          <div className="space-y-3 space-y-6 col-span-full md:col-span-3">
             <a className=" font-semibold transition ease-in-out duration-150 text-xl">
               Helendo
             </a>
@@ -37,7 +37,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
               (0091) 8547 632521
             </p>
           </div>
-          <div className="col-span-5 lg:col-span-2">
+          <div className="col-span-5 md:col-span-2">
             <ul className="flex flex-initial flex-col md:flex-1 text-sm">
               <li className="py-3 md:py-0 md:pb-4">
                 <Link href="/">
@@ -62,7 +62,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
               </li>
             </ul>
           </div>
-          <div className="col-span-5 lg:col-span-2">
+          <div className="col-span-5 md:col-span-2">
             <ul className="flex flex-initial flex-col md:flex-1 text-sm">
               {['all', 'clothes', 'accessories', 'shoes'].map((string) => {
                 return (
@@ -77,34 +77,34 @@ const Footer: FC<Props> = ({ className, pages }) => {
               })}
             </ul>
           </div>
-          <div className="col-span-full lg:col-span-3 flex items-start lg:justify-end ">
+          <div className="col-span-full md:col-span-3 flex items-start md:justify-end ">
             <Subscribe3 />
           </div>
         </div>
-        <div className="py-12 text-accents-2 flex flex-col md:flex-row justify-between items-center space-y-4">
+        <div className="py-12 text-accents-2 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <ul className="flex  md:flex-1 text-sm space-x-6">
-            <li className="py-3 md:py-0 md:pb-4">
+            <li className="py-3 md:py-0 ">
               <Link href="/">
                 <a className="text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
                   Home
                 </a>
               </Link>
             </li>
-            <li className="py-3 md:py-0 md:pb-4">
+            <li className="py-3 md:py-0 ">
               <Link href="/careers">
                 <a className="text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
                   Careers
                 </a>
               </Link>
             </li>
-            <li className="py-3 md:py-0 md:pb-4">
+            <li className="py-3 md:py-0 ">
               <Link href="/blog">
                 <a className="text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
                   Blog
                 </a>
               </Link>
             </li>
-            <li className="py-3 md:py-0 md:pb-4">
+            <li className="py-3 md:py-0 ">
               <Link href="/contact">
                 <a className="text-effect-1 hover:text-accents-6 transition ease-in-out duration-150">
                   Contact us
