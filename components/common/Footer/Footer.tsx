@@ -77,7 +77,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
               })}
             </ul>
           </div>
-          <div className="col-span-full md:col-span-3 flex items-start md:justify-end ">
+          <div className="col-span-full md:col-span-3 flex justify-center items-start md:justify-end ">
             <Subscribe3 />
           </div>
         </div>

@@ -280,7 +280,7 @@ export default function Home({
     <div className="w-full space-y-12">
       <div className="relative w-full overflow-hidden">
         <HeroSlider list={hero}></HeroSlider>
-        <div className="absolute inset-0 pointer-events-none hidden md:block">
+        <div className="absolute inset-0 pointer-events-none hidden md:block ">
           <Container className=" h-full">
             <div className="w-full h-full relative">
               <div className="pointer-events-auto flex flex-col h-full absolute left-full top-0">
@@ -321,8 +321,9 @@ export default function Home({
                 </div>
                 <div
                   onClick={() => {
-                    if (!scrollerRef.current) return
-                    scrollerRef.current.scrollTo({
+                    const element = scrollerRef.current || window
+                    if (!element) return
+                    element.scrollTo({
                       top: window.innerHeight,
                       behavior: 'smooth',
                     })
