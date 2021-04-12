@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Lightbox from 'react-image-lightbox'
 import 'react-image-lightbox/style.css'
+
 interface ItemImage {
   url: string
   alt?: string
@@ -12,6 +13,9 @@ interface Props {
 }
 const Gallery: React.FC<Props> = ({ onClose, index = 0, images }) => {
   const [photoIndex, setIndex] = useState(index)
+  if (!document) {
+    return null
+  }
   return (
     <>
       <Lightbox

@@ -2,16 +2,21 @@ import type { Product } from '@commerce/types'
 import { ActionButton, Gallery, Title } from '@components/common'
 import { Facebook, GGPlus, Heart, Twitter } from '@components/icons'
 import { ProductCard, Swatch } from '@components/product'
-import { Button, Container, Modal, Text, useUI } from '@components/ui'
+import { Button, Container, Text, useUI } from '@components/ui'
 import Link from '@components/ui/Link'
 import { useAddItem } from '@framework/cart'
 import { NextSeo } from 'next-seo'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { FC, useState } from 'react'
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
+import { Tab, TabList, TabPanel, TabsProps } from 'react-tabs'
 import { getVariant, SelectedOptions } from '../helpers'
 import ProductSlider from '../ProductSlider'
 import s from './ProductView.module.css'
+const Tabs = dynamic<TabsProps>(
+  import('react-tabs').then((mod) => mod.Tabs),
+  { ssr: false }
+) // disable ssr
 interface Props {
   className?: string
   children?: any
@@ -281,6 +286,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
         <Tabs>
           <TabList className="flex overflow-auto w-full items-center md:items-baseline space-x-6 py-xl mb-xl border-b border-accents-4">
             <Tab
+              key="Detail"
               className="text-sm md:text-lg font-semibold cursor-pointer"
               selectedClassName="text-primary"
             >
@@ -288,6 +294,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             </Tab>
             <div>/</div>
             <Tab
+              key="info"
               className="text-sm md:text-lg font-semibold cursor-pointer"
               selectedClassName="text-primary"
             >
@@ -295,13 +302,14 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             </Tab>
             <div>/</div>
             <Tab
+              key="review"
               className="text-sm md:text-lg font-semibold cursor-pointer"
               selectedClassName="text-primary"
             >
               Reviews
             </Tab>
           </TabList>
-          <TabPanel>
+          <TabPanel key="Detail">
             <div className="grid  gap-md grid-cols-5 items-center">
               <div className="col-span-full md:col-span-3">
                 <Text className="inline-block" variant="sectionHeading">
@@ -363,7 +371,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
               </div>
             </div>
           </TabPanel>
-          <TabPanel>
+          <TabPanel key="info">
             <div className="grid grid-cols-2 gap-3 md:gap-6 max-w-lg">
               <div className="col-span-full md:col-span-1">
                 <span className="font-semibold">Weight</span> 1.2 kg
@@ -374,7 +382,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
               </div>
             </div>
           </TabPanel>
-          <TabPanel>
+          <TabPanel key="review">
             <Text variant="sectionHeading">
               Be the first to review “Wooden chair”
             </Text>
@@ -475,18 +483,13 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
           })}
         </ProductSlider>
       </Container>
-      <Modal
-        closable={false}
-        noBackgroud
-        open={open}
-        onClose={() => setOpen(false)}
-      >
+      {open && (
         <Gallery
           images={product.images}
           onClose={() => setOpen(false)}
           index={index}
         />
-      </Modal>
+      )}
     </div>
   )
 }

@@ -36,17 +36,17 @@ const Modal: FC<Props> = ({
   useEffect(() => {
     if (open && ref.current) {
       disableBodyScroll(ref.current)
-    }
-    return () => {
-      ref.current && enableBodyScroll(ref.current)
+      return () => {
+        ref.current && enableBodyScroll(ref.current)
+      }
     }
   }, [open])
   useEffect(() => {
     if (open) {
       window.addEventListener('keydown', handleKey)
-    }
-    return () => {
-      window.removeEventListener('keydown', handleKey)
+      return () => {
+        window.removeEventListener('keydown', handleKey)
+      }
     }
   }, [open, handleKey])
   return (

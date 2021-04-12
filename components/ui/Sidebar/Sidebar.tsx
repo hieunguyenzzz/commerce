@@ -36,9 +36,9 @@ const Sidebar: FC<Props> = ({
   useEffect(() => {
     if (open && ref.current) {
       disableBodyScroll(ref.current)
-    }
-    return () => {
-      enableBodyScroll(ref.current)
+      return () => {
+        enableBodyScroll(ref.current)
+      }
     }
   }, [open])
   useEffect(() => {

@@ -1,4 +1,3 @@
-import { LoadingDots } from '@components/ui'
 import cn from 'classnames'
 import React, {
   ButtonHTMLAttributes,
@@ -64,11 +63,11 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
       {...rest}
     >
       {children}
-      {loading && (
+      {/* {loading && (
         <i className="pl-2 m-0 flex">
           <LoadingDots />
         </i>
-      )}
+      )} */}
     </Component>
   )
 })

@@ -61,8 +61,10 @@ const Layout: FC<Props> = ({
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies()
   const { locale = 'en-US' } = useRouter()
   useEffect(() => {
-    return () => {
-      clearAllBodyScrollLocks()
+    if (displaySidebar || displayModal) {
+      return () => {
+        clearAllBodyScrollLocks()
+      }
     }
   }, [displaySidebar || displayModal])
   return (

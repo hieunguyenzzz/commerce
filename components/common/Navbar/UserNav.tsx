@@ -58,11 +58,10 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
             <div className=" absolute pointer-events-none top-0 -right-2 focus-within:w-80 focus-within:h-auto w-3 h-3 focus-within:pointer-events-auto transform opacity-0  focus-within:block focus-within:opacity-100 mt-8 focus-within:mt-0 transition-all duration-300 ease-in-out">
               <div className="h-header flex items-center">
                 <input
-                  autoFocus={true}
                   autoComplete="none"
                   id="search"
                   name="search"
-                  className="w-full py-2 shadow-lg px-12 focus:w-80  rounded-full  bg-accents-0 transition-all duration-300 ease-in-out"
+                  className="w-full py-2 shadow-inner border border-accents-3 px-12 focus:w-80 focus:outline-none rounded-full  bg-accents-0 transition-all duration-300 ease-in-out"
                 ></input>
               </div>
               <Container className="text-xs shadow-lg bg-accents-0 flex flex-col py-6  relative space-y-3">
