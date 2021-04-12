@@ -93,6 +93,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--accents-0);
+  -webkit-overflow-scrolling: touch;
 }
 body {
   min-height: 100%;

@@ -29,11 +29,13 @@ const SidebarLayout: FC<Props> = ({ children, className }) => {
           </div>
         </Container>
       </header>
-      <div className={cn(s.content)}>{children}</div>
-      <div
-        className="h-40"
-        style={{ height: 'var(--safe-area-inset-bottom)', width: '100%' }}
-      />
+      <div className={cn(s.content)}>
+        {children}
+        <div
+          className="h-40"
+          style={{ height: 'var(--safe-area-inset-bottom)', width: '100%' }}
+        />
+      </div>
     </div>
   )
 }
