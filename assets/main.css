@@ -17,7 +17,6 @@
   }
   @import './base.css';
 }
-
 @tailwind components;
 @layer components {
   @import 'animate.css/animate.css';
