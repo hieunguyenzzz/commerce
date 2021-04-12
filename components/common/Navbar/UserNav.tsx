@@ -55,7 +55,7 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
                 <Search />
               </div>
             </div>
-            <div className=" absolute top-0 -right-2 focus-within:w-80 w-2  focus-within:pointer-events-auto transform opacity-0  focus-within:block focus-within:opacity-100 mt-8 focus-within:mt-0 transition-all duration-300 ease-in-out">
+            <div className=" absolute pointer-events-none top-0 -right-2 focus-within:w-80 focus-within:h-auto w-3 h-3 focus-within:pointer-events-auto transform opacity-0  focus-within:block focus-within:opacity-100 mt-8 focus-within:mt-0 transition-all duration-300 ease-in-out">
               <div className="h-header flex items-center">
                 <input
                   autoFocus={true}
