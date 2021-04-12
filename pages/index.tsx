@@ -180,8 +180,7 @@ const AdsBannerModal = () => {
       <div
         style={{
           width: 800,
-          minHeight:
-            'calc(100vh - var(--header-height) - var(--header-height))',
+          minHeight: 'calc(100% - var(--header-height) - var(--header-height))',
         }}
         className="max-w-full  p-8 isolate mx-auto flex flex-col justify-center"
       >

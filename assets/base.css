@@ -79,13 +79,15 @@
 
 html {
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
   overscroll-behavior-y: none;
 }
 
 html,
 body {
   box-sizing: border-box;
-  touch-action: manipulation;
+  touch-action: pan-y;
   font-feature-settings: 'case' 1, 'rlig' 1, 'calt' 0;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -95,7 +97,6 @@ body {
 body {
   min-height: 100%;
   margin: 0;
-  overflow: hidden;
 }
 
 a {

@@ -51,7 +51,6 @@ const Layout: FC<Props> = ({
   pageProps: { commerceFeatures, ...pageProps },
 }) => {
   const {
-    scrollerRef,
     displaySidebar,
     displayModal,
     closeSidebar,
@@ -62,7 +61,7 @@ const Layout: FC<Props> = ({
   const { locale = 'en-US' } = useRouter()
   return (
     <CommerceProvider locale={locale}>
-      <div ref={scrollerRef} className={cn(s.root)}>
+      <div className={cn(s.root)}>
         {renderNavbar ? renderNavbar() : <Navbar />}
         <main className="fit">{children}</main>
         <Footer pages={pageProps.pages} />
