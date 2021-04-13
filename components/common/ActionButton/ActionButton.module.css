@@ -1,10 +1,10 @@
 .root {
-  @apply relative w-14 h-14 bg-accents-0 flex justify-center items-center text-2xl rounded-full  delay-100 hover:text-primary;
+  @apply relative w-10 h-10 bg-black text-white flex justify-center items-center text-xl rounded-full  delay-100;
   &.large {
     @apply w-16 h-16;
   }
   &.small {
-    @apply w-10 h-10;
+    @apply w-8 h-8 text-base;
   }
   &.round {
     @apply rounded-none;

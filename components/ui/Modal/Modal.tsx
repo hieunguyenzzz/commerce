@@ -51,7 +51,7 @@ const Modal: FC<Props> = ({
           {open && (
             <style>{`
              html,body{
-               -webkit-overflow-scrolling: none;    touch-action: none;overflow:hidden;
+               -webkit-overflow-scrolling: none;touch-action: none;overflow:hidden;
              }
              
            `}</style>

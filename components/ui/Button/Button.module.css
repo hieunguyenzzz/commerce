@@ -1,5 +1,5 @@
 .root {
-  @apply bg-secondary text-accents-1 cursor-pointer inline-flex px-10 leading-6  transition ease-in-out duration-150 shadow-sm font-semibold text-center justify-center py-4 border border-transparent items-center;
+  @apply bg-secondary leading-tight text-sm uppercase text-accents-1 cursor-pointer inline-flex px-10 transition ease-in-out duration-150 shadow-sm font-semibold text-center justify-center py-4 border border-transparent items-center;
 }
 .root.secondary {
   @apply bg-transparent text-primary border-primary-2;

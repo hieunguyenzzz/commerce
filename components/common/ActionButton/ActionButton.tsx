@@ -15,7 +15,7 @@ const ActionButton: React.FC<Props> = ({
   shape = 'circle',
   children,
 }) => (
-  <button
+  <a
     className={cn(s.root, s[size], s[shape], className)}
     data-testid="ActionButton"
   >
@@ -25,6 +25,6 @@ const ActionButton: React.FC<Props> = ({
         <div>{tooltip}</div>
       </div>
     )}
-  </button>
+  </a>
 )
 export default ActionButton

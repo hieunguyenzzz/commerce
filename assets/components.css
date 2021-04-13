@@ -45,6 +45,11 @@
     width: 100%;
     left: 0;
   }
+  &.text-effect-1_active:after {
+    @apply text-current;
+    width: 100%;
+    left: 0;
+  }
 }
 
 .text-effect-2 {
