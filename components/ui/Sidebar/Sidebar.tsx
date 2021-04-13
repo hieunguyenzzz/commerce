@@ -48,6 +48,14 @@ const Sidebar: FC<Props> = ({
     <Portal>
       {open ? (
         <div className={cn(s.root, s[position], s.open)} ref={ref}>
+          {open && (
+            <style>{`
+            html,body{
+              -webkit-overflow-scrolling: none;    touch-action: none;overflow:hidden;
+            }
+            
+          `}</style>
+          )}
           <div className={'absolute inset-0 overflow-hidden'}>
             <div
               className="absolute inset-0 bg-accents-9 opacity-50 transition-opacity"

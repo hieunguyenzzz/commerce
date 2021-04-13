@@ -81,7 +81,8 @@ html {
   height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  overscroll-behavior-y: none;
+  /* overscroll-behavior-y: none; */
+  touch-action: manipulation;
 }
 
 html,
@@ -92,7 +93,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--accents-0);
-  -webkit-overflow-scrolling: none;
+  -webkit-overflow-scrolling: auto;
 }
 body {
   min-height: 100%;
@@ -104,8 +105,8 @@ a {
 }
 
 .animated {
-  -webkit-animation-duration: 300s;
-  animation-duration: 300s;
+  -webkit-animation-duration: 1000ms;
+  animation-duration: 1000ms;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }

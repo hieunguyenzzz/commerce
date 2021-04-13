@@ -48,6 +48,14 @@ const Modal: FC<Props> = ({
           fluid
           className={classNames(s.root, noBackgroud && s.noBackgroud)}
         >
+          {open && (
+            <style>{`
+             html,body{
+               -webkit-overflow-scrolling: none;    touch-action: none;overflow:hidden;
+             }
+             
+           `}</style>
+          )}
           <div className={s.modal} role="dialog" ref={ref}>
             <FocusTrap focusFirst>{children}</FocusTrap>
             {closable && (

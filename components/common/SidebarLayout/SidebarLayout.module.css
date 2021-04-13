@@ -3,7 +3,6 @@
 }
 .content {
   @apply flex flex-col w-full absolute left-0 bottom-0 top-header;
-  bottom: var(--safe-area-inset-bottom);
   overflow-y: scroll;
   overscroll-behavior-y: none;
 }
