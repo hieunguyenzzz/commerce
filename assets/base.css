@@ -87,13 +87,12 @@ html {
 html,
 body {
   box-sizing: border-box;
-  touch-action: pan-y;
   font-feature-settings: 'case' 1, 'rlig' 1, 'calt' 0;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--accents-0);
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: none;
 }
 body {
   min-height: 100%;
@@ -105,8 +104,8 @@ a {
 }
 
 .animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
+  -webkit-animation-duration: 300s;
+  animation-duration: 300s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }

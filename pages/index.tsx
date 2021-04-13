@@ -173,33 +173,36 @@ const AdsBannerModal = () => {
         setOpen(false)
       }}
     >
-      <div className="w-full h-full absolute inset-0 ">
-        <Image layout="fill" src="/2.jpg" objectFit="cover" />
-      </div>
-      <div style={{ width: 690 }} className="w-screen max-w-full " />
-      <div
-        style={{
-          width: 800,
-          minHeight: 'calc(100% - var(--header-height) - var(--header-height))',
-        }}
-        className="max-w-full  p-8 isolate mx-auto flex flex-col justify-center"
-      >
-        <h3 className="text-center text-4xl lg:text-4xl md:font-bold">
-          {'Get 10% Off & Free Delivery'}
-        </h3>
-        <p className="pt-6 pb-12 text-center lg:text-xl">
-          For All New Email Subscribers
-        </p>
-        <div className="flex flex-col md:flex-row w-full">
-          <input
-            type="email"
-            placeholder="Your email address"
-            className="w-full flex-1 md:py-4 py-2 px-5 border-black block bg-accents-0 border rounded-none hover:shadow-inner focus:shadow-inner"
-          ></input>
-          <div className="h-3 md:hidden" />
-          <Button className="block w-full  md:w-auto" variant="slim">
-            Subscribe
-          </Button>
+      <div className="w-full animated fadeIn">
+        <div className="w-full h-full absolute inset-0 ">
+          <Image layout="fill" src="/2.jpg" objectFit="cover" />
+        </div>
+        <div style={{ width: 690 }} className="w-screen max-w-full " />
+        <div
+          style={{
+            width: 800,
+            minHeight:
+              'calc(100% - var(--header-height) - var(--header-height))',
+          }}
+          className="max-w-full  p-8 isolate mx-auto flex flex-col justify-center"
+        >
+          <h3 className="text-center text-4xl lg:text-4xl md:font-bold">
+            {'Get 10% Off & Free Delivery'}
+          </h3>
+          <p className="pt-6 pb-12 text-center lg:text-xl">
+            For All New Email Subscribers
+          </p>
+          <div className="flex flex-col md:flex-row w-full">
+            <input
+              type="email"
+              placeholder="Your email address"
+              className="w-full flex-1 md:py-4 py-2 px-5 border-black block bg-accents-0 border rounded-none hover:shadow-inner focus:shadow-inner"
+            ></input>
+            <div className="h-3 md:hidden" />
+            <Button className="block w-full  md:w-auto" variant="slim">
+              Subscribe
+            </Button>
+          </div>
         </div>
       </div>
     </Modal>

@@ -49,12 +49,12 @@
   height: 100%;
   position: absolute;
   top: 0;
-  @apply pointer-events-none opacity-0 transition-opacity delay-300 duration-700 ease-in-out lg:text-2xl;
+  @apply pointer-events-none opacity-0 transition-all duration-700 ease-in-out lg:text-2xl;
+
   & .subTitle {
-    @apply mb-lg max-w-xs transition-transform duration-300 ease-in-out;
+    @apply mb-lg max-w-xs transition-transform duration-500 ease-in-out;
     line-height: 1.41;
     transform: translateX(5rem);
-    transition: all 0.3s linear 0.3s;
     font-size: 0.9em;
   }
   & .title {
@@ -71,7 +71,7 @@
   }
 }
 .faderSlide.current {
-  @apply pointer-events-auto opacity-100;
+  @apply pointer-events-auto opacity-100 duration-1000;
   & .subTitle {
     transform: translateX(0);
   }
