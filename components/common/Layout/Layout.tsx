@@ -10,7 +10,7 @@ import { useAcceptCookies } from '@lib/hooks/useAcceptCookies'
 import cn from 'classnames'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import s from './Layout.module.css'
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -58,7 +58,11 @@ const Layout: FC<Props> = ({
     modalView,
   } = useUI()
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies()
-  const { locale = 'en-US' } = useRouter()
+  const { locale = 'en-US', pathname } = useRouter()
+  useEffect(() => {
+    closeSidebar()
+    closeModal()
+  }, [pathname, closeSidebar, closeModal])
   return (
     <CommerceProvider locale={locale}>
       <div className={cn(s.root)}>
