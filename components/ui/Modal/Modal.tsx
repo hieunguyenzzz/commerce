@@ -46,14 +46,20 @@ const Modal: FC<Props> = ({
       {open ? (
         <Container
           fluid
-          className={classNames(s.root, noBackgroud && s.noBackgroud)}
+          className={classNames(
+            s.root,
+            'animated fadeIn',
+            noBackgroud && s.noBackgroud
+          )}
         >
           {open && (
             <style>{`
              html,body{
                -webkit-overflow-scrolling: none;touch-action: none;overflow:hidden;
              }
-             
+             body{
+               padding-right:${window.innerWidth - document.body.clientWidth}px
+             }
            `}</style>
           )}
           <div className={s.modal} role="dialog" ref={ref}>

@@ -73,7 +73,9 @@
     margin-right: 0.3em;
   }
 }
-
+.card-shadow {
+  box-shadow: 0 0 30px 0 rgb(0 0 0 / 10%);
+}
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;

@@ -6,6 +6,7 @@ import useCustomer from '@framework/customer/use-customer'
 import type { LineItem } from '@framework/types'
 import cn from 'classnames'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { FC } from 'react'
 import DropdownMenu from './DropdownMenu'
 import s from './UserNav.module.css'
@@ -28,7 +29,7 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
     openModal,
   } = useUI()
   const itemsCount = (5 || data?.lineItems.reduce(countItem, 0)) ?? 0
-
+  const { push } = useRouter()
   return (
     <nav className={cn(s.root, className)}>
       <ul className={s.list}>
@@ -56,14 +57,20 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
               </div>
             </div>
             <div className=" absolute pointer-events-none top-0 -right-2 focus-within:w-80 focus-within:h-auto w-3 h-3 focus-within:pointer-events-auto transform opacity-0  focus-within:block focus-within:opacity-100 mt-8 focus-within:mt-0 transition-all duration-300 ease-in-out">
-              <div className="h-header flex items-center">
+              <form
+                onSubmit={(e: any) => {
+                  e.preventDefault()
+                  push(`/search?q=${e.target[0].value}`)
+                }}
+                className="h-header flex items-center"
+              >
                 <input
                   autoComplete="none"
                   id="search"
                   name="search"
                   className="w-full py-2 shadow-inner border border-accents-3 px-12 focus:w-80 focus:outline-none rounded-full  bg-accents-0 transition-all duration-300 ease-in-out"
                 ></input>
-              </div>
+              </form>
               <Container className="text-xs shadow-lg bg-accents-0 flex flex-col py-6  relative space-y-3">
                 <div className="text-accents-6 text-xs ">Quick links</div>
                 {new Array(5)
@@ -87,14 +94,16 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
                           key={i}
                           className="leading-extra-loose flex flex-col items-start space-y-3"
                         >
-                          <div
-                            className={cn(
-                              s.link,
-                              'inline-block text-xs text-effect-1'
-                            )}
-                          >
-                            {item}
-                          </div>
+                          <Link href={`/search?q=${item}`}>
+                            <a
+                              className={cn(
+                                s.link,
+                                'inline-block text-xs text-effect-1'
+                              )}
+                            >
+                              {item}
+                            </a>
+                          </Link>
                         </div>
                       )
                     }

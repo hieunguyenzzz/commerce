@@ -1,7 +1,7 @@
 .root {
 }
 .subTitle {
-  @apply font-bold text-primary mb-sm lg:text-lg xl:text-xl text-sm max-w-xs;
+  @apply font-semibold text-primary mb-sm lg:text-lg xl:text-xl text-sm max-w-xs;
   line-height: 1.41;
 }
 .title {

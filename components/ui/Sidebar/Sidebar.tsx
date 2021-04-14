@@ -53,7 +53,9 @@ const Sidebar: FC<Props> = ({
             html,body{
               -webkit-overflow-scrolling: none;    touch-action: none;overflow:hidden;
             }
-            
+            body{
+              padding-right:${window.innerWidth - document.body.clientWidth}px
+            }
           `}</style>
           )}
           <div className={'absolute inset-0 overflow-hidden'}>

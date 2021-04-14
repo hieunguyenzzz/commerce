@@ -1,5 +1,5 @@
 import { Title } from '@components/common'
-import { Button, Input } from '@components/ui'
+import { Button } from '@components/ui'
 import React from 'react'
 const Subscribe: React.FC = () => (
   <div className="flex flex-col space-y-5" data-testid="Subscribe">
@@ -11,14 +11,12 @@ const Subscribe: React.FC = () => (
       upcoming collections
     </div>
     <div className="flex-1 flex flex-col space-y-3">
-      <Input
+      <input
         type="email"
         placeholder="Your email address"
-        className="w-full py-4 px-5 border-black bg-accents-0 border-2 rounded-none hover:shadow-inner focus:shadow-inner"
-      ></Input>
-      <Button className="w-full" variant="slim">
-        Subscribe
-      </Button>
+        className="w-full text-sm py-4 px-5 border-black bg-accents-0 border-2 rounded-none hover:shadow-inner focus:shadow-inner"
+      ></input>
+      <Button className="w-full">Subscribe</Button>
     </div>
   </div>
 )

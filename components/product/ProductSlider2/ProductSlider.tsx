@@ -20,20 +20,24 @@ const ProductSlider: React.FC = ({ children }) => {
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     spacing: 10,
     slidesPerView: 2,
+
     centered: false,
     loop: false,
     breakpoints: {
       '(min-width: 600px)': {
         slidesPerView: 2,
         mode: 'free-snap',
+        spacing: 24,
       },
       '(min-width: 800px)': {
         slidesPerView: 3,
         mode: 'free-snap',
+        spacing: 24,
       },
       '(min-width: 1024px)': {
         slidesPerView: 4,
         mode: 'free-snap',
+        spacing: 36,
       },
     },
   })

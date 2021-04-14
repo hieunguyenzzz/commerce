@@ -1,7 +1,7 @@
 import type { Product } from '@commerce/types'
 import { ActionButton, Gallery, Title } from '@components/common'
 import { Facebook, Heart, Pinterest, Twitter } from '@components/icons'
-import { ProductCard } from '@components/product'
+import { ProductCard, ProductSlider2, Swatch } from '@components/product'
 import { Button, Container, Text, useUI } from '@components/ui'
 import Link from '@components/ui/Link'
 import { useAddItem } from '@framework/cart'
@@ -11,7 +11,6 @@ import Image from 'next/image'
 import { FC, useState } from 'react'
 import { Tab, TabList, TabPanel, TabsProps } from 'react-tabs'
 import { getVariant, SelectedOptions } from '../helpers'
-import ProductSlider from '../ProductSlider'
 import s from './ProductView.module.css'
 const Tabs = dynamic<TabsProps>(
   import('react-tabs').then((mod) => mod.Tabs),
@@ -74,8 +73,8 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
           ],
         }}
       />
-      <Container className=" grid gap-12 grid-cols-2 ">
-        <div className="col-span-2 md:col-span-1">
+      <Container className=" grid gap-12 grid-cols-12 ">
+        <div className="col-span-full lg:col-span-7 md:col-span-1">
           <div className="w-full relative" style={{ paddingTop: '80%' }}>
             <div className="absolute w-full h-full top-0 left-0 flex">
               <div className="w-1/6 flex flex-col z-10 ">
@@ -158,9 +157,27 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             </div>
           </div>
         </div>
-        <div className="col-span-2 md:col-span-1 space-y-6 relative pt-12">
+        <div className="col-span-full lg:col-span-5 md:col-span-1 space-y-6 relative">
+          <div className="py-8 hidden lg:flex items-center text-xs text-accents-6">
+            <div>Home</div>
+            <div>
+              <svg width="1em" height="1em" viewBox="2 2 10 10">
+                <path d="M9.156 7l-2.5 3.125-.669-.536L8.058 7 5.987 4.411l.669-.536z"></path>
+                <path fill="none" d="M2 2h10v10H2z"></path>
+              </svg>
+            </div>
+            <div>Living room</div>
+            <div>
+              <svg width="1em" height="1em" viewBox="2 2 10 10">
+                <path d="M9.156 7l-2.5 3.125-.669-.536L8.058 7 5.987 4.411l.669-.536z"></path>
+                <path fill="none" d="M2 2h10v10H2z"></path>
+              </svg>
+            </div>
+            <div>Chair</div>
+          </div>
+
           <div className="space-y-sm">
-            <h1 className="text-xl">{product.name}</h1>
+            <h1 className="text-2xl">{product.name}</h1>
             <div className="break-words w-full max-w-xl text-sm">
               <Text html={product.description} />
             </div>
@@ -211,8 +228,43 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
               <span>{product.price.currencyCode}</span>
             </div>
           </div>
-          <div className="flex flex-wrap lg:flex-nowrap justify-between space-y-md">
-            <div className="bg-accents-1 w-full border border-accents-5 flex focus-within:border-black items-stretch">
+          <div className="space-y-4">
+            {product.options?.map((opt) => (
+              <div className="flex items-center" key={opt.displayName}>
+                <h2 className="text-accents-6 text-xs uppercase w-1/3">
+                  {opt.displayName}
+                </h2>
+                <div className="flex flex-row flex-wrap space-y-2 space-y-reverse">
+                  {opt.values.map((v, i: number) => {
+                    const active = (choices as any)[
+                      opt.displayName.toLowerCase()
+                    ]
+                    return (
+                      <Swatch
+                        className="flex-shrink-0"
+                        key={`${opt.id}-${i}`}
+                        active={v.label.toLowerCase() === active}
+                        variant={opt.displayName}
+                        color={v.hexColors ? v.hexColors[0] : ''}
+                        label={v.label}
+                        onClick={() => {
+                          setChoices((choices) => {
+                            return {
+                              ...choices,
+                              [opt.displayName.toLowerCase()]: v.label.toLowerCase(),
+                            }
+                          })
+                        }}
+                      />
+                    )
+                  })}
+                  <div />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap lg:flex-nowrap justify-between space-y-md lg:space-y-0">
+            <div className="bg-accents-1 w-full lg:w-auto border border-accents-5 flex focus-within:border-black items-stretch">
               <button className="z-10 text-accents-6 w-10 flex justify-center hover:text-primary focus:outline-none  cursor-pointer  items-center text-xl font-semibold p-3">
                 -
               </button>
@@ -220,14 +272,14 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                 type="number"
                 pattern="\d*"
                 defaultValue={1}
-                className="flex-1 appearance-none focus:outline-none text-center px-3 w-20 bg-transparent "
+                className="flex-1 appearance-none focus:outline-none text-center px-3 bg-transparent "
               ></input>
               <button className="z-10 text-accents-6 w-10 flex justify-center hover:text-primary focus:outline-none cursor-pointer  items-center text-xl font-semibold p-3">
                 +
               </button>
             </div>
             <Button
-              className="order-1 lg:ml-6 mt-6 lg:mt-0 w-full lg:w-0 m-0 lg:order-none lg:flex-1 flex-none"
+              className="order-1 px-6 text-center lg:ml-6 mt-6 lg:mt-0 w-full lg:w-0 m-0 lg:order-none lg:flex-1 flex-none truncate"
               aria-label="Add to Cart"
               type="button"
               onClick={addToCart}
@@ -237,7 +289,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
               Add to Cart
             </Button>
             {process.env.COMMERCE_WISHLIST_ENABLED && (
-              <div className="absolute -top-6 right-0">
+              <div className="lg:hidden absolute -top-6 right-0">
                 <ActionButton
                   className="flex-shrink-0 border border-black hover:border-primary"
                   tooltip={'add wishlist'}
@@ -248,7 +300,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             )}
           </div>
           <div className="space-y-6 flex flex-wrap items-baseline space-x-3 space-x-reverse">
-            <div className="flex-1 text-xs uppercase">Share</div>
+            <div className="flex-1 text-accents-6 text-xs uppercase">Share</div>
             <div className="flex space-x-3">
               <span className="hover-effect-1">
                 <Facebook />
@@ -264,215 +316,276 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
           <div className="border-b border-accents-3" />
           <div className="space-y-2 text-xs uppercase">
             <div className="flex items-baseline space-x-3">
-              <div className="text-accents-6 w-1/3">SKU:</div>{' '}
+              <div className="text-accents-6 w-1/3">SKU</div>{' '}
               <div className="flex-1">502</div>
             </div>
             <div className="flex items-baseline space-x-3">
-              <div className="text-accents-6 w-1/3">Categories:</div>{' '}
+              <div className="text-accents-6 w-1/3">Categories</div>{' '}
               <div className="flex-1">
                 <Link href="/search?q=Furniture">Furniture</Link>,{' '}
                 <Link href="/search?q=Table">Table</Link>
               </div>
             </div>
             <div className="flex items-baseline space-x-3">
-              <div className="text-accents-6 w-1/3">Tag:</div>{' '}
+              <div className="text-accents-6 w-1/3">Tag</div>{' '}
               <div className="flex-1">
                 <Link href="/search?q=Pottery">Pottery</Link>
               </div>
             </div>
           </div>
-          <div className="h-28"></div>
-          <div className="border-b border-accents-3" />
+          <div className="h-12"></div>
         </div>
       </Container>
+
       <Container>
-        <Tabs>
-          <TabList className="flex flex-col items-start overflow-auto w-full space-y-3 md:items-baseline  mb-xl">
+        <div className="border-b border-accents-3 mb-12" />
+        <Tabs className="lg:flex lg:space-x-6">
+          <TabList className="flex lg:w-48 flex-shrink-0 flex-col items-start overflow-auto  space-y-3 md:items-baseline  mb-xl">
             <Tab
               key="Detail"
-              className="uppercase md:text-lg font-semibold cursor-pointer text-effect-1"
+              className=" cursor-pointer text-effect-1"
               selectedClassName="text-effect-1_active"
             >
               Description
             </Tab>
             <Tab
               key="info"
-              className="uppercase md:text-lg font-semibold cursor-pointer text-effect-1"
+              className=" cursor-pointer text-effect-1"
               selectedClassName="text-effect-1_active"
             >
               Addition Infomations
             </Tab>
             <Tab
               key="review"
-              className="uppercase md:text-lg font-semibold cursor-pointer text-effect-1"
+              className=" cursor-pointer text-effect-1"
               selectedClassName="text-effect-1_active"
             >
-              Reviews
+              Reviews(3)
             </Tab>
           </TabList>
-          <TabPanel key="Detail">
-            <div className="grid  gap-md grid-cols-5 items-center">
-              <div className="col-span-full md:col-span-3">
-                <Text className="inline-block" variant="sectionHeading">
-                  Detail
-                </Text>
-                <Text variant="body">
-                  Nam libero tempore, cum soluta nobis est eligendi optio cumque
-                  nihil impedit quo minus id quod maxime placeat facere
-                  possimus, omnis voluptas assumenda est, omnis dolor
-                  repellendus. Temporibus autem quibusdam et aut officiis
-                  debitis aut rerum omnis voluptas assumenda.
-                </Text>
-              </div>
-              <div className="col-span-full md:col-span-2">
-                <Image
-                  className={s.img}
-                  src={product.images[0]?.url!}
-                  alt={product.images[0]?.alt || 'Product Image'}
-                  width={1050}
-                  height={1050}
-                  quality="85"
-                  objectFit="cover"
-                />
-              </div>
-            </div>
-            <div className="my-xl border-b border-accents-4"></div>
-            <div className="grid  gap-md grid-cols-5 items-center">
-              <div className="col-span-full md:col-span-3">
-                <Text className="inline-block" variant="sectionHeading">
-                  Features
-                </Text>
-                <Text variant="body">
-                  <ul className="list-disc list-inside">
-                    <li>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                    </li>
-                    <li>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                    </li>
-                    <li>
-                      Lorem ipsum dolor sit1amet, consectetur adipisicing elit
-                    </li>
-                    <li>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                    </li>
-                  </ul>
-                </Text>
-              </div>
-              <div className="col-span-full md:col-span-2">
-                <Image
-                  className={s.img}
-                  src={product.images[1]?.url!}
-                  alt={product.images[1]?.alt || 'Product Image'}
-                  width={1050}
-                  height={1050}
-                  quality="85"
-                  objectFit="cover"
-                />
-              </div>
-            </div>
-          </TabPanel>
-          <TabPanel key="info">
-            <div className="grid grid-cols-2 gap-3 md:gap-6 max-w-lg">
-              <div className="col-span-full md:col-span-1">
-                <span className="font-semibold">Weight</span> 1.2 kg
-              </div>
-              <div className="col-span-full md:col-span-1">
-                <span className="font-semibold">Dimensions</span> 12 × 2 × 1.5
-                cm
-              </div>
-            </div>
-          </TabPanel>
-          <TabPanel key="review">
-            <Text variant="sectionHeading">
-              Be the first to review “Wooden chair”
-            </Text>
-            <div className="grid grid-cols-2 gap-6 max-w-lg">
-              <label className="block col-span-full md:col-span-1">
-                <span className="text-gray-700">Your rating</span>
-                <div className="flex items-center mt-1">
-                  <svg
-                    className="mx-1 w-2 h-2 fill-current text-yellow-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                  </svg>
-                  <svg
-                    className="mx-1 w-2 h-2 fill-current text-yellow-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                  </svg>
-                  <svg
-                    className="mx-1 w-2 h-2 fill-current text-yellow-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                  </svg>
-                  <svg
-                    className="mx-1 w-2 h-2 fill-current text-yellow-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                  </svg>
-                  <svg
-                    className="mx-1 w-2 h-2 fill-current text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                  </svg>
+          <div className="flex-1 lg:pl-12 border-l border-accents-3">
+            <TabPanel key="Detail">
+              <div className="grid  gap-md grid-cols-5 items-center">
+                <div className="col-span-full md:col-span-3">
+                  <Text className="inline-block" variant="sectionHeading">
+                    Detail
+                  </Text>
+                  <Text variant="body">
+                    Nam libero tempore, cum soluta nobis est eligendi optio
+                    cumque nihil impedit quo minus id quod maxime placeat facere
+                    possimus, omnis voluptas assumenda est, omnis dolor
+                    repellendus. Temporibus autem quibusdam et aut officiis
+                    debitis aut rerum omnis voluptas assumenda.
+                  </Text>
                 </div>
-              </label>
-
-              <label className="block col-span-full">
-                <span className="text-gray-700">
-                  Your review <span>*</span>
-                </span>
-                <textarea
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  rows={4}
-                ></textarea>
-              </label>
-              <label className="block col-span-full md:col-span-1">
-                <span className="text-gray-700">
-                  Your Name <span>*</span>
-                </span>
-                <input
-                  type="email"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  placeholder="john@example.com"
-                />
-              </label>
-              <label className="bloc col-span-full md:col-span-1">
-                <span className="text-gray-700">
-                  Your Email <span>*</span>
-                </span>
-                <input
-                  type="email"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  placeholder="john@example.com"
-                />
-              </label>
-              <div className="block col-span-full mb-6">
-                <Button variant="slim">Submit</Button>
+                <div className="col-span-full md:col-span-2">
+                  <Image
+                    className={s.img}
+                    src={product.images[0]?.url!}
+                    alt={product.images[0]?.alt || 'Product Image'}
+                    width={1050}
+                    height={1050}
+                    quality="85"
+                    objectFit="cover"
+                  />
+                </div>
               </div>
-            </div>
-          </TabPanel>
+              <div className="my-xl border-b border-accents-4"></div>
+              <div className="grid  gap-md grid-cols-5 items-center">
+                <div className="col-span-full md:col-span-3">
+                  <Text className="inline-block" variant="sectionHeading">
+                    Features
+                  </Text>
+                  <Text variant="body">
+                    <ul className="list-disc list-inside">
+                      <li>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                      </li>
+                      <li>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                      </li>
+                      <li>
+                        Lorem ipsum dolor sit1amet, consectetur adipisicing elit
+                      </li>
+                      <li>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                      </li>
+                    </ul>
+                  </Text>
+                </div>
+                <div className="col-span-full md:col-span-2">
+                  <Image
+                    className={s.img}
+                    src={product.images[1]?.url!}
+                    alt={product.images[1]?.alt || 'Product Image'}
+                    width={1050}
+                    height={1050}
+                    quality="85"
+                    objectFit="cover"
+                  />
+                </div>
+              </div>
+            </TabPanel>
+            <TabPanel key="info">
+              <div className="grid grid-cols-2 gap-3 md:gap-6 max-w-lg">
+                <div className="col-span-full md:col-span-1">
+                  <span className="font-semibold">Weight</span> 1.2 kg
+                </div>
+                <div className="col-span-full md:col-span-1">
+                  <span className="font-semibold">Dimensions</span> 12 × 2 × 1.5
+                  cm
+                </div>
+              </div>
+            </TabPanel>
+            <TabPanel key="review">
+              <div className="space-y-6">
+                {new Array(3).fill(
+                  <div className="space-y-2">
+                    <div className="flex space-x-4 items-baseline">
+                      <div>Chris Ames</div>
+                      <div className="text-xs uppercase font-semibold flex-1 text-accents-6">
+                        September 14, 2018
+                      </div>
+                      <div>
+                        <div className="flex items-center mt-1">
+                          <svg
+                            className="mx-1 w-2 h-2 fill-current text-yellow-500"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                          </svg>
+                          <svg
+                            className="mx-1 w-2 h-2 fill-current text-yellow-500"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                          </svg>
+                          <svg
+                            className="mx-1 w-2 h-2 fill-current text-yellow-500"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                          </svg>
+                          <svg
+                            className="mx-1 w-2 h-2 fill-current text-yellow-500"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                          </svg>
+                          <svg
+                            className="mx-1 w-2 h-2 fill-current text-gray-400"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-accents-6 text-sm">
+                      Hanc ergo intuens debet institutum illud quasi signum
+                      absolvere. Sed quid attinet de rebus tam apertis plura
+                      requirere? Quam illa ardentis amores excitaret sui! Cur
+                      tandem? A primo, ut opinor, animantium ortu petitur origo
+                      summi boni.
+                    </p>
+                  </div>
+                )}
+                <div>
+                  <Text variant="sectionHeading">Add a review</Text>
+                  <Text variant="body">
+                    Your email address will not be published. Required fields
+                    are marked *
+                  </Text>
+                  <div className="grid py-6 grid-cols-2 gap-6 max-w-lg">
+                    <label className="block col-span-full md:col-span-1">
+                      <span className="text-gray-700">Your rating</span>
+                      <div className="flex items-center mt-1">
+                        <svg
+                          className="mx-1 w-4 h-4 fill-current text-yellow-500"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                        <svg
+                          className="mx-1 w-4 h-4 fill-current text-yellow-500"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                        <svg
+                          className="mx-1 w-4 h-4 fill-current text-yellow-500"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                        <svg
+                          className="mx-1 w-4 h-4 fill-current text-yellow-500"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                        <svg
+                          className="mx-1 w-2 h-2 fill-current text-gray-400"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                      </div>
+                    </label>
+                    <label className="block col-span-full">
+                      <span className="text-gray-700">
+                        Your review <span>*</span>
+                      </span>
+                      <textarea
+                        className="mt-1 border border-black py-2 px-3 block w-full rounded-md  shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        rows={4}
+                      ></textarea>
+                    </label>
+                    <label className="block col-span-full md:col-span-1">
+                      <span className="text-gray-700">
+                        Your Name <span>*</span>
+                      </span>
+                      <input
+                        type="email"
+                        className="mt-1 border border-black py-2 px-3 block w-full rounded-md  shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        placeholder="john@example.com"
+                      />
+                    </label>
+                    <label className="bloc col-span-full md:col-span-1">
+                      <span className="text-gray-700">
+                        Your Email <span>*</span>
+                      </span>
+                      <input
+                        type="email"
+                        className="mt-1 border border-black py-2 px-3 block w-full rounded-md  shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        placeholder="john@example.com"
+                      />
+                    </label>
+                    <div className="block col-span-full mb-6">
+                      <Button variant="slim">Submit</Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </TabPanel>
+          </div>
         </Tabs>
-      </Container>
-      <Container>
-        <div className="my-xl border-b border-accents-4" />
       </Container>
       <Container className="py-6 lg:py-12 space-y-6 lg:space-y-10">
         <Title small center>
           Related products
         </Title>
-        <ProductSlider>
+        <ProductSlider2>
           {relatedProducts.map((product, i) => {
             return (
               <ProductCard
@@ -482,7 +595,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
               />
             )
           })}
-        </ProductSlider>
+        </ProductSlider2>
       </Container>
       {open && (
         <Gallery

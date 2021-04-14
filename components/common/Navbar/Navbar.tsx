@@ -183,7 +183,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
                     'Journal',
                   ].map((str) => (
                     <li key={str} className="group-foo  text-effect-2">
-                      <Link href={'/' + str}>
+                      <Link href={'search?q=' + str}>
                         <a className="z-20 text-2xl font-light transition ease-in-out duration-150 isolate">
                           {str}
                         </a>
@@ -195,7 +195,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
                         {new Array(5).fill(str).map((str, i) => {
                           return (
                             <li key={i}>
-                              <Link href={'/' + str + '_' + i}>
+                              <Link href={'search?q=' + str + '_' + i}>
                                 <a className="text-effect-1 py-1 transition ease-in-out duration-150">
                                   {str + ' v' + i}
                                 </a>
@@ -275,10 +275,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
             </div>
             <div className="absolute top-0 left-0 w-full h-header flex items-center justify-center pointer-events-none">
               <Link href="/">
-                <a
-                  className="text-2xl font-bold z-10 pointer-events-auto"
-                  aria-label="Logo"
-                >
+                <a className="text-2xl font-bold z-10 " aria-label="Logo">
                   Helendo
                 </a>
               </Link>
@@ -295,7 +292,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
         <div className="space-x-12 h-header-lg hidden lg:flex items-center">
           <div className="group flex items-center h-header-lg">
             <Link href="/home">
-              <a className={cn(s.link, 'z-10')}>home</a>
+              <a className={cn(s.link, 'z-10 text-sm')}>home</a>
             </Link>
             <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
               <Container className="w-full text-xs py-6  relative">
@@ -309,12 +306,16 @@ const Navbar: FC<Props> = ({ transparent }) => {
                             className="leading-extra-loose  flex-1 flex flex-col items-start space-y-3"
                           >
                             {item.map((menu: any, i: any) => (
-                              <div
-                                key={i}
-                                className={cn(s.link, 'text-xs tinline-block')}
-                              >
-                                {menu as any}
-                              </div>
+                              <Link key={i} href={`/search?q=${menu}`}>
+                                <a
+                                  className={cn(
+                                    s.link,
+                                    'text-xs tinline-block'
+                                  )}
+                                >
+                                  {menu as any}
+                                </a>
+                              </Link>
                             ))}
                           </div>
                         )
@@ -343,7 +344,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
           <div className="group flex items-center h-header-lg">
             <Link href="/shop">
-              <a className={cn(s.link, 'z-10')}>shop</a>
+              <a className={cn(s.link, 'z-10 text-sm')}>shop</a>
             </Link>
             <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
               <Container fluid clean className="w-full text-xs flex relative">
@@ -367,12 +368,16 @@ const Navbar: FC<Props> = ({ transparent }) => {
                           {title}
                         </div>
                         {rest.map((menu: any, i: any) => (
-                          <div
-                            key={i}
-                            className={cn(s.link, 'inline-block text-xs z-10')}
-                          >
-                            {menu as any}
-                          </div>
+                          <Link key={i} href={`/search?q=${menu}`}>
+                            <a
+                              className={cn(
+                                s.link,
+                                'inline-block text-xs z-10'
+                              )}
+                            >
+                              {menu as any}
+                            </a>
+                          </Link>
                         ))}
                       </Container>
                     )
@@ -383,10 +388,13 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
           <div className="group flex items-center h-header-lg">
             <Link href="/features">
-              <a className={cn(s.link, 'z-10')}>features</a>
+              <a className={cn(s.link, 'z-10 text-sm')}>features</a>
             </Link>
             <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
-              <Container className="w-full text-xs grid grid-cols-7 gap-8 py-6 relative">
+              <Container
+                fluid
+                className="w-full text-xs grid grid-cols-7 gap-8 py-6 relative"
+              >
                 <div className="absolute bottom-0 right-0 w-96 h-96">
                   <Image
                     layout="intrinsic"
@@ -410,12 +418,11 @@ const Navbar: FC<Props> = ({ transparent }) => {
                           {title}
                         </div>
                         {rest.map((menu: any, i: any) => (
-                          <div
-                            key={i}
-                            className={cn(s.link, 'inline-block text-xs')}
-                          >
-                            {menu as any}
-                          </div>
+                          <Link key={i} href={`/search?q=${menu}`}>
+                            <a className={cn(s.link, 'inline-block text-xs')}>
+                              {menu as any}
+                            </a>
+                          </Link>
                         ))}
                       </div>
                     )
@@ -427,7 +434,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
           <div className="group flex items-center h-header-lg relative">
             <Link href="/pages">
-              <a className={cn(s.link, 'z-10')}>pages</a>
+              <a className={cn(s.link, 'z-10 text-sm')}>pages</a>
             </Link>
             <div className=" absolute top-0 left-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto transform -translate-x-1/2 opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
               <Container className="text-xs shadow-lg bg-accents-0 flex flex-col py-6  relative space-y-3">
@@ -446,12 +453,11 @@ const Navbar: FC<Props> = ({ transparent }) => {
                         </div>
                         <div className="hidden">
                           {rest.map((menu: any, i: any) => (
-                            <div
-                              key={i}
-                              className={cn(s.link, 'inline-block text-xs')}
-                            >
-                              {menu as any}
-                            </div>
+                            <Link key={i} href={`/search?q=${menu}`}>
+                              <a className={cn(s.link, 'inline-block text-xs')}>
+                                {menu as any}
+                              </a>
+                            </Link>
                           ))}
                         </div>
                       </div>

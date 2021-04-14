@@ -58,7 +58,7 @@
     font-size: 0.9em;
   }
   & .title {
-    @apply max-w-sm lg:max-w-xl xl:max-w-2xl transition-transform duration-700 ease-in-out;
+    @apply max-w-sm mb-lg lg:max-w-xl xl:max-w-2xl transition-transform duration-700 ease-in-out;
     line-height: 1.1;
     transform: translateX(5rem);
     font-size: 3em;
@@ -67,7 +67,7 @@
     @apply transition-transform duration-1000 ease-in-out;
     font-size: 0.9em;
     transform: translateX(5rem);
-    font-size: 1.3em;
+    font-size: 0.9em;
   }
 }
 .faderSlide.current {

@@ -95,7 +95,12 @@ const HeroSlider: FC<any> = ({ list }) => {
                     <h2 className={s.title}>{item.title}</h2>
                     <div className={s.buttonText}>
                       <Link href={'#'}>
-                        <Button variant="link">{item.buttonText}</Button>
+                        <Button
+                          variant="link"
+                          className={cn(s.buttonText, 'text-effect-1 ')}
+                        >
+                          {item.buttonText}
+                        </Button>
                       </Link>
                     </div>
                   </div>

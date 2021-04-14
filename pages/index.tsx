@@ -90,7 +90,7 @@ export async function getStaticProps({
           ? {
               label: {
                 position: 'top right',
-                text: 'Out Of Stock',
+                text: 'new',
                 variant: 'new',
               },
             }
@@ -98,7 +98,7 @@ export async function getStaticProps({
           ? {
               label: {
                 position: 'top right',
-                text: 'discount',
+                text: 'Out Of Stock',
                 variant: 'out-of-stock',
               },
             }
@@ -160,10 +160,9 @@ const featured = [
 const AdsBannerModal = () => {
   const [open, setOpen] = useState(false)
   useEffect(() => {
-    setTimeout &&
-      setTimeout(() => {
-        setOpen(true)
-      }, 5000)
+    setTimeout(() => {
+      setOpen(true)
+    })
   }, [])
   if (!open) return null
   return (
@@ -173,7 +172,7 @@ const AdsBannerModal = () => {
         setOpen(false)
       }}
     >
-      <div className="w-full animated fadeIn">
+      <div className="w-full ">
         <div className="w-full h-full absolute inset-0 ">
           <Image layout="fill" src="/2.jpg" objectFit="cover" />
         </div>
@@ -342,9 +341,9 @@ export default function Home({
                           bottom: '-20px',
                         } as any
                       }
-                      className="absolute left-0 transform rotate-90 origin-bottom-left"
+                      className="absolute left-0 transform rotate-90 origin-bottom-left uppercase text-xs font-semibold truncate"
                     >
-                      srolldown
+                      sroll down
                     </div>
                   </div>
                   <span className="text-xl mt-4">
