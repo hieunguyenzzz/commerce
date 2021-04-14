@@ -20,11 +20,11 @@ const ActionButton: React.FC<Props> = ({
     data-testid="ActionButton"
   >
     {children}
-    {tooltip && (
+    {/* {tooltip && (
       <div className={s.tooltip}>
         <div>{tooltip}</div>
       </div>
-    )}
+    )} */}
   </a>
 )
 export default ActionButton

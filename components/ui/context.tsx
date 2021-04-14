@@ -147,8 +147,11 @@ export const UIProvider: FC = (props) => {
   const [state, dispatch] = React.useReducer(uiReducer, initialState)
   const scrollerRef = React.useRef()
 
-  const openSidebar = () => dispatch({ type: 'OPEN_SIDEBAR' })
-  const closeSidebar = () => dispatch({ type: 'CLOSE_SIDEBAR' })
+  const openSidebar = useCallback(() => dispatch({ type: 'OPEN_SIDEBAR' }), [])
+  const closeSidebar = useCallback(
+    () => dispatch({ type: 'CLOSE_SIDEBAR' }),
+    []
+  )
   const toggleSidebar = () =>
     state.displaySidebar
       ? dispatch({ type: 'CLOSE_SIDEBAR' })
