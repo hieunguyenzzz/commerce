@@ -10,6 +10,7 @@ import { useUI } from '@components/ui/context'
 import DropdownMenu from './DropdownMenu'
 import s from './UserNav.module.css'
 
+import { IoPersonOutline, IoSearchOutline } from 'react-icons/io5'
 interface Props {
   className?: string
 }
@@ -26,10 +27,28 @@ const UserNav: FC<Props> = ({ className }) => {
     <nav className={cn(s.root, className)}>
       <div className={s.mainContainer}>
         <ul className={s.list}>
+          <li className={`${s.item} hidden md:flex`}>
+            {customer ? (
+              <DropdownMenu />
+            ) : (
+              <button
+                className={s.avatarButton}
+                aria-label="Menu"
+                onClick={() => openModal()}
+              >
+                <IoPersonOutline size={26} />
+              </button>
+            )}
+          </li>
           <li className={s.item} onClick={toggleSidebar}>
             <Bag />
             {itemsCount > 0 && <span className={s.bagCount}>{itemsCount}</span>}
           </li>
+
+          <li className={`${s.item} flex md:hidden`}>
+            <IoSearchOutline size={26} />
+          </li>
+
           {process.env.COMMERCE_WISHLIST_ENABLED && (
             <li className={s.item}>
               <Link href="/wishlist">
@@ -39,7 +58,7 @@ const UserNav: FC<Props> = ({ className }) => {
               </Link>
             </li>
           )}
-          <li className={s.item}>
+          {/* <li className={s.item}>
             {customer ? (
               <DropdownMenu />
             ) : (
@@ -51,7 +70,7 @@ const UserNav: FC<Props> = ({ className }) => {
                 <Avatar />
               </button>
             )}
-          </li>
+          </li> */}
         </ul>
       </div>
     </nav>

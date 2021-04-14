@@ -9,6 +9,15 @@ import getAllProducts from '@framework/product/get-all-products'
 import getSiteInfo from '@framework/common/get-site-info'
 import getAllPages from '@framework/common/get-all-pages'
 
+// * New
+import HeroCarouselItem from '@components/common/HeroCarouselItem'
+import FeatureProduct from '@components/product/FeatureProduct'
+import ProductBestSell from '@components/product/ProductBestSell'
+import ProductOffer from '@components/product/ProductOffer'
+import Blog from '@components/common/Blog'
+import Newsletter from '@components/common/Newsletter'
+// TODO:
+
 export async function getStaticProps({
   preview,
   locale,
@@ -42,8 +51,19 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <Grid>
-        {products.slice(0, 3).map((product, i) => (
+      {/* HOME */}
+      <HeroCarouselItem />
+      {/* FEATURE PRODUCT */}
+      <FeatureProduct products={products} />
+      {/* BEST SELLING */}
+      <ProductBestSell products={products} />
+      {/* PRODUCT OFFER */}
+      <ProductOffer />
+      {/* BLOG */}
+      <Blog />
+      {/* NEW LETTERS */}
+      <Newsletter />
+      {/* {products.slice(0, 3).map((product, i) => (
           <ProductCard
             key={product.id}
             product={product}
@@ -52,9 +72,9 @@ export default function Home({
               height: i === 0 ? 1080 : 540,
             }}
           />
-        ))}
-      </Grid>
-      <Marquee variant="secondary">
+        ))} */}
+
+      {/* <Marquee variant="secondary">
         {products.slice(0, 3).map((product, i) => (
           <ProductCard
             key={product.id}
@@ -66,8 +86,9 @@ export default function Home({
             }}
           />
         ))}
-      </Marquee>
-      <Hero
+      </Marquee> */}
+
+      {/* <Hero
         headline="Release Details: The Yeezy BOOST 350 V2 ‘Natural'"
         description="
         The Yeezy BOOST 350 V2 lineup continues to grow. We recently had the
@@ -101,7 +122,7 @@ export default function Home({
             }}
           />
         ))}
-      </Marquee>
+      </Marquee> */}
       {/* <HomeAllProductsGrid
         newestProducts={products}
         categories={categories}

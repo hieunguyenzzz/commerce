@@ -8,6 +8,12 @@ import { Github, Vercel } from '@components/icons'
 import { Logo, Container } from '@components/ui'
 import { I18nWidget } from '@components/common'
 import s from './Footer.module.css'
+import {
+  IoLocationSharp,
+  IoCallSharp,
+  IoLogoFacebook,
+  IoLogoTwitter,
+} from 'react-icons/io5'
 
 interface Props {
   className?: string
@@ -19,11 +25,101 @@ const LEGAL_PAGES = ['terms-of-use', 'shipping-returns', 'privacy-policy']
 
 const Footer: FC<Props> = ({ className, pages }) => {
   const { sitePages, legalPages } = usePages(pages)
+
   const rootClassName = cn(className)
 
   return (
     <footer className={rootClassName}>
-      <Container>
+      <div className="px-14 bg-grey-lighter p-8 mx-auto">
+        <div className="flex flex-wrap mb-4">
+          <div className="sm:w-1/4 md:w-2/5  lg:w-1/4 h-auto">
+            <div className="font-bold mb-2 text-lg">Address</div>
+            <ul className="list-reset leading-normal">
+              <li className="flex items-center	py-3">
+                <IoLocationSharp style={{ marginRight: '7px' }} /> Helendo,
+                Chicago, USA 2018
+              </li>
+              <li className="flex items-center pb-3">
+                <IoCallSharp style={{ marginRight: '7px' }} /> +846677028028
+              </li>
+              <li className="flex">
+                <div>
+                  <button className="pr-4">
+                    <IoLogoFacebook size={21} />
+                  </button>
+                  <button>
+                    <IoLogoTwitter size={21} />
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="sm:w-1/4 md:w-2/6 lg:w-1/4 h-auto sm:mt-0 mt-8">
+            <div className="mb-2 font-bold mb-2 text-lg">
+              Help & Information
+            </div>
+            <ul className="list-reset leading-normal">
+              <li className="py-3">Help & Contact Us</li>
+              <li className="pb-3">Returns & Refunds</li>
+              <li className="pb-3">Online Stores</li>
+              <li className="">Terms & Conditions</li>
+            </ul>
+          </div>
+          <div className="sm:w-1/4 w-2/4 h-auto sm:mt-0 mt-8">
+            <div className="mb-2 font-bold mb-2 text-lg">About Us</div>
+            <ul className="list-reset leading-normal">
+              <li className="py-3">About Us</li>
+              <li className="pb-3">What We Do</li>
+              <li className="pb-3">FAQ Page</li>
+              <li className="pb-3">Contact Us</li>
+            </ul>
+          </div>
+          <div className="sm:w-2/4 md:w-2/4 lg:w-1/4 sm:mt-0 mt-8 h-auto">
+            <div className="font-bold mb-2 text-lg mb-2">Newsletter</div>
+            <div className="mt-4 flex">
+              <input
+                type="text"
+                className="p-2 px-4 border-b-2 border-grey-light round text-grey-dark text-sm h-auto"
+                placeholder="Your email address"
+              />
+              <button className="bg-orange text-white rounded-sm h-auto text-xs p-3">
+                Subscribe
+              </button>
+            </div>
+
+            <div className="hidden md:block mt-5 flex flex-wrap">
+              <button className="pr-4">Term & Condition</button>
+              <button className="pr-4">Policy</button>
+              <button className="">Map</button>
+            </div>
+          </div>
+        </div>
+        <div className="block sm:flex ">
+          <div className="mt-5 flex flex-wrap">
+            <button className="pr-4">Term & Condition</button>
+            <button className="pr-4">Policy</button>
+            <button className="">Map</button>
+          </div>
+          <div className="mt-5 mx-auto">
+            <h1 className="font-bold text-4xl">Halendo</h1>
+          </div>
+          <div className="flex mt-5 items-center">
+            <h6>Follow Us On Social </h6>
+            <div className="px-4">
+              <button className="pr-4">
+                <IoLogoFacebook size={21} />
+              </button>
+              <button>
+                <IoLogoTwitter size={21} />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="text-center py-2 md:pt-12">
+          © 2020 Helendo. All Rights Reserved.
+        </div>
+      </div>
+      {/* <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-accents-2 py-12 text-primary bg-primary transition-colors duration-150">
           <div className="col-span-1 lg:col-span-2">
             <Link href="/">
@@ -115,7 +211,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
             </a>
           </div>
         </div>
-      </Container>
+      </Container> */}
     </footer>
   )
 }
