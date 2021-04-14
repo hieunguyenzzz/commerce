@@ -5,7 +5,7 @@ interface BlogProps {}
 
 const Blog: React.FC<BlogProps> = ({}) => {
   return (
-    <div className="mb-2 md:mb-14 ">
+    <div className="mb-2 md:mb-14 md:container mx-auto">
       <div className="pb-5 ">
         <h1 className="text-5xl font-bold text-center ">Our Blog</h1>
         <hr className="w-20 my-4 border-2 border-primary-new text-center mx-auto" />

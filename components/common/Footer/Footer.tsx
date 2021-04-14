@@ -30,7 +30,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
 
   return (
     <footer className={rootClassName}>
-      <div className="px-14 bg-grey-lighter p-8 mx-auto">
+      <div className="px-14 bg-grey-lighter p-8 mx-auto md:container mx-auto">
         <div className="flex flex-wrap mb-4">
           <div className="sm:w-1/4 md:w-2/5  lg:w-1/4 h-auto">
             <div className="font-bold mb-2 text-lg">Address</div>

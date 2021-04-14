@@ -11,7 +11,7 @@ const Newsletter: React.FC<NewsletterProps> = ({}) => {
   const [email, setEmail] = useState<string>('')
 
   return (
-    <div className="flex lg:px-12 mx-auto justify-between flex-wrap">
+    <div className="flex lg:px-12 mx-auto justify-between flex-wrap md:container mx-auto">
       <div className="pl-3">
         <h2 className="font-bold text-5xl">Our Newsletter</h2>
         <hr className="w-4/12 border-t-4 my-2 border-primary-new" />

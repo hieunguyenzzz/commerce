@@ -50,18 +50,20 @@ const ProductOffer: React.FC<ProductOfferProps> = ({}) => {
           backgroundImage: `url(${Background})`,
         }}
       >
-        <div className="px-8 md:px-12 w-full md:w-7/12">
-          <h2 className="font-bold text-4xl">
-            Deco Collection <span className="text-red"> 50% OFF</span>
-          </h2>
-          <hr className="w-20 my-4 border-2 border-primary-new mb-6" />
-          <p>
-            The standard chunk of Lorem Ipsum used since the 1500s is reproduced
-            for those. Sections 1.10.32 and 1.10.33 from “de Finibus Bonorum et
-            Malorum
-          </p>
-          <div>
-            <Countdown date={Date.now() + 10000000000} renderer={renderer} />
+        <div className="px-8 w-full md:w-full md:pr-12 md:container mx-auto">
+          <div className="w-full md:w-2/5">
+            <h2 className="font-bold text-4xl">
+              Deco Collection <span className="text-red"> 50% OFF</span>
+            </h2>
+            <hr className="w-20 my-4 border-2 border-primary-new mb-6" />
+            <p>
+              The standard chunk of Lorem Ipsum used since the 1500s is
+              reproduced for those. Sections 1.10.32 and 1.10.33 from “de
+              Finibus Bonorum et Malorum
+            </p>
+            <div>
+              <Countdown date={Date.now() + 10000000000} renderer={renderer} />
+            </div>
           </div>
 
           <Link href={'/'}>
