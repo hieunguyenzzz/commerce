@@ -1,17 +1,17 @@
 import type { GetStaticPropsContext } from 'next'
 import { getConfig } from '@framework/api'
-import getAllPages from '@framework/common/get-all-pages'
 import { Layout } from '@components/common'
 import { Container } from '@components/ui'
+import getAllBlogs from "@framework/blog/get-all-blogs";
 
 export async function getStaticProps({
   preview,
   locale,
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
-  const { pages } = await getAllPages({ config, preview })
+  const { articles } = await getAllBlogs({ config, preview })
   return {
-    props: { pages },
+    props: { articles },
   }
 }
 
