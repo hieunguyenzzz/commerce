@@ -363,7 +363,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
               Reviews(3)
             </Tab>
           </TabList>
-          <div className="flex-1 lg:pl-12 border-l border-accents-3">
+          <div className="flex-1 lg:pl-12 lg:border-l border-accents-3">
             <TabPanel key="Detail">
               <div className="grid  gap-md grid-cols-5 items-center">
                 <div className="col-span-full md:col-span-3">
