@@ -7,7 +7,7 @@
 }
 
 .sectionHeading {
-  @apply pt-1 pb-2 font-semibold leading-7 tracking-wider uppercase  mb-3 text-b;
+  @apply pt-1 pb-2 font-semibold leading-7 tracking-wider uppercase  mb-3;
 }
 .body {
   @apply text-body;
