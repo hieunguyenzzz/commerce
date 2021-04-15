@@ -1,6 +1,6 @@
 import cn from 'classnames'
-import s from './Input.module.css'
 import React, { InputHTMLAttributes } from 'react'
+import s from './Input.module.css'
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
@@ -8,7 +8,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input: React.FC<Props> = (props) => {
-  const { className, children, onChange, ...rest } = props
+  const { className, type = 'text', children, onChange, ...rest } = props
 
   const rootClassName = cn(s.root, {}, className)
 
@@ -20,17 +20,15 @@ const Input: React.FC<Props> = (props) => {
   }
 
   return (
-    <label>
-      <input
-        className={rootClassName}
-        onChange={handleOnChange}
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="off"
-        spellCheck="false"
-        {...rest}
-      />
-    </label>
+    <input
+      className={rootClassName}
+      onChange={handleOnChange}
+      autoComplete="off"
+      autoCorrect="off"
+      autoCapitalize="off"
+      spellCheck="false"
+      {...rest}
+    />
   )
 }
 

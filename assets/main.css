@@ -1,7 +1,22 @@
 @tailwind base;
-@import './base.css';
-
+@layer base {
+  @font-face {
+    font-display: swap;
+    font-family: 'shop2';
+    src: local('shop2'), url(./fonts/shop2-book.woff2) format('woff2');
+  }
+  html {
+    font-family: 'MinervaModern', sans-serif;
+    @screen lg {
+      font-size: 18px;
+    }
+  }
+  @import './base.css';
+}
 @tailwind components;
-@import './components.css';
+@layer components {
+  @import 'animate.css/animate.css';
+  @import './components.css';
+}
 
 @tailwind utilities;

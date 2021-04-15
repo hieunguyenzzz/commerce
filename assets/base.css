@@ -1,26 +1,14 @@
 :root {
-  --primary: #ffffff;
-  --primary-2: #f1f3f5;
+  --primary: #c8bf71;
+  --primary-2: #c8bf71;
   --secondary: #000000;
-  --secondary-2: #111;
-  --selection: var(--cyan);
+  --secondary-2: #222222;
 
-  --text-base: #000000;
-  --text-primary: #000000;
-  --text-secondary: white;
+  --text-base: rgba(0, 0, 0, 1);
+  --text-primary: rgba(0, 0, 0, 1);
+  --text-secondary: rgba(255, 255, 255, 1);
 
-  --hover: rgba(0, 0, 0, 0.075);
-  --hover-1: rgba(0, 0, 0, 0.15);
-  --hover-2: rgba(0, 0, 0, 0.25);
-  --cyan: #22b8cf;
-  --green: #37b679;
-  --red: #da3c3c;
-  --pink: #e64980;
-  --purple: #f81ce5;
-  --blue: #0070f3;
-  --violet: #5f3dc4;
-  --violet-light: #7048e8;
-  --accents-0: #f8f9fa;
+  --accents-0: #fff;
   --accents-1: #f1f3f5;
   --accents-2: #e9ecef;
   --accents-3: #dee2e6;
@@ -33,7 +21,18 @@
   --font-sans: -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica Neue',
     'Helvetica', sans-serif;
 }
-
+:root {
+  --header-height: 50px;
+  @screen lg {
+    --header-height: 69px;
+  }
+}
+:root {
+  --safe-area-inset-top: env(safe-area-inset-top, 20px);
+  --safe-area-inset-right: env(safe-area-inset-right, 20px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 50px);
+  --safe-area-inset-left: env(safe-area-inset-left, 20px);
+}
 [data-theme='dark'] {
   --primary: #000000;
   --primary-2: #111;
@@ -68,26 +67,23 @@
 
 html {
   height: 100%;
-  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  /* overscroll-behavior-y: none; */
   touch-action: manipulation;
-  font-feature-settings: 'case' 1, 'rlig' 1, 'calt' 0;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 html,
 body {
-  font-family: var(--font-sans);
+  box-sizing: border-box;
+  font-feature-settings: 'case' 1, 'rlig' 1, 'calt' 0;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--primary);
-  color: var(--text-primary);
+  background-color: var(--accents-0);
+  -webkit-overflow-scrolling: auto;
 }
-
 body {
-  position: relative;
   min-height: 100%;
   margin: 0;
 }
@@ -95,36 +91,3 @@ body {
 a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
-.animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
-
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-

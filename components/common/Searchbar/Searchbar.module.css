@@ -1,13 +1,11 @@
 .input {
-  @apply bg-transparent px-3 py-2 appearance-none w-full transition duration-150 ease-in-out pr-10;
-
-  @screen sm {
-    min-width: 300px;
-  }
+  @apply bg-transparent  border-b border-accents-5 px-3 py-2 appearance-none w-full transition duration-150 ease-in-out pr-10;
 }
-
+.wrap {
+  @apply relative inline-block w-full sm:min-w-[120px] sm:max-w-[300px];
+}
 .input:focus {
-  @apply outline-none shadow-outline-normal;
+  @apply outline-none border-primary text-primary;
 }
 
 .iconContainer {

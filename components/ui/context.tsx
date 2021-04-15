@@ -1,5 +1,5 @@
-import React, { FC, useMemo } from 'react'
 import { ThemeProvider } from 'next-themes'
+import React, { FC, useCallback, useMemo } from 'react'
 
 export interface State {
   displaySidebar: boolean
@@ -145,9 +145,13 @@ function uiReducer(state: State, action: Action) {
 
 export const UIProvider: FC = (props) => {
   const [state, dispatch] = React.useReducer(uiReducer, initialState)
+  const scrollerRef = React.useRef()
 
-  const openSidebar = () => dispatch({ type: 'OPEN_SIDEBAR' })
-  const closeSidebar = () => dispatch({ type: 'CLOSE_SIDEBAR' })
+  const openSidebar = useCallback(() => dispatch({ type: 'OPEN_SIDEBAR' }), [])
+  const closeSidebar = useCallback(
+    () => dispatch({ type: 'CLOSE_SIDEBAR' }),
+    []
+  )
   const toggleSidebar = () =>
     state.displaySidebar
       ? dispatch({ type: 'CLOSE_SIDEBAR' })
@@ -159,7 +163,7 @@ export const UIProvider: FC = (props) => {
   const closeDropdown = () => dispatch({ type: 'CLOSE_DROPDOWN' })
 
   const openModal = () => dispatch({ type: 'OPEN_MODAL' })
-  const closeModal = () => dispatch({ type: 'CLOSE_MODAL' })
+  const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), [])
 
   const openToast = () => dispatch({ type: 'OPEN_TOAST' })
   const closeToast = () => dispatch({ type: 'CLOSE_TOAST' })
@@ -173,6 +177,7 @@ export const UIProvider: FC = (props) => {
   const value = useMemo(
     () => ({
       ...state,
+      scrollerRef,
       openSidebar,
       closeSidebar,
       toggleSidebar,

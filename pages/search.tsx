@@ -1,22 +1,25 @@
-import cn from 'classnames'
-import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-
+import { Product } from '@commerce/types'
 import { Layout } from '@components/common'
 import { ProductCard } from '@components/product'
 import { Container, Grid, Skeleton } from '@components/ui'
-
 import { getConfig } from '@framework/api'
-import useSearch from '@framework/product/use-search'
 import getAllPages from '@framework/common/get-all-pages'
 import getSiteInfo from '@framework/common/get-site-info'
-
-import rangeMap from '@lib/range-map'
-
+import useSearch from '@framework/product/use-search'
 // TODO(bc) Remove this. This should come from the API
 import getSlug from '@lib/get-slug'
+import rangeMap from '@lib/range-map'
+import {
+  filterQuery,
+  getCategoryPath,
+  getDesignerPath,
+  useSearchMeta,
+} from '@lib/search'
+import cn from 'classnames'
+import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 // TODO (bc) : Remove or standarize this.
 const SORT = Object.entries({
@@ -25,14 +28,6 @@ const SORT = Object.entries({
   'price-asc': 'Price: Low to high',
   'price-desc': 'Price: High to low',
 })
-
-import {
-  filterQuery,
-  getCategoryPath,
-  getDesignerPath,
-  useSearchMeta,
-} from '@lib/search'
-import { Product } from '@commerce/types'
 
 export async function getStaticProps({
   preview,
@@ -340,33 +335,35 @@ export default function Search({
               )}
             </div>
           )}
-
-          {data ? (
-            <Grid layout="normal">
-              {data.products.map((product: Product) => (
-                <ProductCard
-                  variant="simple"
-                  key={product.path}
-                  className="animated fadeIn"
-                  product={product}
-                  imgProps={{
-                    width: 480,
-                    height: 480,
-                  }}
-                />
-              ))}
-            </Grid>
-          ) : (
-            <Grid layout="normal">
-              {rangeMap(12, (i) => (
-                <Skeleton
-                  key={i}
-                  className="w-full animated fadeIn"
-                  height={325}
-                />
-              ))}
-            </Grid>
-          )}
+          <div>
+            {data ? (
+              <Grid layout="normal">
+                {data.products.map((product: Product) => (
+                  <ProductCard
+                    variant="simple"
+                    key={product.path}
+                    size="small"
+                    className="animated fadeIn"
+                    product={product}
+                    imgProps={{
+                      width: 480,
+                      height: 480,
+                    }}
+                  />
+                ))}
+              </Grid>
+            ) : (
+              <Grid layout="normal">
+                {rangeMap(12, (i) => (
+                  <Skeleton
+                    key={i}
+                    className="w-full animated fadeIn"
+                    height={325}
+                  />
+                ))}
+              </Grid>
+            )}
+          </div>
         </div>
 
         {/* Sort */}
