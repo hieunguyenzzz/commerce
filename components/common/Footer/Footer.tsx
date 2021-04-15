@@ -28,7 +28,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
   return (
     <footer className={rootClassName}>
       <Container className="py-11">
-        <div className="w-full grid grid-cols-10 px-14  gap-6  transition-colors duration-150">
+        <div className="w-full grid grid-cols-9 px-14  gap-6  transition-colors duration-150">
           <div className="col-span-3  space-y-11 px-10">
             <Text variant="h5">CUSTOMER CARE</Text>
             <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-4">
@@ -53,7 +53,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
               ))}
             </ul>
           </div>
-          <div className="col-span-4 space-y-11 flex flex-col  px-10">
+          <div className="col-span-3 space-y-6 flex flex-col  px-10">
             <div className="space-y-4">
               <Text variant="h5">CUSTOMER CARE</Text>
               <div className="space-x-6 flex text-2xl">
@@ -64,11 +64,11 @@ const Footer: FC<Props> = ({ className, pages }) => {
               </div>
             </div>
             <div className="space-y-4 space-y-6 ">
-              <p className=" leading-loose  text-sm whitespace-pre-line">
+              <p className="  text-sm whitespace-pre-line">
                 {`hello@tessjean.com 
                 +84 077 277 0802`}
               </p>
-              <p className=" leading-loose  text-sm whitespace-pre-line">
+              <p className=" text-sm whitespace-pre-line">
                 {`Customer Care hours: 
                 Monday - Friday 8:00am - 4:30pm ICT`}
               </p>
