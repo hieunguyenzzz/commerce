@@ -73,8 +73,8 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
           ],
         }}
       />
-      <Container className=" grid gap-12 grid-cols-12 ">
-        <div className="col-span-full lg:col-span-7 md:col-span-1">
+      <Container className=" lg:grid gap-12 grid-cols-12 ">
+        <div className=" lg:col-span-7 md:col-span-1">
           <div className="w-full relative" style={{ paddingTop: '80%' }}>
             <div className="absolute w-full h-full top-0 left-0 flex">
               <div className="w-1/6 flex flex-col z-10 ">
@@ -157,7 +157,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             </div>
           </div>
         </div>
-        <div className="col-span-full lg:col-span-5 md:col-span-1 space-y-6 relative">
+        <div className=" lg:col-span-5 md:col-span-1 space-y-6 relative">
           <div className="py-8 hidden lg:flex items-center text-xs text-accents-6">
             <div>Home</div>
             <div>
