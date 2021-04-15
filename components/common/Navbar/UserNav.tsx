@@ -1,4 +1,4 @@
-import { Bag, Heart, Search } from '@components/icons'
+import { Bag, Search, User } from '@components/icons'
 import { Container } from '@components/ui'
 import { useUI } from '@components/ui/context'
 import useCart from '@framework/cart/use-cart'
@@ -8,7 +8,6 @@ import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
-import DropdownMenu from './DropdownMenu'
 import s from './UserNav.module.css'
 
 interface Props {
@@ -33,22 +32,6 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
   return (
     <nav className={cn(s.root, className)}>
       <ul className={s.list}>
-        <li className={cn(s.item, responsive && s.visibleOnLg)}>
-          {customer ? (
-            <DropdownMenu />
-          ) : (
-            <a
-              onClick={() => {
-                setModalView('LOGIN_VIEW')
-                openModal()
-              }}
-              className="text-sm"
-              aria-label="Wishlist"
-            >
-              Sign in
-            </a>
-          )}
-        </li>
         <li className={cn(s.item, s.visibleOnLg, 'group relative ')}>
           <label>
             <div className="relative flex justify-end">
@@ -112,16 +95,15 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
             </div>
           </label>
         </li>
-        {process.env.COMMERCE_WISHLIST_ENABLED && (
-          <li className={cn(s.item, responsive && s.visibleOnLg)}>
-            <Link href="/wishlist">
-              <a onClick={closeSidebarIfPresent} aria-label="Wishlist">
-                <Heart />
-              </a>
-            </Link>
-            <span className={s.bagCount}>0</span>
-          </li>
-        )}
+        <li
+          className={s.item}
+          onClick={() => {
+            setModalView('LOGIN_VIEW')
+            openModal()
+          }}
+        >
+          <User />
+        </li>
         <li
           className={s.item}
           onClick={() => {

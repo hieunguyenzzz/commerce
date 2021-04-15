@@ -12,7 +12,6 @@
 .body {
   @apply text-body;
 }
-
 .h1 {
   @apply text-h1;
 }

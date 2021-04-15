@@ -3,14 +3,14 @@
 }
 
 .list {
-  @apply flex flex-row items-center justify-items-end h-full;
+  @apply flex flex-row items-center justify-items-end h-full space-x-md;
 }
 
 .item {
-  @apply mr-3 cursor-pointer h-header flex items-center  relative transition ease-in-out duration-100 outline-none;
+  @apply cursor-pointer h-header flex items-center  relative transition ease-in-out duration-100 outline-none;
 
   & svg {
-    @apply text-xl;
+    @apply text-2xl;
   }
   &.itemhidden {
     @apply lg:hidden;

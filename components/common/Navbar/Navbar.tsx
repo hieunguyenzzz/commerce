@@ -4,6 +4,7 @@ import { Container, useUI } from '@components/ui'
 import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { FC } from 'react'
 import s from './Navbar.module.css'
 import NavbarRoot from './NavbarRoot'
@@ -109,6 +110,7 @@ const pagesMenu = [
 
 const Navbar: FC<Props> = ({ transparent }) => {
   const { openSidebar, setModalView } = useUI()
+  const router = useRouter()
   const smallNav = (
     <div className="flex w-full py-4 items-center align-center space-x-12">
       <div className="flex-1 flex items-center">
@@ -122,7 +124,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           <Menu />
         </div>
       </div>
-      <div className="flex items-center flex-1 justify-center lg:justify-start lg:space-x-16">
+      <div className="flex  items-center flex-1 justify-center lg:justify-start lg:space-x-16">
         <Link href="/">
           <a className="text-2xl font-bold z-10" aria-label="Logo">
             Helendo
@@ -136,11 +138,9 @@ const Navbar: FC<Props> = ({ transparent }) => {
   )
   const largeNav = (
     <div className="flex w-full py-4 items-center align-center">
-      <div className="flex-1 space-x-md h-header flex items-center">
+      <div className="flex-1 justify-between space-x-sm h-header flex items-center">
         <div className="group flex items-center h-header-lg">
-          <Link href="/home">
-            <a className={cn(s.link, 'z-10 text-sm')}>home</a>
-          </Link>
+          <a className={cn(s.link, 'z-10 text-sm')}>NEW ARRIVALS</a>
           <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
             <Container className="w-full text-xs py-6  relative">
               <div className="w-full mx-auto max-w-2xl grid grid-cols-7 space-x-8 ">
@@ -155,7 +155,9 @@ const Navbar: FC<Props> = ({ transparent }) => {
                           {item.map((menu: any, i: any) => (
                             <Link key={i} href={`/search?q=${menu}`}>
                               <a
-                                className={cn(s.link, 'text-xs tinline-block')}
+                                className={cn(
+                                  'inline-block  text-effect-1 py-2 '
+                                )}
                               >
                                 {menu as any}
                               </a>
@@ -187,9 +189,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
         </div>
         <div className="group flex items-center h-header-lg">
-          <Link href="/shop">
-            <a className={cn(s.link, 'z-10 text-sm')}>shop</a>
-          </Link>
+          <a className={cn(s.link, 'z-10 text-sm')}>SHOP</a>
           <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
             <Container fluid clean className="w-full text-xs flex relative">
               {new Array(5).fill(shopMenu).map((menu, i) => {
@@ -214,7 +214,9 @@ const Navbar: FC<Props> = ({ transparent }) => {
                       {rest.map((menu: any, i: any) => (
                         <Link key={i} href={`/search?q=${menu}`}>
                           <a
-                            className={cn(s.link, 'inline-block text-xs z-10')}
+                            className={cn(
+                              'inline-block  text-effect-1 py-2 truncate   text-xs z-10'
+                            )}
                           >
                             {menu as any}
                           </a>
@@ -228,14 +230,9 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
         </div>
         <div className="group flex items-center h-header-lg">
-          <Link href="/features">
-            <a className={cn(s.link, 'z-10 text-sm')}>features</a>
-          </Link>
+          <a className={cn(s.link, 'z-10 text-sm')}>COLLECTIONS</a>
           <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
-            <Container
-              fluid
-              className="w-full text-xs grid grid-cols-7 gap-8 py-6 relative"
-            >
+            <Container className="w-full text-xs grid grid-cols-7 gap-8 py-6 relative">
               <div className="absolute bottom-0 right-0 w-96 h-96">
                 <Image
                   layout="intrinsic"
@@ -260,7 +257,11 @@ const Navbar: FC<Props> = ({ transparent }) => {
                       </div>
                       {rest.map((menu: any, i: any) => (
                         <Link key={i} href={`/search?q=${menu}`}>
-                          <a className={cn(s.link, 'inline-block text-xs')}>
+                          <a
+                            className={cn(
+                              'inline-block  text-effect-1 py-2 truncate   text-xs'
+                            )}
+                          >
                             {menu as any}
                           </a>
                         </Link>
@@ -274,10 +275,8 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
         </div>
         <div className="group flex items-center h-header-lg relative">
-          <Link href="/pages">
-            <a className={cn(s.link, 'z-10 text-sm')}>pages</a>
-          </Link>
-          <div className=" absolute top-0 left-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto transform -translate-x-1/2 opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
+          <a className={cn(s.link, 'z-10 text-sm')}>ETHICS</a>
+          <div className=" absolute top-0 left-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto transform  opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
             <Container className="text-xs shadow-lg bg-accents-0 flex flex-col py-6  relative space-y-3">
               {new Array(5).fill(pagesMenu).map((menu, i) => {
                 {
@@ -289,13 +288,70 @@ const Navbar: FC<Props> = ({ transparent }) => {
                       key={i}
                       className="leading-extra-loose flex flex-col items-start space-y-3"
                     >
-                      <div className={cn(s.link, 'inline-block text-xs')}>
+                      <div
+                        className={cn(
+                          'inline-block  text-effect-1 py-2 truncate   text-xs'
+                        )}
+                      >
                         {title}
                       </div>
                       <div className="hidden">
                         {rest.map((menu: any, i: any) => (
                           <Link key={i} href={`/search?q=${menu}`}>
-                            <a className={cn(s.link, 'inline-block text-xs')}>
+                            <a
+                              className={cn(
+                                'inline-block  text-effect-1 py-2 truncate   text-xs'
+                              )}
+                            >
+                              {menu as any}
+                            </a>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                }
+              })}
+            </Container>
+          </div>
+        </div>
+        <div className="group flex items-center h-header-lg relative">
+          <a
+            className={cn(
+              s.link,
+              router.pathname.startsWith('/blog') && s.active,
+              'z-10 text-sm'
+            )}
+          >
+            JOURNAL
+          </a>
+          <div className=" absolute top-0 left-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto transform  opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
+            <Container className="text-xs shadow-lg bg-accents-0 flex flex-col py-6  relative space-y-3">
+              {new Array(5).fill(pagesMenu).map((menu, i) => {
+                {
+                  const item = menu[i]
+                  if (!item || !item.length) return null
+                  const [title, ...rest] = item
+                  return (
+                    <div
+                      key={i}
+                      className="leading-extra-loose flex flex-col items-start space-y-3"
+                    >
+                      <div
+                        className={cn(
+                          'inline-block  text-effect-1 py-2 truncate   text-xs'
+                        )}
+                      >
+                        {title}
+                      </div>
+                      <div className="hidden">
+                        {rest.map((menu: any, i: any) => (
+                          <Link key={i} href={`/search?q=${menu}`}>
+                            <a
+                              className={cn(
+                                'inline-block  text-effect-1 py-2 truncate   text-xs'
+                              )}
+                            >
                               {menu as any}
                             </a>
                           </Link>
@@ -309,11 +365,14 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
         </div>
       </div>
-      <Link href="/">
-        <a className="text-2xl font-bold z-10" aria-label="Logo">
-          Helendo
-        </a>
-      </Link>
+      <div className={s.logo}>
+        <Link href="/">
+          <a aria-label="Logo">
+            <img src={'/logo.svg'} alt="jess jean" />
+          </a>
+        </Link>
+      </div>
+
       <div className="flex justify-end flex-1  space-x-md">
         <UserNav responsive />
       </div>
@@ -325,9 +384,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
       <Container fluid className="w-full lg:hidden">
         {smallNav}
       </Container>
-      <Container fluid className="w-full hidden lg:block">
-        {largeNav}
-      </Container>
+      <Container className="w-full hidden lg:block">{largeNav}</Container>
     </NavbarRoot>
   )
 }

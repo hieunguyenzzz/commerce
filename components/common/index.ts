@@ -1,5 +1,6 @@
 export { default as ActionButton } from './ActionButton'
 export { default as Avatar } from './Avatar'
+export { default as Breadcrumb } from './Breadcrumb'
 export { default as FeatureBar } from './FeatureBar'
 export { default as Footer } from './Footer'
 export { default as Gallery } from './Gallery'

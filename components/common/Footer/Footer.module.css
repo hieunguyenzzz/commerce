@@ -1,12 +1,5 @@
 .root {
-  @apply bg-black mt-12;
+  @apply mt-12;
 }
 .link {
-  & > svg {
-    @apply transform duration-75 ease-linear;
-  }
-
-  &:hover > svg {
-    @apply scale-110;
-  }
 }
