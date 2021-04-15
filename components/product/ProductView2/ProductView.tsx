@@ -74,7 +74,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
         }}
       />
       <Container className=" lg:grid gap-12 grid-cols-12 ">
-        <div lg:col-span-7 md:col-span-1">
+        <div className=" lg:col-span-7 md:col-span-1">
           <div className="w-full relative" style={{ paddingTop: '80%' }}>
             <div className="absolute w-full h-full top-0 left-0 flex">
               <div className="w-1/6 flex flex-col z-10 ">
