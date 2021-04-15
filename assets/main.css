@@ -6,7 +6,7 @@
     src: local('shop2'), url(./fonts/shop2-book.woff2) format('woff2');
   }
   html {
-    font-family: 'shop2', sans-serif;
+    font-family: 'MinervaModern', sans-serif;
     @screen lg {
       font-size: 18px;
     }

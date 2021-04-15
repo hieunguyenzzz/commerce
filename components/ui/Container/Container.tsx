@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import React, { FC } from 'react'
-
+import s from './Container.module.css'
 interface Props {
   className?: string
   children?: any
@@ -18,8 +18,8 @@ const Container: FC<Props> = ({
 }) => {
   const rootClassName = cn(
     {
-      'mx-auto w-full px-4 md:px-8 lg:px-12 xl:px-12': !clean,
-      'max-w-7xl': !fluid,
+      [s.root]: !clean,
+      [s.fluid]: fluid,
     },
     className
   )

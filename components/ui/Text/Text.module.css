@@ -1,7 +1,3 @@
-.body {
-  @apply max-w-6xl mx-auto;
-}
-
 .heading {
   @apply text-5xl mb-12;
 }
@@ -11,5 +7,36 @@
 }
 
 .sectionHeading {
-  @apply pt-1 pb-2 font-semibold leading-7 tracking-wider uppercase  mb-3;
+  @apply pt-1 pb-2 font-semibold leading-7 tracking-wider uppercase  mb-3 text-b;
+}
+.body {
+  @apply text-body;
+}
+
+.h1 {
+  @apply text-h1;
+}
+.h2 {
+  @apply text-h2;
+}
+.h3 {
+  @apply text-h3;
+}
+.h4 {
+  @apply text-h4;
+}
+.h5 {
+  @apply text-h5;
+}
+.h6 {
+  @apply text-h6;
+}
+.h7 {
+  @apply text-h7;
+}
+.subtitle {
+  @apply text-subtitle;
+}
+.button {
+  @apply text-button;
 }

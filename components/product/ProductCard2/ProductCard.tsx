@@ -34,7 +34,7 @@ const Label: FC<LabelProps> = ({ variant = 'default', text }) => {
     )
   if (variant === 'discount')
     return (
-      <div className="text-xs flex items-center justify-center w-8 h-8 rounded-full bg-red text-white absolute top-4 right-4">
+      <div className="text-xs flex items-center justify-center w-8 h-8 rounded-full  text-white absolute top-4 right-4">
         {text}
       </div>
     )

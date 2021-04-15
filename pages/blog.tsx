@@ -1,8 +1,8 @@
-import type { GetStaticPropsContext } from 'next'
-import { getConfig } from '@framework/api'
-import getAllPages from '@framework/common/get-all-pages'
 import { Layout } from '@components/common'
 import { Container } from '@components/ui'
+import { getConfig } from '@framework/api'
+import getAllPages from '@framework/common/get-all-pages'
+import type { GetStaticPropsContext } from 'next'
 
 export async function getStaticProps({
   preview,
@@ -18,7 +18,7 @@ export async function getStaticProps({
 export default function Blog() {
   return (
     <div className="pb-20">
-      <div className="text-center pt-40 pb-56 bg-violet">
+      <div className="text-center pt-40 pb-56 ">
         <Container>
           <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl">
             Welcome to Acme, the simplest way to start publishing with Next.js

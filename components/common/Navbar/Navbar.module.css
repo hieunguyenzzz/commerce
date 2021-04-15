@@ -12,7 +12,7 @@
 }
 
 .link {
-  @apply capitalize inline truncate transition ease-in-out duration-75 cursor-pointer relative overflow-hidden leading-extra-loose;
+  @apply px-xs h-header flex items-center capitalize inline truncate transition ease-in-out duration-75 cursor-pointer relative overflow-hidden leading-extra-loose;
 }
 .link:after {
   content: '';
