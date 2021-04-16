@@ -56,7 +56,7 @@ const BlogListView: React.FC<Props> = ({
               <Link key={i} href={`/blog/${str.toLowerCase()}`}>
                 <a
                   className={classNames(
-                    'hover:text-primary-2 mx-xl text-effect-1 text-h7',
+                    'mx-xl text-effect-1 text-h7',
                     str.toLowerCase() === currentTag.toLowerCase()
                       ? 'text-primary'
                       : ''
@@ -70,8 +70,13 @@ const BlogListView: React.FC<Props> = ({
         </div>
         <div className="h-16" />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-10 w-full">
-          {articles.map((article: any) => (
-            <div>
+          {articles.map((article: any, i: number) => (
+            <div
+              style={{
+                transitionDelay: `${i * 3 + 1}00ms`,
+              }}
+              className="animated opacity-0 fadeIn ease-in-out"
+            >
               <Image
                 className="bg-accents-1"
                 layout="responsive"
