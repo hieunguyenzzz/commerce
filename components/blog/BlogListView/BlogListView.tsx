@@ -102,7 +102,9 @@ const BlogListView: React.FC<Props> = ({
               return (
                 <Link
                   key={i}
-                  href={i === 0 ? '/blog' : `${router.pathname}?page=${page}`}
+                  href={
+                    i === 0 ? router.asPath : `${router.asPath}?page=${page}`
+                  }
                 >
                   <a
                     className={`py-xs px-7 relative text-lg -mb-px text-effect-1 ${
