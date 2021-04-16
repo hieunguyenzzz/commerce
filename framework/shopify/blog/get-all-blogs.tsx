@@ -1,5 +1,5 @@
-import { Article, ArticleEdge } from '@framework/schema'
 import { getConfig, ShopifyConfig } from '@framework/api'
+import { Article, ArticleEdge } from '@framework/schema'
 import { getAllBlogQuery } from '@framework/utils'
 
 type Variables = {

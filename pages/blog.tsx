@@ -3,8 +3,9 @@ import { Button, Container, Text } from '@components/ui'
 import { getConfig } from '@framework/api'
 import getAllBlogs from '@framework/blog/get-all-blogs'
 import classNames from 'classnames'
-import type { GetStaticPropsContext } from 'next'
+import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 const placeholderImg = '/product-img-placeholder.svg'
 export async function getStaticProps({
   preview,
@@ -17,7 +18,9 @@ export async function getStaticProps({
   }
 }
 
-export default function Blog() {
+export default function Blog({
+  articles,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
       <Container className="pt-md mb-6">
@@ -25,7 +28,7 @@ export default function Blog() {
       </Container>
       <Container className="flex flex-col items-center">
         <Text className="text-center mx-auto" variant="h4">
-          JOURNAL/ ALL
+          JOURNAL
         </Text>
         <div className="mx-auto mt-xl flex flex-wrap justify-center items-baseline space-y-sm">
           {[
@@ -36,46 +39,49 @@ export default function Blog() {
             'LIFESTYLE',
           ].map((str, i) => {
             return (
-              <Text
-                className={classNames(
-                  'hover:text-primary-2 mx-xl text-effect-1',
-                  i === 0 ? 'text-primary' : ''
-                )}
-                variant="h7"
-              >
-                {str}
-              </Text>
+              <Link key={i} href={`?tag=${str.toLowerCase()}`}>
+                <a
+                  className={classNames(
+                    'hover:text-primary-2 mx-xl text-effect-1 text-h7',
+                    i === 0 ? 'text-primary' : ''
+                  )}
+                >
+                  {str}
+                </a>
+              </Link>
             )
           })}
         </div>
         <div className="h-16" />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-10 w-full">
-          {new Array(6).fill(true).map((_, i) => (
+          {articles.map((article, i) => (
             <div>
               <Image
                 className="bg-accents-1"
                 layout="responsive"
-                src={`/blog-${i + 1}.png`}
+                src={article.image?.originalSrc}
                 width={630}
                 height={369}
               ></Image>
               <div className="p-5 space-y-2 text-center">
-                <h2 className="header-1">title</h2>
-                <Text variant="subtitle">subtitle</Text>
+                <h2 className="header-1">{(article as any).name as any}</h2>
+                <Text variant="subtitle">{article.content}</Text>
               </div>
             </div>
           ))}
         </div>
         <div className="h-16" />
-        <div className="mx-auto max-w-full flex justify-center border-b border-accents-3">
+        <div className="mx-auto max-w-full flex justify-center border-b border-accents-3 ">
           {new Array(5).fill(true).map((_, i) => (
-            <div
-              className={`py-xs px-7 relative text-lg -mb-px text-effect-1 ${
-                i === 0 ? 'text-effect-1_active' : ''
-              }`}
-            >
-              {i}
-            </div>
+            <Link key={i} href={i === 0 ? '/blog' : `?page=${i}`}>
+              <a
+                className={`py-xs px-7 relative text-lg -mb-px text-effect-1 ${
+                  i === 0 ? 'text-effect-1_active' : ''
+                }`}
+              >
+                {i + 1}
+              </a>
+            </Link>
           ))}
         </div>
         <div className="h-40"></div>

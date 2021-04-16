@@ -1,23 +1,21 @@
 export const getAllBlogQuery = /* GraphQL */ `
   query getAllBlogs($first: Int = 250) {
-      articles(first: $first) {
-        edges {
-          node {
+    articles(first: $first) {
+      edges {
+        node {
+          title
+          content
+          handle
+          publishedAt
+          tags
+          image {
+            id
+            originalSrc
+            transformedSrc
+          }
+          seo {
             title
-            content
-            handle
-            publishedAt
-            tags
-            image {
-              id
-              originalSrc
-              transformedSrc
-
-            }
-            seo {
-              title
-              description
-            }
+            description
           }
         }
       }
