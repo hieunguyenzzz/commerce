@@ -1,6 +1,5 @@
 .root {
-  @apply fixed bg-black bg-opacity-50 text-primary flex items-center inset-0 z-50 justify-center;
-  touch-action: none;
+  @apply fixed bg-black bg-opacity-50 flex items-center inset-0 z-50 justify-center overflow-y-scroll;
   &.noBackgroud {
     @apply bg-transparent;
     & .modal {

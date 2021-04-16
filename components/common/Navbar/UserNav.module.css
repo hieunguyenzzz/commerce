@@ -19,7 +19,7 @@
     @apply hidden lg:flex;
   }
   &:hover {
-    @apply text-primary transition scale-110 duration-100;
+    @apply transition scale-110 duration-100;
   }
 
   &:last-child {
