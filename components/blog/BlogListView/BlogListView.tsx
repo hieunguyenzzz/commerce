@@ -71,12 +71,7 @@ const BlogListView: React.FC<Props> = ({
         <div className="h-16" />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-10 w-full">
           {articles.map((article: any, i: number) => (
-            <div
-              style={{
-                transitionDelay: `${i * 3 + 1}00ms`,
-              }}
-              className="animated opacity-0 fadeIn ease-in-out"
-            >
+            <div>
               <Image
                 className="bg-accents-1"
                 layout="responsive"
