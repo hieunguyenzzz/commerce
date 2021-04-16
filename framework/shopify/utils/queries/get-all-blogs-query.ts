@@ -7,6 +7,17 @@ export const getAllBlogQuery = /* GraphQL */ `
             content
             handle
             publishedAt
+            tags
+            image {
+              id
+              originalSrc
+              transformedSrc
+
+            }
+            seo {
+              title
+              description
+            }
           }
         }
       }
