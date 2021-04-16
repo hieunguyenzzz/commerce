@@ -1,10 +1,9 @@
+@font-face {
+  font-family: 'MinervaModern';
+  src: local('MinervaModern'), url(/fonts/MINERVAM.OTF) format('opentype');
+}
 @tailwind base;
 @layer base {
-  @font-face {
-    font-family: 'MinervaModern';
-    src: local('MinervaModern'),
-      url(./fonts/MINERVAM/MINERVAM.OTF) format('opentype');
-  }
   html {
     font-family: 'MinervaModern', sans-serif;
   }
