@@ -2,14 +2,26 @@ const Search = ({ ...props }) => {
   return (
     <svg
       height="1em"
-      fill="currentColor"
+      fill="none"
       width="1em"
       viewBox="0 0 24 24"
       id="search"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path fill="none" d="M0 0h24v24H0z" />
-      <path d="M20 18.586l-3.402-3.402A6.953 6.953 0 0018 11c0-3.86-3.141-7-7-7-3.86 0-7 3.14-7 7 0 3.859 3.14 7 7 7 1.57 0 3.015-.526 4.184-1.402L18.586 20 20 18.586zM6 11c0-2.757 2.243-5 5-5s5 2.243 5 5-2.243 5-5 5-5-2.243-5-5z" />
+      <path
+        d="M20.0001 19.9998L15.7334 15.7332"
+        stroke="#222222"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M10.8571 17.7143C14.6442 17.7143 17.7143 14.6442 17.7143 10.8571C17.7143 7.07005 14.6442 4 10.8571 4C7.07005 4 4 7.07005 4 10.8571C4 14.6442 7.07005 17.7143 10.8571 17.7143Z"
+        stroke="#222222"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
     </svg>
   )
 }

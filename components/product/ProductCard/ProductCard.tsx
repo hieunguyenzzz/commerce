@@ -30,9 +30,7 @@ const Label: FC<LabelProps> = ({ variant = 'default', text }) => {
     )
   if (variant === 'discount')
     return (
-      <div className="py-1 px-4 bg-red text-white absolute top-4 right-4">
-        {text}
-      </div>
+      <div className="py-1 px-4  text-white absolute top-4 right-4">{text}</div>
     )
   if (variant === 'default')
     return (

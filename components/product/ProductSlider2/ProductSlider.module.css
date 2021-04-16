@@ -9,7 +9,7 @@
 
 .leftControl:hover,
 .rightControl:hover {
-  @apply bg-hover-2 transform scale-110;
+  @apply bg-primary transform scale-110;
 }
 
 .leftControl:hover,

@@ -9,7 +9,7 @@
   }
 
   &:hover {
-    @apply transform scale-110 bg-hover;
+    @apply transform scale-110 bg-primary;
   }
 }
 

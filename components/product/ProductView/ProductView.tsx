@@ -8,7 +8,7 @@ import { useAddItem } from '@framework/cart'
 import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Tab, TabList, TabPanel, TabsProps } from 'react-tabs'
 import { getVariant, SelectedOptions } from '../helpers'
 import ProductSlider from '../ProductSlider'
@@ -18,7 +18,6 @@ const Tabs = dynamic<TabsProps>(
   { ssr: false }
 ) // disable ssr
 interface Props {
-  className?: string
   children?: any
   product: Product
   relatedProducts: Product[]
@@ -28,12 +27,17 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
   const addItem = useAddItem()
   const { openSidebar, setModalView } = useUI()
   const [loading, setLoading] = useState(false)
-  const [choices, setChoices] = useState<SelectedOptions>({
-    size: null,
-    color: null,
-  })
+  const [choices, setChoices] = useState<SelectedOptions>({})
 
-  // Select the correct variant based on choices
+  useEffect(() => {
+    product.variants[0].options?.forEach((v) => {
+      setChoices((choices) => ({
+        ...choices,
+        [v.displayName.toLowerCase()]: v.values[0].label.toLowerCase(),
+      }))
+    })
+  }, [])
+
   const variant = getVariant(product, choices)
   const addToCart = async () => {
     setLoading(true)
@@ -233,7 +237,6 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
               type="button"
               onClick={addToCart}
               loading={loading}
-              disabled={!variant && product.options.length > 0}
             >
               Add to Cart
             </Button>

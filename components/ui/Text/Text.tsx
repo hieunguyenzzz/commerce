@@ -1,9 +1,9 @@
+import cn from 'classnames'
 import React, {
+  CSSProperties,
   FunctionComponent,
   JSXElementConstructor,
-  CSSProperties,
 } from 'react'
-import cn from 'classnames'
 import s from './Text.module.css'
 
 interface Props {
@@ -14,7 +14,20 @@ interface Props {
   html?: string
 }
 
-type Variant = 'heading' | 'body' | 'pageHeading' | 'sectionHeading'
+type Variant =
+  | 'heading'
+  | 'body'
+  | 'pageHeading'
+  | 'sectionHeading'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'h7'
+  | 'subtitle'
+  | 'button'
 
 const Text: FunctionComponent<Props> = ({
   style,
@@ -30,6 +43,15 @@ const Text: FunctionComponent<Props> = ({
     heading: 'h1',
     pageHeading: 'h1',
     sectionHeading: 'h2',
+    h1: 'h1',
+    h2: 'h2',
+    h3: 'h3',
+    h4: 'h4',
+    h5: 'h5',
+    h6: 'h6',
+    h7: 'h7',
+    subtitle: 'div',
+    button: 'button',
   }
 
   const Component:
@@ -46,16 +68,7 @@ const Text: FunctionComponent<Props> = ({
 
   return (
     <Component
-      className={cn(
-        s.root,
-        {
-          [s.body]: variant === 'body',
-          [s.heading]: variant === 'heading',
-          [s.pageHeading]: variant === 'pageHeading',
-          [s.sectionHeading]: variant === 'sectionHeading',
-        },
-        className
-      )}
+      className={cn(s.root, s[variant], className)}
       style={style}
       {...htmlContentProps}
     >

@@ -1,25 +1,13 @@
 :root {
-  --primary: rgba(0, 0, 0, 1);
-  --secondary-2: rgba(17, 17, 17, 1);
-  --secondary: rgba(0, 0, 0, 1);
-  --secondary-2: rgba(17, 17, 17, 1);
-  --selection: var(--cyan);
+  --primary: #c8bf71;
+  --primary-2: #c8bf71;
+  --secondary: #000000;
+  --secondary-2: #222222;
 
   --text-base: rgba(0, 0, 0, 1);
   --text-primary: rgba(0, 0, 0, 1);
   --text-secondary: rgba(255, 255, 255, 1);
 
-  --hover: rgba(220, 177, 74, 1);
-  --hover-1: rgba(220, 177, 74, 1);
-  --hover-2: rgba(220, 177, 74, 1);
-  --cyan: #22b8cf;
-  --green: #37b679;
-  --red: #da3c3c;
-  --pink: #e64980;
-  --purple: #f81ce5;
-  --blue: #0070f3;
-  --violet: #5f3dc4;
-  --violet-light: #7048e8;
   --accents-0: #fff;
   --accents-1: #f1f3f5;
   --accents-2: #e9ecef;
@@ -34,9 +22,9 @@
     'Helvetica', sans-serif;
 }
 :root {
-  --header-height: 60px;
+  --header-height: 50px;
   @screen lg {
-    --header-height: 120px;
+    --header-height: 69px;
   }
 }
 :root {
@@ -102,36 +90,4 @@ body {
 
 a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-.animated {
-  -webkit-animation-duration: 1000ms;
-  animation-duration: 1000ms;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
-
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
 }

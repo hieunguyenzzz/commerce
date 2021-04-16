@@ -1,14 +1,14 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { Minus, Plus, Trash } from '@components/icons'
+import { useUI } from '@components/ui/context'
+import useRemoveItem from '@framework/cart/use-remove-item'
+import useUpdateItem from '@framework/cart/use-update-item'
+import usePrice from '@framework/product/use-price'
+import type { LineItem } from '@framework/types'
 import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ChangeEvent, useEffect, useState } from 'react'
 import s from './CartItem.module.css'
-import { Trash, Plus, Minus } from '@components/icons'
-import { useUI } from '@components/ui/context'
-import type { LineItem } from '@framework/types'
-import usePrice from '@framework/product/use-price'
-import useUpdateItem from '@framework/cart/use-update-item'
-import useRemoveItem from '@framework/cart/use-remove-item'
 
 type ItemOption = {
   name: string
@@ -92,7 +92,7 @@ const CartItem = ({
       })}
       {...rest}
     >
-      <div className="w-16 h-16 bg-violet relative overflow-hidden cursor-pointer">
+      <div className="w-16 h-16  relative overflow-hidden cursor-pointer">
         <Link href={`/product/${item.path}`}>
           <Image
             onClick={() => closeSidebarIfPresent()}
