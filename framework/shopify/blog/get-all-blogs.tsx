@@ -1,6 +1,6 @@
-import {Article, ArticleEdge} from "@framework/schema";
-import {getConfig, ShopifyConfig} from "@framework/api";
-import {getAllBlogQuery} from "@framework/utils";
+import { Article, ArticleEdge } from '@framework/schema'
+import { getConfig, ShopifyConfig } from '@framework/api'
+import { getAllBlogQuery } from '@framework/utils'
 
 type Variables = {
   first?: number
@@ -9,7 +9,6 @@ type Variables = {
 type ReturnType = {
   articles: Article[]
 }
-
 
 const getAllBlogs = async (options?: {
   variables?: Variables
