@@ -37,7 +37,8 @@
     right: 0;
     bottom: 0;
     width: 0;
-    border-bottom: 3px solid var(--accents-3);
+    opacity: 0.5;
+    border-bottom: 3px solid currentColor;
     transition: width 0.3s, color 0.3s;
   }
   &:hover:after {

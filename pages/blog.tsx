@@ -38,7 +38,7 @@ export default function Blog() {
             return (
               <Text
                 className={classNames(
-                  'hover:text-primary-2 px-xl text-effect-1',
+                  'hover:text-primary-2 mx-xl text-effect-1',
                   i === 0 ? 'text-primary' : ''
                 )}
                 variant="h7"
