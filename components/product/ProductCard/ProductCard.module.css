@@ -45,7 +45,6 @@
   }
 
   &:nth-child(6n + 1) .squareBg {
-    @apply;
   }
 
   &:nth-child(6n + 5) .squareBg {
