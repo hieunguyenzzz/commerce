@@ -30,7 +30,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
     <footer className={rootClassName}>
       <Container className="py-11">
         <div className="w-full grid grid-cols-3 lg:grid-cols-9 px-14 gap-y-xl gap-6  transition-colors duration-150">
-          <div className="col-span-3 space-y-lg lg:space-y-11 px-10">
+          <div className="col-span-3 space-y-lg lg:space-y-11 px:md lg:px-10">
             <Text variant="h5">CUSTOMER CARE</Text>
             <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
               {['CONTACT', 'SHIPPING', 'RETURNS', 'FAQS', 'SIZE GUIDE'].map(
@@ -44,7 +44,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
               )}
             </ul>
           </div>
-          <div className="col-span-3 space-y-lg lg:space-y-11 px-10">
+          <div className="col-span-3 space-y-lg lg:space-y-11 px:md lg:px-10">
             <Text variant="h5">OUR BRAND</Text>
             <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
               {[
@@ -62,7 +62,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
               ))}
             </ul>
           </div>
-          <div className="col-span-3 space-y-6 flex flex-col  px-10">
+          <div className="col-span-3 space-y-6 flex flex-col px:md  lg:px-10">
             <div className="space-y-sm lg:space-y-4">
               <Text variant="h5">CUSTOMER CARE</Text>
               <div className="space-x-6 flex text-2xl">

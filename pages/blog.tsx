@@ -1,11 +1,9 @@
-import { Breadcrumb, Layout } from '@components/common'
-import { Button, Container, Text } from '@components/ui'
+import BlogListView from '@components/blog/BlogListView'
+import { Layout } from '@components/common'
 import { getConfig } from '@framework/api'
 import getAllBlogs from '@framework/blog/get-all-blogs'
-import classNames from 'classnames'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 const placeholderImg = '/product-img-placeholder.svg'
 export async function getStaticProps({
   preview,
@@ -14,88 +12,39 @@ export async function getStaticProps({
   const config = getConfig({ locale })
   const { articles } = await getAllBlogs({ config, preview })
   return {
-    props: { articles },
+    props: {
+      articles,
+      tags: [
+        'ALL',
+        'INSPIRING WOMEN',
+        'BEHIND TESS JEAN',
+        'EDITIORIALS',
+        'LIFESTYLE',
+      ],
+    },
   }
 }
 
 export default function Blog({
   articles,
+  tags,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return (
-    <div>
-      <Container className="pt-md mb-6">
-        <Breadcrumb>JOURNAL/ ALL</Breadcrumb>
-      </Container>
-      <Container className="flex flex-col items-center">
-        <Text className="text-center mx-auto" variant="h4">
-          JOURNAL
-        </Text>
-        <div className="mx-auto mt-xl flex flex-wrap justify-center items-baseline space-y-sm">
-          {[
-            'ALL',
-            'INSPIRING WOMEN',
-            'BEHIND TESS JEAN',
-            'EDITIORIALS',
-            'LIFESTYLE',
-          ].map((str, i) => {
-            return (
-              <Link key={i} href={`?tag=${str.toLowerCase()}`}>
-                <a
-                  className={classNames(
-                    'hover:text-primary-2 mx-xl text-effect-1 text-h7',
-                    i === 0 ? 'text-primary' : ''
-                  )}
-                >
-                  {str}
-                </a>
-              </Link>
-            )
-          })}
-        </div>
-        <div className="h-16" />
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-10 w-full">
-          {articles.map((article, i) => (
-            <div>
-              <Image
-                className="bg-accents-1"
-                layout="responsive"
-                src={article.image?.originalSrc}
-                width={630}
-                height={369}
-              ></Image>
-              <div className="p-5 space-y-2 text-center">
-                <h2 className="header-1">{(article as any).name as any}</h2>
-                <Text variant="subtitle">{article.content}</Text>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="h-16" />
-        <div className="mx-auto max-w-full flex justify-center border-b border-accents-3 ">
-          {new Array(5).fill(true).map((_, i) => (
-            <Link key={i} href={i === 0 ? '/blog' : `?page=${i}`}>
-              <a
-                className={`py-xs px-7 relative text-lg -mb-px text-effect-1 ${
-                  i === 0 ? 'text-effect-1_active' : ''
-                }`}
-              >
-                {i + 1}
-              </a>
-            </Link>
-          ))}
-        </div>
-        <div className="h-40"></div>
-        <div className="max-w-prose flex flex-col items-center text-center space-y-5">
-          <Text variant="h3">10% OFF YOUR FIRST ORDER</Text>
-          <div className="text-lg whitespace-pre-line text-body-2">
-            Sign up to receive 10% your first order and be the first to hear
-            about latest news and offers.
-          </div>
-          <Button>sign up</Button>
-        </div>
-        <div className="h-40"></div>
-      </Container>
-    </div>
+  const router = useRouter()
+  const currentPage = Number(router.query?.page || 1)
+  const limit = 4
+  const pageTotal = Math.ceil(articles.length / limit)
+  const fromIndex = (currentPage - 1) * limit
+  const ToIndex = fromIndex + limit
+  const showArticles = articles.filter((_, i) => i >= fromIndex && i < ToIndex)
+  return router.isFallback ? (
+    <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
+  ) : (
+    <BlogListView
+      articles={showArticles}
+      tags={tags}
+      pageTotal={pageTotal}
+      currentPage={currentPage}
+    />
   )
 }
 
