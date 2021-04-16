@@ -2,6 +2,7 @@ import { Breadcrumb, Layout } from '@components/common'
 import { Button, Container, Text } from '@components/ui'
 import { getConfig } from '@framework/api'
 import getAllBlogs from '@framework/blog/get-all-blogs'
+import classNames from 'classnames'
 import type { GetStaticPropsContext } from 'next'
 import Image from 'next/image'
 const placeholderImg = '/product-img-placeholder.svg'
@@ -26,7 +27,7 @@ export default function Blog() {
         <Text className="text-center mx-auto" variant="h4">
           JOURNAL/ ALL
         </Text>
-        <div className="mx-auto mt-xl flex justify-center space-x-4xl">
+        <div className="mx-auto mt-xl flex flex-wrap justify-center items-baseline space-y-sm">
           {[
             'ALL',
             'INSPIRING WOMEN',
@@ -35,14 +36,20 @@ export default function Blog() {
             'LIFESTYLE',
           ].map((str, i) => {
             return (
-              <Text className={i === 0 ? 'text-primary' : ''} variant="h7">
+              <Text
+                className={classNames(
+                  'hover:text-primary-2 px-xl text-effect-1',
+                  i === 0 ? 'text-primary' : ''
+                )}
+                variant="h7"
+              >
                 {str}
               </Text>
             )
           })}
         </div>
         <div className="h-16" />
-        <div className="lg:grid grid-cols-2 gap-x-5 gap-y-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-10 w-full">
           {new Array(6).fill(true).map((_, i) => (
             <div>
               <Image
@@ -53,8 +60,8 @@ export default function Blog() {
                 height={369}
               ></Image>
               <div className="p-5 space-y-2 text-center">
-                <Text variant="h7">title</Text>
-                <Text variant="subtitle">Date</Text>
+                <h2 className="header-1">title</h2>
+                <Text variant="subtitle">subtitle</Text>
               </div>
             </div>
           ))}
@@ -74,7 +81,7 @@ export default function Blog() {
         <div className="h-40"></div>
         <div className="max-w-prose flex flex-col items-center text-center space-y-5">
           <Text variant="h3">10% OFF YOUR FIRST ORDER</Text>
-          <div className="text-lg whitespace-pre-line">
+          <div className="text-lg whitespace-pre-line text-body-2">
             Sign up to receive 10% your first order and be the first to hear
             about latest news and offers.
           </div>

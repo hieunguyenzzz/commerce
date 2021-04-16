@@ -1,4 +1,4 @@
-import { Bag, Search, User } from '@components/icons'
+import { Bag, Down, Search, User } from '@components/icons'
 import { Container } from '@components/ui'
 import { useUI } from '@components/ui/context'
 import useCart from '@framework/cart/use-cart'
@@ -32,6 +32,12 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
   return (
     <nav className={cn(s.root, className)}>
       <ul className={s.list}>
+        <li className={cn(s.item, 'flex items-baseline')}>
+          <div className="text-h7">GLOBAL ($USD) </div>
+          <span>
+            <Down />
+          </span>
+        </li>
         <li className={cn(s.item, s.visibleOnLg, 'group relative ')}>
           <label>
             <div className="relative flex justify-end">

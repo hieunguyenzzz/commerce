@@ -1,10 +1,16 @@
 const plugin = require('tailwindcss/plugin')
 
-module.exports = plugin(function ({ addComponents, theme }) {
+module.exports = plugin(function ({ addComponents }) {
   const typography = {
     '.text-body': {
       fontSize: '16px',
       lineHeight: '19px',
+      letterSpacing: '0.06em',
+    },
+    '.text-body-2': {
+      fontSize: '18px',
+      lineHeight: '22px',
+      textAlign: 'center',
       letterSpacing: '0.06em',
     },
     '.text-h1': {
@@ -51,11 +57,12 @@ module.exports = plugin(function ({ addComponents, theme }) {
       lineHeight: '17px',
       letterSpacing: '0.08em',
     },
-    '.text-subtitle': {
+    '.textSubtitle': {
       fontSize: '14px',
       textTransform: 'uppercase',
       lineHeight: '17px',
       letterSpacing: '0.06em',
+      color: '#5E5E5E',
     },
     '.text-button': {
       fontSize: '14px',
@@ -64,7 +71,31 @@ module.exports = plugin(function ({ addComponents, theme }) {
       lineHeight: '17px',
       letterSpacing: '0.15em',
     },
+    '.header-1': {
+      fontSize: '16px',
+      lineHeight: '19px',
+      letterSpacing: '0.06em',
+    },
+    '.header-2': {
+      textTransform: 'uppercase',
+      fontSize: '14px',
+      lineHeight: '17px',
+      letterSpacing: '0.06em',
+    },
+    '.categories': {
+      fontFamily: 'Montserrat',
+      fontSize: '14px',
+      lineHeight: '17px',
+      letterSpacing: '0.06em',
+    },
+    '.notification': {
+      fontFamily: 'Montserrat',
+      fontStyle: 'normal',
+      fontWeight: '500',
+      fontSize: '12px',
+      lineHeight: '15px',
+      letterSpacing: '0.06em',
+    },
   }
-
   addComponents(typography)
 })

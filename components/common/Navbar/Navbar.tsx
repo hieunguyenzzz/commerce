@@ -125,13 +125,11 @@ const Navbar: FC<Props> = ({ transparent }) => {
         </div>
       </div>
       <div className="flex  items-center flex-1 justify-center lg:justify-start lg:space-x-16">
-        <div className={s.logo}>
-          <Link href="/">
-            <a aria-label="Logo">
-              <img src={'/logo.svg'} alt="jess jean" />
-            </a>
-          </Link>
-        </div>
+        <Link href="/">
+          <a className="h-full" aria-label="Logo">
+            <img src={'/logo.svg'} alt="jess jean" />
+          </a>
+        </Link>
       </div>
       <div className="flex justify-end flex-1 space-x-8">
         <UserNav responsive />

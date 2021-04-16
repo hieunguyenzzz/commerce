@@ -6,6 +6,7 @@ import {
   Tiktok,
 } from '@components/icons'
 import { Container, Text } from '@components/ui'
+import Link from '@components/ui/Link'
 import type { Page } from '@framework/common/get-all-pages'
 import getSlug from '@lib/get-slug'
 import cn from 'classnames'
@@ -28,20 +29,24 @@ const Footer: FC<Props> = ({ className, pages }) => {
   return (
     <footer className={rootClassName}>
       <Container className="py-11">
-        <div className="w-full grid grid-cols-9 px-14  gap-6  transition-colors duration-150">
-          <div className="col-span-3  space-y-11 px-10">
+        <div className="w-full grid grid-cols-3 lg:grid-cols-9 px-14 gap-y-xl gap-6  transition-colors duration-150">
+          <div className="col-span-3 space-y-lg lg:space-y-11 px-10">
             <Text variant="h5">CUSTOMER CARE</Text>
-            <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-4">
+            <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
               {['CONTACT', 'SHIPPING', 'RETURNS', 'FAQS', 'SIZE GUIDE'].map(
                 (str) => (
-                  <Text variant="h7">{str}</Text>
+                  <Link href={'/' + str}>
+                    <Text className="text-effect-1" variant="h7">
+                      {str}
+                    </Text>
+                  </Link>
                 )
               )}
             </ul>
           </div>
-          <div className="col-span-3  space-y-11 px-10">
+          <div className="col-span-3 space-y-lg lg:space-y-11 px-10">
             <Text variant="h5">OUR BRAND</Text>
-            <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-4">
+            <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
               {[
                 'ABOUT',
                 'ETHICS',
@@ -49,21 +54,33 @@ const Footer: FC<Props> = ({ className, pages }) => {
                 'PRIVACY POLICY',
                 'TERMS & CONDITIONS',
               ].map((str) => (
-                <Text variant="h7">{str}</Text>
+                <Link href={'/' + str}>
+                  <Text className="text-effect-1" variant="h7">
+                    {str}
+                  </Text>
+                </Link>
               ))}
             </ul>
           </div>
           <div className="col-span-3 space-y-6 flex flex-col  px-10">
-            <div className="space-y-4">
+            <div className="space-y-sm lg:space-y-4">
               <Text variant="h5">CUSTOMER CARE</Text>
               <div className="space-x-6 flex text-2xl">
-                <Facebook />
-                <Instagram />
-                <Pinterest />
-                <Tiktok />
+                <span className="rounded-full hover-effect-1">
+                  <Facebook />
+                </span>
+                <span className="rounded-full hover-effect-1">
+                  <Instagram />
+                </span>
+                <span className="rounded-full hover-effect-1">
+                  <Pinterest />
+                </span>
+                <span className="rounded-full hover-effect-1">
+                  <Tiktok />
+                </span>
               </div>
             </div>
-            <div className="space-y-4 space-y-6 ">
+            <div className="space-y-sm lg:space-y-6">
               <p className="  text-sm whitespace-pre-line">
                 {`hello@tessjean.com 
                 +84 077 277 0802`}
