@@ -4,7 +4,7 @@ import { getConfig } from '@framework/api'
 import getAllBlogs from '@framework/blog/get-all-blogs'
 import type { GetStaticPropsContext } from 'next'
 import Image from 'next/image'
-
+const placeholderImg = '/product-img-placeholder.svg'
 export async function getStaticProps({
   preview,
   locale,
@@ -46,6 +46,7 @@ export default function Blog() {
           {new Array(6).fill(true).map((_, i) => (
             <div>
               <Image
+                className="bg-accents-1"
                 layout="responsive"
                 src={`/blog-${i + 1}.png`}
                 width={630}

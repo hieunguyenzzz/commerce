@@ -45,17 +45,20 @@ export async function getStaticProps({
 
 export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   const { products } = await getAllProductPaths()
-
   return {
     paths: locales
       ? locales.reduce<string[]>((arr, locale) => {
           // Add a product path for every locale
-          products.forEach((product) => {
-            arr.push(`/${locale}/product${product.node.path}`)
-          })
+          products
+            .filter((_, i) => i < 10)
+            .forEach((product) => {
+              arr.push(`/${locale}/product${product.node.path}`)
+            })
           return arr
         }, [])
-      : products.map((product) => `/product${product.node.path}`),
+      : products
+          .filter((_, i) => i < 10)
+          .map((product) => `/product${product.node.path}`),
     fallback: 'blocking',
   }
 }

@@ -125,11 +125,13 @@ const Navbar: FC<Props> = ({ transparent }) => {
         </div>
       </div>
       <div className="flex  items-center flex-1 justify-center lg:justify-start lg:space-x-16">
-        <Link href="/">
-          <a className="text-2xl font-bold z-10" aria-label="Logo">
-            Helendo
-          </a>
-        </Link>
+        <div className={s.logo}>
+          <Link href="/">
+            <a aria-label="Logo">
+              <img src={'/logo.svg'} alt="jess jean" />
+            </a>
+          </Link>
+        </div>
       </div>
       <div className="flex justify-end flex-1 space-x-8">
         <UserNav responsive />
@@ -140,7 +142,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
     <div className="flex w-full py-4 items-center align-center">
       <div className="flex-1 justify-between space-x-sm h-header flex items-center">
         <div className="group flex items-center h-header-lg">
-          <a className={cn(s.link, 'z-10 text-sm')}>NEW ARRIVALS</a>
+          <a className={cn(s.link, 'z-10')}>NEW ARRIVALS</a>
           <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
             <Container className="w-full text-xs py-6  relative">
               <div className="w-full mx-auto max-w-2xl grid grid-cols-7 space-x-8 ">
@@ -189,7 +191,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
         </div>
         <div className="group flex items-center h-header-lg">
-          <a className={cn(s.link, 'z-10 text-sm')}>SHOP</a>
+          <a className={cn(s.link, 'z-10')}>SHOP</a>
           <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
             <Container fluid clean className="w-full text-xs flex relative">
               {new Array(5).fill(shopMenu).map((menu, i) => {
@@ -230,7 +232,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
         </div>
         <div className="group flex items-center h-header-lg">
-          <a className={cn(s.link, 'z-10 text-sm')}>COLLECTIONS</a>
+          <a className={cn(s.link, 'z-10')}>COLLECTIONS</a>
           <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
             <Container className="w-full text-xs grid grid-cols-7 gap-8 py-6 relative">
               <div className="absolute bottom-0 right-0 w-96 h-96">
@@ -275,7 +277,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
         </div>
         <div className="group flex items-center h-header-lg relative">
-          <a className={cn(s.link, 'z-10 text-sm')}>ETHICS</a>
+          <a className={cn(s.link, 'z-10')}>ETHICS</a>
           <div className=" absolute top-0 left-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto transform  opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
             <Container className="text-xs shadow-lg bg-accents-0 flex flex-col py-6  relative space-y-3">
               {new Array(5).fill(pagesMenu).map((menu, i) => {
@@ -320,7 +322,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
             className={cn(
               s.link,
               router.pathname.startsWith('/blog') && s.active,
-              'z-10 text-sm'
+              'z-10'
             )}
           >
             JOURNAL
