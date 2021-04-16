@@ -57,7 +57,7 @@ module.exports = plugin(function ({ addComponents }) {
       lineHeight: '17px',
       letterSpacing: '0.08em',
     },
-    '.textSubtitle': {
+    '.text-subtitle': {
       fontSize: '14px',
       textTransform: 'uppercase',
       lineHeight: '17px',
