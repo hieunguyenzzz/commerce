@@ -44,11 +44,16 @@ module.exports = {
         blue: 'var(--blue)',
         green: 'var(--green)',
         red: 'var(--red)',
+        'primary-new': '#dcb14a',
+      },
+      backgroundColor: {
+        sale: '#f14705',
       },
       textColor: {
         base: 'var(--text-base)',
         primary: 'var(--text-primary)',
         secondary: 'var(--text-secondary)',
+        'primary-new': '#dcb14a',
       },
       boxShadow: {
         'outline-normal': '0 0 0 2px var(--accents-2)',
@@ -61,6 +66,24 @@ module.exports = {
       scale: {
         120: '1.2',
       },
+      height: {
+        700: '700px',
+      },
+      border: {
+        'primary-new': '#dcb14a',
+      },
+      padding: {
+        120: '120px',
+      },
     },
+  },
+  variants: {
+    backgroundImage: [
+      'responsive',
+      'group-hover',
+      'focus-within',
+      'hover',
+      'focus',
+    ],
   },
 }

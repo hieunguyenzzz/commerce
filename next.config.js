@@ -15,7 +15,7 @@ module.exports = withCommerceConfig({
     defaultLocale: 'en-US',
   },
   images: {
-    domains: ['example.com'],
+    domains: ['example.com', 'live.hasthemes.com'],
   },
   target: 'serverless',
   rewrites() {

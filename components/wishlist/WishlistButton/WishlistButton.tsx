@@ -66,7 +66,7 @@ const WishlistButton: FC<Props> = ({
   return (
     <button
       aria-label="Add to wishlist"
-      className={cn({ 'opacity-50': loading }, className)}
+      className={cn({ 'opacity-50': loading }, className, 'focus:outline-none')}
       onClick={handleWishlistChange}
       {...props}
     >

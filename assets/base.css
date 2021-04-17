@@ -128,3 +128,23 @@ a {
   }
 }
 
+.slick-dots {
+  bottom: 20px !important;
+}
+
+.slick-dots li.slick-active button:before {
+  font-size: 15px;
+  color: #dcb14a !important;
+}
+
+.slick-dots li button:before {
+  font-size: 15px !important;
+  color: #ddd;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  /* font-family: none !important; */
+  font-size: 26px !important;
+  color: #666 !important;
+}

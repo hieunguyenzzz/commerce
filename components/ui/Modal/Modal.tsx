@@ -8,6 +8,8 @@ import {
   clearAllBodyScrollLocks,
 } from 'body-scroll-lock'
 import FocusTrap from '@lib/focus-trap'
+// import ClickOutside from '@lib/click-outside'
+
 interface Props {
   className?: string
   children?: any
@@ -39,6 +41,7 @@ const Modal: FC<Props> = ({ children, open, onClose, onEnter = null }) => {
     }
     return () => {
       window.removeEventListener('keydown', handleKey)
+
       clearAllBodyScrollLocks()
     }
   }, [open, handleKey])
