@@ -35,12 +35,6 @@ const ProductListItemHover: React.FC<ProductListItemHoverProps> = ({
   return (
     <div className="flex justify-around">
       <button
-        type="button"
-        className="bg-white hover:text-primary-new	rounded-full px-3 py-3 flex items-center transition-all mr-3 focus:outline-none"
-      >
-        <BsPlusCircle className="h-6 w-6" data-tip="Quick View" />
-      </button>
-      <button
         onClick={addToCart}
         type="button"
         className="bg-white hover:text-primary-new	rounded-full px-3 py-3 flex items-center transition-all focus:outline-none"

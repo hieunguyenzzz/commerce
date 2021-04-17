@@ -66,7 +66,7 @@ const ProductOffer: React.FC<ProductOfferProps> = ({}) => {
             </div>
           </div>
 
-          <Link href={'/'}>
+          <Link href={'/search'}>
             <a className="mt-4 px-4 py-2 bg-black text-white font-bold flex w-8/12 sm:w-6/12 md:w-3/12">
               Shop Now
               <BsArrowRight size={22} className="ml-2" />

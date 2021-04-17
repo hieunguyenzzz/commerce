@@ -4,7 +4,7 @@ export const homePageData = [
     text: 'Welcome To <br/> Our Store',
     desc:
       'Many desktop publishing packages and web page editors now use <br/> Lorem Ipsum as their default model text',
-    link: '/',
+    link: '/search',
     img:
       'https://live.hasthemes.com/html/7/helendo-preview/helendo/assets/images/hero/home-default-1.jpg',
   },
@@ -13,7 +13,7 @@ export const homePageData = [
     text: 'Welcome To <br/> Our Store',
     desc:
       'Many desktop publishing packages and web page editors now use <br/> Lorem Ipsum as their default model text',
-    link: '/',
+    link: '/search',
     img:
       'https://live.hasthemes.com/html/7/helendo-preview/helendo/assets/images/hero/home-default-2.jpg',
   },
@@ -22,7 +22,7 @@ export const homePageData = [
     text: 'Welcome To <br/> Our Store',
     desc:
       'Many desktop publishing packages and web page editors now use <br/> Lorem Ipsum as their default model text',
-    link: '/',
+    link: '/search',
     img:
       'https://live.hasthemes.com/html/7/helendo-preview/helendo/assets/images/hero/home-default-3.jpg',
   },

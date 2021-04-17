@@ -8,6 +8,7 @@ import { getConfig } from '@framework/api'
 import getAllProducts from '@framework/product/get-all-products'
 import getSiteInfo from '@framework/common/get-site-info'
 import getAllPages from '@framework/common/get-all-pages'
+import getAllBlogs from '@framework/blog/get-all-blogs'
 
 // * New
 import HeroCarouselItem from '@components/common/HeroCarouselItem'
@@ -32,6 +33,7 @@ export async function getStaticProps({
 
   const { categories, brands } = await getSiteInfo({ config, preview })
   const { pages } = await getAllPages({ config, preview })
+  const { articles } = await getAllBlogs({ config, preview })
 
   return {
     props: {
@@ -39,6 +41,7 @@ export async function getStaticProps({
       categories,
       brands,
       pages,
+      articles,
     },
     revalidate: 14400,
   }
@@ -48,6 +51,7 @@ export default function Home({
   products,
   brands,
   categories,
+  articles,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -60,7 +64,7 @@ export default function Home({
       {/* PRODUCT OFFER */}
       <ProductOffer />
       {/* BLOG */}
-      <Blog />
+      <Blog articles={articles} />
       {/* NEW LETTERS */}
       <Newsletter />
       {/* {products.slice(0, 3).map((product, i) => (

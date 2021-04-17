@@ -13,7 +13,6 @@ interface Props {
 
 const FeatureProduct: FC<Props> = ({ ...props }) => {
   const { products } = props
-
   return (
     <>
       {products.slice(0, 3).map((item, index) => (
@@ -37,7 +36,7 @@ const FeatureProduct: FC<Props> = ({ ...props }) => {
               <h2 className="mt-2 text-4xl fold-extrabold">{item?.name}</h2>
               <hr className="w-14 my-4 border-2 border-primary-new" />
               <p className=" pt-4">{item?.description}</p>
-              <Link href="/">
+              <Link href={`product${item?.path}`}>
                 <a
                   className="mt-4 px-4 py-2 border-2 border-black	
                 flex w-8/12 sm:w-4/12 md:w-6/12 justify-center hover:bg-black hover:text-white duration-300	transform"

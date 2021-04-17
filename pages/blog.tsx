@@ -2,7 +2,7 @@ import type { GetStaticPropsContext } from 'next'
 import { getConfig } from '@framework/api'
 import { Layout } from '@components/common'
 import { Container } from '@components/ui'
-import getAllBlogs from "@framework/blog/get-all-blogs";
+import getAllBlogs from '@framework/blog/get-all-blogs'
 
 export async function getStaticProps({
   preview,
@@ -15,7 +15,7 @@ export async function getStaticProps({
   }
 }
 
-export default function Blog() {
+export default function Blog(articles) {
   return (
     <div className="pb-20">
       <div className="text-center pt-40 pb-56 bg-violet">

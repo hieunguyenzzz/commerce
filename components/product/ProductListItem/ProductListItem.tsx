@@ -1,16 +1,24 @@
 import React from 'react'
 import ProductListItemHover from './ProductListItemHover'
+import { useRouter } from 'next/router'
 
 interface ProductListItem {
   product: any
 }
 
 const ProductListItem: React.FC<ProductListItem> = ({ product }) => {
+  const router = useRouter()
+
+  const handleImageClick = (path) => {
+    router.push(`product${path}`)
+  }
+
   const randomNumber = Math.floor(Math.random() * 3)
   return (
     <div>
       <div
-        className="relative rounded flex justify-center items-center mt-6 mx-3 h-64 "
+        onClick={() => handleImageClick(product.path)}
+        className="relative rounded flex justify-center items-center mt-6 mx-3 h-64 cursor-pointer"
         style={{
           backgroundColor: '#f9f9f9',
         }}
