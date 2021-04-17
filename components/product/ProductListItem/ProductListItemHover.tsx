@@ -33,7 +33,7 @@ const ProductListItemHover: React.FC<ProductListItemHoverProps> = ({
     }
   }
   return (
-    <div className="flex justify-around">
+    <div className="flex justify-around z-40">
       <button
         onClick={addToCart}
         type="button"
