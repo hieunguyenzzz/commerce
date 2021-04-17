@@ -2,7 +2,6 @@ import { UserNav } from '@components/common'
 import { Menu } from '@components/icons'
 import { Container, useUI } from '@components/ui'
 import cn from 'classnames'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
@@ -138,7 +137,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
   )
   const largeNav = (
     <div className="flex w-full py-4 items-center align-center">
-      <div className="flex-1 justify-between space-x-sm h-header flex items-center">
+      {/* <div className="flex-1 justify-between space-x-sm h-header flex items-center">
         <div className="group flex items-center h-header-lg">
           <a className={cn(s.link, 'z-10')}>NEW ARRIVALS</a>
           <div className="shadow-lg bg-accents-0 absolute left-0 top-0 pt-header lg:pt-header-lg pointer-events-none group-hover:pointer-events-auto  w-full opacity-0  group-hover:block group-hover:opacity-100 mt-8 group-hover:mt-0 transition-all duration-300 ease-in-out">
@@ -364,7 +363,8 @@ const Navbar: FC<Props> = ({ transparent }) => {
             </Container>
           </div>
         </div>
-      </div>
+      </div> */}
+      <div className="flex-1" />
       <div className={s.logo}>
         <Link href="/">
           <a aria-label="Logo">
@@ -372,7 +372,6 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </a>
         </Link>
       </div>
-
       <div className="flex justify-end flex-1  space-x-md">
         <UserNav responsive />
       </div>

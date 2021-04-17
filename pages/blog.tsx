@@ -31,7 +31,7 @@ export default function Blog({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
   const currentPage = Number(router.query?.page || 1)
-  const limit = 4
+  const limit = 6
   const pageTotal = Math.ceil(articles.length / limit)
   const fromIndex = (currentPage - 1) * limit
   const ToIndex = fromIndex + limit
