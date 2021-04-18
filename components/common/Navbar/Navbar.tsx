@@ -1,7 +1,5 @@
 import { UserNav } from '@components/common'
-import { Menu } from '@components/icons'
 import { Container, useUI } from '@components/ui'
-import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
@@ -113,7 +111,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
   const smallNav = (
     <div className="flex w-full py-4 items-center align-center space-x-12">
       <div className="flex-1 flex items-center">
-        <div
+        {/* <div
           onClick={() => {
             setModalView('MENU')
             openSidebar()
@@ -121,7 +119,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           className={cn(s.item, 'z-10')}
         >
           <Menu />
-        </div>
+        </div> */}
       </div>
       <div className="flex  items-center flex-1 justify-center lg:justify-start lg:space-x-16">
         <Link href="/">

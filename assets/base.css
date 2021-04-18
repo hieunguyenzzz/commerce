@@ -22,7 +22,7 @@
     'Helvetica', sans-serif;
 }
 :root {
-  --header-height: 50px;
+  --header-height: 69px;
   @screen lg {
     --header-height: 69px;
   }

@@ -27,6 +27,7 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
   } = useUI()
   const itemsCount = (5 || data?.lineItems.reduce(countItem, 0)) ?? 0
   const { push } = useRouter()
+  return null
   return (
     <nav className={cn(s.root, className)}>
       <ul className={s.list}>
