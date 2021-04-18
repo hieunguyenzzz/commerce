@@ -23,6 +23,7 @@ const getAllBlogs = async (options?: {
   const articles = data.articles?.edges?.map(
     ({ node: { title: name, handle, ...node } }: ArticleEdge) => ({
       ...node,
+      handle,
       url: `/${locale}/${handle}`,
       name,
     })

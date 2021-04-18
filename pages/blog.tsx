@@ -10,6 +10,7 @@ export async function getStaticProps({
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
   const { articles } = await getAllBlogs({ config, preview })
+  console.log(articles);
   return {
     props: { articles },
   }
