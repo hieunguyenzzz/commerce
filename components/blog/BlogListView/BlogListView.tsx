@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { getLink } from '../helper'
 import s from './BlogListView.module.css'
 
 function formatdate(
@@ -93,23 +94,25 @@ const BlogListView: React.FC<Props> = ({
         <div className="h-16" />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-10 w-full">
           {articles.map((article: any, i: number) => (
-            <div>
-              <Image
-                className="bg-accents-1"
-                layout="responsive"
-                src={article.image?.originalSrc}
-                width={630}
-                height={369}
-              ></Image>
-              <div className="p-5 space-y-1 text-center">
-                <h2 className="header-1 uppercase">
-                  {(article as any).name as any}
-                </h2>
-                <Text variant="subtitle">
-                  {formatdate(article.publishedAt, locale, 'long')}
-                </Text>
+            <Link key={article.handle} href={getLink(article.handle)}>
+              <div>
+                <Image
+                  className="bg-accents-1"
+                  layout="responsive"
+                  src={article.image?.originalSrc}
+                  width={630}
+                  height={369}
+                ></Image>
+                <div className="p-5 space-y-1 text-center">
+                  <h2 className="header-1 uppercase">
+                    {(article as any).name as any}
+                  </h2>
+                  <Text variant="subtitle">
+                    {formatdate(article.publishedAt, locale, 'long')}
+                  </Text>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <div className="h-16" />
