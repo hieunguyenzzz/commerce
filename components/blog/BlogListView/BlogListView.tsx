@@ -9,6 +9,28 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import s from './BlogListView.module.css'
 
+function formatdate(
+  dateStr: string,
+  locale = 'en-US',
+  format: 'default' | 'long' | 'short' = 'default'
+) {
+  let options
+  switch (format) {
+    case 'long':
+      options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+      break
+    case 'default':
+    case 'short':
+    default:
+      break
+  }
+  return new Date(dateStr).toLocaleDateString(locale, options as any)
+}
+
 interface Props {
   articles: Article[]
   tags?: string[]
@@ -31,7 +53,7 @@ const BlogListView: React.FC<Props> = ({
     'LIFESTYLE',
   ],
 }: any) => {
-  const router = useRouter()
+  const { locale } = useRouter()
   return (
     <div className={s.root} data-testid="BlogListView">
       <NextSeo
@@ -83,7 +105,9 @@ const BlogListView: React.FC<Props> = ({
                 <h2 className="header-1 uppercase">
                   {(article as any).name as any}
                 </h2>
-                <Text variant="subtitle">{article.content}</Text>
+                <Text variant="subtitle">
+                  {formatdate(article.publishedAt, locale, 'long')}
+                </Text>
               </div>
             </div>
           ))}
