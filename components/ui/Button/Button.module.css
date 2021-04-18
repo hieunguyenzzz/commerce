@@ -1,15 +1,15 @@
 .root {
-  @apply bg-secondary text-button text-sm  text-accents-1 cursor-pointer inline-flex px-11 transition ease-in-out duration-150 text-center justify-center py-4 border border-transparent items-center;
+  @apply text-button bg-secondary px-md py-[15px] text-accents-1 cursor-pointer inline-flex transition ease-in-out duration-150 text-center justify-center items-center;
 }
 .root.secondary {
   @apply bg-transparent text-primary border-primary-2;
 }
 .root:hover {
-  @apply bg-primary text-accents-0 border border-primary-2;
+  @apply bg-primary text-accents-0 shadow-outline-normal;
 }
 
 .root:focus {
-  @apply shadow-outline-normal outline-none;
+  @apply shadow-outline-normal outline-none ring-primary;
 }
 
 .root[data-active] {

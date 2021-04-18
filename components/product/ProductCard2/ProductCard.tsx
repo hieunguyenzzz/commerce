@@ -56,7 +56,7 @@ const ProductCard: FC<Props> = ({
   ...props
 }) => (
   <div {...props}>
-    <div className="group w-full h-full flex flex-col hover:bg-white transition-all duration-600 ease-in-out hover:shadow-lg overflow-hidden">
+    <div className="group w-full h-full flex flex-col hover:bg-white transition-all duration-600 ease-in-out hover:shadow-lg">
       <div className="flex relative items-center w-full bg-gray-100">
         <div style={{ paddingTop: '100%', width: '100%' }} />
         <Image
@@ -68,15 +68,15 @@ const ProductCard: FC<Props> = ({
         />
         {label && <Label {...label} />}
       </div>
-      <div className="px-sm space-y-xs group-hover:bg-white p-sm group-hover:-translate-y-8 transform transition-all duration-300 ease-in-out">
+      <div className="px-sm group-hover:bg-white p-sm group-hover:-translate-y-8 transform transition-all duration-300 ease-in-out">
         <Link href={`/product/${product.slug}`}>
           <h2 className="text-sm leading-snug lg:text-lg">{product.name}</h2>
         </Link>
-        <div className="text-sm">
+        <div className="text-sm mt-1">
           <span>{product.price.value}</span>{' '}
           <span>{product.price.currencyCode}</span>
         </div>
-        <div className="px-sm opacity-0 group-hover:opacity-100 absolute left-0 transition-opacity duration-300 ease-in-out">
+        <div className="px-sm mt-3 opacity-0 group-hover:opacity-100 translate-y-3 transform group-hover:translate-y-0 absolute left-0 transition-all duration-300 ease-in-out">
           <button className="font-semibold uppercase text-sm">
             add to cart
           </button>

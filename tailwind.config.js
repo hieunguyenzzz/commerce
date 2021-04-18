@@ -18,7 +18,9 @@ module.exports = {
   theme: {
     namedGroups: ['foo', 'bar'],
     extend: {
-      fontSize: {},
+      fontSize: {
+        xxs: '10px',
+      },
       maxWidth: {
         '8xl': '1920px',
       },
@@ -71,6 +73,7 @@ module.exports = {
         'responsive-xl': '1.4em',
         'responsive-2xl': '1.6em',
         'responsive-3xl': '1.8em',
+        5.5: '22px',
       },
     },
   },

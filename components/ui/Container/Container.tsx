@@ -6,11 +6,13 @@ interface Props {
   children?: any
   el?: HTMLElement
   clean?: boolean
+  small?: boolean
   fluid?: boolean
 }
 
 const Container: FC<Props> = ({
   children,
+  small,
   className,
   el = 'div',
   clean,
@@ -20,6 +22,7 @@ const Container: FC<Props> = ({
     {
       [s.root]: !clean,
       [s.fluid]: fluid,
+      [s.small]: small,
     },
     className
   )

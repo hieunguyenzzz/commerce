@@ -28,8 +28,8 @@ const Footer: FC<Props> = ({ className, pages }) => {
 
   return (
     <footer className={rootClassName}>
-      <Container className="py-11">
-        <div className="w-full grid grid-cols-3 lg:grid-cols-9 px-14 gap-y-xl gap-6  transition-colors duration-150">
+      <Container small className="py-11">
+        <div className="w-full grid grid-cols-3 lg:grid-cols-9 gap-y-xl gap-6  transition-colors duration-150">
           <div className="col-span-3 space-y-lg lg:space-y-11 px:md lg:px-10">
             <Text variant="h5">CUSTOMER CARE</Text>
             <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
@@ -116,7 +116,6 @@ function usePages(pages?: Page[]) {
   if (pages) {
     pages.forEach((page) => {
       const slug = page.url && getSlug(page.url)
-
       if (!slug) return
       if (locale && !slug.startsWith(`${locale}/`)) return
 

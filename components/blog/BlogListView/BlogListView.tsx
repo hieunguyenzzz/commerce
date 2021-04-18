@@ -1,5 +1,6 @@
 import { Breadcrumb } from '@components/common'
-import { Button, Container, Text } from '@components/ui'
+import AdsSignupView from '@components/others/AdsSignup'
+import { Container, Text } from '@components/ui'
 import { Article } from '@framework/schema'
 import classNames from 'classnames'
 import { NextSeo } from 'next-seo'
@@ -138,14 +139,7 @@ const BlogListView: React.FC<Props> = ({
             })}
         </div>
         <div className="h-40"></div>
-        <div className="max-w-prose flex flex-col items-center text-center space-y-5">
-          <Text variant="h3">10% OFF YOUR FIRST ORDER</Text>
-          <div className="text-lg whitespace-pre-line text-body-2">
-            Sign up to receive 10% your first order and be the first to hear
-            about latest news and offers.
-          </div>
-          <Button>sign up</Button>
-        </div>
+        <AdsSignupView />
         <div className="h-40"></div>
       </Container>
     </div>

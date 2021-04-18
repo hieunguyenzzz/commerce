@@ -15,45 +15,46 @@ module.exports = plugin(function ({ addComponents }) {
     },
     '.text-h1': {
       fontSize: '36px',
-      textTransform: 'uppercase',
+
       lineHeight: '43px',
       letterSpacing: '0.06em',
     },
     '.text-h2': {
       fontSize: '32px',
-      textTransform: 'uppercase',
+
       lineHeight: '38px',
       letterSpacing: '0.06em',
     },
     '.text-h3': {
       fontSize: '24px',
-      textTransform: 'uppercase',
+
       lineHeight: '29px',
       letterSpacing: '0.06em',
       fontWeight: 'bold',
     },
     '.text-h4': {
       fontSize: '24px',
-      textTransform: 'uppercase',
+
       lineHeight: '29px',
       letterSpacing: '0.06em',
     },
     '.text-h5': {
-      textTransform: 'uppercase',
+      fontSize: '18px',
+
       lineHeight: '22px',
       letterSpacing: '0.06em',
       fontWeight: 'bold',
     },
     '.text-h6': {
       fontSize: '14px',
-      textTransform: 'uppercase',
+
       lineHeight: '17px',
       letterSpacing: '0.06em',
       fontWeight: 'bold',
     },
     '.text-h7': {
       fontSize: '14px',
-      textTransform: 'uppercase',
+
       lineHeight: '17px',
       letterSpacing: '0.08em',
     },
@@ -76,7 +77,6 @@ module.exports = plugin(function ({ addComponents }) {
       letterSpacing: '0.06em',
     },
     '.header-2': {
-      textTransform: 'uppercase',
       fontSize: '14px',
       lineHeight: '17px',
       letterSpacing: '0.06em',

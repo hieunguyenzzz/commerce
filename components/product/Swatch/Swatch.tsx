@@ -1,9 +1,9 @@
-import cn from 'classnames'
-import { FC } from 'react'
-import s from './Swatch.module.css'
 import { Check } from '@components/icons'
 import Button, { ButtonProps } from '@components/ui/Button'
 import { isDark } from '@lib/colors'
+import cn from 'classnames'
+import { FC } from 'react'
+import s from './Swatch.module.css'
 interface Props {
   active?: boolean
   children?: any
@@ -42,12 +42,15 @@ const Swatch: FC<Omit<ButtonProps, 'variant'> & Props> = ({
       aria-label="Variant Swatch"
       {...props}
     >
-      {variant === 'color' && active && (
-        <span>
-          <Check />
-        </span>
-      )}
-      {variant === 'size' ? label : null}
+      {variant === 'color' &&
+        (active ? (
+          <span className={s.icon}>
+            <Check />
+          </span>
+        ) : (
+          <span className={cn(s.icon, 'invisible')}>null</span>
+        ))}
+      {variant === 'size' && label ? label : null}
     </Button>
   )
 }

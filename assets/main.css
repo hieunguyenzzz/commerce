@@ -6,6 +6,9 @@
 @layer base {
   html {
     font-family: 'MinervaModern', sans-serif;
+    @screen lg {
+      font-size: 18px;
+    }
   }
   body {
     @apply text-body;
