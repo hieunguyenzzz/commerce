@@ -1,5 +1,5 @@
-import BlogListView from '@components/blog/BlogListView'
-import BlogView from '@components/blog/BlogView'
+import { BlogListView, BlogView } from '@components/blog'
+import { getAllTagsFromArticles } from '@components/blog/helpers'
 import { Layout } from '@components/common'
 import { getConfig } from '@framework/api'
 import getAllBlogs from '@framework/blog/get-all-blogs'
@@ -19,13 +19,7 @@ export async function getStaticProps({
   const slug = (params?.slug || 'ALL') as string
   const config = getConfig({ locale })
   const { articles } = await getAllBlogs({ config, preview })
-  const tags = [
-    'ALL',
-    'INSPIRING WOMEN',
-    'BEHIND TESS JEAN',
-    'EDITIORIALS',
-    'LIFESTYLE',
-  ]
+  const tags = getAllTagsFromArticles(articles)
 
   return {
     props: {
@@ -54,9 +48,7 @@ function WhatBlog({ currentTag, articles, tags }: WhatBlog) {
   const fromIndex = (currentPage - 1) * limit
   const ToIndex = fromIndex + limit
   const showArticles = articles.filter((_, i) => i >= fromIndex && i < ToIndex)
-  return router.isFallback ? (
-    <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
-  ) : (
+  return (
     <BlogListView
       articles={showArticles}
       tags={tags}

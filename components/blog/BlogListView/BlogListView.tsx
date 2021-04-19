@@ -8,7 +8,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { getLink } from '../helper'
+import { getLink } from '../helpers'
 import s from './BlogListView.module.css'
 
 function formatdate(

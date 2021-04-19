@@ -1,10 +1,10 @@
-import BlogListView from '@components/blog/BlogListView'
+import { BlogListView } from '@components/blog'
+import { getAllTagsFromArticles } from '@components/blog/helpers'
 import { Layout } from '@components/common'
 import { getConfig } from '@framework/api'
 import getAllBlogs from '@framework/blog/get-all-blogs'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
-const placeholderImg = '/product-img-placeholder.svg'
 export async function getStaticProps({
   preview,
   locale,
@@ -14,13 +14,7 @@ export async function getStaticProps({
   return {
     props: {
       articles,
-      tags: [
-        'ALL',
-        'INSPIRING WOMEN',
-        'BEHIND TESS JEAN',
-        'EDITIORIALS',
-        'LIFESTYLE',
-      ],
+      tags: getAllTagsFromArticles(articles),
     },
   }
 }
