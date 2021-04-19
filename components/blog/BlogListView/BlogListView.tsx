@@ -44,7 +44,7 @@ interface Props {
 const BlogListView: React.FC<Props> = ({
   title = 'JOURNAL',
   articles,
-  currentTag = 'All',
+  currentTag,
   pageTotal,
   currentPage = 1,
   tags = [
@@ -75,15 +75,26 @@ const BlogListView: React.FC<Props> = ({
           {title}
         </Text>
         <div className="mx-auto mt-xl flex flex-wrap justify-center items-baseline space-y-sm">
+          <Link href={`/blog`}>
+            <a
+              className={classNames('mx-xl text-effect-1 text-h7 uppercase', {
+                'text-primary': !currentTag,
+              })}
+            >
+              all
+            </a>
+          </Link>
           {tags.map((str: any, i: number) => {
             return (
               <Link key={i} href={`/blog/${str.toLowerCase()}`}>
                 <a
                   className={classNames(
                     'mx-xl text-effect-1 text-h7 uppercase',
-                    str.toLowerCase() === currentTag.toLowerCase()
-                      ? 'text-primary'
-                      : ''
+                    {
+                      'text-primary':
+                        currentTag &&
+                        str.toLowerCase() === currentTag.toLowerCase(),
+                    }
                   )}
                 >
                   {str}
@@ -125,7 +136,10 @@ const BlogListView: React.FC<Props> = ({
               return (
                 <Link
                   key={i}
-                  href={{ pathname: `/blog/${currentTag}`, query: { page } }}
+                  href={{
+                    pathname: `/blog/${currentTag ? currentTag : ''}`,
+                    query: { page },
+                  }}
                 >
                   <a
                     className={`py-xs px-7 relative text-lg -mb-px text-effect-1 ${

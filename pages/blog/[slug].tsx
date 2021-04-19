@@ -66,17 +66,13 @@ export default function Blog({
   const router = useRouter()
   const currentTag =
     tags.find((item) => item.toLowerCase() === slug.toLowerCase()) || null
-  const showarticles = currentTag
-    ? currentTag.toUpperCase() === 'ALL'
-      ? articles
-      : articles.filter(
-          (article) =>
-            article.tags &&
-            article.tags.find(
-              (item) => item.toLowerCase() === String(currentTag).toLowerCase()
-            )
-        )
-    : []
+  const showarticles = articles.filter(
+    (article) =>
+      article.tags &&
+      article.tags.find(
+        (item) => item.toLowerCase() === String(currentTag).toLowerCase()
+      )
+  )
   const article = !currentTag
     ? articles.find((article) => article.id === slug) || null
     : null

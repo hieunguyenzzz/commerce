@@ -6,14 +6,11 @@ export function getLink(handle: string) {
 export function getAllTagsFromArticles(articles: Article[]) {
   return articles
     .flatMap((article) => article.tags || [])
-    .reduce(
-      (result, tag) => {
-        if (result.find((item) => item === tag)) {
-          return result
-        }
-        result.push(tag)
+    .reduce((result: string[], tag) => {
+      if (result.find((item) => item === tag)) {
         return result
-      },
-      ['ALL']
-    )
+      }
+      result.push(tag)
+      return result
+    }, [])
 }
