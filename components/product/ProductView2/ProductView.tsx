@@ -59,19 +59,22 @@ const ProductImages = ({
                   key={i}
                   className="group pr-responsive-md pb-responsive-md lg:pr-5 lg:pb-5"
                 >
-                  <div className="w-full  flex relative border group-hover:border-primary group-hover:shadow-outline-normal">
-                    <Image
-                      layout="intrinsic"
-                      className="border border-accents-2 fadeIn animated"
-                      width={width / 5}
-                      height={height / 5}
-                      src={image.url!}
-                      alt={image.alt || 'Product Image'}
-                      objectFit="cover"
-                      priority={i === 0}
-                      quality="85"
-                    />
+                  <div className="w-full  flex relative border group-hover:border-black group-hover:shadow-outline-normal">
+                    <div style={{ paddingTop }} />
+                    <div className="absolute inset-0">
+                      <Image
+                        layout="fill"
+                        className="border border-accents-2 fadeIn animated"
+                        src={image.url!}
+                        sizes="(max-width: 400px) 100px, 100px"
+                        alt={image.alt || 'Product Image'}
+                        objectFit="cover"
+                        priority={i === 0}
+                        quality="85"
+                      />
+                    </div>
                   </div>
+
                   <div
                     onClick={() => {
                       handleOpenGallery(i)
@@ -79,7 +82,7 @@ const ProductImages = ({
                     className="hidden group-hover:block  right-0 top-0 absolute w-5/6  bg-accents-0"
                   >
                     <div className="w-full" style={{ paddingTop }}>
-                      <div className="absolute top-0 right-0 w-full h-full flex-1 border border-gray-300">
+                      <div className="absolute top-0 right-0 w-full h-full flex-1">
                         <Image
                           layout="responsive"
                           className={s.img}

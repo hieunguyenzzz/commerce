@@ -58,7 +58,7 @@ const ProductCard: FC<Props> = ({
   <div {...props}>
     <div className="group w-full h-full flex flex-col hover:bg-white transition-all duration-600 ease-in-out hover:shadow-lg">
       <div className="flex relative items-center w-full bg-gray-100">
-        <div style={{ paddingTop: '100%', width: '100%' }} />
+        <div style={{ paddingTop: (358 / 253) * 100 + '%' }} />
         <Image
           layout="fill"
           objectFit="cover"

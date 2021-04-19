@@ -4,12 +4,12 @@
 
 .leftControl,
 .rightControl {
-  @apply absolute text-accents-9 top-1/3 -translate-x-1/2 z-20 text-xl w-8 h-8  flex items-center justify-center rounded-full;
+  @apply absolute text-accents-9 top-1/2 transform -translate-y-1/2  z-20 text-2xl w-12 h-12  flex items-center justify-center rounded-full;
 }
 
 .leftControl:hover,
 .rightControl:hover {
-  @apply bg-primary transform scale-110;
+  @apply bg-primary scale-110;
 }
 
 .leftControl:hover,

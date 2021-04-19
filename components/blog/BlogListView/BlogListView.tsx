@@ -80,7 +80,7 @@ const BlogListView: React.FC<Props> = ({
               <Link key={i} href={`/blog/${str.toLowerCase()}`}>
                 <a
                   className={classNames(
-                    'mx-xl text-effect-1 text-h7',
+                    'mx-xl text-effect-1 text-h7 uppercase',
                     str.toLowerCase() === currentTag.toLowerCase()
                       ? 'text-primary'
                       : ''

@@ -4,5 +4,16 @@ export function getLink(handle: string) {
   return `/blog/${handle}`
 }
 export function getAllTagsFromArticles(articles: Article[]) {
-  return articles.flatMap((article) => article.tags || []).filter(Boolean)
+  return articles
+    .flatMap((article) => article.tags || [])
+    .reduce(
+      (result, tag) => {
+        if (result.find((item) => item === tag)) {
+          return result
+        }
+        result.push(tag)
+        return result
+      },
+      ['ALL']
+    )
 }

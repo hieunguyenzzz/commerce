@@ -67,7 +67,7 @@ export default function Blog({
   const currentTag =
     tags.find((item) => item.toLowerCase() === slug.toLowerCase()) || null
   const showarticles = currentTag
-    ? currentTag === 'ALL'
+    ? currentTag.toUpperCase() === 'ALL'
       ? articles
       : articles.filter(
           (article) =>
