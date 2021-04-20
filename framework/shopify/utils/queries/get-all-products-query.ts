@@ -16,6 +16,10 @@ edges {
         currencyCode
       }
     }
+    options {
+      name
+      values
+    }
     images(first: 1) {
       pageInfo {
         hasNextPage
