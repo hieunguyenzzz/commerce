@@ -17,6 +17,7 @@ edges {
       }
     }
     options {
+      id
       name
       values
     }
