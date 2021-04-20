@@ -36,7 +36,10 @@ export async function getStaticProps({
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
   const { pages } = await getAllPages({ config, preview })
-  const { categories, brands } = await getSiteInfo({ config, preview })
+  const { categories, brands } = await getSiteInfo({
+    config,
+    preview,
+  })
   return {
     props: {
       pages,
@@ -52,7 +55,6 @@ export default function Search({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [activeFilter, setActiveFilter] = useState('')
   const [toggleFilter, setToggleFilter] = useState(false)
-
   const router = useRouter()
   const { asPath } = router
   const { q, sort } = router.query
@@ -93,16 +95,15 @@ export default function Search({
         <Breadcrumb>SHOP/{activeCategory?.name || 'all'}</Breadcrumb>
       </Container>
       <Container>
-        <div className="grid grid-cols-1 gap-x-16 lg:grid-cols-12 gap-4 mt-3 mb-20">
-          <div className="col-span-3 order-1 lg:order-none">
-            {/* Categories */}
+        <div className="w-full grid grid-cols-12 gap-5 mb-20">
+          <div className="col-span-12 lg:col-span-3 space-y-5 lg:space-y-0 order-1 lg:order-none">
             <div className="relative inline-block w-full">
               <div className="lg:hidden">
                 <span className="rounded-md shadow-sm">
                   <button
                     type="button"
                     onClick={(e) => handleClick(e, 'categories')}
-                    className="flex justify-between w-full rounded-sm border border-gray-300 px-4 py-3 bg-white text-sm  font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-normal active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+                    className="flex justify-between w-full rounded-sm border border-gray-300 px-4 py-3 bg-white  font-medium hover:underline hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-normal active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                     id="options-menu"
                     aria-haspopup="true"
                     aria-expanded="true"
@@ -126,7 +127,7 @@ export default function Search({
                 </span>
               </div>
               <div
-                className={`origin-top-left absolute lg:relative left-0 w-full rounded-md shadow-lg lg:shadow-none z-10 mb-10 lg:block ${
+                className={`origin-top-left absolute lg:relative left-0 w-full rounded-md shadow-lg lg:shadow-none z-10 lg:block ${
                   activeFilter !== 'categories' || toggleFilter !== true
                     ? 'hidden'
                     : ''
@@ -138,21 +139,26 @@ export default function Search({
                     aria-orientation="vertical"
                     aria-labelledby="options-menu"
                   >
-                    <ul className="space-y-5">
+                    <ul>
                       <li
                         className={cn(
-                          'block text-sm  text-gray-700 lg:text-base lg:no-underline lg:font-bold lg:tracking-wide hover:bg-gray-100 lg:hover:bg-transparent hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+                          'block py-2 px-3 lg:px-0  hover:underline lg:text-base lg:no-underline lg:font-bold lg:tracking-wide hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
                           {
-                            underline: !activeCategory?.name,
+                            'text-primary': !activeCategory?.name,
                           }
                         )}
                       >
                         <Link
-                          href={{ pathname: getCategoryPath('', brand), query }}
+                          href={{
+                            pathname: getCategoryPath('', brand),
+                            query,
+                          }}
                         >
                           <a
                             onClick={(e) => handleClick(e, 'categories')}
-                            className={'block lg:inline-block header-2'}
+                            className={
+                              'block lg:inline-block header-2 uppercase'
+                            }
                           >
                             All Categories
                           </a>
@@ -162,9 +168,9 @@ export default function Search({
                         <li
                           key={cat.path}
                           className={cn(
-                            'block text-sm text-h7  text-gray-700 hover:bg-gray-100 lg:hover:bg-transparent hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+                            'block py-2 px-3 lg:px-0  text-h7 uppercase hover:underline hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
                             {
-                              underline:
+                              'text-primary':
                                 activeCategory?.entityId === cat.entityId,
                             }
                           )}
@@ -190,14 +196,13 @@ export default function Search({
               </div>
             </div>
 
-            {/* Designs */}
             <div className="relative inline-block w-full">
-              <div className="lg:hidden mt-3">
+              <div className="lg:hidden">
                 <span className="rounded-md shadow-sm">
                   <button
                     type="button"
                     onClick={(e) => handleClick(e, 'brands')}
-                    className="flex justify-between w-full rounded-sm border border-gray-300 px-4 py-3 bg-white text-sm  font-medium text-gray-900 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-normal active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+                    className="flex justify-between w-full rounded-sm border border-gray-300 px-4 py-3 bg-white  font-medium text-gray-900 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-normal active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                     id="options-menu"
                     aria-haspopup="true"
                     aria-expanded="true"
@@ -221,7 +226,7 @@ export default function Search({
                 </span>
               </div>
               <div
-                className={`origin-top-left absolute lg:relative left-0 mt-2 w-full rounded-md shadow-lg lg:shadow-none z-10 mb-10 lg:block ${
+                className={`origin-top-left absolute lg:relative left-0 mt-2 w-full rounded-md shadow-lg lg:shadow-none z-10 lg:block ${
                   activeFilter !== 'brands' || toggleFilter !== true
                     ? 'hidden'
                     : ''
@@ -233,12 +238,12 @@ export default function Search({
                     aria-orientation="vertical"
                     aria-labelledby="options-menu"
                   >
-                    <ul className="space-y-5">
+                    <ul>
                       <li
                         className={cn(
-                          'block text-sm  text-gray-700 lg:text-base lg:no-underline lg:font-bold lg:tracking-wide hover:bg-gray-100 lg:hover:bg-transparent hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+                          'block py-2 px-3 lg:px-0 header-2 uppercase hover:underlinelg:text-base lg:no-underline lg:font-bold lg:tracking-wide hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
                           {
-                            underline: !activeBrand?.name,
+                            'text-primary': !activeBrand?.name,
                           }
                         )}
                       >
@@ -260,10 +265,10 @@ export default function Search({
                         <li
                           key={node.path}
                           className={cn(
-                            'block text-sm  text-gray-700 hover:bg-gray-100 lg:hover:bg-transparent hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+                            'block py-2 px-3 lg:px-0  text-h7 uppercase hover:underline hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
                             {
                               // @ts-ignore Shopify - Fix this types
-                              underline:
+                              'text-primary':
                                 activeBrand?.entityId === node.entityId,
                             }
                           )}
@@ -289,14 +294,13 @@ export default function Search({
               </div>
             </div>
 
-            {/* Sort */}
             <div className="relative inline-block w-full">
               <div className="lg:hidden">
                 <span className="rounded-md shadow-sm">
                   <button
                     type="button"
                     onClick={(e) => handleClick(e, 'sort')}
-                    className="flex justify-between w-full rounded-sm border border-gray-300 px-4 py-3 bg-white text-sm  font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-normal active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+                    className="flex justify-between w-full rounded-sm border border-gray-300 px-4 py-3 bg-white  font-medium hover:underline hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-normal active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                     id="options-menu"
                     aria-haspopup="true"
                     aria-expanded="true"
@@ -318,7 +322,7 @@ export default function Search({
                 </span>
               </div>
               <div
-                className={`origin-top-left absolute lg:relative left-0 mt-2 w-full rounded-md shadow-lg lg:shadow-none z-10 mb-10 lg:block ${
+                className={`origin-top-left absolute lg:relative left-0 mt-2 w-full rounded-md shadow-lg lg:shadow-none z-10 lg:block ${
                   activeFilter !== 'sort' || toggleFilter !== true
                     ? 'hidden'
                     : ''
@@ -330,16 +334,21 @@ export default function Search({
                     aria-orientation="vertical"
                     aria-labelledby="options-menu"
                   >
-                    <ul className="space-y-5">
+                    <ul>
                       <li
                         className={cn(
-                          'block text-sm  text-gray-700 lg:text-base lg:no-underline lg:font-bold lg:tracking-wide hover:bg-gray-100 lg:hover:bg-transparent hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+                          'block py-2 px-3 lg:px-0 header-2 uppercase hover:underlinelg:text-base lg:no-underline lg:font-bold lg:tracking-wide hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
                           {
-                            underline: !sort,
+                            'text-primary': !sort,
                           }
                         )}
                       >
-                        <Link href={{ pathname, query: filterQuery({ q }) }}>
+                        <Link
+                          href={{
+                            pathname,
+                            query: filterQuery({ q }),
+                          }}
+                        >
                           <a
                             onClick={(e) => handleClick(e, 'sort')}
                             className={'block lg:inline-block'}
@@ -352,16 +361,19 @@ export default function Search({
                         <li
                           key={key}
                           className={cn(
-                            'block text-sm  text-gray-700 hover:bg-gray-100 lg:hover:bg-transparent hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+                            'block py-2 px-3 lg:px-0  text-h7 uppercase hover:underline hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
                             {
-                              underline: sort === key,
+                              'text-primary': sort === key,
                             }
                           )}
                         >
                           <Link
                             href={{
                               pathname,
-                              query: filterQuery({ q, sort: key }),
+                              query: filterQuery({
+                                q,
+                                sort: key,
+                              }),
                             }}
                           >
                             <a
@@ -379,8 +391,7 @@ export default function Search({
               </div>
             </div>
           </div>
-          {/* Products */}
-          <div className="col-span-9 order-3 lg:order-none">
+          <div className="col-span-12 lg:col-span-9 order-3 lg:order-none">
             {(q || activeCategory || activeBrand) && (
               <div className="mb-12 transition ease-in duration-75">
                 {data ? (
