@@ -12,7 +12,14 @@ interface Props {
   variant?: 'size' | 'color' | string
   color?: string
 }
-
+const sizeLabelMap = {
+  small: 's',
+  medium: 'm',
+  large: 'l',
+}
+const fixSizeLabel = (sizeStr: string) => {
+  return (sizeLabelMap as any)[sizeStr] || sizeStr
+}
 const Swatch: FC<Omit<ButtonProps, 'variant'> & Props> = ({
   className,
   color = '',
@@ -34,12 +41,13 @@ const Swatch: FC<Omit<ButtonProps, 'variant'> & Props> = ({
     },
     className
   )
-
+  const title = `${variant} ${label}`
   return (
     <Button
+      title={title}
       className={rootClassName}
       style={color ? { backgroundColor: color } : {}}
-      aria-label="Variant Swatch"
+      aria-label={'Variant Swatch - ' + title}
       {...props}
     >
       {variant === 'color' &&
@@ -50,7 +58,7 @@ const Swatch: FC<Omit<ButtonProps, 'variant'> & Props> = ({
         ) : (
           <span className={cn(s.icon, 'invisible')}>null</span>
         ))}
-      {variant === 'size' && label ? label : null}
+      {variant === 'size' && label ? fixSizeLabel(label) : null}
     </Button>
   )
 }
