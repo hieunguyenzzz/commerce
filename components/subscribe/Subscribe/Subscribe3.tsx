@@ -11,7 +11,7 @@ const Subscribe: React.FC = () => (
     </div>
     <div className="w-full flex space-x-3 border-b-2 border-accents-6 focus-within:border-accents-0 py-2">
       <input
-        className="flex-1 bg-transparent appearance-none focus:outline-none block border-none p-0 focus:outline-none "
+        className="flex-1 bg-transparent appearance-none focus:outline-none block border-none p-0 "
         type="email"
         placeholder="Your email address"
       ></input>
