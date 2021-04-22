@@ -1,16 +1,14 @@
 import { Product } from '@commerce/types'
-
 import {
-  Product as ShopifyProduct,
   Checkout,
   CheckoutLineItemEdge,
-  SelectedOption,
   ImageConnection,
-  ProductVariantConnection,
   MoneyV2,
+  Product as ShopifyProduct,
   ProductOption,
+  ProductVariantConnection,
+  SelectedOption,
 } from '../schema'
-
 import type { Cart, LineItem } from '../types'
 
 const money = ({ amount, currencyCode }: MoneyV2) => {
@@ -19,7 +17,18 @@ const money = ({ amount, currencyCode }: MoneyV2) => {
     currencyCode,
   }
 }
-
+// TODO (bc) : Remove or standarize this.
+const sizeLabelMap = {
+  'x-small': 'xs',
+  small: 's',
+  medium: 'm',
+  large: 'l',
+  'x-large': 'xl',
+  'xx-large': 'xxl',
+}
+const fixSizeLabel = (sizeStr: string) => {
+  return (sizeLabelMap as any)[sizeStr] || sizeStr
+}
 const normalizeProductOption = ({
   id,
   name: displayName,
@@ -28,7 +37,7 @@ const normalizeProductOption = ({
   return {
     __typename: 'MultipleChoiceOption',
     id,
-    displayName,
+    displayName: displayName.toLowerCase(),
     values: values.map((value) => {
       let output: any = {
         label: value,
@@ -37,6 +46,12 @@ const normalizeProductOption = ({
         output = {
           ...output,
           hexColors: [value],
+        }
+      }
+      if (displayName.match(/size?r/gi)) {
+        output = {
+          ...output,
+          values: fixSizeLabel(value.toLowerCase()),
         }
       }
       return output

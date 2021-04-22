@@ -1,4 +1,4 @@
-import { Container, LoadingDots } from '@components/ui'
+import { LoadingDots } from '@components/ui'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
@@ -9,22 +9,32 @@ interface Props {
 const ComingSoon: FC<Props> = ({}) => {
   const [status, setstatus] = useState<'idle' | 'loading' | 'success'>('idle')
   return (
-    <div className="bg-primary text-white w-full">
-      <Container
-        small
-        className="flex min-h-screen flex-col lg:flex-row justify-center items-center h-full lg:space-y-6 "
+    <div className="bg-primary absolute w-full min-h-full text-white text-center  flex items-center">
+      <style>
+        {`html{
+                background:var(--primary)
+          }
+        `}
+      </style>
+      <div
+        style={{
+          fontSize: '12px',
+          letterSpacing: '2px',
+          fontFamily: `Helvetica, 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif`,
+        }}
+        className="flex max-w-5xl w-full m-auto flex-col lg:flex-row  lg:space-y-6 space-y-12"
       >
-        <div>
+        <div className="relative">
           <Image
             layout="intrinsic"
-            width={400}
-            height={400}
+            width={450}
+            height={450}
             src="/coming-soon.jpg"
           />
         </div>
         <div className="flex-1">
-          <div className="text-center w-full mx-auto max-w-sm py-12 lg:pt-24  space-y-12">
-            <span className="uppercase">
+          <div className="text-center leading-normal w-full mx-auto max-w-lg py-12  space-y-16">
+            <div className="uppercase px-12 lg:px-6">
               TESS JEAN IS A CONTEMPORARY FASHION LABEL THAT EMBODIES EFFORTLESS
               STYLE FOR THE MODERN WOMAN.
               <br />
@@ -38,11 +48,11 @@ const ComingSoon: FC<Props> = ({}) => {
               <br />
               Sign up to follow our journey and be the first to hear when we
               launch.
-            </span>
-            <div className="flex-1 flex flex-col space-y-3">
+            </div>
+            <div className="flex-1 flex flex-col space-y-6 px-6">
               {status !== 'success' && (
                 <>
-                  <div className="w-full text-center uppercase text-black">
+                  <div className="w-full text-center uppercase text-black font-bold">
                     join us
                   </div>
                   <form
@@ -53,7 +63,7 @@ const ComingSoon: FC<Props> = ({}) => {
                         setstatus('success')
                       }, 2000)
                     }}
-                    className="w-full flex space-x-3 border p-2 bg-white border-accents-6 transition-all focus-within:border-black py-2"
+                    className="w-full flex space-x-2 p-1 bg-white border border-transparent focus-within:border-accents-6 transition-all"
                   >
                     <input
                       name="subscriber"
@@ -64,7 +74,7 @@ const ComingSoon: FC<Props> = ({}) => {
                     ></input>
                     <button
                       type="submit"
-                      className="inline-flex jce uppercase px-4 h-8 items-center py-2 bg-primary relative"
+                      className="inline-flex font-bold justify-center uppercase px-8 h-8 items-center py-2 bg-primary relative truncate"
                     >
                       {status === 'idle' && <span>sign up</span>}
                       {status === 'loading' && (
@@ -80,7 +90,7 @@ const ComingSoon: FC<Props> = ({}) => {
                 </>
               )}
               {status === 'success' && (
-                <div className="text-black text-center w-full text-2xl">
+                <div className="text-black text-center w-full">
                   Thank for subscribe!
                 </div>
               )}
@@ -128,7 +138,8 @@ const ComingSoon: FC<Props> = ({}) => {
             </div>
           </div>
         </div>
-      </Container>
+      </div>
+      <div className="h-32" />
     </div>
   )
 }
