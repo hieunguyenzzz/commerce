@@ -106,6 +106,7 @@ function Select({
     </div>
   )
 }
+
 function SearchView({ activeCategory, categories }: Props) {
   const router = useRouter()
   const { asPath } = router
@@ -114,7 +115,7 @@ function SearchView({ activeCategory, categories }: Props) {
   // in the same way of products, it's better to ignore the search input if one
   // of those is selected
   const query = filterQuery({ sort })
-  const { pathname, category, brand } = useSearchMeta(asPath)
+  const { pathname } = useSearchMeta(asPath)
   const searchData = useSearch({
     search: typeof q === 'string' ? q : '',
     // TODO: Shopify - Fix this type
@@ -128,7 +129,19 @@ function SearchView({ activeCategory, categories }: Props) {
     sort: !!sort,
     motherhood: !!motherhood,
   })
-  const { data } = searchData
+  const sizeFilter = (product: Product, size: any) => {
+    return !!product.options.find(({ displayName, values }) => {
+      console.log({ displayName, values, size })
+      return (
+        displayName.toLowerCase() === 'size' &&
+        values.find((item) => item.label.toLowerCase() === size.toLowerCase())
+      )
+    })
+  }
+  const data = searchData.data
+  const products = currentSize
+    ? data?.products.filter((item) => sizeFilter(item, currentSize))
+    : data?.products
   const handleClick = (event: any, filter: string) => {
     setToggleFilter({
       ...toggleFilter,
@@ -285,7 +298,7 @@ function SearchView({ activeCategory, categories }: Props) {
                     pathname,
                     query: {
                       ...router.query,
-                      motherhood: key,
+                      q: key,
                     },
                   }}
                 >
@@ -378,7 +391,7 @@ function SearchView({ activeCategory, categories }: Props) {
         <div>
           {data ? (
             <Grid layout="normal">
-              {data.products.map((product: Product) => (
+              {products?.map((product: Product) => (
                 <ProductCard
                   variant="simple"
                   key={product.path}
