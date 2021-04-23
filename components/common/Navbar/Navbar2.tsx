@@ -365,7 +365,6 @@ const Navbar: FC<Props> = ({ transparent }) => {
           </div>
         </div>
       </div>
-      <div className="flex-1" />
       <div className={s.logo}>
         <Link href="/">
           <a aria-label="Logo">
