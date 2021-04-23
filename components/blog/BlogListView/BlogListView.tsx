@@ -67,7 +67,7 @@ const BlogListView: React.FC<Props> = ({
       />
       <Container className="pt-md mb-6">
         <Breadcrumb>
-          {title}/ {currentTag}
+          {title}/ {currentTag || 'all'}
         </Breadcrumb>
       </Container>
       <Container className="flex flex-col items-center">
