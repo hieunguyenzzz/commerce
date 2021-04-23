@@ -2,12 +2,8 @@ import { getConfig } from '@framework/api'
 import ComingSoon from 'components/others/ComingSoon'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
-const placeholderImg = '/product-img-placeholder.svg'
 
-export async function getStaticProps({
-  preview,
-  locale,
-}: GetStaticPropsContext) {
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const config = getConfig({ locale })
   return {
     props: {},

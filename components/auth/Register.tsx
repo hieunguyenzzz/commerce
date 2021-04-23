@@ -1,42 +1,47 @@
 import { Breadcrumb } from '@components/common'
 import { Button, Text } from '@components/ui'
 import { useUI } from '@components/ui/context'
-import useLogin from '@framework/auth/use-login'
+import useSignup from '@framework/auth/use-signup'
 import { validate } from 'email-validator'
 import Link from 'next/link'
 import { FC, useCallback, useEffect, useState } from 'react'
 import { Input } from './Form'
-import { handleOnInputChange } from './Form/helpers'
+import { handleOnCheckoxChange, handleOnInputChange } from './Form/helpers'
 import Layout from './Layout'
 
 interface Props {}
 
-const LoginView: FC<Props> = () => {
+const RegisterView: FC<Props> = () => {
+  // Form State
   // Form State
   const [email, setEmail] = useState('')
+  const [acceptsMarketing, setacceptsMarketing] = useState(false)
   const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [dirty, setDirty] = useState(false)
   const [disabled, setDisabled] = useState(false)
+
+  const signup = useSignup()
   const { setModalView, closeModal } = useUI()
 
-  const login = useLogin()
-
-  const handleLogin = async (e: React.SyntheticEvent<EventTarget>) => {
+  const handleSignup = async (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault()
-
     if (!dirty && !disabled) {
       setDirty(true)
       handleValidation()
     }
-
     try {
       setLoading(true)
       setMessage('')
-      await login({
+      await signup({
         email,
+        firstName,
+        lastName,
         password,
+        acceptsMarketing,
       })
       setLoading(false)
       closeModal()
@@ -64,15 +69,14 @@ const LoginView: FC<Props> = () => {
     <Layout>
       <div className="w-full flex flex-col items-center">
         <div className="pt-md w-full">
-          <Breadcrumb>ACCOUNT/ SIGN IN</Breadcrumb>
+          <Breadcrumb>ACCOUNT/ REGISTER</Breadcrumb>
         </div>
-
         <form
-          onSubmit={handleLogin}
+          onSubmit={handleSignup}
           className="max-w-sm w-full flex flex-col justify-between"
         >
           <div className="flex justify-center py-12">
-            <Text variant="h4">sign in</Text>
+            <Text variant="h4">REGISTER</Text>
           </div>
           <div className="flex flex-col space-y-8">
             {message && (
@@ -87,36 +91,53 @@ const LoginView: FC<Props> = () => {
               </div>
             )}
             <Input
-              required
               autoFocus
+              placeholder="First Name"
+              onChange={handleOnInputChange(setFirstName)}
+            />
+            <Input
+              placeholder="Last Name"
+              onChange={handleOnInputChange(setLastName)}
+            />
+            <Input
               type="email"
               placeholder="Email"
               onChange={handleOnInputChange(setEmail)}
             />
             <Input
-              required
               type="password"
               placeholder="Password"
               onChange={handleOnInputChange(setPassword)}
             />
             <div className="space-y-3 flex flex-col">
-              <span className="text-accents-7 uppercase">
-                Forgot your password?
-              </span>
+              <div>
+                <input
+                  name="acceptsMarketing"
+                  type="checkbox"
+                  onChange={handleOnCheckoxChange(setacceptsMarketing)}
+                />
+                <div>
+                  Sign up to the TessJean newsletter and receive 10% off your
+                  first purchase by signing up you agree to TessJean Terms of
+                  Service and Privacy Policy
+                </div>
+              </div>
               <Button
                 className="block w-full"
                 type="submit"
                 loading={loading}
                 disabled={disabled}
               >
-                Log In
+                REGISTER
               </Button>
             </div>
             <div className="space-y-3 flex flex-col">
-              <span className="text-accents-7 uppercase">NOT REGISTERED?</span>
-              <Link href="/account/register">
+              <span className="text-accents-7 uppercase">
+                ALREADY SIGNED UP?
+              </span>
+              <Link href="/account/signIn">
                 <Button secondary className="block w-full">
-                  REGISTER NOW
+                  sign in
                 </Button>
               </Link>
             </div>
@@ -127,4 +148,4 @@ const LoginView: FC<Props> = () => {
   )
 }
 
-export default LoginView
+export default RegisterView

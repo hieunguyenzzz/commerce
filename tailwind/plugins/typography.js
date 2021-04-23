@@ -16,18 +16,21 @@ module.exports = plugin(function ({ addComponents }) {
     '.text-h1': {
       fontSize: '36px',
 
+      textTransform: 'uppercase',
       lineHeight: '43px',
       letterSpacing: '0.06em',
     },
     '.text-h2': {
       fontSize: '32px',
 
+      textTransform: 'uppercase',
       lineHeight: '38px',
       letterSpacing: '0.06em',
     },
     '.text-h3': {
       fontSize: '24px',
 
+      textTransform: 'uppercase',
       lineHeight: '29px',
       letterSpacing: '0.06em',
       fontWeight: 'bold',
@@ -35,11 +38,13 @@ module.exports = plugin(function ({ addComponents }) {
     '.text-h4': {
       fontSize: '24px',
 
+      textTransform: 'uppercase',
       lineHeight: '29px',
       letterSpacing: '0.06em',
     },
     '.text-h5': {
       fontSize: '18px',
+      textTransform: 'uppercase',
 
       lineHeight: '22px',
       letterSpacing: '0.06em',

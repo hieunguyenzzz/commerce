@@ -1,3 +1,8 @@
 {
-  "recommendations": ["esbenp.prettier-vscode", "bradlc.vscode-tailwindcss"]
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "pulkitgangwar.nextjs-snippets",
+    "edgarjs.next-js-commands"
+  ]
 }

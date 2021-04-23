@@ -11,8 +11,8 @@
     "generate": "graphql-codegen",
     "generate:definitions": "node framework/bigcommerce/scripts/generate-definitions.js",
     "gen:c": "generate-react component",
-    "gen:p": "generate-react page",
-    "gen:l": "generate-react layout"
+    "gen:p": "generate-react component --type=page",
+    "gen:l": "generate-react component --type=layout"
   },
   "sideEffects": false,
   "license": "MIT",
