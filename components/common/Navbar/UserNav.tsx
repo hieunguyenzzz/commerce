@@ -1,9 +1,11 @@
 import { Bag, Down, Search, User } from '@components/icons'
+import { Container } from '@components/ui'
 import { useUI } from '@components/ui/context'
 import useCart from '@framework/cart/use-cart'
 import useCustomer from '@framework/customer/use-customer'
 import type { LineItem } from '@framework/types'
 import cn from 'classnames'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 import s from './UserNav.module.css'
@@ -27,7 +29,6 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
   } = useUI()
   const itemsCount = (5 || data?.lineItems.reduce(countItem, 0)) ?? 0
   const { push } = useRouter()
-  return null
   return (
     <nav className={cn(s.root, className)}>
       <ul className={s.list}>
@@ -44,7 +45,7 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
                 <Search />
               </div>
             </div>
-            {/* <div className=" absolute pointer-events-none top-0 -right-2 focus-within:w-80 focus-within:h-auto w-3 h-3 focus-within:pointer-events-auto transform opacity-0  focus-within:block focus-within:opacity-100 mt-8 focus-within:mt-0 transition-all duration-300 ease-in-out">
+            <div className=" absolute pointer-events-none top-0 -right-2 focus-within:w-80 focus-within:h-auto w-3 h-3 focus-within:pointer-events-auto transform opacity-0  focus-within:block focus-within:opacity-100 mt-8 focus-within:mt-0 transition-all duration-300 ease-in-out">
               <form
                 onSubmit={(e: any) => {
                   e.preventDefault()
@@ -97,24 +98,24 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
                     }
                   })}
               </Container>
-            </div> */}
+            </div>
           </label>
         </li>
         <li
           className={s.item}
-          // onClick={() => {
-          //   setModalView('LOGIN_VIEW')
-          //   openModal()
-          // }}
+          onClick={() => {
+            setModalView('LOGIN_VIEW')
+            openModal()
+          }}
         >
           <User />
         </li>
         <li
           className={s.item}
-          // onClick={() => {
-          //   setModalView('CART')
-          //   openSidebar()
-          // }}
+          onClick={() => {
+            setModalView('CART')
+            openSidebar()
+          }}
         >
           <Bag />
           {itemsCount > 0 && <span className={s.bagCount}>{itemsCount}</span>}

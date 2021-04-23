@@ -36,7 +36,7 @@
 }
 
 .logo {
-  @apply px-md mx-16 z-10 flex justify-center;
+  @apply px-md mx-16 isolate flex justify-center;
 }
 .item {
   @apply cursor-pointer relative transition ease-in-out duration-100 outline-none;
