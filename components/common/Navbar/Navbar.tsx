@@ -110,8 +110,8 @@ const Navbar: FC<Props> = ({ transparent }) => {
   const router = useRouter()
   const smallNav = (
     <div className="flex w-full py-4 items-center align-center space-x-12">
-      <div className="flex-1 flex items-center">
-        {/* <div
+      {/* <div className="flex-1 flex items-center">
+        <div
           onClick={() => {
             setModalView('MENU')
             openSidebar()
@@ -119,8 +119,8 @@ const Navbar: FC<Props> = ({ transparent }) => {
           className={cn(s.item, 'z-10')}
         >
           <Menu />
-        </div> */}
-      </div>
+        </div>
+      </div> */}
       <div className="flex  items-center flex-1 justify-center lg:justify-start lg:space-x-16">
         <Link href="/">
           <a className="h-full" aria-label="Logo">
