@@ -103,7 +103,9 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
         </li>
         <li className={s.item}>
           <Link href="/account/signin">
-            <User />
+            <a>
+              <User />
+            </a>
           </Link>
         </li>
         <li

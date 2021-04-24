@@ -22,11 +22,6 @@ const dynamicProps = {
   loading: () => <Loading />,
 }
 
-const SignUpView = dynamic(
-  () => import('@components/auth/SignUpView'),
-  dynamicProps
-)
-
 const ForgotPassword = dynamic(
   () => import('@components/auth/ForgotPassword'),
   dynamicProps
@@ -93,7 +88,6 @@ const Layout: FC<Props> = ({
         </Sidebar>
         <Modal open={displayModal} onClose={closeModal}>
           {modalView === 'LOGIN_VIEW' && <LoginView />}
-          {modalView === 'SIGNUP_VIEW' && <SignUpView />}
           {modalView === 'FORGOT_VIEW' && <ForgotPassword />}
         </Modal>
       </div>

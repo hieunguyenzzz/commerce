@@ -35,7 +35,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
             <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
               {['CONTACT', 'SHIPPING', 'RETURNS', 'FAQS', 'SIZE GUIDE'].map(
                 (str) => (
-                  <Link href={'/' + str}>
+                  <Link key={str} href={'/' + str}>
                     <Text className="text-effect-1" variant="h7">
                       {str}
                     </Text>
@@ -54,7 +54,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
                 'PRIVACY POLICY',
                 'TERMS & CONDITIONS',
               ].map((str) => (
-                <Link href={'/' + str}>
+                <Link key={str} href={'/' + str}>
                   <Text className="text-effect-1" variant="h7">
                     {str}
                   </Text>

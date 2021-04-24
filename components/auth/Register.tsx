@@ -56,8 +56,11 @@ const RegisterView: FC<Props> = () => {
     const validPassword = /^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password)
 
     // Unable to send form unless fields are valid.
+    // if (dirty) {
+    //   setDisabled(!validate(email) || password.length < 7 || !validPassword)
+    // }
     if (dirty) {
-      setDisabled(!validate(email) || password.length < 7 || !validPassword)
+      setDisabled(!validate(email))
     }
   }, [email, password, dirty])
 
@@ -91,26 +94,29 @@ const RegisterView: FC<Props> = () => {
               </div>
             )}
             <Input
-              autoFocus
+              required
               placeholder="First Name"
               onChange={handleOnInputChange(setFirstName)}
             />
             <Input
+              required
               placeholder="Last Name"
               onChange={handleOnInputChange(setLastName)}
             />
             <Input
+              required
               type="email"
               placeholder="Email"
               onChange={handleOnInputChange(setEmail)}
             />
             <Input
+              required
               type="password"
               placeholder="Password"
               onChange={handleOnInputChange(setPassword)}
             />
             <div className="space-y-3 flex flex-col">
-              <div>
+              <label>
                 <input
                   name="acceptsMarketing"
                   type="checkbox"
@@ -121,7 +127,7 @@ const RegisterView: FC<Props> = () => {
                   first purchase by signing up you agree to TessJean Terms of
                   Service and Privacy Policy
                 </div>
-              </div>
+              </label>
               <Button
                 className="block w-full"
                 type="submit"
@@ -135,7 +141,7 @@ const RegisterView: FC<Props> = () => {
               <span className="text-accents-7 uppercase font-montserrat text-xs">
                 ALREADY SIGNED UP?
               </span>
-              <Link href="/account/signIn">
+              <Link href="/account/signin">
                 <Button secondary className="block w-full">
                   sign in
                 </Button>

@@ -1,4 +1,4 @@
-import RegisterView from '@components/auth/Register'
+import { Register as RegisterView } from '@components/auth'
 import { Layout } from '@components/common'
 import { getConfig } from '@framework/api'
 import getAllPages from '@framework/common/get-all-pages'

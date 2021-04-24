@@ -6,6 +6,7 @@ import React, {
   useRef,
 } from 'react'
 import mergeRefs from 'react-merge-refs'
+import { LoadingDots } from '..'
 import s from './Button.module.css'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -63,11 +64,11 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
       {...rest}
     >
       {children}
-      {/* {loading && (
+      {loading && (
         <i className="pl-2 m-0 flex">
           <LoadingDots />
         </i>
-      )} */}
+      )}
     </Component>
   )
 })

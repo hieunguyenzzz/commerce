@@ -1,6 +1,5 @@
 import { Breadcrumb } from '@components/common'
 import { Button, Text } from '@components/ui'
-import { useUI } from '@components/ui/context'
 import useLogin from '@framework/auth/use-login'
 import { validate } from 'email-validator'
 import Link from 'next/link'
@@ -19,7 +18,6 @@ const LoginView: FC<Props> = () => {
   const [message, setMessage] = useState('')
   const [dirty, setDirty] = useState(false)
   const [disabled, setDisabled] = useState(false)
-  const { setModalView, closeModal } = useUI()
 
   const login = useLogin()
 
@@ -39,10 +37,11 @@ const LoginView: FC<Props> = () => {
         password,
       })
       setLoading(false)
-      closeModal()
     } catch ({ errors }) {
       setMessage(errors[0].message)
+    } finally {
       setLoading(false)
+      setDisabled(false)
     }
   }
 
@@ -51,8 +50,11 @@ const LoginView: FC<Props> = () => {
     const validPassword = /^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password)
 
     // Unable to send form unless fields are valid.
+    // if (dirty) {
+    //   setDisabled(!validate(email) || password.length < 7 || !validPassword)
+    // }
     if (dirty) {
-      setDisabled(!validate(email) || password.length < 7 || !validPassword)
+      setDisabled(!validate(email))
     }
   }, [email, password, dirty])
 
@@ -78,17 +80,13 @@ const LoginView: FC<Props> = () => {
             {message && (
               <div className="text-red border border-red p-3">
                 {message}. Did you {` `}
-                <a
-                  className="text-accent-9 inline font-bold hover:underline cursor-pointer"
-                  onClick={() => setModalView('FORGOT_VIEW')}
-                >
+                <a className="text-accent-9 inline font-bold hover:underline cursor-pointer">
                   forgot your password?
                 </a>
               </div>
             )}
             <Input
               required
-              autoFocus
               type="email"
               placeholder="Email address"
               onChange={handleOnInputChange(setEmail)}

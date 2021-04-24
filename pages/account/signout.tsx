@@ -27,15 +27,18 @@ function Logout(props: InferGetStaticPropsType<typeof getStaticProps>) {
   useEffect(() => {
     if (customer?.data) {
       logout()
-    }
-  }, [])
-  useEffect(() => {
-    if (!customer?.data) {
-      router.replace('/')
+    } else {
+      router.replace('/account/signin')
     }
   }, [customer])
+  // useEffect(() => {
+  //   if (!customer?.data) {
+  //     router.replace('/account/signin')
+  //   }
+  // }, [customer])
   return (
-    <div className="m-auto fit flex w-full h-full justify-center items-center">
+    <div className="m-auto fit flex flex-col w-full h-full justify-center items-center space-y-sm">
+      <div>You are logging out</div>
       <LoadingDots />
     </div>
   )
