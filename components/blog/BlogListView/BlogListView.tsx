@@ -106,8 +106,8 @@ const BlogListView: React.FC<Props> = ({
         <div className="h-16" />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-10 w-full">
           {articles.map((article: any, i: number) => (
-            <Link key={article.handle} href={getLink(article.handle)}>
-              <div>
+            <Link key={article.slug} href={getLink(article.slug)}>
+              <a>
                 <Image
                   className="bg-accents-1"
                   layout="responsive"
@@ -123,7 +123,7 @@ const BlogListView: React.FC<Props> = ({
                     {formatdate(article.publishedAt, locale, 'long')}
                   </Text>
                 </div>
-              </div>
+              </a>
             </Link>
           ))}
         </div>
