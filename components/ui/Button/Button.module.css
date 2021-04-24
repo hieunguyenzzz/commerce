@@ -1,5 +1,6 @@
 .root {
   @apply text-button border border-transparent bg-secondary px-md py-[15px] text-accents-1 cursor-pointer inline-flex transition ease-in-out duration-150 text-center justify-center items-center;
+  font-family: 'Montserrat';
 }
 .root.secondary {
   @apply bg-transparent text-secondary  border-secondary-2;

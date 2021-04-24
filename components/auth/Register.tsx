@@ -131,8 +131,8 @@ const RegisterView: FC<Props> = () => {
                 REGISTER
               </Button>
             </div>
-            <div className="space-y-3 flex flex-col">
-              <span className="text-accents-7 uppercase">
+            <div className="space-y-2 flex flex-col">
+              <span className="text-accents-7 uppercase font-montserrat text-xs">
                 ALREADY SIGNED UP?
               </span>
               <Link href="/account/signIn">

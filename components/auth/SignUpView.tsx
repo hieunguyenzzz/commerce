@@ -1,9 +1,9 @@
-import { FC, useEffect, useState, useCallback } from 'react'
-import { validate } from 'email-validator'
 import { Info } from '@components/icons'
+import { Button, Input, Logo } from '@components/ui'
 import { useUI } from '@components/ui/context'
-import { Logo, Button, Input } from '@components/ui'
 import useSignup from '@framework/auth/use-signup'
+import { validate } from 'email-validator'
+import { FC, useCallback, useEffect, useState } from 'react'
 
 interface Props {}
 
@@ -97,7 +97,9 @@ const SignUpView: FC<Props> = () => {
         </div>
 
         <span className="pt-1 text-center text-sm">
-          <span className="text-accents-7">Do you have an account?</span>
+          <span className="text-accents-7 font-montserrat text-xs">
+            Do you have an account?
+          </span>
           {` `}
           <a
             className="text-accent-9 font-bold hover:underline cursor-pointer"

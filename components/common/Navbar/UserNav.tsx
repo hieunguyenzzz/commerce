@@ -101,14 +101,10 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
             </div>
           </label>
         </li>
-        <li
-          className={s.item}
-          onClick={() => {
-            setModalView('LOGIN_VIEW')
-            openModal()
-          }}
-        >
-          <User />
+        <li className={s.item}>
+          <Link href="/account/signin">
+            <User />
+          </Link>
         </li>
         <li
           className={s.item}

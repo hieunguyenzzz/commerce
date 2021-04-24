@@ -68,7 +68,7 @@ const ComingSoon: FC<Props> = ({}) => {
                     <input
                       name="subscriber"
                       required
-                      className="flex-1 text-black bg-transparent px-3 appearance-none focus:outline-none block border-none p-0 "
+                      className="flex-1 text-base text-black bg-transparent px-3 appearance-none focus:outline-none block border-none p-0 "
                       type="email"
                       placeholder="Your email address"
                     ></input>

@@ -6,12 +6,13 @@
   position: relative;
 }
 .input {
-  @apply w-full pb-2 pt-5;
+  @apply w-full pb-2 pt-5 appearance-none text-body;
   width: 100%;
   outline: none;
 }
 .label {
-  @apply absolute pointer-events-none block text-accents-6 top-5 pb-2 uppercase origin-top-left;
+  @apply absolute pointer-events-none block top-5 pb-2 uppercase origin-top-left text-title-2;
+  color: #828282;
   transform: translate(0, 0) scale(1);
   transition: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
     top 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;

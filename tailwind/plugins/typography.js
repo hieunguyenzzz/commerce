@@ -15,14 +15,12 @@ module.exports = plugin(function ({ addComponents }) {
     },
     '.text-h1': {
       fontSize: '36px',
-
       textTransform: 'uppercase',
       lineHeight: '43px',
       letterSpacing: '0.06em',
     },
     '.text-h2': {
       fontSize: '32px',
-
       textTransform: 'uppercase',
       lineHeight: '38px',
       letterSpacing: '0.06em',
@@ -37,7 +35,6 @@ module.exports = plugin(function ({ addComponents }) {
     },
     '.text-h4': {
       fontSize: '24px',
-
       textTransform: 'uppercase',
       lineHeight: '29px',
       letterSpacing: '0.06em',
@@ -52,24 +49,24 @@ module.exports = plugin(function ({ addComponents }) {
     },
     '.text-h6': {
       fontSize: '14px',
-
       lineHeight: '17px',
       letterSpacing: '0.06em',
       fontWeight: 'bold',
     },
     '.text-h7': {
       fontSize: '14px',
-
       lineHeight: '17px',
       letterSpacing: '0.08em',
     },
     '.text-subtitle': {
+      fontFamily: 'Montserrat',
       fontSize: '14px',
       lineHeight: '17px',
       letterSpacing: '0.06em',
       color: '#5E5E5E',
     },
     '.text-button': {
+      fontFamily: 'Montserrat',
       fontSize: '14px',
       textTransform: 'uppercase',
       fontWeight: 500,
@@ -88,6 +85,11 @@ module.exports = plugin(function ({ addComponents }) {
     },
     '.categories': {
       fontFamily: 'Montserrat',
+      fontSize: '14px',
+      lineHeight: '17px',
+      letterSpacing: '0.06em',
+    },
+    '.text-title-2': {
       fontSize: '14px',
       lineHeight: '17px',
       letterSpacing: '0.06em',

@@ -90,7 +90,7 @@ const LoginView: FC<Props> = () => {
               required
               autoFocus
               type="email"
-              placeholder="Email"
+              placeholder="Email address"
               onChange={handleOnInputChange(setEmail)}
             />
             <Input
@@ -99,8 +99,8 @@ const LoginView: FC<Props> = () => {
               placeholder="Password"
               onChange={handleOnInputChange(setPassword)}
             />
-            <div className="space-y-3 flex flex-col">
-              <span className="text-accents-7 uppercase">
+            <div className="space-y-2 flex flex-col">
+              <span className="text-accents-7 uppercase hover:underline font-montserrat text-xs">
                 Forgot your password?
               </span>
               <Button
@@ -109,11 +109,13 @@ const LoginView: FC<Props> = () => {
                 loading={loading}
                 disabled={disabled}
               >
-                Log In
+                Sign in
               </Button>
             </div>
-            <div className="space-y-3 flex flex-col">
-              <span className="text-accents-7 uppercase">NOT REGISTERED?</span>
+            <div className="space-y-2 flex flex-col">
+              <span className="text-accents-7 uppercase font-montserrat text-xs">
+                NOT REGISTERED?
+              </span>
               <Link href="/account/register">
                 <Button secondary className="block w-full">
                   REGISTER NOW
