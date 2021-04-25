@@ -1,6 +1,9 @@
 import type { Product } from '@commerce/types'
 export type SelectedOptions = Record<string, string | null>
 
+export function getSizeRange() {
+  return [6, 8, 10, 12, 14, 16]
+}
 export function getVariant(product: Product, opts: SelectedOptions) {
   const variant = product.variants.find((variant) => {
     return Object.entries(opts).every(([key, value]) =>

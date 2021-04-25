@@ -1,5 +1,4 @@
 import { Breadcrumb, Layout } from '@components/common'
-import Navbar from '@components/common/Navbar/Navbar2'
 import AdsSignupView from '@components/others/AdsSignup'
 import { SearchView } from '@components/product'
 import { Container } from '@components/ui'
@@ -53,7 +52,7 @@ export default function Search({
   return (
     <>
       <Container className="pt-md mb-6">
-        <Breadcrumb>SHOP/{activeCategory?.name || 'all'}</Breadcrumb>
+        <Breadcrumb>SHOP/ {activeCategory?.name || 'all'}</Breadcrumb>
       </Container>
       <Container>
         <SearchView activeCategory={activeCategory} categories={categories} />
@@ -68,4 +67,3 @@ export default function Search({
 }
 
 Search.Layout = Layout
-Search.renderNavbar = () => <Navbar />

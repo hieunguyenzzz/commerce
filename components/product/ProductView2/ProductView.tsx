@@ -189,7 +189,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
         }}
       />
       <Container className="pt-md mb-6">
-        <Breadcrumb>SHOP/All/{product.name}</Breadcrumb>
+        <Breadcrumb>SHOP/ All/ {product.name}</Breadcrumb>
       </Container>
       <div className="fit  space-y-2xl">
         <Container

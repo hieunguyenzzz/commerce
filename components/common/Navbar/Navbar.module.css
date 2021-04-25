@@ -25,6 +25,7 @@
 .link:hover {
   @apply text-primary;
 }
+
 .link.active:after {
   @apply w-full left-0 border-primary;
 }

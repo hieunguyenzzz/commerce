@@ -2,6 +2,7 @@ import type { Product } from '@commerce/types'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
+import { getSizeRange } from '../helpers'
 
 const placeholderImg = '/product-img-placeholder.svg'
 
@@ -19,33 +20,6 @@ interface Props {
   imgProps?: Omit<ImageProps, 'src'>
 }
 
-const Label: FC<LabelProps> = ({ variant = 'default', text }) => {
-  if (variant === 'out-of-stock')
-    return (
-      <div className="text-xs py-1 px-4 bg-black text-white absolute top-4 right-4">
-        {text}
-      </div>
-    )
-  if (variant === 'new')
-    return (
-      <div className="text-xs flex items-center  justify-center w-8 h-8 rounded-full bg-yellow-600 text-white absolute top-4 right-4">
-        {text}
-      </div>
-    )
-  if (variant === 'discount')
-    return (
-      <div className="text-xs flex items-center justify-center w-8 h-8 rounded-full  text-white absolute top-4 right-4">
-        {text}
-      </div>
-    )
-  if (variant === 'default')
-    return (
-      <div className="text-xs py-1 px-4 bg-black text-white absolute top-4 right-4">
-        {text}
-      </div>
-    )
-  return null
-}
 const ProductCard: FC<Props> = ({
   className,
   product,
@@ -55,11 +29,6 @@ const ProductCard: FC<Props> = ({
   size,
   ...props
 }) => {
-  const sizes = product.options.flatMap((opt) =>
-    opt.displayName.toLowerCase() === 'size'
-      ? opt.values.map((value) => value.label)
-      : []
-  )
   return (
     <div {...props}>
       <div className="group w-full h-full flex flex-col hover:bg-white transition-all duration-600 ease-in-out">
@@ -72,12 +41,14 @@ const ProductCard: FC<Props> = ({
             src={product.images[0].url || placeholderImg}
             alt={product.name || 'Product Image'}
           />
-          {label && <Label {...label} />}
         </div>
         <div className="relative group-hover:bg-white py-4 transform transition-all duration-300 ease-in-out">
-          <div className="w-full text-left bg-white flex-wrap justify-between text-xs flex opacity-0 group-hover:opacity-100 translate-y-0 transform group-hover:-translate-y-full absolute left-0 top-0 transition-all duration-300 ease-in-out p-2 py-2">
-            {sizes.map((size) => (
-              <div className="text-xs lg:text-base px-3" children={size} />
+          <div className="w-full bg-white pointer-events-none  text-center justify-center text-xs flex opacity-0 group-hover:opacity-100 translate-y-0 transform group-hover:-translate-y-full absolute left-0 top-0 transition-all duration-300 ease-in-out p-2">
+            {getSizeRange().map((size) => (
+              <div
+                className="text-xs lg:text-base px-1 flex-1"
+                children={size}
+              />
             ))}
           </div>
           <div className="space-y-1">

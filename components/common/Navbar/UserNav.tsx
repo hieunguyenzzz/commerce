@@ -2,12 +2,13 @@ import { Bag, Down, Search, User } from '@components/icons'
 import { Container } from '@components/ui'
 import { useUI } from '@components/ui/context'
 import useCart from '@framework/cart/use-cart'
-import useCustomer from '@framework/customer/use-customer'
+import { useCustomer } from '@framework/customer'
 import type { LineItem } from '@framework/types'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
+import { NavItem } from './Navbar'
 import s from './UserNav.module.css'
 
 interface Props {
@@ -20,25 +21,49 @@ const countItem = (count: number, item: LineItem) => count + item.quantity
 const UserNav: FC<Props> = ({ className, responsive }) => {
   const { data } = useCart()
   const { data: customer } = useCustomer()
-  const {
-    openSidebar,
-    toggleSidebar,
-    closeSidebarIfPresent,
-    setModalView,
-    openModal,
-  } = useUI()
+  const router = useRouter()
+  const { currency } = router.query
+  const { openSidebar, setModalView, openModal } = useUI()
   const itemsCount = (5 || data?.lineItems.reduce(countItem, 0)) ?? 0
   const { push } = useRouter()
   return (
     <nav className={cn(s.root, className)}>
-      <ul className={s.list}>
-        <li className={cn(s.item, 'flex items-baseline')}>
+      <div className={s.list}>
+        <NavItem
+          placement="right"
+          className={cn(s.item, 'flex items-baseline relative isolate')}
+          dropdown={
+            <div className="text-xs shadow-lg bg-accents-0 flex flex-col top-header px-md py-2">
+              {new Array(5).fill(['NZD', 'AUD', 'VND']).map((menu, i) => {
+                {
+                  const item = menu[i]
+                  if (!item || !item.length) return null
+
+                  return (
+                    <Link key={i} href={`?currency=${item}`}>
+                      <a className="leading-extra-loose flex flex-col items-start py-1">
+                        <div
+                          className={cn(
+                            'inline-block text-effect-1 truncate text-xs',
+                            currency === 'item' && 'text-primary'
+                          )}
+                        >
+                          {item}
+                        </div>
+                      </a>
+                    </Link>
+                  )
+                }
+              })}
+            </div>
+          }
+        >
           <div className="text-h7">GLOBAL ($USD) </div>
           <span>
             <Down />
           </span>
-        </li>
-        <li className={cn(s.item, s.visibleOnLg, 'group relative ')}>
+        </NavItem>
+        <div className={cn(s.item, s.visibleOnLg, 'group relative isolate')}>
           <label>
             <div className="relative flex justify-end">
               <div className="pointer-events-none z-30">
@@ -100,15 +125,51 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
               </Container>
             </div>
           </label>
-        </li>
-        <li className={s.item}>
-          <Link href="/account/signin">
-            <a>
-              <User />
-            </a>
-          </Link>
-        </li>
-        <li
+        </div>
+        {!!customer ? (
+          <NavItem
+            placement="right"
+            className={cn(s.item, 'flex items-baseline relative isolate')}
+            dropdown={
+              <div className="text-xs shadow-lg bg-accents-0 flex flex-col top-header px-md py-2">
+                <Link href={`/account`}>
+                  <a className="leading-extra-loose flex flex-col items-start py-2 ">
+                    <div
+                      className={cn(
+                        'inline-block text-effect-1 truncate h-7 uppercase'
+                      )}
+                    >
+                      My account
+                    </div>
+                  </a>
+                </Link>
+                <Link href={`/account/signout`}>
+                  <a className="leading-extra-loose flex flex-col items-start py-2">
+                    <div
+                      className={cn(
+                        'inline-block text-effect-1 truncate h-7 uppercase'
+                      )}
+                    >
+                      logout
+                    </div>
+                  </a>
+                </Link>
+              </div>
+            }
+          >
+            <User />
+          </NavItem>
+        ) : (
+          <div className={s.item}>
+            <Link href="/account/signin">
+              <a>
+                <User />
+              </a>
+            </Link>
+          </div>
+        )}
+
+        <div
           className={s.item}
           onClick={() => {
             setModalView('CART')
@@ -117,8 +178,8 @@ const UserNav: FC<Props> = ({ className, responsive }) => {
         >
           <Bag />
           {itemsCount > 0 && <span className={s.bagCount}>{itemsCount}</span>}
-        </li>
-      </ul>
+        </div>
+      </div>
     </nav>
   )
 }

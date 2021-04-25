@@ -1,3 +1,3 @@
-export { default } from './Navbar'
-export { default as Navbar2 } from './Navbar2'
+export { default, Logo } from './Navbar'
+export { default as NavbarRoot } from './NavbarRoot'
 export { default as UserNav } from './UserNav'
