@@ -2,14 +2,15 @@
 
 @font-face {
   font-family: 'MinervaModern';
-  src: local('MinervaModern'), url('/fonts/MinervaModern') format('opentype');
+  src: local('MinervaModern'),
+    url('/fonts/MinervaModern.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'MinervaModern';
   src: local('MinervaModern'),
-    url('/fonts/MinervaModernBold') format('opentype');
+    url('/fonts/MinervaModernBold.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
 }
