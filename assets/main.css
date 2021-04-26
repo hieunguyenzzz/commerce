@@ -2,14 +2,16 @@
 
 @font-face {
   font-family: 'MinervaModern';
-  src: url('/fonts/Minerva-Modern.eot');
-  src: local('Minerva-Modern'),
-    url('/fonts/Minerva-Modern.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/Minerva-Modern.svg#Minerva-Modern') format('svg'),
-    url('/fonts/Minerva-Modern.ttf') format('truetype'),
-    url('/fonts/Minerva-Modern.woff') format('woff'),
-    url('/fonts/Minerva-Modern.woff2') format('woff2');
+  src: local('MinervaModern'),
+    url('/fonts/T-26 - MinervaModern-Regular') format('opentype');
   font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'MinervaModern';
+  src: local('MinervaModern'),
+    url('/fonts/T-26 - MinervaModern-Bold') format('opentype');
+  font-weight: bold;
   font-style: normal;
 }
 
