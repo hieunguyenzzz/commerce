@@ -430,7 +430,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
         <Logo />
       </div>
       <div className="flex justify-end flex-1  space-x-md">
-        <UserNav responsive />
+        <UserNav />
       </div>
     </div>
   )
