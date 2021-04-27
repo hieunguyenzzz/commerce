@@ -3,7 +3,6 @@ import { Breadcrumb } from '@components/common'
 import { Facebook, Pinterest, Twitter } from '@components/icons'
 import { Container, Text } from '@components/ui'
 import { formatdate } from '@lib/datetime'
-import { NextSeo } from 'next-seo'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -29,15 +28,6 @@ const BlogView: React.FC<Props> = ({
   const { locale, isReady } = useRouter()
   return (
     <>
-      <NextSeo
-        title={article?.seo?.title}
-        description={article?.seo?.description}
-        openGraph={{
-          type: 'article',
-          title: article?.seo?.title,
-          description: article?.seo?.description,
-        }}
-      />
       <Container className="pt-md mb-6">
         <Breadcrumb>
           <Link href={`/blog`}>{title}</Link>

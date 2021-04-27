@@ -9,6 +9,7 @@ import type {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from 'next'
+import { ArticleJsonLd, NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 export async function getStaticProps({
   params,
@@ -86,13 +87,40 @@ export default function Blog({
       (article) => article.slug === slug
     )
     return (
-      <BlogView
-        article={article}
-        articles={[
-          sameTagsArticle[articleIndex + 1] || articles[0],
-          sameTagsArticle[articleIndex + 2] || articles[1],
-        ]}
-      />
+      <>
+        <NextSeo
+          title={article?.seo?.title}
+          description={article?.seo?.description}
+          openGraph={{
+            type: 'article',
+            title: article?.seo?.title,
+            description: article?.seo?.description,
+            article: {
+              publishedTime: article.publishedAt,
+              tags: article.tags,
+            },
+            images: article.image && [article.image],
+          }}
+        />
+        <ArticleJsonLd
+          url={article.path || '/'}
+          title={article.seo?.title || 'tess-jean'}
+          images={[article.image?.url || '']}
+          datePublished="2015-02-05T08:00:00+08:00"
+          dateModified="2015-02-05T09:00:00+08:00"
+          authorName={['Tess Jean']}
+          publisherName="Tess Jean"
+          publisherLogo="/avatar.png"
+          description={article.seo?.description || 'tess-jean'}
+        />
+        <BlogView
+          article={article}
+          articles={[
+            sameTagsArticle[articleIndex + 1] || articles[0],
+            sameTagsArticle[articleIndex + 2] || articles[1],
+          ]}
+        />
+      </>
     )
   }
   return (
