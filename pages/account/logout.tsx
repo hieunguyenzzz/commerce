@@ -28,14 +28,10 @@ function Logout(props: InferGetStaticPropsType<typeof getStaticProps>) {
     if (customer?.data) {
       logout()
     } else {
-      router.replace('/account/signin')
+      router.replace('/')
     }
   }, [customer])
-  // useEffect(() => {
-  //   if (!customer?.data) {
-  //     router.replace('/account/signin')
-  //   }
-  // }, [customer])
+
   return (
     <div className="m-auto fit flex flex-col w-full h-full justify-center items-center space-y-sm">
       <div>You are logging out</div>

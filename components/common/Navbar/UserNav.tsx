@@ -30,7 +30,7 @@ const UserNav: FC<Props> = ({ className }) => {
       <div className={s.list}>
         <NavItem
           placement="right"
-          className={cn(s.item, 'flex items-baseline relative isolate')}
+          className={cn(s.item, 'flex items-baseline relative')}
           dropdown={
             <div className="text-xs shadow-lg bg-accents-0 flex flex-col top-header px-md py-2">
               {new Array(5).fill(['NZD', 'AUD', 'VND']).map((menu, i) => {
@@ -62,9 +62,9 @@ const UserNav: FC<Props> = ({ className }) => {
             <Down />
           </span>
         </NavItem>
-        <div className={cn(s.item, s.visibleOnLg, 'group relative isolate')}>
-          <label>
-            <div className="relative flex justify-end">
+        <div className={cn(s.item, s.visibleOnLg, 'group relative')}>
+          <label className="z-10">
+            <div className="relative flex justify-end ">
               <div className="pointer-events-none z-30">
                 <Search />
               </div>
@@ -128,7 +128,7 @@ const UserNav: FC<Props> = ({ className }) => {
         {!!customer ? (
           <NavItem
             placement="right"
-            className={cn(s.item, 'flex items-baseline relative isolate')}
+            className={cn(s.item, 'flex items-baseline relative')}
             dropdown={
               <div className="text-xs shadow-lg bg-accents-0 flex flex-col top-header px-md py-2">
                 <Link href={`/account`}>
@@ -142,7 +142,7 @@ const UserNav: FC<Props> = ({ className }) => {
                     </div>
                   </a>
                 </Link>
-                <Link href={`/account/signout`}>
+                <Link href={`/account/logout`}>
                   <a className="leading-extra-loose flex flex-col items-start py-2">
                     <div
                       className={cn(
@@ -160,7 +160,7 @@ const UserNav: FC<Props> = ({ className }) => {
           </NavItem>
         ) : (
           <div className={s.item}>
-            <Link href="/account/signin">
+            <Link href="/account/login">
               <a>
                 <User />
               </a>

@@ -15,7 +15,7 @@
 }
 
 .link {
-  @apply text-h7  h-header flex items-center  truncate transition ease-in-out duration-75 cursor-pointer relative overflow-hidden leading-extra-loose;
+  @apply text-h7 z-10 h-header flex items-center  truncate transition ease-in-out duration-75 cursor-pointer relative overflow-hidden leading-extra-loose;
 }
 .link:after {
   @apply absolute inset-x-0 bottom-0 w-0 border-b-2;
