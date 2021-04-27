@@ -1,6 +1,6 @@
-import type { Wishlist as BCWishlist } from '../bigcommerce/api/wishlist'
-import type { Customer as BCCustomer } from '../bigcommerce/api/customers'
 import type { SearchProductsData as BCSearchProductsData } from '../bigcommerce/api/catalog/products'
+import type { Customer as BCCustomer } from '../bigcommerce/api/customers'
+import type { Wishlist as BCWishlist } from '../bigcommerce/api/wishlist'
 
 export type Discount = {
   // The value of the discount, can be an amount or percentage
@@ -200,4 +200,33 @@ interface ProductPrice {
   listPrice?: number
   extendedSalePrice?: number
   extendedListPrice?: number
+}
+
+export type Seo = {
+  __typename?: 'SEO'
+  /** The meta description. */
+  description?: string
+  /** The SEO title. */
+  title?: string
+}
+
+export type ArticleImage = {
+  url: string
+  altText?: string
+}
+export interface Article extends Entity {
+  name: string
+  description: string
+  slug?: string
+  path?: string
+  content?: string
+  contentHtml?: any
+  image?: ArticleImage
+  /** The date and time when the article was published. */
+  publishedAt: string
+  /** The article’s SEO information. */
+  seo?: Seo
+  /** A categorization that a article can be tagged with. */
+  tags: string[]
+  /** The article’s name. */
 }

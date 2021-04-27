@@ -13,12 +13,11 @@ import s from './UserNav.module.css'
 
 interface Props {
   className?: string
-  responsive?: boolean
 }
 
 const countItem = (count: number, item: LineItem) => count + item.quantity
 
-const UserNav: FC<Props> = ({ className, responsive }) => {
+const UserNav: FC<Props> = ({ className }) => {
   const { data } = useCart()
   const { data: customer } = useCustomer()
   const router = useRouter()

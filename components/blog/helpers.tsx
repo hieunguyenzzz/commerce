@@ -1,4 +1,4 @@
-import { Article } from '@framework/schema'
+import { Article } from '@commerce/types'
 
 export function getLink(handle: string) {
   return `/blog/${handle}`

@@ -63,6 +63,12 @@
     @apply outline-none;
   }
 }
+.bagCount {
+  @apply bg-primary  flex-shrink-0 text-accents-0 ml-px rounded-full flex items-center justify-center font-bold text-xs;
+  width: 1.5em;
+  height: 1.5em;
+}
+
 @keyframes sidebaranimationOpen {
   0% {
     transform: translateX(-110%);

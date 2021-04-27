@@ -1,7 +1,8 @@
+import { Article } from '@commerce/types'
 import { Breadcrumb } from '@components/common'
 import AdsSignupView from '@components/others/AdsSignup'
 import { Container, Text } from '@components/ui'
-import { Article } from '@framework/schema'
+import { formatdate } from '@lib/datetime'
 import classNames from 'classnames'
 import { NextSeo } from 'next-seo'
 import Image from 'next/image'
@@ -10,28 +11,6 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { getLink } from '../helpers'
 import s from './BlogListView.module.css'
-
-function formatdate(
-  dateStr: string,
-  locale = 'en-US',
-  format: 'default' | 'long' | 'short' = 'default'
-) {
-  let options
-  switch (format) {
-    case 'long':
-      options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      }
-      break
-    case 'default':
-    case 'short':
-    default:
-      break
-  }
-  return new Date(dateStr).toLocaleDateString(locale, options as any)
-}
 
 interface Props {
   articles: Article[]
@@ -111,7 +90,7 @@ const BlogListView: React.FC<Props> = ({
                 <Image
                   className="bg-accents-1"
                   layout="responsive"
-                  src={article.image?.originalSrc}
+                  src={article.image?.url}
                   width={630}
                   height={369}
                 ></Image>

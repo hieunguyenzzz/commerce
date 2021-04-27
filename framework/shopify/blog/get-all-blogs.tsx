@@ -1,6 +1,7 @@
+import { Article } from '@commerce/types'
 import { getConfig, ShopifyConfig } from '@framework/api'
-import { Article, ArticleEdge } from '@framework/schema'
-import { getAllBlogQuery } from '@framework/utils'
+import { ArticleEdge } from '@framework/schema'
+import { getAllBlogQuery, normalizeBlog } from '@framework/utils'
 
 type Variables = {
   first?: number
@@ -17,14 +18,9 @@ const getAllBlogs = async (options?: {
 }): Promise<ReturnType> => {
   let { config, variables = { first: 250 } } = options ?? {}
   config = getConfig(config)
-  const { locale } = config
   const { data } = await config.fetch(getAllBlogQuery, { variables })
-  const articles = data.articles?.edges?.map(
-    ({ node: { title: name, handle, ...node } }: ArticleEdge) => ({
-      ...node,
-      url: `/${locale}/${handle}`,
-      name,
-    })
+  const articles = data.articles?.edges?.map(({ node }: ArticleEdge) =>
+    normalizeBlog(node)
   )
 
   return { articles }

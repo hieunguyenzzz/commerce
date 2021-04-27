@@ -1,5 +1,6 @@
-import { Product } from '@commerce/types'
+import { Article, Product } from '@commerce/types'
 import {
+  Article as ShopifyArticle,
   Checkout,
   CheckoutLineItemEdge,
   ImageConnection,
@@ -175,4 +176,44 @@ function normalizeLineItem({
             },
           ],
   }
+}
+export function normalizeBlog(node: ShopifyArticle): Article {
+  const {
+    id,
+    title: name,
+    content,
+    contentHtml,
+    image,
+    handle,
+    publishedAt,
+    seo,
+    tags,
+  } = node
+  let article = {
+    id: id || handle,
+    name,
+    description: content,
+    path: `/${handle}`,
+    publishedAt,
+    slug: handle?.replace(/^\/+|\/+$/g, ''),
+    content: content || null,
+    contentHtml: contentHtml || null,
+    tags,
+  } as Article
+  if (image) {
+    const { originalSrc, altText, ...rest } = image
+    article.image = {
+      url: image.originalSrc,
+      altText: image.altText || name,
+      ...rest,
+    }
+  }
+  if (seo) {
+    const { title, description, ...rest } = seo
+    article.seo = {
+      title: title || name,
+      description: description || content,
+    }
+  }
+  return article
 }

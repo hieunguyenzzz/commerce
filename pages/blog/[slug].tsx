@@ -1,16 +1,15 @@
+import { Article } from '@commerce/types'
 import { BlogListView, BlogView } from '@components/blog'
 import { getAllTagsFromArticles } from '@components/blog/helpers'
 import { Layout } from '@components/common'
 import { getConfig } from '@framework/api'
 import getAllBlogs from '@framework/blog/get-all-blogs'
-import { Article } from '@framework/schema'
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from 'next'
 import { useRouter } from 'next/router'
-const placeholderImg = '/product-img-placeholder.svg'
 export async function getStaticProps({
   params,
   preview,
@@ -20,7 +19,6 @@ export async function getStaticProps({
   const config = getConfig({ locale })
   const { articles } = await getAllBlogs({ config, preview })
   const tags = getAllTagsFromArticles(articles)
-
   return {
     props: {
       articles,
@@ -73,14 +71,29 @@ export default function Blog({
         (item) => item.toLowerCase() === String(currentTag).toLowerCase()
       )
   )
-  const article = !currentTag
-    ? articles.find((article) => article.id === slug) || null
-    : null
+  const articleIndex = !currentTag
+    ? articles.findIndex((article) => article.slug === slug)
+    : -1
+  const article = articles[articleIndex]
   if (router.isFallback) {
     return <h1>Loading...</h1>
   }
   if (article) {
-    return <BlogView />
+    const sameTagsArticle = articles.filter((art) =>
+      art.tags.includes(article.tags[0])
+    )
+    const articleIndex = sameTagsArticle.findIndex(
+      (article) => article.slug === slug
+    )
+    return (
+      <BlogView
+        article={article}
+        articles={[
+          sameTagsArticle[articleIndex + 1] || articles[0],
+          sameTagsArticle[articleIndex + 2] || articles[1],
+        ]}
+      />
+    )
   }
   return (
     <WhatBlog

@@ -81,6 +81,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/typography'),
     require('./tailwind/plugins/nestedGroup'),
     require('./tailwind/plugins/typography'),
   ],

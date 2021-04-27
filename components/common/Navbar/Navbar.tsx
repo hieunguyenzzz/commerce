@@ -1,5 +1,5 @@
 import { UserNav } from '@components/common'
-import { Menu } from '@components/icons'
+import { Bag, Menu } from '@components/icons'
 import { Container, useUI } from '@components/ui'
 import classNames from 'classnames'
 import Image from 'next/image'
@@ -171,7 +171,16 @@ const Navbar: FC<Props> = ({ transparent }) => {
         <Logo />
       </div>
       <div className="flex justify-end flex-1 space-x-8">
-        <UserNav responsive />
+        <div
+          className={classNames(s.item, 'flex items-center')}
+          onClick={() => {
+            setModalView('CART')
+            openSidebar()
+          }}
+        >
+          <Bag />
+          <span className={s.bagCount}>6</span>
+        </div>
       </div>
     </div>
   )
