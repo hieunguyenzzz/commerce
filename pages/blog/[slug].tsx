@@ -106,8 +106,8 @@ export default function Blog({
           url={article.path || '/'}
           title={article.seo?.title || 'tess-jean'}
           images={[article.image?.url || '']}
-          datePublished="2015-02-05T08:00:00+08:00"
-          dateModified="2015-02-05T09:00:00+08:00"
+          datePublished={article.publishedAt}
+          dateModified={article.publishedAt}
           authorName={['Tess Jean']}
           publisherName="Tess Jean"
           publisherLogo="/avatar.png"
