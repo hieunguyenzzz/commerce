@@ -5,15 +5,12 @@ import { Container } from '@components/ui'
 import { getConfig } from '@framework/api'
 import getAllPages from '@framework/common/get-all-pages'
 import getSiteInfo from '@framework/common/get-site-info'
+import getAllCollections from '@framework/product/get-all-collections'
 // TODO(bc) Remove this. This should come from the API
 import getSlug from '@lib/get-slug'
 import { useSearchMeta } from '@lib/search'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
-
-// TODO (bc) : Remove or standarize this.
-
-// TODO (bc) : Remove or standarize this.
 
 export async function getStaticProps({
   preview,
@@ -21,12 +18,17 @@ export async function getStaticProps({
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
   const { pages } = await getAllPages({ config, preview })
+  const { categories: collections } = await getAllCollections({
+    config,
+    preview,
+  })
   const { categories, brands } = await getSiteInfo({
     config,
     preview,
   })
   return {
     props: {
+      collections,
       pages,
       categories,
       brands,

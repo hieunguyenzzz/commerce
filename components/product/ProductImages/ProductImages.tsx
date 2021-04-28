@@ -1,0 +1,129 @@
+import { Product } from '@commerce/types'
+import { Gallery } from '@components/common'
+import classNames from 'classnames'
+import Image from 'next/image'
+import React, { useState } from 'react'
+
+export const ProductImages = ({
+  product,
+  width,
+  height,
+}: {
+  product: Product
+  width: number
+  height: number
+}) => {
+  const [open, setOpen] = useState<boolean>()
+  const [index, setIndex] = useState<number>(0)
+  const handleOpenGallery = (index: number) => {
+    setOpen(true)
+    setIndex(index)
+  }
+  let ratio = height / width
+  const paddingTop = `${ratio * 100}%`
+  return (
+    <div className="w-full relative">
+      {open && (
+        <Gallery
+          images={product.images}
+          onClose={() => setOpen(false)}
+          index={index}
+        />
+      )}
+      <div className="w-full h-full top-0 left-0 flex">
+        <div className="w-1/6 flex flex-col z-10">
+          {new Array(5).fill(product.images).map((arr, i) => {
+            const image = arr[i]
+            if (image) {
+              return (
+                <div
+                  key={i}
+                  className="group pr-responsive-md pb-responsive-md lg:pr-5 lg:pb-5"
+                >
+                  <div
+                    onClick={() => {
+                      setIndex(i)
+                    }}
+                    className={classNames(
+                      'w-full  flex relative border group-hover:shadow-outline-normal border-primary',
+                      { 'border border-black': i === index }
+                    )}
+                  >
+                    <div
+                      style={{
+                        paddingTop,
+                      }}
+                    />
+                    <div className="absolute inset-0">
+                      <Image
+                        layout="fill"
+                        className="border border-accents-2 fadeIn animated"
+                        src={image.url!}
+                        sizes="(max-width: 400px) 100px,(min-width: 400px) 100px"
+                        alt={image.alt || 'Product Image'}
+                        objectFit="cover"
+                        priority={i === 0}
+                        quality="50"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    onClick={() => {
+                      handleOpenGallery(i)
+                    }}
+                    className="hidden group-hover:block  right-0 top-0 absolute w-5/6  bg-accents-0"
+                  >
+                    <div
+                      className="w-full"
+                      style={{
+                        paddingTop,
+                      }}
+                    >
+                      <div className="absolute top-0 right-0 w-full h-full flex-1">
+                        <Image
+                          layout="responsive"
+                          src={image.url!}
+                          alt={image.alt || 'Product Image'}
+                          sizes="(max-width: 400px) 100px,(min-width: 400px) 600px"
+                          width={width}
+                          height={height}
+                          priority={i === 0}
+                          quality="85"
+                          objectFit="cover"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            }
+            return <div key={i} className="flex-1" />
+          })}
+        </div>
+        <div className="w-5/6 bg-accents-0">
+          <div
+            onClick={() => {
+              handleOpenGallery(0)
+            }}
+            className="w-full flex-1 relative"
+            style={{ paddingTop }}
+          >
+            <div className="flex-1 absolute top-0 right-0 w-full h-full fadeIn animated">
+              <Image
+                layout="responsive"
+                src={product.images[index]?.url!}
+                alt={product.images[index]?.alt || 'Product Image'}
+                width={width}
+                height={height}
+                quality="85"
+                objectFit="cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+export default ProductImages

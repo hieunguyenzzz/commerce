@@ -115,6 +115,7 @@ export const Logo = () => (
   </Link>
 )
 interface NavItemProps {
+  href?: string
   className?: string
   active?: boolean
   placement?: 'full' | 'left' | 'right'
@@ -122,6 +123,7 @@ interface NavItemProps {
 }
 export const NavItem: React.FC<NavItemProps> = ({
   children,
+  href,
   active,
   placement = 'full',
   dropdown,
@@ -131,9 +133,18 @@ export const NavItem: React.FC<NavItemProps> = ({
     <div
       className={classNames('group flex items-center h-header-lg', className)}
     >
-      <a className={classNames(s.link, 'z-10', { [s.active]: active })}>
-        {children}
-      </a>
+      {href ? (
+        <Link href={href}>
+          <a className={classNames(s.link, 'z-10', { [s.active]: active })}>
+            {children}
+          </a>
+        </Link>
+      ) : (
+        <a className={classNames(s.link, 'z-10', { [s.active]: active })}>
+          {children}
+        </a>
+      )}
+
       {dropdown && (
         <div
           className={classNames(
@@ -243,6 +254,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
         </NavItem>
         <NavItem
           placement="full"
+          href={'/search'}
           active={router.pathname.startsWith('/search')}
           dropdown={
             <div className="w-full bg-accents-0 shadow-magical">

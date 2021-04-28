@@ -18,41 +18,109 @@ const money = ({ amount, currencyCode }: MoneyV2) => {
     currencyCode,
   }
 }
-// TODO (bc) : Remove or standarize this.
+// TODO (bc) : Remove or standarize this. 6|8|10|12|14|16
 const sizeLabelMap = {
-  'x-small': 'xs',
-  small: 's',
-  medium: 'm',
-  large: 'l',
-  'x-large': 'xl',
-  'xx-large': 'xxl',
+  '0': '6',
+  '1': '6',
+  '2': '6',
+  '3': '6',
+  '4': '6',
+  '6': '6',
+  '8': '6',
+  '10': '6',
+  '12': '8',
+  '29': '8',
+  '30': '8',
+  '31': '8',
+  '32': '8',
+  '33': '8',
+  '34': '8',
+  '35': '8',
+  '36': '10',
+  '37': '10',
+  '38': '10',
+  '39': '10',
+  '40': '10',
+  '40.5': '12',
+  '41': '12',
+  '41.5': '12',
+  '42': '12',
+  '42.5': '12',
+  '43': '12',
+  '44': '12',
+  '45': '12',
+  '46': '14',
+  '48': '14',
+  '50': '16',
+  '52': '16',
+  '54': '16',
+  'French 36': '6',
+  'French 38': '8',
+  'French 40': '10',
+  'French 42': '10',
+  'German 34': '12',
+  'German 36': '12',
+  'German 38': '14',
+  'German 40': '14',
+  'German 42': '16',
+  'German 44': '16',
+  'Italian 38': '6',
+  'Italian 40': '8',
+  'Italian 42': '10',
+  'Italian 44': '12',
+  'Italian 46': '12',
+  'Italian 48': '14',
+  'Italian 50': '14',
+  'Italian 52': '16',
+  'Italian 54': '16',
+  Large: '14',
+  Medium: '12',
+  'One Size': '16',
+  Small: '10',
+  'UK 6': '6',
+  'UK 8': '8',
+  'UK 10': '10',
+  'UK 12': '12',
+  'UK 14': '14',
+  'X Large': '14',
+  'X-Large': '14',
+  'X-Small': '6',
+  XLarge: '14',
+  'XX Large': '16',
+  'XX-Large': '16',
+  XXLarge: '16',
 }
+
 const fixSizeLabel = (sizeStr: string) => {
-  return (sizeLabelMap as any)[sizeStr] || sizeStr
+  return (sizeLabelMap as any)[sizeStr] || '10'
 }
 const normalizeProductOption = ({
   id,
   name: displayName,
   values,
 }: ProductOption) => {
+  let optionname = displayName.toLowerCase()
   return {
     __typename: 'MultipleChoiceOption',
     id,
-    displayName: displayName.toLowerCase(),
+    displayName: optionname,
     values: values.map((value) => {
+      let valueStr = value.toLowerCase()
       let output: any = {
-        label: value,
+        label: valueStr,
       }
       if (displayName.match(/colou?r/gi)) {
         output = {
           ...output,
-          hexColors: [value],
+          hexColors: [valueStr],
         }
       }
-      if (displayName.match(/size?r/gi)) {
+      if (optionname === 'size') {
+        const values = fixSizeLabel(value)
         output = {
           ...output,
-          values: fixSizeLabel(value.toLowerCase()),
+          label: values,
+          values: valueStr,
         }
       }
       return output

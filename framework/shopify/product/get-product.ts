@@ -1,13 +1,14 @@
 import { GraphQLFetcherResult } from '@commerce/api'
+import { Product } from '@commerce/types'
 import { getConfig, ShopifyConfig } from '../api'
-import { normalizeProduct, getProductQuery } from '../utils'
+import { getProductQuery, normalizeProduct } from '../utils'
 
 type Variables = {
   slug: string
 }
 
 type ReturnType = {
-  product: any
+  product: Product
 }
 
 const getProduct = async (options: {
@@ -25,7 +26,7 @@ const getProduct = async (options: {
   const { productByHandle: product } = data
 
   return {
-    product: product ? normalizeProduct(product) : null,
+    product: normalizeProduct(product),
   }
 }
 

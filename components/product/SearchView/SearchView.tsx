@@ -131,7 +131,6 @@ function SearchView({ activeCategory, categories }: Props) {
   })
   const sizeFilter = (product: Product, size: any) => {
     return !!product.options.find(({ displayName, values }) => {
-      console.log({ displayName, values, size })
       return (
         displayName.toLowerCase() === 'size' &&
         values.find((item) => item.label.toLowerCase() === size.toLowerCase())
@@ -148,7 +147,7 @@ function SearchView({ activeCategory, categories }: Props) {
       [filter]: !(toggleFilter as any)[filter],
     })
   }
-
+  console.log({ products })
   return (
     <div className="w-full grid grid-cols-12 gap-5 lg:gap-16 mb-20">
       <div className="col-span-12 lg:col-span-3 space-y-5 lg:space-y-2 order-1 lg:order-none lg:pr-8">
@@ -354,7 +353,7 @@ function SearchView({ activeCategory, categories }: Props) {
                     hidden: !data.found,
                   })}
                 >
-                  Showing {data.products.length} results{' '}
+                  Showing {products?.length || 0} results{' '}
                   {q && (
                     <>
                       for "<strong>{q}</strong>"
@@ -391,10 +390,10 @@ function SearchView({ activeCategory, categories }: Props) {
         <div>
           {data ? (
             <Grid layout="normal">
-              {products?.map((product: Product) => (
+              {products?.map((product: Product, i) => (
                 <ProductCard
                   variant="simple"
-                  key={product.path}
+                  key={i}
                   size="small"
                   className="animated fadeIn"
                   product={product}
