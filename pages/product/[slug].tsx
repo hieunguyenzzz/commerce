@@ -28,7 +28,9 @@ export async function getStaticProps({
   const { products } = await getAllProducts({
     variables: {
       first: 12,
-      ...getSearchVariables({ search: product.tags[0] }),
+      ...(product?.tags
+        ? getSearchVariables({ search: product?.tags[0] })
+        : {}),
     },
     config,
     preview,
