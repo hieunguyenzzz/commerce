@@ -45,7 +45,7 @@ export const ProductImages = ({
                       setIndex(i)
                     }}
                     className={classNames(
-                      'w-full  flex relative border group-hover:shadow-outline-normal border-primary',
+                      'w-full  flex relative border group-hover:shadow-outline-normal ',
                       { 'border border-black': i === index }
                     )}
                   >
@@ -57,13 +57,13 @@ export const ProductImages = ({
                     <div className="absolute inset-0">
                       <Image
                         layout="fill"
-                        className="border border-accents-2 fadeIn animated"
+                        className="border border-accents-2"
                         src={image.url!}
-                        sizes="(max-width: 400px) 100px,(min-width: 400px) 100px"
+                        sizes="(max-width: 400px) 100px,200px"
                         alt={image.alt || 'Product Image'}
                         objectFit="cover"
                         priority={i === 0}
-                        quality="50"
+                        quality="85"
                       />
                     </div>
                   </div>
@@ -72,7 +72,7 @@ export const ProductImages = ({
                     onClick={() => {
                       handleOpenGallery(i)
                     }}
-                    className="hidden group-hover:block  right-0 top-0 absolute w-5/6  bg-accents-0"
+                    className="hidden group-hover:block  right-0 top-0 absolute w-5/6"
                   >
                     <div
                       className="w-full"
@@ -85,7 +85,7 @@ export const ProductImages = ({
                           layout="responsive"
                           src={image.url!}
                           alt={image.alt || 'Product Image'}
-                          sizes="(max-width: 400px) 100px,(min-width: 400px) 600px"
+                          sizes="(max-width: 400px) 300px, 800px"
                           width={width}
                           height={height}
                           priority={i === 0}
@@ -109,13 +109,14 @@ export const ProductImages = ({
             className="w-full flex-1 relative"
             style={{ paddingTop }}
           >
-            <div className="flex-1 absolute top-0 right-0 w-full h-full fadeIn animated">
+            <div className="flex-1 absolute top-0 right-0 w-full h-full bg-accents-1">
               <Image
                 layout="responsive"
                 src={product.images[index]?.url!}
                 alt={product.images[index]?.alt || 'Product Image'}
                 width={width}
                 height={height}
+                sizes="(max-width: 400px) 300px, 800px"
                 quality="85"
                 objectFit="cover"
               />

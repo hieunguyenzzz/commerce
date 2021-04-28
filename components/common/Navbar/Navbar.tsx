@@ -1,6 +1,6 @@
 import { UserNav } from '@components/common'
 import { Bag, Menu } from '@components/icons'
-import { Container, useUI } from '@components/ui'
+import { Container, Text, useUI } from '@components/ui'
 import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -63,42 +63,8 @@ const megamenu = [
     'Blog Posts',
   ],
 ]
-const shopMenu = [
-  [
-    'SHOP PAGES',
-    'Standard Shop Page',
-    'Small Products',
-    'Large Products',
-    'Masonry',
-    'Carousel',
-    'Pagination',
-    'Shop Sidebar',
-    'Shop Infinity',
-    'Shop v2',
-    'Shop v3',
-  ],
-  [
-    'PRODUCT PAGES',
-    'Product v1',
-    'Product v2',
-    'Product V3',
-    'Product v4',
-    'Product v5',
-    'Product V6',
-    'Product v7',
-  ],
-  [
-    'OTHER SHOP PAGES',
-    'Collection',
-    'LookBook',
-    'Categories Page',
-    'Shopping Cart',
-    'Wishlist',
-    'Order Tracking',
-    'Checkout',
-    'Checkout – 2 Columns',
-  ],
-]
+
+const shopMenu = ['DRESSES', 'TOPS', 'BOTTOMS', 'VIEW ALL', 'SALE']
 const pagesMenu = [
   ['About', 'About Us', 'About Us v2', 'About Me'],
   ['Contact', 'Contact Us', 'Contact Us v2', 'Contact Me'],
@@ -257,42 +223,62 @@ const Navbar: FC<Props> = ({ transparent }) => {
           href={'/search'}
           active={router.pathname.startsWith('/search')}
           dropdown={
-            <div className="w-full bg-accents-0 shadow-magical">
-              <Container fluid clean className="w-full text-xs flex relative">
-                {new Array(5).fill(shopMenu).map((menu, i) => {
-                  {
-                    const item = menu[i]
-                    if (!item || !item.length) return null
-                    const [title, ...rest] = item
-                    return (
-                      <Container
-                        key={i}
-                        className="leading-extra-loose py-6 flex-1 relative flex flex-col items-start space-y-3"
-                      >
-                        <Image
-                          layout="fill"
-                          objectFit="cover"
-                          className="absolute inset-0 "
-                          src={`/mega-menu-v2-${i + 1}.jpg`}
-                        ></Image>
-                        <div className="uppercase font-semibold text-xs z-10">
-                          {title}
-                        </div>
-                        {rest.map((menu: any, i: any) => (
-                          <Link key={i} href={`/search?q=${menu}`}>
+            <div className="w-full py-6 bg-accents-0 shadow-magical">
+              <Container className="w-full flex text-xs relative">
+                <div className="flex flex-1 space-x-24 justify-start  py-6 ">
+                  <Text variant="h4">CLOTHING</Text>
+                  <div className="space-y-2 flex flex-col items-start">
+                    {shopMenu.map((item, i) => {
+                      {
+                        return (
+                          <Link key={i} href={`/search?q=${item}`}>
                             <a
                               className={classNames(
-                                'inline-block  text-effect-1 py-2 truncate   text-xs z-10'
+                                'inline-block h-7 text-effect-1 py-2 '
                               )}
                             >
-                              {menu as any}
+                              {item}
                             </a>
                           </Link>
-                        ))}
-                      </Container>
-                    )
-                  }
-                })}
+                        )
+                      }
+                    })}
+                    <div />
+                    <Link href={`/search?q=${'our-edits'}`}>
+                      <a
+                        className={classNames(
+                          'inline-block header-2 text-effect-1 py-2 '
+                        )}
+                      >
+                        OUR EDITS
+                      </a>
+                    </Link>
+                    <Link href={`/search?q=${'motherhood'}`}>
+                      <a
+                        className={classNames(
+                          'inline-block header-2 text-effect-1 py-2 '
+                        )}
+                      >
+                        MOTHERHOOD
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+                <div className="flex-1 space-y-4">
+                  <Image
+                    className="bg-accents-1"
+                    layout="intrinsic"
+                    width={447}
+                    height={276}
+                    objectFit="cover"
+                    src={'/mega-menu-v1-1.jpg'}
+                  ></Image>
+                  <Link href={`/search?q=${'softlines'}`}>
+                    <div className="header-2 text-effect-1">
+                      SOFTLINES JUST IN
+                    </div>
+                  </Link>
+                </div>
               </Container>
             </div>
           }
@@ -302,46 +288,41 @@ const Navbar: FC<Props> = ({ transparent }) => {
         <NavItem
           placement="full"
           dropdown={
-            <div className="w-full bg-accents-0 shadow-magical">
-              <Container className="w-full text-xs grid grid-cols-7 gap-8 py-6 relative">
-                <div className="absolute bottom-0 right-0 w-96 h-96">
-                  <Image
-                    layout="intrinsic"
-                    width={800}
-                    height={800}
-                    objectFit="cover"
-                    src={megamenuImage}
-                  ></Image>
-                </div>
-                {new Array(5).fill(megamenu).map((megamenu, i) => {
-                  {
-                    const item = megamenu[i]
-                    if (!item || !item.length) return null
-                    const [title, ...rest] = item
-                    return (
-                      <div
-                        key={i}
-                        className="leading-extra-loose  flex flex-col items-start space-y-3"
-                      >
-                        <div className="uppercase font-semibold text-xs">
-                          {title}
+            <div className="w-full py-6 bg-accents-0 shadow-magical">
+              <Container className="w-full flex text-xs relative">
+                <div className="flex flex-1 space-x-24 justify-start  py-6 ">
+                  <Text variant="h4">collections</Text>
+                  <div className="space-x-6 flex ">
+                    <div className="flex-1 flex items-start flex-col space-y-4">
+                      <Image
+                        className="bg-accents-1"
+                        layout="intrinsic"
+                        width={250}
+                        height={296}
+                        objectFit="cover"
+                        src={'/mega-menu-v1-1.jpg'}
+                      ></Image>
+                      <Link href={`/search?q=${'softlines'}`}>
+                        <div className="header-2 text-effect-1">
+                          001 SOFTLINES
                         </div>
-                        {rest.map((menu: any, i: any) => (
-                          <Link key={i} href={`/search?q=${menu}`}>
-                            <a
-                              className={classNames(
-                                'inline-block  text-effect-1 py-2 truncate   text-xs'
-                              )}
-                            >
-                              {menu as any}
-                            </a>
-                          </Link>
-                        ))}
-                      </div>
-                    )
-                  }
-                })}
-                <div className="col-span-2 h-96"></div>
+                      </Link>
+                    </div>
+                    <div className="flex-1 flex items-start flex-col space-y-4">
+                      <Image
+                        className="bg-accents-1"
+                        layout="intrinsic"
+                        width={250}
+                        height={296}
+                        objectFit="cover"
+                        src={'/mega-menu-v1-2.jpg'}
+                      ></Image>
+                      <Link href={`/search?q=${'LA-MAR'}`}>
+                        <div className="header-2 text-effect-1">002 LA MAR</div>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </Container>
             </div>
           }
@@ -393,6 +374,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           ETHICS
         </NavItem>
         <NavItem
+          href="/blog"
           className="relative"
           placement="left"
           active={router.pathname.startsWith('/blog')}
