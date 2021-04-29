@@ -1,11 +1,11 @@
 {
-  "name": "Next.js Commerce",
-  "short_name": "Next.js Commerce",
-  "description": "Next.js Commerce -> https://www.nextjs.org/commerce",
+  "name": "Tess Jean",
+  "short_name": "Tess Jean",
+  "description": "Tess Jean is a contemporary fashion label that embodies effortless style for the modern woman.",
   "display": "standalone",
   "start_url": "/",
-  "theme_color": "#fff",
-  "background_color": "#000000",
+  "theme_color": "#C8BF71",
+  "background_color": "#ffffff",
   "orientation": "portrait",
   "icons": [
     {
