@@ -1,4 +1,5 @@
 import type { Product } from '@commerce/types'
+import { Text } from '@components/ui'
 import classNames from 'classnames'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
@@ -39,6 +40,7 @@ const ProductCard: FC<Props> = ({
             layout="fill"
             objectFit="cover"
             quality="85"
+            sizes="(max-width: 400px) 200px ,500px"
             src={product.images[0].url || placeholderImg}
             alt={product.name || 'Product Image'}
           />
@@ -48,7 +50,7 @@ const ProductCard: FC<Props> = ({
             {getSizeRange(product).map(({ label, available }) => (
               <div
                 className={classNames(
-                  'text-xs lg:text-base px-1 flex-1',
+                  'text-xs px-1 flex-1',
                   !available && 'text-accents-4'
                 )}
                 children={label}
@@ -56,7 +58,9 @@ const ProductCard: FC<Props> = ({
             ))}
           </div>
           <div className="space-y-1">
-            <h2 className="header-2 uppercase">{product.name}</h2>
+            <Text variant="h7" className="uppercase">
+              {product.name}
+            </Text>
             <div className="text-sm mt-1 ">
               <span>{product.price.value}</span>{' '}
               <span>{product.price.currencyCode}</span>

@@ -5,6 +5,7 @@ import getAllPages from '@framework/common/get-all-pages'
 import getAllProductPaths from '@framework/product/get-all-product-paths'
 import getAllProducts from '@framework/product/get-all-products'
 import getProduct from '@framework/product/get-product'
+import { getSearchVariables } from '@framework/utils'
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
@@ -25,7 +26,12 @@ export async function getStaticProps({
     preview,
   })
   const { products } = await getAllProducts({
-    variables: { first: 12 },
+    variables: {
+      first: 12,
+      ...(product?.tags
+        ? getSearchVariables({ search: product?.tags[0] })
+        : {}),
+    },
     config,
     preview,
   })
@@ -45,7 +51,6 @@ export async function getStaticProps({
 
 export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   const { products } = await getAllProductPaths()
-
   return {
     paths: locales
       ? locales.reduce<string[]>((arr, locale) => {
@@ -70,7 +75,7 @@ export default function Slug({
     <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
   ) : (
     <ProductView
-      key={product?.entityId}
+      key={product?.slug}
       product={product as any}
       relatedProducts={relatedProducts}
     />

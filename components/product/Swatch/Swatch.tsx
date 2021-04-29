@@ -1,5 +1,5 @@
 import { Check } from '@components/icons'
-import Button, { ButtonProps } from '@components/ui/Button'
+import { ButtonProps } from '@components/ui/Button'
 import { isDark } from '@lib/colors'
 import cn from 'classnames'
 import { FC } from 'react'
@@ -36,11 +36,11 @@ const Swatch: FC<Omit<ButtonProps, 'variant'> & Props> = ({
   )
   const title = `${variant} ${label}`
   return (
-    <Button
+    <button
       title={title}
       className={rootClassName}
       style={color ? { backgroundColor: color } : {}}
-      aria-label={'Variant Swatch - ' + title}
+      aria-label={title}
       {...props}
     >
       {variant === 'color' && (
@@ -49,7 +49,7 @@ const Swatch: FC<Omit<ButtonProps, 'variant'> & Props> = ({
         </span>
       )}
       {variant === 'size' && label ? label : null}
-    </Button>
+    </button>
   )
 }
 
