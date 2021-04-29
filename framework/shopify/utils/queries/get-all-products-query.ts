@@ -16,6 +16,20 @@ edges {
         currencyCode
       }
     }
+    options {
+      id
+      name
+      values
+    }
+    variants (first: 30) {
+      edges {
+        node {
+          title
+          currentlyNotInStock
+          availableForSale
+        }
+      }
+    }
     images(first: 1) {
       pageInfo {
         hasNextPage

@@ -13,6 +13,15 @@ const getProductQuery = /* GraphQL */ `
         name
         values
       }
+      variants (first: 30) {
+        edges {
+          node {
+            title
+            currentlyNotInStock
+            availableForSale
+          }
+        }
+      }
       priceRange {
         maxVariantPrice {
           amount

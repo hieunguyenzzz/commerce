@@ -53,7 +53,7 @@ const normalizeProductImages = ({ edges }: ImageConnection) =>
 const normalizeProductVariants = ({ edges }: ProductVariantConnection) => {
   return edges?.map(
     ({
-      node: { id, selectedOptions, sku, title, priceV2, compareAtPriceV2 },
+      node: { id, selectedOptions, sku, title, priceV2, compareAtPriceV2 ,availableForSale},
     }) => {
       return {
         id,
@@ -62,6 +62,7 @@ const normalizeProductVariants = ({ edges }: ProductVariantConnection) => {
         price: +priceV2.amount,
         listPrice: +compareAtPriceV2?.amount,
         requiresShipping: true,
+        availableForSale,
         options: selectedOptions.map(({ name, value }: SelectedOption) => {
           const options = normalizeProductOption({
             id,
