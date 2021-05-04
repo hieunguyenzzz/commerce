@@ -29,7 +29,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
   return (
     <footer className={rootClassName}>
       <Container small>
-        <div className="w-full grid grid-cols-3 lg:grid-cols-9 gap-y-[31px] md:gap-y-xl gap-6  transition-colors duration-150 py-[28px] md:py-11  border-b border-t border-accents-3 md:border-none">
+        <div className="w-full grid grid-cols-3 lg:grid-cols-9 gap-y-[31px] md:gap-y-xl gap-6  transition-colors duration-150 py-[32px] md:py-11  border-b border-t border-accents-3 md:border-none">
           <div className="col-span-3 space-y-[38px]  ">
             <Text variant="h5">CUSTOMER CARE</Text>
             <ul className="hidden md:flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
@@ -94,11 +94,11 @@ const Footer: FC<Props> = ({ className, pages }) => {
         </div>
       </Container>
       <Container>
-        <div className="py-4 md:py-6  flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0   md:border-t border-accents-3">
+        <div className="py-4 md:py-6  flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0   md:border-t border-accents-3">
           <div className="flex uppercase text-[12px] leading-[14.42PX] md:text-xs md:flex-1 space-x-6">
             2021, ALL RIGHTS RESERVED TESSJEAN
           </div>
-          <div className="flex space-x-3 text-[10px] md:text-xs">
+          <div className="flex space-x-3 items-center text-[10px] md:text-xs leading-none">
             <Location /> <div>SAIGON, VIETNAM</div>
           </div>
         </div>
