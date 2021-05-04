@@ -1,4 +1,5 @@
 export { default as ArrowLeft } from './ArrowLeft'
+export { default as Back } from './Back'
 export { default as Bag } from './Bag'
 export { default as Check } from './Check'
 export { default as ChevronUp } from './ChevronUp'
@@ -28,3 +29,4 @@ export { default as Trash } from './Trash'
 export { default as Twitter } from './Twitter'
 export { default as User } from './User'
 export { default as Vercel } from './Vercel'
+

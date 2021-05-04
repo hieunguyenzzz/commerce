@@ -1,5 +1,6 @@
+import useCustomer from '@commerce/customer/use-customer'
 import { UserNav } from '@components/common'
-import { Bag, Menu } from '@components/icons'
+import { Bag, Menu, User } from '@components/icons'
 import { Container, Text, useUI } from '@components/ui'
 import classNames from 'classnames'
 import Image from 'next/image'
@@ -75,7 +76,7 @@ const pagesMenu = [
 ]
 export const Logo = () => (
   <Link href="/">
-    <a className="h-full" aria-label="Logo">
+    <a className={classNames(s.logo)} aria-label="Logo">
       <img src={'/logo.svg'} alt="jess jean" />
     </a>
   </Link>
@@ -130,13 +131,14 @@ export const NavItem: React.FC<NavItemProps> = ({
 }
 const Navbar: FC<Props> = ({ transparent }) => {
   const { openSidebar, setModalView } = useUI()
+  const { data: customer } = useCustomer()
   const router = useRouter()
   const smallNav = (
-    <div className="flex w-full py-4 items-center align-center space-x-12">
+    <div className="flex w-full flex-1 py-4 items-center align-center">
       <div className="flex-1 flex items-center">
         <div
           onClick={() => {
-            setModalView('MENU')
+            // setModalView('MENU')
             openSidebar()
           }}
           className={classNames(s.item, 'z-10')}
@@ -144,10 +146,52 @@ const Navbar: FC<Props> = ({ transparent }) => {
           <Menu />
         </div>
       </div>
-      <div className="flex  items-center flex-1 justify-center lg:justify-start lg:space-x-16">
+      <div className="text-center mx-3">
         <Logo />
       </div>
-      <div className="flex justify-end flex-1 space-x-8">
+      <div className="flex flex-1 justify-end space-x-[11px]">
+        {!!customer ? (
+          <NavItem
+            placement="right"
+            className={classNames(s.item, 'flex items-baseline relative')}
+            dropdown={
+              <div className="text-xs shadow-lg bg-accents-0 flex flex-col top-header px-md py-2">
+                <Link href={`/account`}>
+                  <a className="leading-extra-loose flex flex-col items-start py-2 ">
+                    <div
+                      className={classNames(
+                        'inline-block text-effect-1 truncate h-7 uppercase'
+                      )}
+                    >
+                      My account
+                    </div>
+                  </a>
+                </Link>
+                <Link href={`/account/logout`}>
+                  <a className="leading-extra-loose flex flex-col items-start py-2">
+                    <div
+                      className={classNames(
+                        'inline-block text-effect-1 truncate h-7 uppercase'
+                      )}
+                    >
+                      logout
+                    </div>
+                  </a>
+                </Link>
+              </div>
+            }
+          >
+            <User />
+          </NavItem>
+        ) : (
+          <div className={s.item}>
+            <Link href="/account/login">
+              <a>
+                <User />
+              </a>
+            </Link>
+          </div>
+        )}
         <div
           className={classNames(s.item, 'flex items-center')}
           onClick={() => {
@@ -163,7 +207,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
   )
   const largeNav = (
     <div className="flex w-full py-4 items-center align-center">
-      <div className="flex-1 justify-between space-x-sm h-header flex items-center">
+      <div className="flex-1 justify-start space-x-[36px] h-header flex items-center">
         <NavItem
           placement="full"
           active={router.pathname.startsWith('/new-arrivals')}
@@ -431,10 +475,12 @@ const Navbar: FC<Props> = ({ transparent }) => {
 
   return (
     <NavbarRoot transparent={transparent}>
-      <Container fluid className="w-full lg:hidden">
-        {smallNav}
-      </Container>
-      <Container className="w-full hidden lg:block">{largeNav}</Container>
+      <div>
+        <Container fluid className="w-full xl:hidden">
+          {smallNav}
+        </Container>
+        <Container className="w-full hidden xl:block">{largeNav}</Container>
+      </div>
     </NavbarRoot>
   )
 }

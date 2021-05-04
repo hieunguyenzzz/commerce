@@ -50,10 +50,10 @@ const BlogListView: React.FC<Props> = ({
         </Breadcrumb>
       </Container>
       <Container className="flex flex-col items-center">
-        <Text className="text-center mx-auto" variant="h4">
+        <Text className="hidden md:block text-center mx-auto" variant="h4">
           {title}
         </Text>
-        <div className="mx-auto mt-xl flex flex-wrap justify-center items-baseline space-y-sm">
+        <div className="hidden md:flex mx-auto mt-xl flex-wrap justify-center items-baseline space-y-sm">
           <Link href={`/blog`}>
             <a
               className={classNames('mx-xl text-effect-1 text-h7 uppercase', {

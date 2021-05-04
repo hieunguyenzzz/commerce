@@ -1,5 +1,5 @@
 .root {
-  @apply mx-auto w-full px-md lg:px-[60px] max-w-[1440px];
+  @apply mx-auto w-full px-[16px] md:px-md lg:px-[60px] max-w-[1440px];
   &.fluid {
     max-width: unset;
   }

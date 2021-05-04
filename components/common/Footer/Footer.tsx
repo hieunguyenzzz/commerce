@@ -24,15 +24,15 @@ const LEGAL_PAGES = ['terms-of-use', 'shipping-returns', 'privacy-policy']
 
 const Footer: FC<Props> = ({ className, pages }) => {
   const { sitePages, legalPages } = usePages(pages)
-  const rootClassName = cn(s.root, className)
+  const rootClassName = cn(s.root, className, 'mt-12 text-center md:text-left')
 
   return (
     <footer className={rootClassName}>
-      <Container small className="py-11">
-        <div className="w-full grid grid-cols-3 lg:grid-cols-9 gap-y-xl gap-6  transition-colors duration-150">
-          <div className="col-span-3 space-y-lg lg:space-y-11 px:md lg:px-10">
+      <Container small>
+        <div className="w-full grid grid-cols-3 lg:grid-cols-9 gap-y-[31px] md:gap-y-xl gap-6  transition-colors duration-150 py-[28px] md:py-11  border-b border-t border-accents-3 md:border-none">
+          <div className="col-span-3 space-y-[38px]  ">
             <Text variant="h5">CUSTOMER CARE</Text>
-            <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
+            <ul className="hidden md:flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
               {['CONTACT', 'SHIPPING', 'RETURNS', 'FAQS', 'SIZE GUIDE'].map(
                 (str) => (
                   <Link key={str} href={'/' + str}>
@@ -44,9 +44,9 @@ const Footer: FC<Props> = ({ className, pages }) => {
               )}
             </ul>
           </div>
-          <div className="col-span-3 space-y-lg lg:space-y-11 px:md lg:px-10">
+          <div className="col-span-3 space-y-[38px]  ">
             <Text variant="h5">OUR BRAND</Text>
-            <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
+            <ul className="hidden md:flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
               {[
                 'ABOUT',
                 'ETHICS',
@@ -62,10 +62,10 @@ const Footer: FC<Props> = ({ className, pages }) => {
               ))}
             </ul>
           </div>
-          <div className="col-span-3 space-y-6 flex flex-col px:md  lg:px-10">
+          <div className="col-span-3 space-y-6 flex flex-col">
             <div className="space-y-sm lg:space-y-4">
-              <Text variant="h5">CUSTOMER CARE</Text>
-              <div className="space-x-6 flex text-2xl">
+              <Text variant="h5">FOLLOW US</Text>
+              <div className="space-x-6 inline-flex text-2xl">
                 <span className="rounded-full hover-effect-1">
                   <Facebook />
                 </span>
@@ -80,12 +80,12 @@ const Footer: FC<Props> = ({ className, pages }) => {
                 </span>
               </div>
             </div>
-            <div className="space-y-sm lg:space-y-6">
-              <p className="  text-sm whitespace-pre-line">
+            <div className="text-[14px] leading-[1.3] tracking-[0.13em] md:text-sm space-y-sm lg:space-y-6">
+              <p className="whitespace-pre-line">
                 {`hello@tessjean.com 
                 +84 077 277 0802`}
               </p>
-              <p className=" text-sm whitespace-pre-line">
+              <p className="whitespace-pre-line">
                 {`Customer Care hours: 
                 Monday - Friday 8:00am - 4:30pm ICT`}
               </p>
@@ -94,16 +94,15 @@ const Footer: FC<Props> = ({ className, pages }) => {
         </div>
       </Container>
       <Container>
-        <div className="py-6  flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 border-t border-accents-3">
-          <div className="flex uppercase text-xs md:flex-1 space-x-6">
+        <div className="py-4 md:py-6  flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0   md:border-t border-accents-3">
+          <div className="flex uppercase text-[12px] leading-[14.42PX] md:text-xs md:flex-1 space-x-6">
             2021, ALL RIGHTS RESERVED TESSJEAN
           </div>
-          <div className="flex space-x-3 text-xs">
+          <div className="flex space-x-3 text-[10px] md:text-xs">
             <Location /> <div>SAIGON, VIETNAM</div>
           </div>
         </div>
       </Container>
-      <div className="h-5"></div>
     </footer>
   )
 }

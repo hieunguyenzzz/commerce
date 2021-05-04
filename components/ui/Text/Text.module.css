@@ -33,6 +33,7 @@
 .h7 {
   @apply text-h7;
 }
+
 .subtitle {
   @apply text-subtitle;
 }

@@ -22,7 +22,7 @@
     'Helvetica', sans-serif;
 }
 :root {
-  --header-height: 69px;
+  --header-height: 60px;
   @screen lg {
     --header-height: 69px;
   }
@@ -70,7 +70,7 @@ html {
   overflow-x: hidden;
   overflow-y: scroll;
   /* overscroll-behavior-y: none; */
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
   touch-action: manipulation;
 }
 

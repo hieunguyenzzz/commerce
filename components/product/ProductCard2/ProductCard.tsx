@@ -1,5 +1,4 @@
 import type { Product } from '@commerce/types'
-import { Text } from '@components/ui'
 import classNames from 'classnames'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
@@ -58,9 +57,7 @@ const ProductCard: FC<Props> = ({
             ))}
           </div>
           <div className="space-y-1">
-            <Text variant="h7" className="uppercase">
-              {product.name}
-            </Text>
+            <h4 className="uppercase header-2">{product.name}</h4>
             <div className="text-sm mt-1 ">
               <span>{product.price.value}</span>{' '}
               <span>{product.price.currencyCode}</span>

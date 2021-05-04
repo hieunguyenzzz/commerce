@@ -44,7 +44,7 @@ const UserNav: FC<Props> = ({ className }) => {
                         <div
                           className={cn(
                             'inline-block text-effect-1 truncate text-xs',
-                            currency === 'item' && 'text-primary'
+                            currency === item && 'text-primary'
                           )}
                         >
                           {item}

@@ -9,5 +9,6 @@ export { default as I18nWidget } from './I18nWidget'
 export { default as Layout } from './Layout'
 export { default as Navbar, UserNav } from './Navbar'
 export { default as Searchbar } from './Searchbar'
-export { default as SidebarLayout } from './SidebarLayout'
+export { default as SidebarLayout } from './TessJeanSidebarLayout'
 export { default as Title } from './Title'
+
