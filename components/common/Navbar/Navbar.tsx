@@ -69,31 +69,31 @@ const shopMenu = [
   {
     label: 'DRESSES',
     getHref: () => {
-      ;`search?q=DRESSES`
+      return `search?q=DRESSES`
     },
   },
   {
     label: 'TOPS',
     getHref: () => {
-      ;`search?q=TOPS`
+      return `search?q=TOPS`
     },
   },
   {
     label: 'BOTTOMS',
     getHref: () => {
-      ;`search?q=BOTTOMS`
+      return `search?q=BOTTOMS`
     },
   },
   {
     label: 'VIEW ALL',
     getHref: () => {
-      ;`search`
+      return `search`
     },
   },
   {
     label: 'SALE',
     getHref: () => {
-      ;`search?q=SALE`
+      return `search?q=SALE`
     },
   },
 ]
