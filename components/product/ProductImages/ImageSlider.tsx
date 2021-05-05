@@ -65,7 +65,7 @@ const ImageSlider: React.FC = ({ children }) => {
   }, [])
   return (
     <div ref={sliderContainerRef} className={s.root} data-testid="ImageSlider">
-      {currentSlide !== 0 && (
+      {slider && currentSlide !== 0 && (
         <button
           className={cn(s.leftControl, s.control)}
           onClick={slider?.prev}
@@ -85,7 +85,7 @@ const ImageSlider: React.FC = ({ children }) => {
           </svg>
         </button>
       )}
-      {currentSlide < slider.details().size - 1 && (
+      {slider && currentSlide < slider.details().size - 1 && (
         <button
           className={cn(s.rightControl, s.control)}
           onClick={slider?.next}
