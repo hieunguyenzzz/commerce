@@ -38,7 +38,6 @@ export async function getStaticProps({
     },
   }
 }
-
 export default function Search({
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {

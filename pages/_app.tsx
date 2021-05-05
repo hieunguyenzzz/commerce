@@ -44,6 +44,12 @@ MyApp.getInitialProps = async (appContext: NextPageContext) => {
       phone: '+84 077 277 0802',
       customerCareHours: 'Monday - Friday 8:00am - 4:30pm ICT',
       location: 'SAIGON, VIETNAM',
+      socials: {
+        instagram: 'https://www.instagram.com/_TESSJEAN_/',
+        facebook: 'https://www.facebook.com/tessjeanwoman',
+        pinterest: 'https://www.pinterest.com/tessjean',
+        tiktok: 'https://www.tiktok.com/tessjean',
+      },
     },
   }
 }

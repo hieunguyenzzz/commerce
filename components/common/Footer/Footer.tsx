@@ -62,7 +62,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
               ))}
             </ul>
           </div>
-          <div className="col-span-3 space-y-6 flex flex-col">
+          <div className="col-span-3 space-y-8 flex flex-col">
             <div className="space-y-sm lg:space-y-4">
               <Text variant="h5">FOLLOW US</Text>
               <div className="space-x-6 inline-flex text-2xl">
@@ -98,7 +98,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
           <div className="flex uppercase text-[12px] leading-[14.42PX] md:text-xs md:flex-1 space-x-6">
             2021, ALL RIGHTS RESERVED TESSJEAN
           </div>
-          <div className="flex space-x-3 items-center text-[10px] md:text-xs leading-none">
+          <div className="flex space-x-2 items-center text-[10px] md:text-xs leading-none font-bold">
             <Location /> <div>SAIGON, VIETNAM</div>
           </div>
         </div>

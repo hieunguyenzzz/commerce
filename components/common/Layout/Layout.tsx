@@ -1,5 +1,4 @@
 import LoginView from '@components/auth/LoginView'
-import CartSidebarView from '@components/cart/CartSidebarView'
 import { Footer, Navbar } from '@components/common'
 import { MenuSidebarView } from '@components/menu'
 import { Button, LoadingDots, Modal, Sidebar } from '@components/ui'
@@ -73,12 +72,6 @@ const Layout: FC<Props> = ({
             </Button>
           }
         />
-        <Sidebar
-          open={displaySidebar && modalView === 'CART'}
-          onClose={closeSidebar}
-        >
-          <CartSidebarView />
-        </Sidebar>
         <Sidebar
           position="left"
           open={displaySidebar && modalView === 'MENU'}

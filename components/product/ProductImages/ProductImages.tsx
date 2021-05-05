@@ -3,6 +3,7 @@ import { Gallery } from '@components/common'
 import classNames from 'classnames'
 import Image from 'next/image'
 import React, { useState } from 'react'
+import ImageSlider from './ImageSlider'
 
 export const ProductImages = ({
   product,
@@ -30,7 +31,7 @@ export const ProductImages = ({
           index={index}
         />
       )}
-      <div className="w-full h-full top-0 left-0 flex">
+      <div className="w-full h-full top-0 left-0 hidden lg:flex">
         <div className="w-1/6 flex flex-col z-10">
           {new Array(5).fill(product.images).map((arr, i) => {
             const image = arr[i]
@@ -122,6 +123,43 @@ export const ProductImages = ({
               />
             </div>
           </div>
+        </div>
+      </div>
+      <div
+        style={{
+          paddingTop,
+        }}
+        className="w-full h-full lg:hidden flex relative"
+      >
+        <div className="absolute inset-0">
+          <ImageSlider>
+            {Array.from(product.images, (image, i) => (
+              <div
+                key={i}
+                className="w-full relative"
+                onClick={() => {
+                  handleOpenGallery(i)
+                }}
+                style={{
+                  paddingTop,
+                }}
+              >
+                <div className="absolute inset-0">
+                  <Image
+                    layout="responsive"
+                    src={image.url!}
+                    alt={image.alt || 'Product Image'}
+                    sizes="(max-width: 400px) 300px, 800px"
+                    width={width}
+                    height={height}
+                    priority={i === 0}
+                    quality="85"
+                    objectFit="cover"
+                  />
+                </div>
+              </div>
+            ))}
+          </ImageSlider>
         </div>
       </div>
     </div>

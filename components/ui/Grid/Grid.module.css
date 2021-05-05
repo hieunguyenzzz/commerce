@@ -1,9 +1,7 @@
 .root {
   --row-height: 200px;
-  @apply grid grid-cols-2 gap-0;
+  @apply grid grid-cols-2 md:grid-cols-3 lg:grid-rows-2 gap-0;
   min-height: var(--row-height);
-  @apply lg:grid-cols-3 lg:grid-rows-2;
-
   & > * {
     @apply row-span-1 bg-transparent box-border;
     @apply lg:col-span-1;

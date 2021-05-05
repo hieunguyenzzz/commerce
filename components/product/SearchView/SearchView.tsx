@@ -1,14 +1,21 @@
 import { Product } from '@commerce/types'
+import { SidebarLayout } from '@components/common'
 import { Down } from '@components/icons'
 import { ProductCard } from '@components/product'
-import { Grid, Skeleton } from '@components/ui'
+import { Grid, Sidebar, Skeleton, useUI } from '@components/ui'
 import useSearch from '@framework/product/use-search'
 import rangeMap from '@lib/range-map'
 import { filterQuery, getCategoryPath, useSearchMeta } from '@lib/search'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactElement, ReactEventHandler, useState } from 'react'
+import {
+  ReactElement,
+  ReactEventHandler,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react'
 // TODO (bc) : Remove or standarize this.
 const SORT = Object.entries({
   featured: 'featured',
@@ -44,40 +51,14 @@ function Select({
 }) {
   return (
     <div className="relative inline-block w-full">
-      <div className="lg:hidden">
-        <span className="rounded-md shadow-sm">
-          <button
-            type="button"
-            onClick={onToggle}
-            className="flex justify-between w-full rounded-sm border border-gray-300 px-4 py-3 bg-white  font-medium hover:underline hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-normal active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
-            id="options-menu"
-            aria-haspopup="true"
-            aria-expanded="true"
-          >
-            {placeholder}
-            <svg
-              className="-mr-1 ml-2 h-5 w-5"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-        </span>
-      </div>
-      <div className="hidden lg:block">
+      <div className="block">
         <div
           onClick={onToggle}
           className={cn(
-            'flex space-x-3 justify-between py-2 px-3 lg:px-0 lg:text-base lg:no-underline lg:font-bold lg:tracking-wide hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900'
+            'flex space-x-3 justify-between py-2 px-0 text-base no-underline font-bold tracking-wide  focus:outline-none focus:bg-gray-100 focus:text-gray-900'
           )}
         >
-          <a className={'block lg:inline-block header-2 uppercase'}>{title}</a>
+          <a className={'block xl:inline-block header-2 uppercase'}>{title}</a>
           <button
             className={cn(
               'transform transition-transform  duration-300 ease-in-out',
@@ -89,11 +70,11 @@ function Select({
         </div>
       </div>
       <div
-        className={`lg:relative left-0 w-full rounded-md shadow-lg lg:shadow-none z-10 ${
+        className={`relative left-0 w-full rounded-md  z-10 ${
           !open ? 'hidden' : ''
         }`}
       >
-        <div className="rounded-sm bg-white shadow-xs lg:bg-none lg:shadow-none">
+        <div className="rounded-sm">
           <div
             role="menu"
             aria-orientation="vertical"
@@ -106,7 +87,239 @@ function Select({
     </div>
   )
 }
-
+const Filter = ({
+  activeCategory,
+  handleClick,
+  categories,
+  router,
+  currentSize,
+  motherhood,
+  sort,
+  toggleFilter,
+}: {
+  activeCategory: any
+  handleClick: any
+  categories: any[]
+  router: any
+  currentSize: any
+  motherhood: any
+  sort: any
+  toggleFilter: any
+}) => {
+  return (
+    <>
+      <Select
+        {...{
+          placeholder: activeCategory?.name
+            ? `Category: ${activeCategory?.name}`
+            : 'All Categories',
+          title: 'Categories',
+          open: toggleFilter['categories'],
+          onToggle: (e) => handleClick(e, 'categories'),
+        }}
+      >
+        <ul>
+          {categories.map((cat) => (
+            <li
+              key={cat.path}
+              className={cn(
+                'block py-2 px-0 tracking-widest text-h7 uppercase hover:underline focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+                {
+                  'text-primary': activeCategory?.entityId === cat.entityId,
+                }
+              )}
+            >
+              <Link
+                href={{
+                  pathname: getCategoryPath(cat.path),
+                  query: router.query,
+                }}
+              >
+                <a className={'inline-block'}>{cat.name}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Select>
+      <Select
+        {...{
+          placeholder: currentSize ? `Size: ${currentSize}` : 'All sizes',
+          title: 'Size',
+          open: toggleFilter['size'],
+          onToggle: (e) => handleClick(e, 'size'),
+        }}
+      >
+        <ul
+          style={{
+            gridTemplateRows: `repeat(${Math.max(
+              NUMBER_SIZE.length,
+              TEXT_SIZE.length
+            )}, minmax(0, 1fr))`,
+          }}
+          className="grid grid-cols-2 grid-flow-col grid-rows-6"
+        >
+          {NUMBER_SIZE.map((size) => (
+            <li
+              key={size}
+              className={cn(
+                'block py-2 px-0  text-h7 uppercase hover:underline  focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+                {
+                  // @ts-ignore Shopify - Fix this types
+                  'text-primary': currentSize === size,
+                }
+              )}
+            >
+              <Link
+                href={{
+                  pathname: router.pathname,
+                  query: filterQuery({
+                    ...router.query,
+                    size,
+                  }),
+                }}
+              >
+                <a className={'inline-block'}>{size}</a>
+              </Link>
+            </li>
+          ))}
+          {TEXT_SIZE.map((size) => (
+            <li
+              key={size}
+              className={cn(
+                'block py-2 px-0  text-h7 uppercase hover:underline xl: focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+                {
+                  // @ts-ignore Shopify - Fix this types
+                  'text-primary': currentSize === size,
+                }
+              )}
+            >
+              <Link
+                href={{
+                  pathname: router.pathname,
+                  query: {
+                    ...router.query,
+                    size,
+                  },
+                }}
+              >
+                <a className={'inline-block'}>{size}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Select>
+      <Select
+        {...{
+          placeholder: activeCategory?.name
+            ? `Motherhood: ${activeCategory?.name}`
+            : 'Motherhood: all',
+          title: 'Motherhood',
+          open: toggleFilter['motherhood'],
+          onToggle: (e) => handleClick(e, 'motherhood'),
+        }}
+      >
+        <ul>
+          <li
+            className={cn(
+              'block py-2 px-0 tracking-widest text-h7 uppercase hover:underline xl: focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+              {
+                'text-primary': !motherhood,
+              }
+            )}
+          >
+            <Link
+              href={{
+                pathname: router.pathname,
+                query: filterQuery({
+                  ...router.query,
+                  motherhood: undefined,
+                }),
+              }}
+            >
+              <a className={'inline-block'}>all</a>
+            </Link>
+          </li>
+          {MOTHERHOOD.map(([key, text]) => (
+            <li
+              key={key}
+              className={cn(
+                'block py-2 px-0 tracking-widest text-h7 uppercase hover:underline xl: focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+                {
+                  'text-primary': motherhood === key,
+                }
+              )}
+            >
+              <Link
+                href={{
+                  pathname: router.pathname,
+                  query: {
+                    ...router.query,
+                    q: key,
+                  },
+                }}
+              >
+                <a className={'inline-block'}>{text}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Select>
+      <Select
+        {...{
+          placeholder: sort ? `Sort by: ${sort}` : 'Sort',
+          title: 'Sort by',
+          open: toggleFilter['sort'],
+          onToggle: (e) => handleClick(e, 'sort'),
+        }}
+      >
+        <ul>
+          {SORT.map(([key, text]) => (
+            <li
+              key={key}
+              className={cn(
+                'block py-2 px-0  text-h7 uppercase hover:underline xl: focus:outline-none focus:bg-gray-100 focus:text-gray-900',
+                {
+                  'text-primary': sort === key,
+                }
+              )}
+            >
+              <Link
+                href={{
+                  pathname: router.pathname,
+                  query: filterQuery({
+                    ...router.query,
+                    sort: key,
+                  }),
+                }}
+              >
+                <a className={'inline-block'}>{text}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Select>
+    </>
+  )
+}
+const SearchSidebar: React.FC<{
+  children: ReactNode
+  title?: string
+  currentTag?: string
+}> = ({ children, title = 'SHOP' }) => {
+  const { displaySidebar, closeSidebar, modalView, setModalView } = useUI()
+  useEffect(() => {
+    setModalView('SEARCH')
+  }, [])
+  return (
+    <Sidebar
+      position="left"
+      open={displaySidebar && modalView === 'SEARCH'}
+      onClose={closeSidebar}
+    >
+      <SidebarLayout title={title}>{children}</SidebarLayout>
+    </Sidebar>
+  )
+}
 function SearchView({ activeCategory, categories }: Props) {
   const router = useRouter()
   const { asPath } = router
@@ -125,9 +338,9 @@ function SearchView({ activeCategory, categories }: Props) {
   })
   const [toggleFilter, setToggleFilter] = useState({
     categories: true,
-    size: !!currentSize,
-    sort: !!sort,
-    motherhood: !!motherhood,
+    size: true || !!currentSize,
+    sort: true || !!sort,
+    motherhood: true || !!motherhood,
   })
   const sizeFilter = (product: Product, size: any) => {
     return !!product.options.find(({ displayName, values }) => {
@@ -147,277 +360,106 @@ function SearchView({ activeCategory, categories }: Props) {
       [filter]: !(toggleFilter as any)[filter],
     })
   }
-  console.log({ products })
+  const filterNode = (
+    <Filter
+      {...{
+        activeCategory,
+        handleClick,
+        categories,
+        router,
+        currentSize,
+        motherhood,
+        sort,
+        toggleFilter,
+      }}
+    />
+  )
   return (
-    <div className="w-full grid grid-cols-12 gap-5 lg:gap-16 mb-20">
-      <div className="col-span-12 lg:col-span-3 space-y-5 lg:space-y-2 order-1 lg:order-none lg:pr-8">
-        <Select
-          {...{
-            placeholder: activeCategory?.name
-              ? `Category: ${activeCategory?.name}`
-              : 'All Categories',
-            title: 'Categories',
-            open: toggleFilter['categories'],
-            onToggle: (e) => handleClick(e, 'categories'),
-          }}
-        >
-          <ul>
-            {categories.map((cat) => (
-              <li
-                key={cat.path}
-                className={cn(
-                  'block py-2 px-3 lg:px-0 tracking-widest text-h7 uppercase hover:underline hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
-                  {
-                    'text-primary': activeCategory?.entityId === cat.entityId,
-                  }
-                )}
-              >
-                <Link
-                  href={{
-                    pathname: getCategoryPath(cat.path),
-                    query,
-                  }}
-                >
-                  <a className={'block lg:inline-block'}>{cat.name}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Select>
-        <Select
-          {...{
-            placeholder: currentSize ? `Size: ${currentSize}` : 'All sizes',
-            title: 'Size',
-            open: toggleFilter['size'],
-            onToggle: (e) => handleClick(e, 'size'),
-          }}
-        >
-          <ul
-            style={{
-              gridTemplateRows: `repeat(${Math.max(
-                NUMBER_SIZE.length,
-                TEXT_SIZE.length
-              )}, minmax(0, 1fr))`,
-            }}
-            className="lg:grid grid-cols-2 grid-flow-col grid-rows-6"
-          >
-            {NUMBER_SIZE.map((size) => (
-              <li
-                key={size}
-                className={cn(
-                  'block py-2 px-3 lg:px-0  text-h7 uppercase hover:underline hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
-                  {
-                    // @ts-ignore Shopify - Fix this types
-                    'text-primary': currentSize === size,
-                  }
-                )}
-              >
-                <Link
-                  href={{
-                    pathname,
-                    query: filterQuery({
-                      ...router.query,
-                      size,
-                    }),
-                  }}
-                >
-                  <a className={'block lg:inline-block'}>{size}</a>
-                </Link>
-              </li>
-            ))}
-            {TEXT_SIZE.map((size) => (
-              <li
-                key={size}
-                className={cn(
-                  'block py-2 px-3 lg:px-0  text-h7 uppercase hover:underline hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
-                  {
-                    // @ts-ignore Shopify - Fix this types
-                    'text-primary': currentSize === size,
-                  }
-                )}
-              >
-                <Link
-                  href={{
-                    pathname,
-                    query: {
-                      ...router.query,
-                      size,
-                    },
-                  }}
-                >
-                  <a className={'block lg:inline-block'}>{size}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Select>
-        <Select
-          {...{
-            placeholder: activeCategory?.name
-              ? `Motherhood: ${activeCategory?.name}`
-              : 'Motherhood: all',
-            title: 'Motherhood',
-            open: toggleFilter['motherhood'],
-            onToggle: (e) => handleClick(e, 'motherhood'),
-          }}
-        >
-          <ul>
-            <li
-              className={cn(
-                'block py-2 px-3 lg:px-0 tracking-widest text-h7 uppercase hover:underline hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
-                {
-                  'text-primary': !motherhood,
-                }
+    <>
+      <SearchSidebar>
+        <div className="space-y-6">{filterNode}</div>
+      </SearchSidebar>
+      <div className="w-full xl:grid grid-cols-12 gap-5 xl:gap-16 mb-20">
+        <div className="hidden xl:block xl:col-span-3 space-y-6 order-1 xl:order-none xl:pr-8">
+          {filterNode}
+        </div>
+        <div className="xl:col-span-9 order-3 xl:order-none">
+          {(q || activeCategory) && (
+            <div className="mb-6 transition ease-in duration-75">
+              {data ? (
+                <>
+                  <span
+                    className={cn('animated', {
+                      fadeIn: data.found,
+                      hidden: !data.found,
+                    })}
+                  >
+                    Showing {products?.length || 0} results{' '}
+                    {q && (
+                      <>
+                        for "<strong>{q}</strong>"
+                      </>
+                    )}
+                  </span>
+                  <span
+                    className={cn('animated', {
+                      fadeIn: !data.found,
+                      hidden: data.found,
+                    })}
+                  >
+                    {q ? (
+                      <>
+                        There are no products that match "<strong>{q}</strong>"
+                      </>
+                    ) : (
+                      <>
+                        There are no products that match the selected category &
+                        designer
+                      </>
+                    )}
+                  </span>
+                </>
+              ) : q ? (
+                <>
+                  Searching for: "<strong>{q}</strong>"
+                </>
+              ) : (
+                <>Searching...</>
               )}
-            >
-              <Link
-                href={{
-                  pathname,
-                  query: filterQuery({
-                    ...router.query,
-                    motherhood: undefined,
-                  }),
-                }}
-              >
-                <a className={'block lg:inline-block'}>all</a>
-              </Link>
-            </li>
-            {MOTHERHOOD.map(([key, text]) => (
-              <li
-                key={key}
-                className={cn(
-                  'block py-2 px-3 lg:px-0 tracking-widest text-h7 uppercase hover:underline hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
-                  {
-                    'text-primary': motherhood === key,
-                  }
-                )}
-              >
-                <Link
-                  href={{
-                    pathname,
-                    query: {
-                      ...router.query,
-                      q: key,
-                    },
-                  }}
-                >
-                  <a className={'block lg:inline-block'}>{text}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Select>
-        <Select
-          {...{
-            placeholder: sort ? `Sort by: ${sort}` : 'Sort',
-            title: 'Sort by',
-            open: toggleFilter['sort'],
-            onToggle: (e) => handleClick(e, 'sort'),
-          }}
-        >
-          <ul>
-            {SORT.map(([key, text]) => (
-              <li
-                key={key}
-                className={cn(
-                  'block py-2 px-3 lg:px-0  text-h7 uppercase hover:underline hover:bg-gray-100 lg:hover:bg-transparent focus:outline-none focus:bg-gray-100 focus:text-gray-900',
-                  {
-                    'text-primary': sort === key,
-                  }
-                )}
-              >
-                <Link
-                  href={{
-                    pathname,
-                    query: filterQuery({
-                      ...router.query,
-                      sort: key,
-                    }),
-                  }}
-                >
-                  <a className={'block lg:inline-block'}>{text}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Select>
-      </div>
-      <div className="col-span-12 lg:col-span-9 order-3 lg:order-none">
-        {(q || activeCategory) && (
-          <div className="mb-12 transition ease-in duration-75">
+            </div>
+          )}
+          <div>
             {data ? (
-              <>
-                <span
-                  className={cn('animated', {
-                    fadeIn: data.found,
-                    hidden: !data.found,
-                  })}
-                >
-                  Showing {products?.length || 0} results{' '}
-                  {q && (
-                    <>
-                      for "<strong>{q}</strong>"
-                    </>
-                  )}
-                </span>
-                <span
-                  className={cn('animated', {
-                    fadeIn: !data.found,
-                    hidden: data.found,
-                  })}
-                >
-                  {q ? (
-                    <>
-                      There are no products that match "<strong>{q}</strong>"
-                    </>
-                  ) : (
-                    <>
-                      There are no products that match the selected category &
-                      designer
-                    </>
-                  )}
-                </span>
-              </>
-            ) : q ? (
-              <>
-                Searching for: "<strong>{q}</strong>"
-              </>
+              <Grid layout="normal">
+                {products?.map((product: Product, i) => (
+                  <ProductCard
+                    variant="simple"
+                    key={i}
+                    size="small"
+                    className="animated fadeIn"
+                    product={product}
+                    imgProps={{
+                      width: 480,
+                      height: 480,
+                    }}
+                  />
+                ))}
+              </Grid>
             ) : (
-              <>Searching...</>
+              <Grid layout="normal">
+                {rangeMap(12, (i) => (
+                  <Skeleton
+                    key={i}
+                    className="w-full animated fadeIn"
+                    height={325}
+                  />
+                ))}
+              </Grid>
             )}
           </div>
-        )}
-        <div>
-          {data ? (
-            <Grid layout="normal">
-              {products?.map((product: Product, i) => (
-                <ProductCard
-                  variant="simple"
-                  key={i}
-                  size="small"
-                  className="animated fadeIn"
-                  product={product}
-                  imgProps={{
-                    width: 480,
-                    height: 480,
-                  }}
-                />
-              ))}
-            </Grid>
-          ) : (
-            <Grid layout="normal">
-              {rangeMap(12, (i) => (
-                <Skeleton
-                  key={i}
-                  className="w-full animated fadeIn"
-                  height={325}
-                />
-              ))}
-            </Grid>
-          )}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

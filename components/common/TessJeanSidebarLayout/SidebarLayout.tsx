@@ -24,9 +24,9 @@ const SidebarLayout: FC<Props> = ({
   return (
     <div className={cn(s.root, className)}>
       <header>
-        <Container className="flex justify-between space-x-3 items-center ">
+        <Container className="flex justify-between space-x-3 items-center">
           <div className="w-full border-b border-black">
-            <div className="flex items-center py-[11px] mx-[-8px]">
+            <div className="flex items-center py-[11px] mx-[-8px]  h-header">
               <button
                 onClick={handleClose}
                 aria-label="Close panel"
