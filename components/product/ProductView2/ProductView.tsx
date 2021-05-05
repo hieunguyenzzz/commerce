@@ -142,33 +142,30 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
               {sizeOptions && (
                 <div>
                   <OptionsRow label={sizeOptions.displayName}>
-                    <div className="flex items-baseline flex-row flex-wrap space-y-2 space-y-reverse">
-                      {getSizeRange(product).map((v, i: number) => {
-                        const active = (choices as any)[sizeOptions.displayName]
-                        return (
-                          <Swatch
-                            className={classNames(
-                              'flex-shrink-0',
-                              !v.available &&
-                                'pointer-events-none && opacity-50'
-                            )}
-                            key={`${sizeOptions.id}-${i}`}
-                            active={v.label === active}
-                            variant={sizeOptions.displayName}
-                            label={v.label}
-                            onClick={() => {
-                              setChoices((choices) => {
-                                return {
-                                  ...choices,
-                                  [sizeOptions.displayName]: v.label,
-                                }
-                              })
-                            }}
-                          />
-                        )
-                      })}
-                      <div />
-                    </div>
+                    {getSizeRange(product).map((v, i: number) => {
+                      const active = (choices as any)[sizeOptions.displayName]
+                      return (
+                        <Swatch
+                          className={classNames(
+                            'flex-shrink-0',
+                            !v.available && 'pointer-events-none && opacity-50'
+                          )}
+                          key={`${sizeOptions.id}-${i}`}
+                          active={v.label === active}
+                          variant={sizeOptions.displayName}
+                          label={v.label}
+                          onClick={() => {
+                            setChoices((choices) => {
+                              return {
+                                ...choices,
+                                [sizeOptions.displayName]: v.label,
+                              }
+                            })
+                          }}
+                        />
+                      )
+                    })}
+                    <div />
                   </OptionsRow>
                   <div className="space-x-xs flex items-center mt-1">
                     <span className="text-lg">

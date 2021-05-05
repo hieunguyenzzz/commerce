@@ -3,12 +3,13 @@ import '@assets/main.css'
 import { Head } from '@components/common'
 import { ManagedUIContext } from '@components/ui/context'
 import 'keen-slider/keen-slider.min.css'
+import { NextPageContext } from 'next'
 import type { AppProps } from 'next/app'
 import { FC, useEffect } from 'react'
 
 const Noop: FC = ({ children }) => <>{children}</>
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   const Layout = (Component as any).Layout || Noop
   const renderNavbar = (Component as any).renderNavbar
 
@@ -27,3 +28,23 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     </>
   )
 }
+
+// Only uncomment this method if you have blocking data requirements for
+// every single page in your application. This disables the ability to
+// perform automatic static optimization, causing every page in your app to
+// be server-side rendered.
+//
+MyApp.getInitialProps = async (appContext: NextPageContext) => {
+  // calls page's `getInitialProps` and fills `appProps.pageProps`
+  // const config = getConfig({ locale: 'en-US' })
+  // const siteInfoProps = await getSiteInfo({ config })
+  return {
+    appProps: {
+      email: 'hello@tessjean.com',
+      phone: '+84 077 277 0802',
+      customerCareHours: 'Monday - Friday 8:00am - 4:30pm ICT',
+      location: 'SAIGON, VIETNAM',
+    },
+  }
+}
+export default MyApp

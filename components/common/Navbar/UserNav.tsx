@@ -21,7 +21,7 @@ const UserNav: FC<Props> = ({ className }) => {
   const { data } = useCart()
   const { data: customer } = useCustomer()
   const router = useRouter()
-  const { currency } = router.query
+  const { currency = 'USA' } = router.query
   const { openSidebar, setModalView, openModal } = useUI()
   const itemsCount = (5 || data?.lineItems.reduce(countItem, 0)) ?? 0
   const { push } = useRouter()
@@ -32,18 +32,27 @@ const UserNav: FC<Props> = ({ className }) => {
           placement="right"
           className={cn(s.item, 'flex items-baseline relative')}
           dropdown={
-            <div className="text-xs shadow-lg bg-accents-0 flex flex-col top-header px-md py-2">
+            <div className="text-xs shadow-lg bg-accents-0 flex flex-col top-header px-md py-3">
               {new Array(5).fill(['NZD', 'AUD', 'VND']).map((menu, i) => {
                 {
                   const item = menu[i]
                   if (!item || !item.length) return null
 
                   return (
-                    <Link key={i} href={`?currency=${item}`}>
-                      <a className="leading-extra-loose flex flex-col items-start py-1">
+                    <Link
+                      key={i}
+                      href={{
+                        pathname: router.pathname,
+                        query: {
+                          ...router.query,
+                          currency: item,
+                        },
+                      }}
+                    >
+                      <a className="leading-extra-loose flex flex-col items-start py-2">
                         <div
                           className={cn(
-                            'inline-block text-effect-1 truncate text-xs',
+                            'inline-block text-effect-1 truncate text-h7',
                             currency === item && 'text-primary'
                           )}
                         >
@@ -57,7 +66,7 @@ const UserNav: FC<Props> = ({ className }) => {
             </div>
           }
         >
-          <div className="text-h7">GLOBAL ($USD) </div>
+          <div className="text-h7">GLOBAL (${currency}) </div>
           <span>
             <Down />
           </span>

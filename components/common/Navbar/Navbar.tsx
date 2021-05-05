@@ -65,7 +65,38 @@ const megamenu = [
   ],
 ]
 
-const shopMenu = ['DRESSES', 'TOPS', 'BOTTOMS', 'VIEW ALL', 'SALE']
+const shopMenu = [
+  {
+    label: 'DRESSES',
+    getHref: () => {
+      ;`search?q=DRESSES`
+    },
+  },
+  {
+    label: 'TOPS',
+    getHref: () => {
+      ;`search?q=TOPS`
+    },
+  },
+  {
+    label: 'BOTTOMS',
+    getHref: () => {
+      ;`search?q=BOTTOMS`
+    },
+  },
+  {
+    label: 'VIEW ALL',
+    getHref: () => {
+      ;`search`
+    },
+  },
+  {
+    label: 'SALE',
+    getHref: () => {
+      ;`search?q=SALE`
+    },
+  },
+]
 const pagesMenu = [
   ['About', 'About Us', 'About Us v2', 'About Me'],
   ['Contact', 'Contact Us', 'Contact Us v2', 'Contact Me'],
@@ -138,7 +169,6 @@ const Navbar: FC<Props> = ({ transparent }) => {
       <div className="flex-1 flex items-center">
         <div
           onClick={() => {
-            // setModalView('MENU')
             openSidebar()
           }}
           className={classNames(s.item, 'z-10')}
@@ -269,46 +299,44 @@ const Navbar: FC<Props> = ({ transparent }) => {
           dropdown={
             <div className="w-full py-6 bg-accents-0 shadow-magical">
               <Container className="w-full flex text-xs relative">
-                <div className="flex flex-1 space-x-24 justify-start  py-6 ">
+                <div className="flex flex-1 space-x-24 justify-start  py-10 ">
                   <Text variant="h4">CLOTHING</Text>
-                  <div className="space-y-2 flex flex-col items-start">
-                    {shopMenu.map((item, i) => {
-                      {
-                        return (
-                          <Link key={i} href={`/search?q=${item}`}>
-                            <a
-                              className={classNames(
-                                'inline-block h-7 text-effect-1 py-2 '
-                              )}
-                            >
-                              {item}
-                            </a>
-                          </Link>
-                        )
-                      }
-                    })}
-                    <div />
-                    <Link href={`/search?q=${'our-edits'}`}>
-                      <a
-                        className={classNames(
-                          'inline-block header-2 text-effect-1 py-2 '
-                        )}
-                      >
+                  <div className="space-y-6">
+                    <div className="space-y-2  flex flex-col items-start">
+                      {shopMenu.map(({ label, getHref }, i) => {
+                        {
+                          return (
+                            <Link key={i} href={getHref()}>
+                              <a
+                                className={classNames(
+                                  'inline-block text-h7 text-effect-1 py-2 '
+                                )}
+                              >
+                                {label}
+                              </a>
+                            </Link>
+                          )
+                        }
+                      })}
+                    </div>
+
+                    <div className="space-y-2  flex flex-col items-start">
+                      <a className={classNames('inline-block header-2 py-2 ')}>
                         OUR EDITS
                       </a>
-                    </Link>
-                    <Link href={`/search?q=${'motherhood'}`}>
-                      <a
-                        className={classNames(
-                          'inline-block header-2 text-effect-1 py-2 '
-                        )}
-                      >
-                        MOTHERHOOD
-                      </a>
-                    </Link>
+                      <Link href={`/search?q=${'motherhood'}`}>
+                        <a
+                          className={classNames(
+                            'inline-block text-h7 text-effect-1 py-2 '
+                          )}
+                        >
+                          MOTHERHOOD
+                        </a>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-                <div className="flex-1 space-y-4">
+                <div className="flex-1 space-y-4 flex flex-col items-start">
                   <Image
                     className="bg-accents-1"
                     layout="intrinsic"
@@ -334,7 +362,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           dropdown={
             <div className="w-full py-6 bg-accents-0 shadow-magical">
               <Container className="w-full flex text-xs relative">
-                <div className="flex flex-1 space-x-24 justify-start  py-6 ">
+                <div className="flex flex-1 space-x-24 justify-start py-10 ">
                   <Text variant="h4">collections</Text>
                   <div className="space-x-6 flex ">
                     <div className="flex-1 flex items-start flex-col space-y-4">

@@ -60,7 +60,16 @@ const SidebarLayout: FC<Props> = ({
                   if (!item || !item.length) return null
 
                   return (
-                    <Link key={i} href={`?currency=${item}`}>
+                    <Link
+                      key={i}
+                      href={{
+                        pathname: router.pathname,
+                        query: {
+                          ...router.query,
+                          currency: item,
+                        },
+                      }}
+                    >
                       <a className="leading-extra-loose flex flex-col items-start py-1 hover:bg-accents-2  px-md">
                         <div
                           className={cn(

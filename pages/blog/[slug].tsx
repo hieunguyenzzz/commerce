@@ -1,5 +1,5 @@
 import { Article } from '@commerce/types'
-import { BlogListView, BlogView } from '@components/blog'
+import { BlogListView, BlogSidebar, BlogView } from '@components/blog'
 import { getAllTagsFromArticles } from '@components/blog/helpers'
 import { Layout } from '@components/common'
 import { getConfig } from '@framework/api'
@@ -63,8 +63,9 @@ export default function Blog({
   tags,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
-  const currentTag =
-    tags.find((item) => item.toLowerCase() === slug.toLowerCase()) || null
+  const currentTag = tags.find(
+    (item) => item.toLowerCase() === slug.toLowerCase()
+  )
   const showarticles = articles.filter(
     (article) =>
       article.tags &&
@@ -79,6 +80,7 @@ export default function Blog({
   if (router.isFallback) {
     return <h1>Loading...</h1>
   }
+  let reactnode = null
   if (article) {
     const sameTagsArticle = articles.filter((art) =>
       art.tags.includes(article.tags[0])
@@ -86,7 +88,7 @@ export default function Blog({
     const articleIndex = sameTagsArticle.findIndex(
       (article) => article.slug === slug
     )
-    return (
+    reactnode = (
       <>
         <NextSeo
           title={article?.seo?.title}
@@ -123,12 +125,28 @@ export default function Blog({
       </>
     )
   }
-  return (
+  reactnode = (
     <WhatBlog
       articles={showarticles}
       tags={tags}
       currentTag={currentTag ? currentTag : undefined}
     />
+  )
+  return (
+    <>
+      {reactnode}
+      <BlogSidebar
+        {...{
+          currentTag,
+          tags: [
+            'INSPIRING WOMEN',
+            'BEHIND TESS JEAN',
+            'EDITIORIALS',
+            'LIFESTYLE',
+          ],
+        }}
+      />
+    </>
   )
 }
 

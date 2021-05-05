@@ -53,11 +53,11 @@ const Layout: FC<Props> = ({
     modalView,
   } = useUI()
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies()
-  const { locale = 'en-US', pathname } = useRouter()
+  const { locale = 'en-US', pathname, query, asPath } = useRouter()
   useEffect(() => {
     closeSidebar()
     closeModal()
-  }, [pathname, closeSidebar, closeModal])
+  }, [pathname, query, asPath, closeSidebar, closeModal])
   return (
     <CommerceProvider locale={locale}>
       <div className={cn(s.root)}>

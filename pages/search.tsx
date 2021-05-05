@@ -22,23 +22,25 @@ export async function getStaticProps({
     config,
     preview,
   })
-  const { categories, brands } = await getSiteInfo({
+
+  const { categories, tags, brands, articles, products } = await getSiteInfo({
     config,
     preview,
   })
   return {
     props: {
-      collections,
       pages,
+      collections,
       categories,
-      brands,
+      tags,
+      articles,
+      products,
     },
   }
 }
 
 export default function Search({
   categories,
-  brands,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
   const { asPath } = router
@@ -46,7 +48,7 @@ export default function Search({
   // in the same way of products, it's better to ignore the search input if one
   // of those is selected
 
-  const { category, brand } = useSearchMeta(asPath)
+  const { category } = useSearchMeta(asPath)
   const activeCategory = categories.find(
     (cat) => getSlug(cat.path) === category
   )
