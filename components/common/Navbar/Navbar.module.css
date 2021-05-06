@@ -4,7 +4,7 @@
     box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
   }
   & > * {
-    @apply h-header fixed flex items-center w-full top-0 bg-accents-0 z-40 transition-colors duration-300;
+    @apply h-header fixed flex items-center w-full top-0 left-0 right-0 bg-accents-0 z-40 transition-colors duration-300;
   }
   &.transparent {
     & + * {
