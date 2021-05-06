@@ -22,7 +22,7 @@ const UserNav: FC<Props> = ({ className }) => {
   const { data: customer } = useCustomer()
   const router = useRouter()
   const { currency = 'USA' } = router.query
-  const { openSidebar, setModalView, openModal } = useUI()
+  const { openSidebar, setModalView } = useUI()
   const itemsCount = (5 || data?.lineItems.reduce(countItem, 0)) ?? 0
   const { push } = useRouter()
   return (

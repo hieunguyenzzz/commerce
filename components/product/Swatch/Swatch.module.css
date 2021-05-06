@@ -14,7 +14,7 @@
     @apply border-black;
   }
   &.disabled {
-    opacity: 0.6;
+    @apply text-accents-4;
     pointer-events: none;
     cursor: not-allowed;
   }

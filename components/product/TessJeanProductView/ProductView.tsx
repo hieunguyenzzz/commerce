@@ -146,10 +146,8 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                       const active = (choices as any)[sizeOptions.displayName]
                       return (
                         <Swatch
-                          className={classNames(
-                            'flex-shrink-0',
-                            !v.available && 'pointer-events-none && opacity-50'
-                          )}
+                          className={classNames('flex-shrink-0')}
+                          disabled={!v.available}
                           key={`${sizeOptions.id}-${i}`}
                           active={v.label === active}
                           variant={sizeOptions.displayName}
@@ -193,15 +191,18 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             <div className="h-12"></div>
           </div>
         </Container>
-        <Container small className="py-6 lg:py-12 space-y-6 lg:space-y-10">
+        <Container
+          small
+          className="py-6 px-0 lg:py-12 space-y-6 lg:space-y-10 overflow-hidden"
+        >
           <Text variant="h4" className="text-center">
             YOU MAY ALSO LIKE
           </Text>
-          <div className="-m-2">
+          <div className="min-w-[125%] md:min-w-full md:w-full ml-[-16px] md:mx-[-8px]">
             <ProductSlider2>
               {relatedProducts.map((product, i) => {
                 return (
-                  <div className="p-2">
+                  <div className="pl-[16px] md:px-[8px]" key={i}>
                     <ProductCard
                       key={i}
                       label={product.label as any}
@@ -210,6 +211,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                   </div>
                 )
               })}
+              <div className="w-1/ md:hidden" />
             </ProductSlider2>
           </div>
         </Container>

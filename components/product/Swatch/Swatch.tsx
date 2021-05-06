@@ -11,6 +11,7 @@ interface Props {
   label?: string
   variant?: 'size' | 'color' | string
   color?: string
+  disabled?: boolean
 }
 
 const Swatch: FC<Omit<ButtonProps, 'variant'> & Props> = ({
@@ -19,6 +20,7 @@ const Swatch: FC<Omit<ButtonProps, 'variant'> & Props> = ({
   label,
   variant = 'size',
   active,
+  disabled,
   ...props
 }) => {
   variant = variant?.toLowerCase()
@@ -28,6 +30,7 @@ const Swatch: FC<Omit<ButtonProps, 'variant'> & Props> = ({
     s.root,
     {
       [s.active]: active,
+      [s.disabled]: disabled,
       [s.size]: variant === 'size',
       [s.color]: color,
       [s.dark]: color ? isDark(color) : false,

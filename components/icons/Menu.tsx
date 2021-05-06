@@ -10,8 +10,8 @@ const Menu = ({ ...props }) => {
     >
       <path
         d="M2.00195 9H22.9997"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path d="M2 15H22.9925" strokeLinecap="round" strokeLinejoin="round" />
     </svg>

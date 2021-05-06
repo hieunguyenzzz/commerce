@@ -22,7 +22,7 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ slug: string }>) {
   const config = getConfig({ locale })
   const { pages } = await getAllPages({ config, preview })
-  const { product } = await getProduct({
+  const { product, rawProduct } = await getProduct({
     variables: { slug: params!.slug },
     config,
     preview,
@@ -45,6 +45,7 @@ export async function getStaticProps({
     props: {
       pages,
       product,
+      rawProduct,
       relatedProducts: products,
     },
     revalidate: 200,
@@ -71,6 +72,7 @@ const EnchancedShopSidebar = () => {
 }
 export default function Slug({
   product,
+  rawProduct,
   relatedProducts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()

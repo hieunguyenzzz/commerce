@@ -13,7 +13,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string
   secondary?: boolean
   className?: string
-  variant?: 'flat' | 'slim' | 'link'
+  variant?: 'flat' | 'slim' | 'link' | 'ghost'
   active?: boolean
   type?: 'submit' | 'reset' | 'button'
   Component?: string | JSXElementConstructor<any>
@@ -44,6 +44,7 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
       [s.secondary]: secondary,
       [s.slim]: variant === 'slim',
       [s.link]: variant === 'link',
+      [s.ghost]: variant === 'ghost',
       [s.loading]: loading,
       [s.disabled]: disabled,
     },

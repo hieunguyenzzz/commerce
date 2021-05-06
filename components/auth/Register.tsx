@@ -12,8 +12,6 @@ import Layout from './Layout'
 interface Props {}
 
 const RegisterView: FC<Props> = () => {
-  // Form State
-  // Form State
   const [email, setEmail] = useState('')
   const [acceptsMarketing, setacceptsMarketing] = useState(false)
   const [password, setPassword] = useState('')

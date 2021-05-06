@@ -1,9 +1,9 @@
 import { GraphQLFetcherResult } from '@commerce/api'
+import { Product } from '@commerce/types'
 import { getConfig, ShopifyConfig } from '../api'
 import { ProductEdge } from '../schema'
-import { getAllProductsQuery } from '../utils/queries'
 import { normalizeProduct } from '../utils/normalize'
-import { Product } from '@commerce/types'
+import { getAllProductsQuery } from '../utils/queries'
 
 type Variables = {
   first?: number

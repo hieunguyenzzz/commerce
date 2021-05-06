@@ -1,8 +1,10 @@
 import useCustomer from '@commerce/customer/use-customer'
+import { CartMenu } from '@components/cart'
 import { UserNav } from '@components/common'
-import { Bag, Menu, User } from '@components/icons'
+import { Bag, Close, Menu, User } from '@components/icons'
 import { CATEGORIES } from '@components/product/helpers'
 import { Container, Text, useUI } from '@components/ui'
+import ClickOutside from '@lib/click-outside'
 import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -131,7 +133,14 @@ export const NavItem: React.FC<NavItemProps> = ({
   )
 }
 const Navbar: FC<Props> = ({ transparent }) => {
-  const { openSidebar, setModalView } = useUI()
+  const {
+    openSidebar,
+    setModalView,
+    openModal,
+    modalView,
+    displaySidebar,
+    closeSidebar,
+  } = useUI()
   const { data: customer } = useCustomer()
   const router = useRouter()
   const smallNav = (
@@ -473,12 +482,40 @@ const Navbar: FC<Props> = ({ transparent }) => {
 
   return (
     <NavbarRoot transparent={transparent}>
-      <div>
-        <Container fluid className="w-full xl:hidden">
-          {smallNav}
-        </Container>
-        <Container className="w-full hidden xl:block">{largeNav}</Container>
-      </div>
+      <Container>
+        <div className="w-full xl:hidden">{smallNav}</div>
+        <div className="w-full hidden xl:block">{largeNav}</div>
+        {modalView === 'CART' && displaySidebar && (
+          <ClickOutside
+            active
+            onClick={(e) => {
+              closeSidebar(e)
+            }}
+          >
+            <div
+              onClick={closeSidebar}
+              className="sm:pointer-events-none absolute top-0 pt-[126px] right-0 isolate z-10 h-screen w-screen bg-black bg-opacity-50 sm:pt-5 sm:bg-transparent"
+            >
+              <Container className="flex justify-end">
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation()
+                  }}
+                  className="relative pointer-events-auto w-full  sm:w-[470px] max-w-full bg-accents-0  border border-black shadow p-[24px] lg:px-[33px] lg:py-[23px]"
+                >
+                  <CartMenu />
+                  <div
+                    onClick={closeSidebar}
+                    className="text-[12px] bg-white bg-opacity-60 p-2 md:hidden absolute top-[12px] right-[12px] hover-effect-1 rounded-full"
+                  >
+                    <Close />
+                  </div>
+                </div>
+              </Container>
+            </div>
+          </ClickOutside>
+        )}
+      </Container>
     </NavbarRoot>
   )
 }
