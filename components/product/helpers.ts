@@ -29,3 +29,20 @@ export function getVariant(product: Product, opts: SelectedOptions) {
   })
   return variant
 }
+
+
+// TODO (bc) : Remove or standarize this.
+export const SORT = Object.entries({
+  featured: 'featured',
+  'newest-in': 'newest in',
+  'price-asc': 'Price Low to high',
+  'price-desc': 'Price High to low',
+})
+// TODO (bc) : Remove or standarize this.
+export const MOTHERHOOD = Object.entries({
+  pregnant: 'pregnant',
+  nursing: 'nursing',
+})
+// TODO (bc) : Remove or standarize this.
+export const NUMBER_SIZE = ['6', '8', '10', '12', '14', '16']
+export const TEXT_SIZE = ['xs', 's', 'm', 'l']
