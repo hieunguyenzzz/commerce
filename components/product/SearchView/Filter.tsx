@@ -65,7 +65,7 @@ export const Filter = ({
   sort,
   toggleFilter,
 }: {
-  activeCategory: any
+  activeCategory?: any
   handleClick: any
   categories: any[]
   router: any

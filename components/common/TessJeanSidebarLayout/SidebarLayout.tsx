@@ -26,7 +26,7 @@ const SidebarLayout: FC<Props> = ({
       <header>
         <Container className="flex justify-between space-x-3 items-center">
           <div className="w-full border-b border-black">
-            <div className="flex items-center py-[11px] mx-[-8px]  h-header">
+            <div className="flex items-center py-[11px] mx-[-8px]">
               <button
                 onClick={handleClose}
                 aria-label="Close panel"
@@ -46,7 +46,7 @@ const SidebarLayout: FC<Props> = ({
       </header>
       <Container className={cn(s.content)}>
         {children}
-        <div className="flex-1"></div>
+        <div className="flex-1 p-6"></div>
         <div className="flex justify-start">
           <div className="group flex items-center relative">
             <div className="text-h7">GLOBAL (${currency}) </div>

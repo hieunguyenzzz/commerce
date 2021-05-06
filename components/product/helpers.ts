@@ -46,3 +46,36 @@ export const MOTHERHOOD = Object.entries({
 // TODO (bc) : Remove or standarize this.
 export const NUMBER_SIZE = ['6', '8', '10', '12', '14', '16']
 export const TEXT_SIZE = ['xs', 's', 'm', 'l']
+
+export const CATEGORIES = [
+  {
+    label: 'DRESSES',
+    getHref: () => {
+      return `search?q=DRESSES`
+    },
+  },
+  {
+    label: 'TOPS',
+    getHref: () => {
+      return `search?q=TOPS`
+    },
+  },
+  {
+    label: 'BOTTOMS',
+    getHref: () => {
+      return `search?q=BOTTOMS`
+    },
+  },
+  {
+    label: 'VIEW ALL',
+    getHref: () => {
+      return `search`
+    },
+  },
+  {
+    label: 'SALE',
+    getHref: () => {
+      return `search?q=SALE`
+    },
+  },
+]

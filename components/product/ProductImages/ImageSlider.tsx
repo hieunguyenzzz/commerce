@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import { useKeenSlider } from 'keen-slider/react'
-import React, { Children, forwardRef, useEffect, useRef, useState } from 'react'
+import React, { Children, forwardRef, useRef, useState } from 'react'
 import s from './ImageSlider.module.css'
 
 interface Props {
@@ -30,39 +30,6 @@ const ImageSlider: React.FC = ({ children }) => {
       setCurrentSlide(s.details().relativeSlide)
     },
   })
-  // Stop the history navigation gesture on touch devices
-  useEffect(() => {
-    const preventNavigation = (event: TouchEvent) => {
-      // Center point of the touch area
-      const touchXPosition = event.touches[0].pageX
-      // Size of the touch area
-      const touchXRadius = event.touches[0].radiusX || 0
-
-      // We set a threshold (10px) on both sizes of the screen,
-      // if the touch area overlaps with the screen edges
-      // it's likely to trigger the navigation. We prevent the
-      // touchstart event in that case.
-      if (
-        touchXPosition - touchXRadius < 10 ||
-        touchXPosition + touchXRadius > window.innerWidth - 10
-      )
-        event.preventDefault()
-    }
-
-    sliderContainerRef.current!.addEventListener(
-      'touchstart',
-      preventNavigation
-    )
-
-    return () => {
-      if (sliderContainerRef.current) {
-        sliderContainerRef.current!.removeEventListener(
-          'touchstart',
-          preventNavigation
-        )
-      }
-    }
-  }, [])
   return (
     <div ref={sliderContainerRef} className={s.root} data-testid="ImageSlider">
       {slider && currentSlide !== 0 && (

@@ -1,5 +1,7 @@
+import ShopSidebar from '@components/blog/ShopSidebar'
 import { Layout } from '@components/common'
 import { ProductView } from '@components/product'
+import { CATEGORIES } from '@components/product/helpers'
 import { getConfig } from '@framework/api'
 import getAllPages from '@framework/common/get-all-pages'
 import getAllProductPaths from '@framework/product/get-all-product-paths'
@@ -64,7 +66,9 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
     fallback: 'blocking',
   }
 }
-
+const EnchancedShopSidebar = () => {
+  return <ShopSidebar categories={CATEGORIES}></ShopSidebar>
+}
 export default function Slug({
   product,
   relatedProducts,
@@ -74,11 +78,14 @@ export default function Slug({
   return router.isFallback ? (
     <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
   ) : (
-    <ProductView
-      key={product?.slug}
-      product={product as any}
-      relatedProducts={relatedProducts}
-    />
+    <>
+      <EnchancedShopSidebar />
+      <ProductView
+        key={product?.slug}
+        product={product as any}
+        relatedProducts={relatedProducts}
+      />
+    </>
   )
 }
 

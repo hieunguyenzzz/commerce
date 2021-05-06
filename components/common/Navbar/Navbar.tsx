@@ -1,6 +1,7 @@
 import useCustomer from '@commerce/customer/use-customer'
 import { UserNav } from '@components/common'
 import { Bag, Menu, User } from '@components/icons'
+import { CATEGORIES } from '@components/product/helpers'
 import { Container, Text, useUI } from '@components/ui'
 import classNames from 'classnames'
 import Image from 'next/image'
@@ -65,38 +66,7 @@ const megamenu = [
   ],
 ]
 
-const shopMenu = [
-  {
-    label: 'DRESSES',
-    getHref: () => {
-      return `search?q=DRESSES`
-    },
-  },
-  {
-    label: 'TOPS',
-    getHref: () => {
-      return `search?q=TOPS`
-    },
-  },
-  {
-    label: 'BOTTOMS',
-    getHref: () => {
-      return `search?q=BOTTOMS`
-    },
-  },
-  {
-    label: 'VIEW ALL',
-    getHref: () => {
-      return `search`
-    },
-  },
-  {
-    label: 'SALE',
-    getHref: () => {
-      return `search?q=SALE`
-    },
-  },
-]
+const shopMenu = CATEGORIES
 const pagesMenu = [
   ['About', 'About Us', 'About Us v2', 'About Me'],
   ['Contact', 'Contact Us', 'Contact Us v2', 'Contact Me'],
