@@ -494,7 +494,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
           >
             <div
               onClick={closeSidebar}
-              className="sm:pointer-events-none absolute top-0 pt-[126px] right-0 isolate z-10 h-screen w-screen bg-black bg-opacity-50 sm:pt-5 sm:bg-transparent"
+              className="sm:pointer-events-none absolute top-0 pt-[126px] right-0 isolate z-10 h-screen bg-black bg-opacity-50 sm:pt-5 sm:bg-transparent w-full"
             >
               <Container className="flex justify-end">
                 <div
