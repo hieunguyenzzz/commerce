@@ -125,7 +125,7 @@ function SearchView({ activeCategory, categories }: Props) {
                 {products?.map((product: Product, i) => (
                   <ProductCard
                     variant="simple"
-                    key={i}
+                    key={product.slug}
                     size="small"
                     className="animated fadeIn"
                     product={product}
