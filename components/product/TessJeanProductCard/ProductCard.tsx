@@ -44,8 +44,9 @@ const ProductCard: FC<Props> = ({
         </div>
         <div className="relative group-hover:bg-white py-4 transform transition-all duration-300 ease-in-out">
           <div className="w-full bg-white pointer-events-none  text-center justify-center text-xs flex opacity-0 group-hover:opacity-100 translate-y-0 transform group-hover:-translate-y-full absolute left-0 top-0 transition-all duration-300 ease-in-out p-2">
-            {getSizeRange(product).map(({ label, available }) => (
+            {getSizeRange(product).map(({ label, available }, i) => (
               <div
+                key={i}
                 className={classNames(
                   'text-xs px-1 flex-1',
                   !available && 'text-accents-4'

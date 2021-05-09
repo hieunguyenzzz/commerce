@@ -30,7 +30,6 @@ export function getVariant(product: Product, opts: SelectedOptions) {
   return variant
 }
 
-
 // TODO (bc) : Remove or standarize this.
 export const SORT = Object.entries({
   featured: 'featured',
