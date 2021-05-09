@@ -15,7 +15,11 @@ const SidebarLayout: FC<Props> = ({
   children,
   className,
   title = 'Tess Jean',
-  icon = <Back />,
+  icon = (
+    <div className="mx-[-8px] pr-[8px]">
+      <Back />
+    </div>
+  ),
 }) => {
   const { closeSidebar } = useUI()
   const handleClose = () => closeSidebar()
@@ -26,7 +30,7 @@ const SidebarLayout: FC<Props> = ({
       <header>
         <Container className="flex justify-between space-x-3 items-center">
           <div className="w-full border-b border-black">
-            <div className="flex items-center py-[11px] mx-[-8px]">
+            <div className="flex items-center py-[11px] ">
               <button
                 onClick={handleClose}
                 aria-label="Close panel"
@@ -34,7 +38,7 @@ const SidebarLayout: FC<Props> = ({
               >
                 {icon}
               </button>
-              <div className="w-full text-[14px] px-md text-center uppercase">
+              <div className="w-full text-[14px] px-[10px] text-center uppercase">
                 {title}
               </div>
               <div className="w-[24px] flex-shrink-0">
@@ -53,7 +57,7 @@ const SidebarLayout: FC<Props> = ({
             <span>
               <Down />
             </span>
-            <div className="hidden absolute bottom-0 min-w-full left-0 shadow-lg group-hover:flex flex-col bg-accents-1 py-2">
+            <div className="hidden absolute bottom-0 min-w-full left-0 shadow-lg group-hover:flex flex-col bg-accents-1 py-2 z-10">
               {new Array(5).fill(['NZD', 'AUD', 'VND']).map((menu, i) => {
                 {
                   const item = menu[i]

@@ -3,20 +3,22 @@ import type { Product } from '@commerce/types'
 import { Breadcrumb } from '@components/common'
 import { SizeGuide } from '@components/icons'
 import AdsSignupView from '@components/others/AdsSignup'
-import { ProductCard, ProductSlider2, Swatch } from '@components/product'
+import { ProductSlider2, Swatch } from '@components/product'
 import { Accordion, Button, Container, Text, useUI } from '@components/ui'
 import { useAddItem } from '@framework/cart'
 import classNames from 'classnames'
 import { NextSeo } from 'next-seo'
-import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import Link from 'next/link'
 import React, { FC, useState } from 'react'
-import { TabsProps } from 'react-tabs'
-import { getSizeRange, getVariant, SelectedOptions } from '../helpers'
+import {
+  getProductLink,
+  getSizeRange,
+  getVariant,
+  placeholderImg,
+  SelectedOptions,
+} from '../helpers'
 import ProductImages from '../ProductImages'
-const Tabs = dynamic<TabsProps>(
-  import('react-tabs').then((mod) => mod.Tabs),
-  { ssr: false }
-) // disable ssr
 interface Props {
   className?: string
   children?: any
@@ -198,28 +200,36 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
           <Text variant="h4" className="text-center">
             YOU MAY ALSO LIKE
           </Text>
-          <div className="min-w-[125%] md:min-w-full md:w-full ml-[-16px] md:mx-[-8px]">
+          <div className="min-w-[493px] md:min-w-full md:w-full ml-[-16px] md:mx-[-8px]">
             <ProductSlider2>
               {relatedProducts.map((product, i) => {
                 return (
-                  <div className="pl-[16px] md:px-[8px]" key={i}>
-                    <ProductCard
-                      key={i}
-                      label={product.label as any}
-                      product={product}
-                    />
-                  </div>
+                  <Link href={getProductLink(product.slug)} key={i}>
+                    <a className="pl-[16px] md:px-[8px] block">
+                      <div className="flex relative items-center w-full bg-gray-100">
+                        <div style={{ paddingTop: (223 / 157) * 100 + '%' }} />
+                        <Image
+                          layout="fill"
+                          objectFit="cover"
+                          quality="85"
+                          sizes="(max-width: 400px) 200px ,500px"
+                          src={product.images[0].url || placeholderImg}
+                          alt={product.name || 'Product Image'}
+                        />
+                      </div>
+                    </a>
+                  </Link>
                 )
               })}
-              <div className="w-1/ md:hidden" />
+              <div className="md:hidden" />
             </ProductSlider2>
           </div>
         </Container>
       </div>
       <Container small>
-        <div className="h-24"></div>
+        <div className="h-12 md:h-24"></div>
         <AdsSignupView />
-        <div className="h-24"></div>
+        <div className="h-12 md:h-24"></div>
       </Container>
     </>
   )

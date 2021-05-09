@@ -3,9 +3,7 @@ import classNames from 'classnames'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
-import { getSizeRange } from '../helpers'
-
-const placeholderImg = '/product-img-placeholder.svg'
+import { getProductLink, getSizeRange, placeholderImg } from '../helpers'
 
 interface LabelProps {
   variant?: 'default' | 'out-of-stock' | 'discount' | 'new'
@@ -31,7 +29,7 @@ const ProductCard: FC<Props> = ({
   ...props
 }) => {
   return (
-    <Link href={`/product/${product.slug}`} {...props}>
+    <Link href={getProductLink(product.slug)} {...props}>
       <a className="group w-full h-full flex flex-col hover:bg-white transition-all duration-600 ease-in-out">
         <div className="flex relative items-center w-full bg-gray-100">
           <div style={{ paddingTop: (358 / 253) * 100 + '%' }} />

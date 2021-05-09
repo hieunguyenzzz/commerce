@@ -1,1 +1,2 @@
-export { default as MenuSidebarView } from './MenuSidebarView'
+export { default as MenuSidebarView } from './DefaultSidebarView';
+

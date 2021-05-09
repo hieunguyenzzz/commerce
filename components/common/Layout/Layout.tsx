@@ -1,15 +1,18 @@
 import LoginView from '@components/auth/LoginView'
+import { CartMenu } from '@components/cart'
 import { Footer, Navbar } from '@components/common'
+import { Close } from '@components/icons'
 import { MenuSidebarView } from '@components/menu'
-import { Button, LoadingDots, Modal, Sidebar } from '@components/ui'
+import { Button, Container, LoadingDots, Modal, Sidebar } from '@components/ui'
 import { useUI } from '@components/ui/context'
 import { CommerceProvider } from '@framework'
 import type { Page } from '@framework/common/get-all-pages'
+import ClickOutside from '@lib/click-outside'
 import { useAcceptCookies } from '@lib/hooks/useAcceptCookies'
 import cn from 'classnames'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import React, { FC, useEffect } from 'react'
+import React, { FC, ReactNode, useEffect } from 'react'
 import s from './Layout.module.css'
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -32,7 +35,8 @@ const FeatureBar = dynamic(
 )
 
 interface Props {
-  renderNavbar?: Function
+  renderNavbar?: () => ReactNode
+  renderMenu?: () => ReactNode
   pageProps: {
     pages?: Page[]
     commerceFeatures: Record<string, boolean>
@@ -42,6 +46,7 @@ interface Props {
 const Layout: FC<Props> = ({
   children,
   renderNavbar,
+  renderMenu,
   pageProps: { commerceFeatures, ...pageProps },
 }) => {
   const {
@@ -77,12 +82,37 @@ const Layout: FC<Props> = ({
           open={displaySidebar && modalView === 'MENU'}
           onClose={closeSidebar}
         >
-          <MenuSidebarView />
+          {renderMenu ? renderMenu() : <MenuSidebarView />}
         </Sidebar>
         <Modal open={displayModal} onClose={closeModal}>
           {modalView === 'LOGIN_VIEW' && <LoginView />}
           {modalView === 'FORGOT_VIEW' && <ForgotPassword />}
         </Modal>
+        {modalView === 'CART' && displaySidebar && (
+          <ClickOutside active onClick={closeSidebar}>
+            <div
+              onClick={closeSidebar}
+              className="sm:pointer-events-none z-50 fixed sm:absolute top-0 pt-[126px] pb-[50px] right-0 h-screen overflow-auto bg-black bg-opacity-50 sm:pt-5 sm:bg-transparent w-full"
+            >
+              <Container className="flex justify-end">
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation()
+                  }}
+                  className="relative pointer-events-auto w-full  sm:w-[470px] max-w-full bg-accents-0  border border-black shadow p-[24px] lg:px-[33px] lg:py-[23px]"
+                >
+                  <CartMenu />
+                  <div
+                    onClick={closeSidebar}
+                    className="text-[12px] bg-white bg-opacity-60 p-2 md:hidden absolute top-[12px] right-[12px] hover-effect-1 rounded-full"
+                  >
+                    <Close />
+                  </div>
+                </div>
+              </Container>
+            </div>
+          </ClickOutside>
+        )}
       </div>
     </CommerceProvider>
   )

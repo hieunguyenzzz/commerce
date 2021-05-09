@@ -1,4 +1,4 @@
-import { Breadcrumb, Layout } from '@components/common'
+import { Breadcrumb, Layout, Navbar } from '@components/common'
 import AdsSignupView from '@components/others/AdsSignup'
 import { SearchView } from '@components/product'
 import { Container } from '@components/ui'
@@ -70,3 +70,4 @@ export default function Search({
 }
 
 Search.Layout = Layout
+Search.renderNavbar = () => <Navbar modalView="SEARCH" />

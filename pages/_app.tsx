@@ -12,6 +12,7 @@ const Noop: FC = ({ children }) => <>{children}</>
 function MyApp({ Component, pageProps }: AppProps) {
   const Layout = (Component as any).Layout || Noop
   const renderNavbar = (Component as any).renderNavbar
+  const renderMenu = (Component as any).renderMenu
 
   useEffect(() => {
     document.body.classList?.remove('loading')
@@ -21,7 +22,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head />
       <ManagedUIContext>
-        <Layout pageProps={pageProps} renderNavbar={renderNavbar}>
+        <Layout
+          pageProps={pageProps}
+          renderNavbar={renderNavbar}
+          renderMenu={renderMenu}
+        >
           <Component {...pageProps} />
         </Layout>
       </ManagedUIContext>

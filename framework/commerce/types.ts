@@ -163,7 +163,7 @@ interface Entity {
 export interface Product extends Entity {
   name: string
   description: string
-  slug?: string
+  slug: string
   path?: string
   images: ProductImage[]
   variants: ProductVariant2[]

@@ -51,31 +51,35 @@ export const CATEGORIES = [
   {
     label: 'DRESSES',
     getHref: () => {
-      return `search?q=DRESSES`
+      return `/search?q=DRESSES`
     },
   },
   {
     label: 'TOPS',
     getHref: () => {
-      return `search?q=TOPS`
+      return `/search?q=TOPS`
     },
   },
   {
     label: 'BOTTOMS',
     getHref: () => {
-      return `search?q=BOTTOMS`
+      return `/search?q=BOTTOMS`
     },
   },
   {
     label: 'VIEW ALL',
     getHref: () => {
-      return `search`
+      return `/search`
     },
   },
   {
     label: 'SALE',
     getHref: () => {
-      return `search?q=SALE`
+      return `/search?q=SALE`
     },
   },
 ]
+export const placeholderImg = '/product-img-placeholder.svg'
+export const getProductLink=(handle: string)=> {
+  return `/product/${handle}`
+}

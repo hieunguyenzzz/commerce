@@ -9,7 +9,6 @@ type Variables = {
 
 type ReturnType = {
   product: Product
-  rawProduct:any
 }
 
 const getProduct = async (options: {
@@ -28,7 +27,6 @@ const getProduct = async (options: {
 
   return {
     product: normalizeProduct(product),
-    rawProduct:data?.productByHandle
   }
 }
 

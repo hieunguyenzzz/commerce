@@ -14,7 +14,5 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 export default function Home({}: InferGetStaticPropsType<
   typeof getStaticProps
 >) {
-  return null
+  return <ComingSoon />
 }
-
-Home.Layout = ComingSoon

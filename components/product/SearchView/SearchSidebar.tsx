@@ -1,6 +1,6 @@
 import { SidebarLayout } from '@components/common'
 import { Sidebar, useUI } from '@components/ui'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode } from 'react'
 
 const SearchSidebar: React.FC<{
   children: ReactNode
@@ -8,9 +8,6 @@ const SearchSidebar: React.FC<{
   currentTag?: string
 }> = ({ children, title = 'SHOP' }) => {
   const { displaySidebar, closeSidebar, modalView, setModalView } = useUI()
-  useEffect(() => {
-    setModalView('SEARCH')
-  }, [])
   return (
     <Sidebar
       position="left"

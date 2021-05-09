@@ -1,10 +1,8 @@
 import useCustomer from '@commerce/customer/use-customer'
-import { CartMenu } from '@components/cart'
 import { UserNav } from '@components/common'
-import { Bag, Close, Menu, User } from '@components/icons'
+import { Bag, Menu, User } from '@components/icons'
 import { CATEGORIES } from '@components/product/helpers'
 import { Container, Text, useUI } from '@components/ui'
-import ClickOutside from '@lib/click-outside'
 import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,59 +11,13 @@ import { FC, ReactElement } from 'react'
 import s from './Navbar.module.css'
 import NavbarRoot from './NavbarRoot'
 export interface Props {
+  modalView?: 'MENU' | 'SEARCH' | 'SHOP'
   transparent?: boolean
 }
-const megamenuImage = '/mega-menu.png'
 const renderItem = (renderer: any, index: any) => renderer(index)
 const homeMenu = [
   new Array(6).fill((index: any) => `Home v${index + 1}`).map(renderItem),
   new Array(4).fill((index: any) => `Home v${index + 7}`).map(renderItem),
-]
-const megamenu = [
-  [
-    'HEADER',
-    'Header v1',
-    'Header v2',
-    'Header v3',
-    'Header v4',
-    'Header v5',
-    'Header v6',
-    'Header v7',
-    'Header v8',
-    'Header v9',
-    'Header v10',
-  ],
-  ['FOOTER', 'Footer v1', 'Footer v2', 'Footer v3', 'Footer v4', 'Footer v5'],
-  [
-    'PRODUCT',
-    'Product v1 – Classic',
-    'Product v2 – Slider',
-    'Product v3 – Zoom',
-    'Product v4 – Fadein',
-    'Product v5 – Simple',
-  ],
-  [
-    'ELEMENTS',
-    'Accordion',
-    'Pricing Table',
-    'Google Maps',
-    'Message Box',
-    'Progress Bars',
-    'Charts',
-    'Icon Box',
-    'Product Tabs',
-    'Products Grid',
-  ],
-  [
-    'ELEMENTS 2',
-    'Tabs',
-    'Video Players',
-    'Team',
-    'Buttons',
-    'Testimonials',
-    'Social Icons',
-    'Blog Posts',
-  ],
 ]
 
 const shopMenu = CATEGORIES
@@ -132,15 +84,8 @@ export const NavItem: React.FC<NavItemProps> = ({
     </div>
   )
 }
-const Navbar: FC<Props> = ({ transparent }) => {
-  const {
-    openSidebar,
-    setModalView,
-    openModal,
-    modalView,
-    displaySidebar,
-    closeSidebar,
-  } = useUI()
+const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
+  const { openSidebar, setModalView, displaySidebar, closeSidebar } = useUI()
   const { data: customer } = useCustomer()
   const router = useRouter()
   const smallNav = (
@@ -148,6 +93,7 @@ const Navbar: FC<Props> = ({ transparent }) => {
       <div className="flex-1 flex items-center">
         <div
           onClick={() => {
+            setModalView(modalView)
             openSidebar()
           }}
           className={classNames(s.item, 'z-10')}
@@ -485,36 +431,6 @@ const Navbar: FC<Props> = ({ transparent }) => {
       <Container>
         <div className="w-full xl:hidden">{smallNav}</div>
         <div className="w-full hidden xl:block">{largeNav}</div>
-        {modalView === 'CART' && displaySidebar && (
-          <ClickOutside
-            active
-            onClick={(e) => {
-              closeSidebar(e)
-            }}
-          >
-            <div
-              onClick={closeSidebar}
-              className="sm:pointer-events-none absolute top-0 pt-[126px] right-0 isolate z-10 h-screen bg-black bg-opacity-50 sm:pt-5 sm:bg-transparent w-full"
-            >
-              <Container className="flex justify-end">
-                <div
-                  onClick={(e) => {
-                    e.stopPropagation()
-                  }}
-                  className="relative pointer-events-auto w-full  sm:w-[470px] max-w-full bg-accents-0  border border-black shadow p-[24px] lg:px-[33px] lg:py-[23px]"
-                >
-                  <CartMenu />
-                  <div
-                    onClick={closeSidebar}
-                    className="text-[12px] bg-white bg-opacity-60 p-2 md:hidden absolute top-[12px] right-[12px] hover-effect-1 rounded-full"
-                  >
-                    <Close />
-                  </div>
-                </div>
-              </Container>
-            </div>
-          </ClickOutside>
-        )}
       </Container>
     </NavbarRoot>
   )

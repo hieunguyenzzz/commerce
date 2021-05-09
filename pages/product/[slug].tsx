@@ -1,5 +1,5 @@
 import ShopSidebar from '@components/blog/ShopSidebar'
-import { Layout } from '@components/common'
+import { Layout, Navbar } from '@components/common'
 import { ProductView } from '@components/product'
 import { CATEGORIES } from '@components/product/helpers'
 import { getConfig } from '@framework/api'
@@ -22,7 +22,7 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ slug: string }>) {
   const config = getConfig({ locale })
   const { pages } = await getAllPages({ config, preview })
-  const { product, rawProduct } = await getProduct({
+  const { product } = await getProduct({
     variables: { slug: params!.slug },
     config,
     preview,
@@ -45,7 +45,6 @@ export async function getStaticProps({
     props: {
       pages,
       product,
-      rawProduct,
       relatedProducts: products,
     },
     revalidate: 200,
@@ -72,11 +71,9 @@ const EnchancedShopSidebar = () => {
 }
 export default function Slug({
   product,
-  rawProduct,
   relatedProducts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
-
   return router.isFallback ? (
     <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
   ) : (
@@ -92,3 +89,4 @@ export default function Slug({
 }
 
 Slug.Layout = Layout
+Slug.renderNavbar = () => <Navbar modalView="SHOP" />

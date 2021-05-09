@@ -2,7 +2,7 @@ import { SidebarLayout } from '@components/common'
 import { Sidebar, useUI } from '@components/ui'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React from 'react'
 interface Props {
   categories?: {
     label: string
@@ -18,9 +18,6 @@ const ShopSidebar: React.FC<Props> = ({
   currentTag,
 }) => {
   const { displaySidebar, closeSidebar, modalView, setModalView } = useUI()
-  useEffect(() => {
-    setModalView('SHOP')
-  }, [])
   return (
     <Sidebar
       position="left"
