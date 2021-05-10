@@ -92,7 +92,7 @@ const Layout: FC<Props> = ({
           <ClickOutside active onClick={closeSidebar}>
             <div
               onClick={closeSidebar}
-              className="sm:pointer-events-none z-50 fixed sm:absolute top-0 pt-[126px] pb-[50px] right-0 h-screen overflow-auto bg-black bg-opacity-50 sm:pt-5 sm:bg-transparent w-full"
+              className="sm:pointer-events-none z-50 fixed sm:fixed top-0 pt-[126px] pb-[50px] right-0 h-screen overflow-auto bg-black bg-opacity-50 sm:pt-5 sm:bg-transparent w-full"
             >
               <Container className="flex justify-end">
                 <div

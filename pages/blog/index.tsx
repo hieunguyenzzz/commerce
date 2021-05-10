@@ -1,10 +1,13 @@
 import { BlogListView, BlogSidebar } from '@components/blog'
 import { getAllTagsFromArticles } from '@components/blog/helpers'
 import { Layout } from '@components/common'
+import { Logo, NavbarRoot } from '@components/common/Navbar'
+import { Container } from '@components/ui'
 import { getConfig } from '@framework/api'
 import getAllBlogs from '@framework/blog/get-all-blogs'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
+import React from 'react'
 export async function getStaticProps({
   preview,
   locale,
@@ -56,10 +59,10 @@ export default function Blog({
 }
 
 Blog.Layout = Layout
-// Blog.renderNavbar = () => (
-//   <NavbarRoot>
-//     <Container className="flex justify-center items-center">
-//       <Logo />
-//     </Container>
-//   </NavbarRoot>
-// )
+Blog.renderNavbar = () => (
+  <NavbarRoot>
+    <Container className="flex justify-center items-center">
+      <Logo />
+    </Container>
+  </NavbarRoot>
+)
