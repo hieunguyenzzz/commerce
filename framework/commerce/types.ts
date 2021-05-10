@@ -170,7 +170,7 @@ export interface Product extends Entity {
   price: ProductPrice
   options: ProductOption[]
   sku?: string
-  tags?:string[]
+  tags?: string[]
 }
 
 interface ProductOption extends Entity {
@@ -230,4 +230,15 @@ export interface Article extends Entity {
   /** A categorization that a article can be tagged with. */
   tags: string[]
   /** The article’s name. */
+}
+
+export interface Collection extends Entity {
+  description: string
+  descriptionHtml: string
+  slug?: string
+  path?: string
+  image?: ArticleImage
+  publishedAt: string
+  seo?: Seo
+  product?: Product[]
 }

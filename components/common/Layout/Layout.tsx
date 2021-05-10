@@ -94,12 +94,12 @@ const Layout: FC<Props> = ({
               onClick={closeSidebar}
               className="sm:pointer-events-none z-50 fixed sm:fixed top-0 pt-[126px] pb-[50px] right-0 h-screen overflow-auto bg-black bg-opacity-50 sm:pt-5 sm:bg-transparent w-full"
             >
-              <Container className="flex justify-end">
+              <Container className="flex justify-end items-start h-full">
                 <div
                   onClick={(e) => {
                     e.stopPropagation()
                   }}
-                  className="relative pointer-events-auto w-full  sm:w-[470px] max-w-full bg-accents-0  border border-black shadow p-[24px] lg:px-[33px] lg:py-[23px]"
+                  className="relative max-h-full overflow-auto pointer-events-auto w-full  sm:w-[470px] max-w-full bg-accents-0  border border-black shadow p-[24px] lg:px-[33px] lg:py-[23px]"
                 >
                   <CartMenu />
                   <div

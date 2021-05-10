@@ -1,4 +1,4 @@
-const rates = {
+export const rates = {
   USD: 1.0,
   EUR: 1.21636,
   GBP: 1.39893,
@@ -184,14 +184,10 @@ const rates = {
   VES: 3.50142e-7,
   MXV: 0.333691,
 }
-
-export default {
-  rates,
-  convert: function (
-    amount: number,
-    from: keyof typeof rates,
-    to: keyof typeof rates
-  ) {
-    return (amount * rates[from]) / rates[to]
-  },
+export const convert = function (
+  amount: number,
+  from: keyof typeof rates,
+  to: keyof typeof rates
+) {
+  return (amount * rates[from]) / rates[to]
 }

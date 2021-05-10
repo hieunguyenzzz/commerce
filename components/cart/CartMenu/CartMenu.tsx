@@ -1,30 +1,12 @@
 import { Check, Cross } from '@components/icons'
 import { Button } from '@components/ui'
-import { useUI } from '@components/ui/context'
 import useCart from '@framework/cart/use-cart'
-import usePrice from '@framework/product/use-price'
 import Link from 'next/link'
 import { FC } from 'react'
 import { CartItem } from '..'
 
 const CartMenu: FC = () => {
-  const { closeSidebar } = useUI()
   const { data, isLoading, isEmpty } = useCart()
-
-  const { price: subTotal } = usePrice(
-    data && {
-      amount: Number(data.subtotalPrice),
-      currencyCode: data.currency.code,
-    }
-  )
-  const { price: total } = usePrice(
-    data && {
-      amount: Number(data.totalPrice),
-      currencyCode: data.currency.code,
-    }
-  )
-  const handleClose = () => closeSidebar()
-
   const error = null
   const success = null
 
@@ -96,7 +78,7 @@ const CartMenu: FC = () => {
               ))}
             </ul>
           </div>
-          <div className="flex-shrink-0 mt-5">
+          <div className="flex-shrink-0 mt-5 sticky bottom-0">
             <div className="flex justify-end  font-semibold text-primary">
               <Link href="/cart">
                 <Button Component="a" width="100%">

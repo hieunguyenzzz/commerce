@@ -11,7 +11,7 @@ import { FC, ReactElement } from 'react'
 import s from './Navbar.module.css'
 import NavbarRoot from './NavbarRoot'
 export interface Props {
-  modalView?: 'MENU' | 'SEARCH' | 'SHOP'
+  modalView?: 'MENU' | 'SEARCH' | 'SHOP' | 'COLLECTION'
   transparent?: boolean
 }
 const renderItem = (renderer: any, index: any) => renderer(index)

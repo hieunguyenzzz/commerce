@@ -1,4 +1,4 @@
-import usePrice from '@commerce/product/use-price'
+import { usePrice } from '@commerce/product'
 import type { Product } from '@commerce/types'
 import { Breadcrumb } from '@components/common'
 import { SizeGuide } from '@components/icons'
@@ -45,10 +45,10 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
     color: null,
   })
 
-  const { price } = usePrice({
+  const { price, currency } = usePrice({
     amount: product.price.value,
     baseAmount: 1,
-    currencyCode: product.price.currencyCode || '$',
+    baseCurrency: product.price.currencyCode,
   })
 
   // Select the correct variant based on choices
@@ -107,7 +107,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             <div className="space-y-1">
               <Text variant="h5">{product.name}</Text>
               <div className="uppercase">
-                {price} {product.price.currencyCode}
+                {price} {currency}
               </div>
             </div>
             <div className="break-words w-full max-w-xl">

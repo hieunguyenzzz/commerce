@@ -1,3 +1,4 @@
+import { usePrice } from '@commerce/product'
 import type { Product } from '@commerce/types'
 import classNames from 'classnames'
 import Image, { ImageProps } from 'next/image'
@@ -28,6 +29,9 @@ const ProductCard: FC<Props> = ({
   size,
   ...props
 }) => {
+  const { price, currency } = usePrice({
+    amount: product.price.value,
+  })
   return (
     <Link href={getProductLink(product.slug)} {...props}>
       <a className="group w-full h-full flex flex-col hover:bg-white transition-all duration-600 ease-in-out">
@@ -58,8 +62,7 @@ const ProductCard: FC<Props> = ({
           <div className="space-y-1">
             <h4 className="uppercase header-2">{product.name}</h4>
             <div className="text-sm mt-1 ">
-              <span>{product.price.value}</span>{' '}
-              <span>{product.price.currencyCode}</span>
+              <span>{price}</span> <span>{currency}</span>
             </div>
           </div>
         </div>

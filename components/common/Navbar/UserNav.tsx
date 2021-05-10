@@ -4,6 +4,7 @@ import { useUI } from '@components/ui/context'
 import useCart from '@framework/cart/use-cart'
 import { useCustomer } from '@framework/customer'
 import type { LineItem } from '@framework/types'
+import { useCurrency } from '@lib/hooks/useCurrency'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -21,7 +22,7 @@ const UserNav: FC<Props> = ({ className }) => {
   const { data } = useCart()
   const { data: customer } = useCustomer()
   const router = useRouter()
-  const { currency = 'USA' } = router.query
+  const { currency, setCurrency } = useCurrency()
   const { openSidebar, setModalView } = useUI()
   const itemsCount = (5 || data?.lineItems.reduce(countItem, 0)) ?? 0
   const { push } = useRouter()
@@ -33,23 +34,20 @@ const UserNav: FC<Props> = ({ className }) => {
           className={cn(s.item, 'flex items-baseline relative')}
           dropdown={
             <div className="text-xs shadow-lg bg-accents-0 flex flex-col top-header px-md py-3">
-              {new Array(5).fill(['NZD', 'AUD', 'VND']).map((menu, i) => {
-                {
-                  const item = menu[i]
-                  if (!item || !item.length) return null
+              {new Array(5)
+                .fill(
+                  ['NZD', 'AUD', 'VND', 'USD'].filter((str) => str !== currency)
+                )
+                .map((menu, i) => {
+                  {
+                    const item = menu[i]
+                    if (!item || !item.length) return null
 
-                  return (
-                    <Link
-                      key={i}
-                      href={{
-                        pathname: router.pathname,
-                        query: {
-                          ...router.query,
-                          currency: item,
-                        },
-                      }}
-                    >
-                      <a className="leading-extra-loose flex flex-col items-start py-2">
+                    return (
+                      <a
+                        onClick={() => setCurrency(item)}
+                        className="leading-extra-loose flex flex-col items-start py-2"
+                      >
                         <div
                           className={cn(
                             'inline-block text-effect-1 truncate text-h7',
@@ -59,10 +57,9 @@ const UserNav: FC<Props> = ({ className }) => {
                           {item}
                         </div>
                       </a>
-                    </Link>
-                  )
-                }
-              })}
+                    )
+                  }
+                })}
             </div>
           }
         >

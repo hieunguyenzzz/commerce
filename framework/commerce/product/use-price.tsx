@@ -23,11 +23,13 @@ export function formatVariantPrice({
   baseAmount,
   currencyCode,
   locale,
+  currencyDisplay,
 }: {
   baseAmount: number
   amount: number
   currencyCode: string
   locale: string
+  currencyDisplay?: string
 }) {
   const hasDiscount = baseAmount > amount
   const formatDiscount = new Intl.NumberFormat(locale, { style: 'percent' })
@@ -48,17 +50,24 @@ export default function usePrice(
     amount: number
     baseAmount?: number
     currencyCode: string
+    currencyDisplay: string
   } | null
 ) {
-  const { amount, baseAmount, currencyCode } = data ?? {}
+  const { amount, baseAmount, currencyCode, currencyDisplay } = data ?? {}
   const { locale } = useCommerce()
   const value = useMemo(() => {
     if (typeof amount !== 'number' || !currencyCode) return ''
 
     return baseAmount
-      ? formatVariantPrice({ amount, baseAmount, currencyCode, locale })
+      ? formatVariantPrice({
+          amount,
+          baseAmount,
+          currencyCode,
+          locale,
+          currencyDisplay,
+        })
       : formatPrice({ amount, currencyCode, locale })
-  }, [amount, baseAmount, currencyCode])
+  }, [amount, baseAmount, currencyCode, currencyDisplay])
 
   return typeof value === 'string' ? { price: value } : value
 }
