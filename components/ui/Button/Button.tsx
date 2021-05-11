@@ -12,6 +12,7 @@ import s from './Button.module.css'
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string
   secondary?: boolean
+  small?: boolean
   className?: string
   variant?: 'flat' | 'slim' | 'link' | 'ghost'
   active?: boolean
@@ -25,6 +26,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
   const {
     className,
+    small,
     variant = 'flat',
     children,
     active,
@@ -42,6 +44,7 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
     s.root,
     {
       [s.secondary]: secondary,
+      [s.small]: small,
       [s.slim]: variant === 'slim',
       [s.link]: variant === 'link',
       [s.ghost]: variant === 'ghost',

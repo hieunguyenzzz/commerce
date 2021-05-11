@@ -7,17 +7,16 @@ const Bag = ({ ...props }) => {
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      stroke="currentColor"
     >
       <path
         d="M20.1818 21.0002H3.81812L5.45449 7.90918H18.5455L20.1818 21.0002Z"
-        stroke="#111111"
         strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M8.72717 10.3637V6.27275C8.72717 4.47274 10.1999 3 11.9999 3C13.7999 3 15.2727 4.47274 15.2727 6.27275V10.3637"
-        stroke="#111111"
         strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"

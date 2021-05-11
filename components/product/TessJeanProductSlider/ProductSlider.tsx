@@ -16,25 +16,30 @@ const Slider = forwardRef<HTMLDivElement, Props>(({ children }, ref) => {
     </div>
   )
 })
-const ProductSlider: React.FC = ({ children }) => {
+const ProductSlider: React.FC<{
+  slidesPerView?: number
+  breakpoints?: any
+}> = ({ children, slidesPerView = 3, breakpoints }) => {
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
-    slidesPerView: 3,
+    slidesPerView,
     centered: false,
     loop: false,
-    breakpoints: {
-      '(min-width: 600px)': {
-        slidesPerView: 3,
-        mode: 'free-snap',
-      },
-      '(min-width: 800px)': {
-        slidesPerView: 3,
-        mode: 'free-snap',
-      },
-      '(min-width: 1024px)': {
-        slidesPerView: 4,
-        mode: 'free-snap',
-      },
-    },
+    breakpoints: breakpoints
+      ? breakpoints
+      : {
+          '(min-width: 600px)': {
+            slidesPerView: 3,
+            mode: 'free-snap',
+          },
+          '(min-width: 800px)': {
+            slidesPerView: 3,
+            mode: 'free-snap',
+          },
+          '(min-width: 1024px)': {
+            slidesPerView: 4,
+            mode: 'free-snap',
+          },
+        },
   })
   return (
     <div className={s.root} data-testid="ProductSlider">

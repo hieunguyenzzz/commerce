@@ -18,7 +18,7 @@ export async function getStaticProps({
   preview,
   locale,
 }: GetStaticPropsContext) {
-  const slug = (params?.slug || 'ALL') as string
+  const slug = (params?.slug || '') as string
   const config = getConfig({ locale })
   const { articles } = await getAllBlogs({ config, preview })
   const tags = getAllTagsFromArticles(articles)
@@ -79,6 +79,7 @@ export default function Blog({
     ? articles.findIndex((article) => article.slug === slug)
     : -1
   const article = articles[articleIndex]
+  console.log({ articles, slug, articleIndex })
   if (router.isFallback) {
     return <h1>Loading...</h1>
   }
@@ -109,7 +110,7 @@ export default function Blog({
         <ArticleJsonLd
           url={article.path || '/'}
           title={article.seo?.title || 'tess-jean'}
-          images={[article.image?.url || '']}
+          images={[article?.image?.url || '']}
           datePublished={article.publishedAt}
           dateModified={article.publishedAt}
           authorName={['Tess Jean']}
@@ -127,13 +128,16 @@ export default function Blog({
       </>
     )
   }
-  reactnode = (
-    <WhatBlog
-      articles={showarticles}
-      tags={tags}
-      currentTag={currentTag ? currentTag : undefined}
-    />
-  )
+  if (currentTag) {
+    reactnode = (
+      <WhatBlog
+        articles={showarticles}
+        tags={tags}
+        currentTag={currentTag ? currentTag : undefined}
+      />
+    )
+  }
+
   return (
     <>
       {reactnode}

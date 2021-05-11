@@ -1,6 +1,7 @@
 import { Article } from '@commerce/types'
 import { Breadcrumb } from '@components/common'
 import { Facebook, Pinterest, Twitter } from '@components/icons'
+import { placeholderImg } from '@components/product/helpers'
 import { Container, Text } from '@components/ui'
 import { formatdate } from '@lib/datetime'
 import Image from 'next/image'
@@ -43,7 +44,11 @@ const BlogView: React.FC<Props> = ({
         <Container data-testid="BlogView">
           <div className="prose">
             <Text variant="h2">{article.name}</Text>
-            <div style={{ textAlign: 'left' }}>
+            <div
+              className="w-full"
+              dangerouslySetInnerHTML={{ __html: article.contentHtml }}
+            ></div>
+            {/* <div style={{ textAlign: 'left' }}>
               <span>
                 We’ve been long-distance friends with the ever inspiring Sarah
                 Shabacon for almost four years now. Mother of two insanely
@@ -241,7 +246,7 @@ const BlogView: React.FC<Props> = ({
                   float: 'none',
                 }}
               />
-            </div>
+            </div> */}
           </div>
           {isReady && (
             <div className="space-y-sm lg:space-y-4">
@@ -289,7 +294,7 @@ const BlogView: React.FC<Props> = ({
                     <Image
                       className="bg-accents-1"
                       layout="responsive"
-                      src={article.image?.url}
+                      src={article.image?.url || placeholderImg}
                       width={630}
                       height={369}
                     ></Image>

@@ -1,9 +1,9 @@
 import type { Collection, Product } from '@commerce/types'
-import { getProductLink, placeholderImg } from '@components/product/helpers'
+import { Button, Container } from '@components/ui'
 import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
+import React, { FC } from 'react'
 import s from './CollectionView.module.css'
 interface Props {
   children?: any
@@ -47,27 +47,88 @@ const CollectionView: FC<Props> = ({ collection, categories, products }) => {
           dangerouslySetInnerHTML={{ __html: collection.descriptionHtml }}
         ></div>
       </div>
-      <div>
-        {new Array(7).fill(products).map((products, i) => {
-          const product = products[i]
-          return (
-            <Link href={getProductLink(product.slug)} key={i}>
-              <a className="pl-[16px] md:px-[8px] block">
-                <div className="flex relative items-center w-full bg-gray-100">
-                  <div style={{ paddingTop: (223 / 157) * 100 + '%' }} />
-                  <Image
-                    layout="fill"
-                    objectFit="cover"
-                    quality="85"
-                    sizes="(max-width: 400px) 200px ,500px"
-                    src={product.images[0].url || placeholderImg}
-                    alt={product.name || 'Product Image'}
-                  />
-                </div>
-              </a>
-            </Link>
-          )
-        })}
+      <div className="space-y-[33px] mt-[33px]">
+        <Container className="flex space-x-2">
+          <div className="flex-1 bg-accents-1">
+            <Image
+              objectFit="cover"
+              width="168"
+              height="256"
+              layout="responsive"
+              src="/blog-1.jpg"
+            />
+          </div>
+          <div className="flex-1 bg-accents-1">
+            <Image
+              objectFit="cover"
+              width="168"
+              height="256"
+              layout="responsive"
+              src="/blog-2.jpg"
+            />
+          </div>
+        </Container>
+        <div className="w-full">
+          <Image
+            objectFit="cover"
+            width="375"
+            height="231"
+            layout="responsive"
+            src="/blog-3.jpg"
+          />
+        </div>
+        <Container className="w-full">
+          <Image
+            objectFit="cover"
+            width="375"
+            height="231"
+            layout="responsive"
+            src="/blog-4.png"
+          />
+        </Container>
+        <div className="w-full">
+          <Image
+            objectFit="cover"
+            width="375"
+            height="231"
+            layout="responsive"
+            src="/blog-5.png"
+          />
+        </div>
+        <div className="w-full">
+          <Image
+            objectFit="cover"
+            width="375"
+            height="231"
+            layout="responsive"
+            src="/blog-6.png"
+          />
+        </div>
+        <Container className="flex space-x-2">
+          <div className="flex-1 bg-accents-1">
+            <Image
+              objectFit="cover"
+              width="168"
+              height="256"
+              layout="responsive"
+              src="/blog-1.jpg"
+            />
+          </div>
+          <div className="flex-1 bg-accents-1">
+            <Image
+              objectFit="cover"
+              width="168"
+              height="256"
+              layout="responsive"
+              src="/blog-2.jpg"
+            />
+          </div>
+        </Container>
+        <div className="flex justify-center">
+          <Link href="/search/001-softtest">
+            <Button>SHOP THE COLLECTION</Button>
+          </Link>
+        </div>
       </div>
     </>
   )

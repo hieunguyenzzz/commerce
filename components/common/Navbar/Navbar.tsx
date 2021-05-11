@@ -1,6 +1,6 @@
 import useCustomer from '@commerce/customer/use-customer'
 import { UserNav } from '@components/common'
-import { Bag, Menu, User } from '@components/icons'
+import { Bag, Logo as LogoIcon, Menu, User } from '@components/icons'
 import { CATEGORIES } from '@components/product/helpers'
 import { Container, Text, useUI } from '@components/ui'
 import classNames from 'classnames'
@@ -32,7 +32,7 @@ const pagesMenu = [
 export const Logo = () => (
   <Link href="/">
     <a className={classNames(s.logo)} aria-label="Logo">
-      <img src={'/logo.svg'} alt="jess jean" />
+      <LogoIcon width="100%" />
     </a>
   </Link>
 )

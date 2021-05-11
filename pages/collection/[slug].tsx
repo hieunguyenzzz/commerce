@@ -1,5 +1,4 @@
-import ShopSidebar from '@components/blog/ShopSidebar'
-import { CollectionView } from '@components/collection'
+import { CollectionSidebar, CollectionView } from '@components/collection'
 import { Layout, Navbar } from '@components/common'
 import { CATEGORIES } from '@components/product/helpers'
 import { getConfig } from '@framework/api'
@@ -11,6 +10,7 @@ import type {
   InferGetStaticPropsType,
 } from 'next'
 import { useRouter } from 'next/router'
+import React from 'react'
 
 export async function getStaticProps({
   params,
@@ -53,7 +53,7 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   }
 }
 const EnchancedShopSidebar = () => {
-  return <ShopSidebar categories={CATEGORIES}></ShopSidebar>
+  return <CollectionSidebar categories={CATEGORIES}></CollectionSidebar>
 }
 export default function Slug({
   collection,

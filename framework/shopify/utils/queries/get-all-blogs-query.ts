@@ -5,6 +5,7 @@ export const getAllBlogQuery = /* GraphQL */ `
         node {
           title
           content
+          contentHtml
           handle
           publishedAt
           tags

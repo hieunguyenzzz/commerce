@@ -10,10 +10,12 @@
     & + * {
       margin-top: calc(0px - var(--header-height));
     }
-    @apply bg-transparent shadow-none  hover:bg-accents-0;
+    & > * {
+      @apply bg-transparent shadow-none  hover:bg-accents-0 text-white;
+    }
   }
   &.hasScrolled > * {
-    @apply bg-accents-0;
+    @apply bg-accents-0 text-black;
     box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.05);
   }
 }

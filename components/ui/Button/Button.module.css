@@ -2,6 +2,9 @@
   @apply text-button border border-white border-opacity-50 bg-secondary px-md py-[15px] text-accents-1 cursor-pointer inline-flex transition ease-in-out duration-150 text-center justify-center items-center;
   font-family: 'Montserrat';
 }
+.root.small {
+  @apply px-[22px] py-[11px] text-[12px];
+}
 .root.secondary {
   @apply bg-transparent text-secondary  border-secondary-2;
 }
@@ -52,7 +55,7 @@
   @apply transition-all duration-300 ease-in-out;
 }
 .ghost {
-  @apply bg-transparent border-none text-black;
+  @apply bg-transparent border-white text-black;
 }
 .link:hover {
   @apply text-primary bg-transparent border-transparent;

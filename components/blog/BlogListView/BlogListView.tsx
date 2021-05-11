@@ -1,6 +1,7 @@
 import { Article } from '@commerce/types'
 import { Breadcrumb } from '@components/common'
 import AdsSignupView from '@components/others/AdsSignup'
+import { placeholderImg } from '@components/product/helpers'
 import { Container, Text } from '@components/ui'
 import { formatdate } from '@lib/datetime'
 import classNames from 'classnames'
@@ -90,7 +91,8 @@ const BlogListView: React.FC<Props> = ({
                 <Image
                   className="bg-accents-1"
                   layout="responsive"
-                  src={article.image?.url}
+                  objectFit="cover"
+                  src={article?.image?.url || placeholderImg}
                   width={630}
                   height={369}
                 ></Image>
