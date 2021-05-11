@@ -1,3 +1,5 @@
+import { productConnection } from './get-all-products-query'
+
 const getSiteCollectionsQuery = /* GraphQL */ `
   query getSiteCollections($first: Int!) {
     collections(first: $first) {
@@ -7,6 +9,11 @@ const getSiteCollectionsQuery = /* GraphQL */ `
           title
           handle
           descriptionHtml
+          products(
+            first: $first
+          ) {
+            ${productConnection}
+          }
         }
       }
     }

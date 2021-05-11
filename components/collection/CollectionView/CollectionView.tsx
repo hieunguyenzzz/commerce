@@ -1,9 +1,10 @@
 import type { Collection, Product } from '@commerce/types'
 import { getProductLink, placeholderImg } from '@components/product/helpers'
+import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
-
+import s from './CollectionView.module.css'
 interface Props {
   children?: any
   collection: Collection
@@ -14,32 +15,32 @@ interface Props {
 const CollectionView: FC<Props> = ({ collection, categories, products }) => {
   return (
     <>
-      <div className="collection">
+      <div className={classNames(s.root, 'collection')}>
         <style>
           {`
-            .collection{
-              text-align:center;
-            }
-            .collection iframe{
-              width: 100vw;
-              height: 56.25vw;
-            }
-            .collection p{
-              max-width:64ch;
-              margin:auto;
-              padding-left:1.2rem;
-              padding-right:1.2rem
-            }
-            .collection h1{
-              font-size:24px;
-              padding:25px;
-            }
-            .collection .desciption{
-              font-size:14px;
-            }
-            .collection .credit{
-              font-size:12px
-            }
+              .collection{
+                text-align:center;
+              }
+              .collection iframe{
+                width: 100vw;
+                height: 48.8vw;
+              }
+              .collection p{
+                max-width:64ch;
+                margin:auto;
+                padding-left:1.2rem;
+                padding-right:1.2rem
+              }
+              .collection h1{
+                font-size:24px;
+                padding:25px;
+              }
+              .collection .description{
+                font-size:14px;
+              }
+              .collection .credit{
+                font-size:12px
+              }
           `}
         </style>
         <div

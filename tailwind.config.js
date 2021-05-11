@@ -117,6 +117,7 @@ module.exports = {
       pointerEvents: ['focus', 'group-hover', 'group-focus'],
       width: ['focus', 'group-hover', 'group-focus'],
       zIndex: ['focus'],
+      pointerEvents: ['hover', 'focus'],
     },
     lineClamp: ['responsive', 'hover', 'focus'],
   },

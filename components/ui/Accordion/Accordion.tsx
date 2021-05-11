@@ -5,9 +5,12 @@ export interface AccordionProps extends HTMLAttributes<HTMLElement> {}
 
 const Accordion: React.FC<AccordionProps> = forwardRef(() => {
   return (
-    <div className="space-y-md  mt-responsive-lg lg:mt-2xl">
+    <div className="space-y-md  mt-responsive-lg lg:mt-2xl pointer-events-none">
       {[`Details`, `Size & Fit`, `Fabric`, `Shipping & Returns`].map((str) => (
-        <div tabIndex={0} className="w-full group">
+        <div
+          tabIndex={0}
+          className="w-full pointer-events-auto focus:pointer-events-none group"
+        >
           <div className="font-bold border-b border-black w-full space-x-3 flex items-center">
             <div className="py-1 text-h5 capitalize flex-1 text-left">
               {str}
@@ -20,7 +23,7 @@ const Accordion: React.FC<AccordionProps> = forwardRef(() => {
               <Down />
             </div>
           </div>
-          <div className="h-0 group-focus:h-auto group-focus:block whitespace-pre-line overflow-hidden transition-all -mt-4 group-focus:mt-0">
+          <div className="h-0 pointer-events-auto group-focus:h-auto group-focus:block whitespace-pre-line overflow-hidden transition-all -mt-4 group-focus:mt-0">
             {`
             • Tiered midi dress
             • Buttercup yellow hue

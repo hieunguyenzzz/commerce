@@ -5,7 +5,6 @@ import { CATEGORIES } from '@components/product/helpers'
 import { getConfig } from '@framework/api'
 import getAllPages from '@framework/common/get-all-pages'
 import getAllCollections from '@framework/product/get-all-collections'
-import getAllProducts from '@framework/product/get-all-products'
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
@@ -20,15 +19,14 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ slug: string }>) {
   const config = getConfig({ locale })
   const { categories } = await getAllCollections({ config })
-  const { products } = await getAllProducts({ config })
   const { pages } = await getAllPages({ config, preview })
   const collection = categories.find((item: any) => item.slug === params?.slug)
   if (!collection) {
     throw new Error(`collection with slug '${params!.slug}' not found`)
   }
+  const { products } = collection
   return {
     props: {
-      pages,
       categories,
       products,
       collection,
