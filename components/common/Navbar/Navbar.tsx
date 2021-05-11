@@ -32,7 +32,7 @@ const pagesMenu = [
 export const Logo = () => (
   <Link href="/">
     <a className={classNames(s.logo)} aria-label="Logo">
-      <LogoIcon width="100%" />
+      <LogoIcon width="100%" height="29px" />
     </a>
   </Link>
 )
@@ -101,7 +101,7 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
           <Menu />
         </div>
       </div>
-      <div className="text-center mx-3">
+      <div className="text-center mx-3 flex-1">
         <Logo />
       </div>
       <div className="flex flex-1 justify-end space-x-[11px]">

@@ -10,6 +10,9 @@
     & + * {
       margin-top: calc(0px - var(--header-height));
     }
+    &:hover > * {
+      @apply bg-accents-0 text-black;
+    }
     & > * {
       @apply bg-transparent shadow-none  hover:bg-accents-0 text-white;
     }

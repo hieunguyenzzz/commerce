@@ -42,7 +42,7 @@ const HomeView: React.FC<{
   articles: Article[]
 }> = ({ collection, articles }) => (
   <div className={classNames(s.root, 'space-y-[17px]')} data-testid="HomeView">
-    <div className="relative lg:h-screen flex items-center justify-center py-[60px] px-[50px] w-full">
+    <div className="relative lg:h-screen flex items-center justify-center py-[60px] pt-[120px] px-[50px] w-full">
       <div className="absolute inset-0 ">
         <Image
           objectPosition="top right"
@@ -51,7 +51,7 @@ const HomeView: React.FC<{
           src="/home_cover.jpeg"
         />
       </div>
-      <div className="text-center mx-auto  isolate flex flex-col items-center w-full space-y-[12px] text-white max-w-md">
+      <div className="text-center mx-auto  isolate flex flex-col items-center w-full space-y-[12px] text-white max-w-3xl">
         <div className="uppercase text-[12px] lg:text-[14px]">JUST LANDED</div>
         <div className="uppercase text-[20px] leading-[24px] lg:text-[48px] lg:leading-[57px]">
           fLEUR STORY: HAND PAINTED IN HOUSE EMBRACE SUMMER FLORALS
@@ -80,8 +80,8 @@ const HomeView: React.FC<{
         </ProductSlider2>
       </div>
     </Container>
-    <Container small className="grid grid-cols-1 gap-lg">
-      <div className="relative flex justify-end p-lg pl-[30%]">
+    <Container small className="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+      <div className="lg:col-span-7 order-2 lg:colsa relative flex justify-end p-lg pl-[30%]">
         <div className="w-full">
           <Image
             objectFit="cover"
@@ -101,7 +101,7 @@ const HomeView: React.FC<{
           ></Image>
         </div>
       </div>
-      <div>
+      <div className="lg:col-span-5 order-2 lg:order-1 lg:py-2xl">
         <div className="max-w-xs">
           <div className="text-[12px] leading-[14.6px] lg:text-[14px] lg-leading-[17px]">
             SUBTITLE
@@ -117,7 +117,7 @@ const HomeView: React.FC<{
         </div>
         <Button className="inline-block mt-[20px]">VIEW THE COLLECTION</Button>
       </div>
-      <div className="py-xl flex flex-col">
+      <div className="lg:col-span-12 order-2 py-xl flex flex-col">
         <div className="w-full pr-[20%]">
           <Image
             objectFit="cover"
