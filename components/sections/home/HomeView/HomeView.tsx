@@ -65,7 +65,7 @@ const HomeView: React.FC<{
     </div>
     <Container className="py-6 px-0 lg:py-12 space-y-6 lg:space-y-10 overflow-hidden">
       <div className="min-w-[493px] md:min-w-full md:w-full ml-[-16px] md:mx-[-8px]">
-        <ProductSlider2 slidesPerView={2}>
+        <ProductSlider2 showNavigationButoon={false} slidesPerView={2}>
           {new Array(4).fill(collection?.products).map((products, i) => {
             if (!products) return null
             const product = products[i]
@@ -162,7 +162,11 @@ const HomeView: React.FC<{
     <Container className="py-6 px-0 lg:py-12 space-y-[28px] lg:space-y-10 overflow-hidden">
       <h3 className="text-[24px] text-center">JOURNAL</h3>
       <div className="min-w-[600px] md:min-w-full md:w-full md:mx-[-8px]">
-        <ProductSlider2 slidesPerView={2} breakpoints={{}}>
+        <ProductSlider2
+          showNavigationButoon={false}
+          slidesPerView={2}
+          breakpoints={{}}
+        >
           {new Array(2).fill(articles).map((articles, i) => {
             const article = articles[i]
             if (!article) return null
@@ -180,7 +184,7 @@ const HomeView: React.FC<{
                       alt={'Blog Image'}
                     />
                     <div className="absolute text-center inset-0 flex flex-col justify-center items-center">
-                      <div className="w-[60%] mx-auto text-white">
+                      <div className="w-[60%] mx-auto max-w-xs text-white">
                         <h3 className="text-[16px]">{article?.name}</h3>
                         <Button
                           className="mt-[13px] block w-full"

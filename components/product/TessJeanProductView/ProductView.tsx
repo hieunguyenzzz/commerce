@@ -193,7 +193,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                 Add to Cart
               </Button>
             </div>
-            <div className="h-3"></div>
+            <div className=" mt-responsive-lg lg:mt-2xl"></div>
             <Accordion />
             <div className="h-12"></div>
           </div>

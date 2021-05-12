@@ -18,8 +18,14 @@ const Slider = forwardRef<HTMLDivElement, Props>(({ children }, ref) => {
 })
 const ProductSlider: React.FC<{
   slidesPerView?: number
+  showNavigationButoon?: boolean
   breakpoints?: any
-}> = ({ children, slidesPerView = 3, breakpoints }) => {
+}> = ({
+  children,
+  slidesPerView = 3,
+  breakpoints,
+  showNavigationButoon = true,
+}) => {
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     slidesPerView,
     centered: false,
@@ -43,60 +49,62 @@ const ProductSlider: React.FC<{
   })
   return (
     <div className={s.root} data-testid="ProductSlider">
-      <div className="pointer-events-none hidden md:block">
-        <button
-          className={cn(s.leftControl, s.control, 'pointer-events-auto')}
-          onClick={slider?.prev}
-          aria-label="Previous Product Image"
-        >
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 16 16"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
+      {showNavigationButoon && (
+        <div className="pointer-events-none hidden md:block">
+          <button
+            className={cn(s.leftControl, s.control, 'pointer-events-auto')}
+            onClick={slider?.prev}
+            aria-label="Previous Product Image"
           >
-            <path
-              fillRule="evenodd"
-              d="M5.854 4.646a.5.5 0 010 .708L3.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z"
-              clipRule="evenodd"
-            ></path>
-            <path
-              fillRule="evenodd"
-              d="M2.5 8a.5.5 0 01.5-.5h10.5a.5.5 0 010 1H3a.5.5 0 01-.5-.5z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </button>
-        <button
-          className={cn(s.rightControl, s.control, 'pointer-events-auto')}
-          onClick={slider?.next}
-          aria-label="Next Product Image"
-        >
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 16 16"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              viewBox="0 0 16 16"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5.854 4.646a.5.5 0 010 .708L3.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z"
+                clipRule="evenodd"
+              ></path>
+              <path
+                fillRule="evenodd"
+                d="M2.5 8a.5.5 0 01.5-.5h10.5a.5.5 0 010 1H3a.5.5 0 01-.5-.5z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <button
+            className={cn(s.rightControl, s.control, 'pointer-events-auto')}
+            onClick={slider?.next}
+            aria-label="Next Product Image"
           >
-            <path
-              fillRule="evenodd"
-              d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"
-              clipRule="evenodd"
-            ></path>
-            <path
-              fillRule="evenodd"
-              d="M2 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H2.5A.5.5 0 012 8z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </button>
-      </div>
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              viewBox="0 0 16 16"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"
+                clipRule="evenodd"
+              ></path>
+              <path
+                fillRule="evenodd"
+                d="M2 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H2.5A.5.5 0 012 8z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      )}
       <Slider ref={sliderRef}>{children as any}</Slider>
     </div>
   )

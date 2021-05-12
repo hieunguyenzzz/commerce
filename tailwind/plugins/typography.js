@@ -76,11 +76,13 @@ module.exports = plugin(function ({ addComponents }) {
     '.header-1': {
       fontSize: '16px',
       lineHeight: '19px',
+      textTransform: 'uppercase',
+      fontWeight: 'bold',
       letterSpacing: '0.06em',
     },
     '.header-2': {
       fontSize: '14px',
-      fontWeight:'bold',
+      fontWeight: 'bold',
       lineHeight: '17px',
       letterSpacing: '0.06em',
     },
