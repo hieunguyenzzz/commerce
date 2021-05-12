@@ -30,6 +30,7 @@ export default function Returns({
   return (
     <CustomercareLayout title="returns" activeslug="returns">
       <div className="grid grid-cols-2 lg:grid-cols-4 lg:px-[2px] border border-white gap-px relative">
+        <div className="absolute inset-px bg-black "></div>
         <div className="flex-1 isolate p-4 px-xs bg-white flex flex-col items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
