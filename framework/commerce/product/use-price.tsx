@@ -50,7 +50,7 @@ export default function usePrice(
     amount: number
     baseAmount?: number
     currencyCode: string
-    currencyDisplay: string
+    currencyDisplay?: string
   } | null
 ) {
   const { amount, baseAmount, currencyCode, currencyDisplay } = data ?? {}

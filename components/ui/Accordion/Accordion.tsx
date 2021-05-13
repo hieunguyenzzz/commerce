@@ -10,43 +10,51 @@ const Accordion: React.FC<AccordionProps> = forwardRef(
     data = [
       {
         title: <span className="text-h5 capitalize ">Details</span>,
-        children: `• Tiered midi dress
+        children: (
+          <div className="py-3">{`• Tiered midi dress
             • Buttercup yellow hue
             • Cotton bodice with added stretch
             • Cotton batiste skirt and sleeves
             • Shirred details
             • Scoop neckline
-            • This style is lined`,
+            • This style is lined`}</div>
+        ),
       },
       {
         title: <span className="text-h5 capitalize ">Size & Fit</span>,
-        children: `• Tiered midi dress
+        children: (
+          <div className="py-3">{`• Tiered midi dress
             • Buttercup yellow hue
             • Cotton bodice with added stretch
             • Cotton batiste skirt and sleeves
             • Shirred details
             • Scoop neckline
-            • This style is lined`,
+            • This style is lined`}</div>
+        ),
       },
       {
         title: <span className="text-h5 capitalize ">Fabric</span>,
-        children: `• Tiered midi dress
+        children: (
+          <div className="py-3">{`• Tiered midi dress
             • Buttercup yellow hue
             • Cotton bodice with added stretch
             • Cotton batiste skirt and sleeves
             • Shirred details
             • Scoop neckline
-            • This style is lined`,
+            • This style is lined`}</div>
+        ),
       },
       {
         title: <span className="text-h5 capitalize ">Shipping & Returns</span>,
-        children: `• Tiered midi dress
+        children: (
+          <div className="py-3">{`• Tiered midi dress
             • Buttercup yellow hue
             • Cotton bodice with added stretch
             • Cotton batiste skirt and sleeves
             • Shirred details
             • Scoop neckline
-            • This style is lined`,
+            • This style is lined`}</div>
+        ),
       },
     ],
   }) => {
