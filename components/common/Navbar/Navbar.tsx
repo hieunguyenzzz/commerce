@@ -428,10 +428,12 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
 
   return (
     <NavbarRoot transparent={transparent}>
+      <div className="w-full">
       <Container>
         <div className="w-full xl:hidden">{smallNav}</div>
         <div className="w-full hidden xl:block">{largeNav}</div>
       </Container>
+      </div>
     </NavbarRoot>
   )
 }
