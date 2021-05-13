@@ -9,7 +9,7 @@ import { Container, Text } from '@components/ui'
 import Link from '@components/ui/Link'
 import type { Page } from '@framework/common/get-all-pages'
 import getSlug from '@lib/get-slug'
-import cn from 'classnames'
+import { default as classNames, default as cn } from 'classnames'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 import s from './Footer.module.css'
@@ -23,40 +23,60 @@ interface Props {
 const LEGAL_PAGES = ['terms-of-use', 'shipping-returns', 'privacy-policy']
 
 const Footer: FC<Props> = ({ className, pages }) => {
-  const { sitePages, legalPages } = usePages(pages)
+  const { pathname } = useRouter()
   const rootClassName = cn(s.root, className, 'mt-12 text-center md:text-left')
-
+  const customercare = [
+    { title: 'SHIPPING', slug: 'shipping' },
+    { title: 'RETURNS', slug: 'returns' },
+    { title: 'ORDERING', slug: 'ordering' },
+    { title: 'GARMENT CARE', slug: 'garment-care' },
+    { title: 'SIZE GUIDE', slug: 'size-guide' },
+    { title: 'ETHICS', slug: 'ethics' },
+    { title: 'FAQS', slug: 'faqs' },
+    { title: 'CONTACT US', slug: 'contact-us' },
+  ]
+  const legalPages = [
+    { title: 'ABOUT', slug: '#' },
+    { title: 'ETHICS', slug: '#' },
+    { title: 'JOURNAL', slug: '#' },
+    { title: 'PRIVACY POLICY', slug: '#' },
+    { title: 'TERMS & CONDITIONS', slug: '#' },
+  ]
   return (
     <footer className={rootClassName}>
       <Container small>
         <div className="w-full grid grid-cols-3 lg:grid-cols-9 gap-y-[31px] md:gap-y-xl gap-6  transition-colors duration-150 py-[32px] md:py-11  border-b border-t border-accents-3 md:border-none">
           <div className="col-span-3 space-y-[38px]  ">
             <Text variant="h5">CUSTOMER CARE</Text>
-            <ul className="hidden md:flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
-              {['CONTACT', 'SHIPPING', 'RETURNS', 'FAQS', 'SIZE GUIDE'].map(
-                (str) => (
-                  <Link key={str} href={'/' + str}>
-                    <Text className="text-effect-1" variant="h7">
-                      {str}
-                    </Text>
-                  </Link>
-                )
+            <ul
+              className={classNames(
+                ' md:flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4',
+                pathname.includes('/customer-care') ? 'flex' : 'hidden'
               )}
+            >
+              {customercare.map(({ title, slug }) => (
+                <Link key={slug} href={'/customer-care/' + slug}>
+                  <Text
+                    className={classNames('text-effect-1', {
+                      'text-primary': pathname.includes(
+                        '/customer-care/' + slug
+                      ),
+                    })}
+                    variant="h7"
+                  >
+                    {title}
+                  </Text>
+                </Link>
+              ))}
             </ul>
           </div>
           <div className="col-span-3 space-y-[38px]  ">
             <Text variant="h5">OUR BRAND</Text>
             <ul className="hidden md:flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
-              {[
-                'ABOUT',
-                'ETHICS',
-                'JOURNAL',
-                'PRIVACY POLICY',
-                'TERMS & CONDITIONS',
-              ].map((str) => (
-                <Link key={str} href={'/' + str}>
+              {legalPages.map(({ title, slug }) => (
+                <Link key={slug} href={'/' + slug}>
                   <Text className="text-effect-1" variant="h7">
-                    {str}
+                    {title}
                   </Text>
                 </Link>
               ))}
