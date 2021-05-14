@@ -2,7 +2,6 @@ import { Layout } from '@components/common'
 import CustomercareLayout from '@components/sections/customer-care/Layout'
 import { Button } from '@components/ui'
 import { getConfig } from '@framework/api'
-import getPage from '@framework/common/get-page'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import { default as React } from 'react'
@@ -12,23 +11,16 @@ export async function getStaticProps({
   preview,
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
-  const { page } = await getPage({
-    config,
-    preview,
-    variables: { id: 'contact-us' },
-  })
 
   return {
-    props: {
-      page,
-    },
+    props: {},
     revalidate: 14400,
   }
 }
 
-export default function ContactUs({
-  page,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function ContactUs({}: InferGetStaticPropsType<
+  typeof getStaticProps
+>) {
   return (
     <CustomercareLayout title="contact us" activeslug="contact-us">
       <div>
