@@ -122,8 +122,8 @@ const HomeView: React.FC<{
           </Button>
         </Link>
       </div>
-      <div className="lg:col-span-12 order-2 py-xl flex flex-col">
-        <div className="w-full pr-[20%]">
+      <div className="lg:col-span-12 order-2 py-xl flex flex-col lg:grid grid-cols-9 grid-rows-2 lg:gap-5">
+        <div className="w-full pr-[20%] row-start-1 row-end-1 lg:col-start-1 lg:col-end-6 lg:pr-0">
           <Image
             objectFit="cover"
             layout="responsive"
@@ -136,7 +136,7 @@ const HomeView: React.FC<{
             shop now
           </div>
         </div>
-        <div className="w-full pl-[43%]">
+        <div className="w-full pl-[43%] row-start-1 row-end-3 lg:col-start-6 lg:col-end-10 lg:pl-0 lg:mt-[108px]">
           <Image
             objectFit="cover"
             layout="responsive"
@@ -149,7 +149,7 @@ const HomeView: React.FC<{
             shop now
           </div>
         </div>
-        <div className="w-full pr-[27%] mt-[36px]">
+        <div className="w-full pr-[27%] mt-[36px] row-start-2 lg:col-start-1 lg:col-end-6 lg:pl-[27%] lg:pr-0 lg:mt-0">
           <Image
             objectFit="cover"
             layout="responsive"
