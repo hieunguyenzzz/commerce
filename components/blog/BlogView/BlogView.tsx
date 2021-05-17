@@ -95,6 +95,7 @@ const BlogView: React.FC<Props> = ({
                     <Image
                       className="bg-accents-1"
                       layout="responsive"
+                      objectFit="cover"
                       src={article.image?.url || placeholderImg}
                       width={630}
                       height={369}
