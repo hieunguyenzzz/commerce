@@ -11,7 +11,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const config = getConfig({ locale })
   const { article, articles } = await getArticle({
     config,
-    variables: { query: 'tag:customercare/faqs' },
+    variables: { query: 'tag:customercare/garment-care' },
   })
   return {
     props: {
@@ -22,14 +22,15 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
   }
 }
 
-export default function Shipping({
+export default function Garment({
   article,
   articles,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [_, ...rows] = articles
   return (
-    <CustomercareLayout title="faqs" activeslug="faqs">
-      <div className="flex flex-col space-y-md">
+    <CustomercareLayout title="garment-care" activeslug="garment-care">
+      <div dangerouslySetInnerHTML={{ __html: article.contentHtml }}></div>
+      <div className="flex flex-col space-y-md mt-6">
         <Accordion
           data={rows.map((article) => {
             return {
@@ -47,4 +48,4 @@ export default function Shipping({
     </CustomercareLayout>
   )
 }
-Shipping.Layout = Layout
+Garment.Layout = Layout

@@ -39,8 +39,8 @@ const CustomercareLayout = ({
             </Link>
           ))}
         </div>
-        <div className="flex-1 ">
-          <div className="space-y-5 md:pl-[90px] pb-[90px]">
+        <div className="flex-1 md:pl-[90px] pb-[90px]">
+          <div className="space-y-6 max-w-3xl mx-auto">
             <div className="header-1 font-bold uppercase">{title}</div>
             <div className="whitespace-pre-line">{children}</div>
           </div>

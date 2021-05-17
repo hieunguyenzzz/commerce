@@ -11,7 +11,6 @@ export async function getStaticProps({
   preview,
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
-
   return {
     props: {},
     revalidate: 14400,

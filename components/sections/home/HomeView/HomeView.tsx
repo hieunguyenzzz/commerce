@@ -14,8 +14,8 @@ const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
     amount: product.price.value,
   })
   return (
-    <a className="pl-[16px] md:px-[8px] block">
-      <div className="flex relative items-center w-full bg-gray-100">
+    <a className="pl-[16px] md:px-[8px] block cursor-pointer ">
+      <div className="flex relative items-center w-full bg-gray-100 border border-transparent hover:border-accents-5">
         <div style={{ paddingTop: (297 / 200) * 100 + '%' }} />
         <Image
           layout="fill"
@@ -64,14 +64,14 @@ const HomeView: React.FC<{
       </div>
     </div>
     <Container className="py-6 px-0 lg:py-12 space-y-6 lg:space-y-10 overflow-hidden">
-      <div className="min-w-[493px] md:min-w-full md:w-full ml-[-16px] md:mx-[-8px]">
+      <div className="min-w-[493px] md:min-w-full md:w-full ml-[-16px] md:mx-0">
         <ProductSlider2 showNavigationButoon={false} slidesPerView={2}>
           {new Array(4).fill(collection?.products).map((products, i) => {
             if (!products) return null
             const product = products[i]
             if (!product) return null
             return (
-              <Link href={getProductLink(product)} key={i}>
+              <Link href={getProductLink(product.slug)} key={i}>
                 <ProductItem {...{ product }} />
               </Link>
             )
@@ -172,7 +172,7 @@ const HomeView: React.FC<{
             if (!article) return null
             return (
               <Link href={`/blog/${article.slug}`} key={i}>
-                <a className=" md:px-[8px] block">
+                <a className=" md:mx-[8px] block ">
                   <div className="flex relative items-center w-full bg-gray-100">
                     <div style={{ paddingTop: (165 / 267) * 100 + '%' }} />
                     <Image
