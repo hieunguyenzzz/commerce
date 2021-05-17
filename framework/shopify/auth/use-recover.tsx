@@ -3,11 +3,7 @@ import { CommerceError } from '@commerce/utils/errors'
 import type { MutationHook } from '@commerce/utils/types'
 import { useCallback } from 'react'
 import useCustomer from '../customer/use-customer'
-import {
-  CustomerCreateInput,
-  Mutation,
-  MutationCustomerRecoverArgs,
-} from '../schema'
+import { Mutation, MutationCustomerRecoverArgs } from '../schema'
 import { throwUserErrors } from '../utils'
 import { customerCreateMutation } from '../utils/mutations'
 
@@ -17,7 +13,7 @@ export const handler: MutationHook<
   null,
   {},
   MutationCustomerRecoverArgs,
-  CustomerCreateInput
+  MutationCustomerRecoverArgs
 > = {
   fetchOptions: {
     query: customerCreateMutation,

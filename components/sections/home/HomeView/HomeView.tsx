@@ -188,13 +188,11 @@ const HomeView: React.FC<{
                       src={article?.image?.url || placeholderImg}
                       alt={'Blog Image'}
                     />
-                    <div className="absolute text-center inset-0 flex flex-col justify-center items-center">
+                    <div className="absolute text-center inset-0 flex flex-col justify-center items-center ">
                       <div className="w-[60%] mx-auto max-w-xs text-white">
-                        <div>
-                          <h3 className="text-[16px] inline-block">
-                            {article?.name}
-                          </h3>
-                        </div>
+                        <h3 className="text-[16px] inline-block">
+                          {article?.name}
+                        </h3>
                         <Button
                           className="mt-[13px] block w-full"
                           variant="ghost"
