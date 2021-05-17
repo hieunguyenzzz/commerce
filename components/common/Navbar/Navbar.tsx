@@ -298,7 +298,7 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
                         objectFit="cover"
                         src={'/mega-menu-v1-1.jpg'}
                       ></Image>
-                      <Link href={`/search?q=${'softlines'}`}>
+                      <Link href={`/collection/${'001-softtest'}`}>
                         <div className="header-2 text-effect-1">
                           001 SOFTLINES
                         </div>
@@ -313,7 +313,7 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
                         objectFit="cover"
                         src={'/mega-menu-v1-2.jpg'}
                       ></Image>
-                      <Link href={`/search?q=${'LA-MAR'}`}>
+                      <Link href={`/collection/${'002-la-mar'}`}>
                         <div className="header-2 text-effect-1">002 LA MAR</div>
                       </Link>
                     </div>

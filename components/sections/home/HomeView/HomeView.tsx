@@ -190,7 +190,7 @@ const HomeView: React.FC<{
                     />
                     <div className="absolute text-center inset-0 flex flex-col justify-center items-center ">
                       <div className="w-[60%] mx-auto max-w-xs text-white">
-                        <h3 className="text-[16px] inline-block">
+                        <h3 className="text-[16px] inline-block lg:text-[24px] lg:leading-[29px]">
                           {article?.name}
                         </h3>
                         <Button
