@@ -93,7 +93,7 @@ const CartItem = ({
       {...rest}
     >
       <Link href={`/product/${item.path}`}>
-        <a className="relative flex overflow-hidden cursor-pointer  w-2/6 max-w-[160px]">
+        <a className="relative flex overflow-hidden cursor-pointer w-[89px] lg:w-2/6 max-w-[160px]">
           <Image
             onClick={() => closeSidebarIfPresent()}
             className={cn(s.productImage, 'block')}
@@ -166,7 +166,7 @@ const CartItem = ({
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-between space-y-2 text-base pt-1">
+      <div className="flex text-right flex-col justify-between space-y-2 text-base pt-1">
         <button
           className="flex font-montserrat justify-end outline-none text-[12px] uppercase text-accents-5 space-x-2 leading-none font-semibold"
           onClick={handleRemove}

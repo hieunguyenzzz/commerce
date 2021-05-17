@@ -123,7 +123,7 @@ export default function Cart() {
             <div>
               <ul className="py-3 lg:flex lg:space-x-3 justify-between">
                 <li className="flex justify-between py-1">
-                  <span className="text-[12px] text-accents-6">
+                  <span className="text-[12px] lg:text-base text-accents-6">
                     I agree to the{' '}
                     <a className="underline" href="#">
                       terms and conditions
@@ -131,18 +131,18 @@ export default function Cart() {
                   </span>
                 </li>
                 <li className="flex justify-between py-1 space-x-3">
-                  <span className="text-[14px] font-bold uppercase">
+                  <span className="text-[14px] lg:text-h5 font-bold uppercase">
                     Shipping:
                   </span>
-                  <span className="text-[12px] text-accents-6">
+                  <span className="text-[12px] lg:text-base text-accents-6">
                     Calculated at checkout
                   </span>
                 </li>
                 <li className="flex justify-between py-1 space-x-3">
-                  <span className="text-[14px] font-bold uppercase">
+                  <span className="text-[14px] lg:text-h5 font-bold uppercase">
                     Subtotal
                   </span>
-                  <span className="text-[14px] font-bold uppercase">
+                  <span className="text-[14px] lg:text-h5 font-bold uppercase">
                     {subTotal}
                   </span>
                 </li>
