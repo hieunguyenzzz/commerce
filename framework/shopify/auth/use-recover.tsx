@@ -5,7 +5,7 @@ import { useCallback } from 'react'
 import useCustomer from '../customer/use-customer'
 import { Mutation, MutationCustomerRecoverArgs } from '../schema'
 import { throwUserErrors } from '../utils'
-import { customerCreateMutation } from '../utils/mutations'
+import { customerRecoverMutation } from '../utils/mutations'
 
 export default useRecover as UseRecover<typeof handler>
 
@@ -16,7 +16,7 @@ export const handler: MutationHook<
   MutationCustomerRecoverArgs
 > = {
   fetchOptions: {
-    query: customerCreateMutation,
+    query: customerRecoverMutation,
   },
   async fetcher({ input: { email }, options, fetch }) {
     if (!email) {
@@ -25,19 +25,17 @@ export const handler: MutationHook<
       })
     }
 
-    const { customerCreate } = await fetch<
+    const { customerRecover } = await fetch<
       Mutation,
       MutationCustomerRecoverArgs
     >({
       ...options,
       variables: {
-        input: {
-          email,
-        },
+        email,
       },
     })
 
-    throwUserErrors(customerCreate?.customerUserErrors)
+    throwUserErrors(customerRecover?.customerUserErrors)
 
     return null
   },

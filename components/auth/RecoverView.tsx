@@ -10,7 +10,7 @@ import Layout from './Layout'
 
 interface Props {}
 
-const LoginView: FC<Props> = () => {
+const RecoveryView: FC<Props> = () => {
   // Form State
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
@@ -56,7 +56,7 @@ const LoginView: FC<Props> = () => {
     <Layout>
       <div className="w-full flex flex-col items-center">
         <div className="pt-md w-full">
-          <Breadcrumb>ACCOUNT/ SIGN IN</Breadcrumb>
+          <Breadcrumb>ACCOUNT/ Recovery</Breadcrumb>
         </div>
 
         <form
@@ -64,16 +64,11 @@ const LoginView: FC<Props> = () => {
           className="max-w-sm w-full flex flex-col justify-between"
         >
           <div className="flex justify-center py-12">
-            <Text variant="h4">sign in</Text>
+            <Text variant="h4">forgot your password?</Text>
           </div>
           <div className="flex flex-col space-y-8">
             {message && (
-              <div className="text-red border border-red p-3">
-                {message}. Did you {` `}
-                <a className="text-accent-9 inline font-bold hover:underline cursor-pointer">
-                  forgot your password?
-                </a>
-              </div>
+              <div className="text-red border border-red p-3">{message}</div>
             )}
             <Input
               required
@@ -92,12 +87,9 @@ const LoginView: FC<Props> = () => {
               </Button>
             </div>
             <div className="space-y-2 flex flex-col">
-              <span className="text-accents-7 uppercase font-montserrat text-xs">
-                NOT REGISTERED?
-              </span>
-              <Link href="/account/register">
-                <Button secondary className="block w-full">
-                  REGISTER NOW
+              <Link href="/account/login">
+                <Button variant="ghost" className="block w-full">
+                  return to login
                 </Button>
               </Link>
             </div>
@@ -108,4 +100,4 @@ const LoginView: FC<Props> = () => {
   )
 }
 
-export default LoginView
+export default RecoveryView

@@ -80,9 +80,11 @@ const LoginView: FC<Props> = () => {
             {message && (
               <div className="text-red border border-red p-3">
                 {message}. Did you {` `}
-                <a className="text-accent-9 inline font-bold hover:underline cursor-pointer">
-                  forgot your password?
-                </a>
+                <Link href="/account/recovery">
+                  <a className="text-accent-9 inline font-bold hover:underline cursor-pointer">
+                    forgot your password?
+                  </a>
+                </Link>
               </div>
             )}
             <Input
@@ -98,9 +100,11 @@ const LoginView: FC<Props> = () => {
               onChange={handleOnInputChange(setPassword)}
             />
             <div className="space-y-2 flex flex-col">
-              <span className="text-accents-7 uppercase hover:underline font-montserrat text-xs">
-                Forgot your password?
-              </span>
+              <Link href="/account/recovery">
+                <a className="text-accents-7 underline uppercase hover:underline font-montserrat text-xs">
+                  Forgot your password?
+                </a>
+              </Link>
               <Button
                 className="block w-full"
                 type="submit"
