@@ -54,7 +54,7 @@ const BlogListView: React.FC<Props> = ({
         <Text className="hidden md:block text-center mx-auto" variant="h4">
           {title}
         </Text>
-        <div className="hidden md:flex mx-auto mt-xl flex-wrap justify-center items-baseline space-y-sm">
+        <div className="flex mx-auto mt-xl flex-wrap justify-center items-baseline space-y-sm">
           <Link href={`/blog`}>
             <a
               className={classNames('mx-xl text-effect-1 text-h7 uppercase', {

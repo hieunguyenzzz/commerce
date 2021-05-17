@@ -5,7 +5,7 @@ import { Layout } from '@components/common'
 import { Logo, NavbarRoot } from '@components/common/Navbar'
 import { Container } from '@components/ui'
 import { getConfig } from '@framework/api'
-import getAllBlogs from '@framework/blog/get-all-blogs'
+import getAllJournal from '@framework/blog/get-all-journal'
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
@@ -20,13 +20,13 @@ export async function getStaticProps({
 }: GetStaticPropsContext) {
   const slug = (params?.slug || '') as string
   const config = getConfig({ locale })
-  const { articles } = await getAllBlogs({ config, preview })
+  const { articles = [] } = await getAllJournal({ config, preview })
   const tags = getAllTagsFromArticles(articles)
   return {
     props: {
       articles,
       slug,
-      tags,
+      tags: getAllTagsFromArticles(articles),
     },
   }
 }
@@ -79,7 +79,6 @@ export default function Blog({
     ? articles.findIndex((article) => article.slug === slug)
     : -1
   const article = articles[articleIndex]
-  console.log({ articles, slug, articleIndex })
   if (router.isFallback) {
     return <h1>Loading...</h1>
   }

@@ -1,14 +1,14 @@
 import {
-  ReactNode,
-  MutableRefObject,
   createContext,
+  MutableRefObject,
+  ReactNode,
   useContext,
   useMemo,
   useRef,
 } from 'react'
-import { Fetcher, SWRHook, MutationHook } from './utils/types'
 import type { FetchCartInput } from './cart/use-cart'
-import type { Cart, Wishlist, Customer, SearchProductsData } from './types'
+import type { Cart, Customer, SearchProductsData, Wishlist } from './types'
+import { Fetcher, MutationHook, SWRHook } from './utils/types'
 
 const Commerce = createContext<CommerceContextValue<any> | {}>({})
 
@@ -35,6 +35,7 @@ export type Provider = CommerceConfig & {
     useSignup?: MutationHook<any, any, any>
     useLogin?: MutationHook<any, any, any>
     useLogout?: MutationHook<any, any, any>
+    useRecover?: MutationHook<any, any, any>
   }
 }
 

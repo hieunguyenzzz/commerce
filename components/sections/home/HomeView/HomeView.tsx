@@ -1,5 +1,6 @@
 import { usePrice } from '@commerce/product'
 import { Article, Collection, Product } from '@commerce/types'
+import AdsSignupView from '@components/others/AdsSignup'
 import { ProductSlider2 } from '@components/product'
 import { getProductLink, placeholderImg } from '@components/product/helpers'
 import { Button, Container } from '@components/ui'
@@ -115,7 +116,11 @@ const HomeView: React.FC<{
             shop the campaign.
           </div>
         </div>
-        <Button className="inline-block mt-[20px]">VIEW THE COLLECTION</Button>
+        <Link href="/collection/001-softtest">
+          <Button className="inline-block mt-[20px]">
+            VIEW THE COLLECTION
+          </Button>
+        </Link>
       </div>
       <div className="lg:col-span-12 order-2 py-xl flex flex-col">
         <div className="w-full pr-[20%]">
@@ -185,7 +190,11 @@ const HomeView: React.FC<{
                     />
                     <div className="absolute text-center inset-0 flex flex-col justify-center items-center">
                       <div className="w-[60%] mx-auto max-w-xs text-white">
-                        <h3 className="text-[16px]">{article?.name}</h3>
+                        <div>
+                          <h3 className="text-[16px] inline-block">
+                            {article?.name}
+                          </h3>
+                        </div>
                         <Button
                           className="mt-[13px] block w-full"
                           variant="ghost"
@@ -203,6 +212,11 @@ const HomeView: React.FC<{
           <div className="md:hidden" />
         </ProductSlider2>
       </div>
+    </Container>
+    <Container small>
+      <div className="h-24"></div>
+      <AdsSignupView />
+      <div className="h-24"></div>
     </Container>
   </div>
 )

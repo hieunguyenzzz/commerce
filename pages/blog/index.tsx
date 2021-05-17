@@ -4,7 +4,7 @@ import { Layout } from '@components/common'
 import { Logo, NavbarRoot } from '@components/common/Navbar'
 import { Container } from '@components/ui'
 import { getConfig } from '@framework/api'
-import getAllBlogs from '@framework/blog/get-all-blogs'
+import getAllJournal from '@framework/blog/get-all-journal'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -13,7 +13,7 @@ export async function getStaticProps({
   locale,
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
-  const { articles } = await getAllBlogs({ config, preview })
+  const { articles = [] } = await getAllJournal({ config, preview })
   return {
     props: {
       articles,
