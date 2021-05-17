@@ -1,10 +1,10 @@
-import { Minus, Plus, Trash } from '@components/icons'
+import { Close, Minus, Plus } from '@components/icons'
 import { useUI } from '@components/ui/context'
 import useRemoveItem from '@framework/cart/use-remove-item'
 import useUpdateItem from '@framework/cart/use-update-item'
 import usePrice from '@framework/product/use-price'
 import type { LineItem } from '@framework/types'
-import cn from 'classnames'
+import { default as classNames, default as cn } from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChangeEvent, useEffect, useState } from 'react'
@@ -87,34 +87,39 @@ const CartItem = ({
 
   return (
     <li
-      className={cn('flex flex-row space-x-8 py-8', {
+      className={cn('flex flex-row space-x-5 py-md lg:py-12', {
         'opacity-75 pointer-events-none': removing,
       })}
       {...rest}
     >
-      <div className="w-16 h-16  relative overflow-hidden cursor-pointer">
-        <Link href={`/product/${item.path}`}>
+      <Link href={`/product/${item.path}`}>
+        <a className="relative flex overflow-hidden cursor-pointer  w-2/6 max-w-[160px]">
           <Image
             onClick={() => closeSidebarIfPresent()}
-            className={s.productImage}
-            width={150}
-            height={150}
+            className={cn(s.productImage, 'block')}
+            width={160}
+            height={244}
+            objectPosition="top center"
+            objectFit="cover"
             src={item.variant.image!.url}
             alt={item.variant.image!.altText}
             unoptimized
           />
-        </Link>
-      </div>
+        </a>
+      </Link>
       <div className="flex-1 flex flex-col text-base">
         <Link href={`/product/${item.path}`}>
           <span
-            className="font-bold text-lg cursor-pointer leading-6"
+            className="font-bold text-[14px] md:text-base cursor-pointer leading-6 uppercase"
             onClick={() => closeSidebarIfPresent()}
           >
             {item.name}
           </span>
         </Link>
-        {options && options.length > 0 ? (
+        {((options) => {
+          console.log({ item })
+          return options
+        })(options) && options.length > 0 ? (
           <div className="">
             {options.map((option: ItemOption, i: number) => (
               <span
@@ -127,34 +132,51 @@ const CartItem = ({
             ))}
           </div>
         ) : null}
-        <div className="flex items-center mt-3">
-          <button type="button" onClick={() => increaseQuantity(-1)}>
-            <Minus width={18} height={18} />
-          </button>
-          <label>
-            <input
-              type="number"
-              max={99}
-              min={0}
-              className={s.quantity}
-              value={quantity}
-              onChange={handleQuantity}
-              onBlur={handleBlur}
-            />
-          </label>
-          <button type="button" onClick={() => increaseQuantity(1)}>
-            <Plus width={18} height={18} />
-          </button>
+        <div className="flex-1" />
+        <div className="flex">
+          <div className="flex  items-center mt-3 border border-black focus-within:shadow-outline-normal">
+            <button
+              className="p-xs"
+              type="button"
+              onClick={() => increaseQuantity(-1)}
+            >
+              <Minus width={11} height={11} />
+            </button>
+            <label>
+              <input
+                type="number"
+                max={99}
+                min={0}
+                className={classNames(
+                  s.quantity,
+                  'appearance-none border-none focus:outline-none'
+                )}
+                value={quantity}
+                onChange={handleQuantity}
+                onBlur={handleBlur}
+              />
+            </label>
+            <button
+              className="p-xs"
+              type="button"
+              onClick={() => increaseQuantity(1)}
+            >
+              <Plus width={11} height={11} />
+            </button>
+          </div>
         </div>
       </div>
-      <div className="flex flex-col justify-between space-y-2 text-base">
-        <span>{price}</span>
+      <div className="flex flex-col justify-between space-y-2 text-base pt-1">
         <button
-          className="flex justify-end outline-none"
+          className="flex font-montserrat justify-end outline-none text-[12px] uppercase text-accents-5 space-x-2 leading-none font-semibold"
           onClick={handleRemove}
         >
-          <Trash />
+          <div>
+            <Close />
+          </div>{' '}
+          <div>remove</div>
         </button>
+        <span>{price}</span>
       </div>
     </li>
   )

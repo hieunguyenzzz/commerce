@@ -4,7 +4,7 @@ import useRemoveItem from '@framework/cart/use-remove-item'
 import useUpdateItem from '@framework/cart/use-update-item'
 import usePrice from '@framework/product/use-price'
 import type { LineItem } from '@framework/types'
-import cn from 'classnames'
+import { default as classNames, default as cn } from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChangeEvent, useEffect, useState } from 'react'
@@ -131,24 +131,37 @@ const CartItem = ({
             ))}
           </div>
         ) : null}
-        <div className="flex items-center mt-3">
-          <button type="button" onClick={() => increaseQuantity(-1)}>
-            <Minus width={18} height={18} />
-          </button>
-          <label>
-            <input
-              type="number"
-              max={99}
-              min={0}
-              className={s.quantity}
-              value={quantity}
-              onChange={handleQuantity}
-              onBlur={handleBlur}
-            />
-          </label>
-          <button type="button" onClick={() => increaseQuantity(1)}>
-            <Plus width={18} height={18} />
-          </button>
+        <div className="flex">
+          <div className="flex  items-center mt-3 border border-black focus-within:shadow-outline-normal">
+            <button
+              className="p-xs"
+              type="button"
+              onClick={() => increaseQuantity(-1)}
+            >
+              <Minus width={11} height={11} />
+            </button>
+            <label>
+              <input
+                type="number"
+                max={99}
+                min={0}
+                className={classNames(
+                  s.quantity,
+                  'appearance-none border-none focus:outline-none'
+                )}
+                value={quantity}
+                onChange={handleQuantity}
+                onBlur={handleBlur}
+              />
+            </label>
+            <button
+              className="p-xs"
+              type="button"
+              onClick={() => increaseQuantity(1)}
+            >
+              <Plus width={11} height={11} />
+            </button>
+          </div>
         </div>
       </div>
     </li>

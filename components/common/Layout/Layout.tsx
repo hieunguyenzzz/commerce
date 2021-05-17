@@ -62,8 +62,18 @@ const Layout: FC<Props> = ({
     closeSidebar()
     closeModal()
   }, [pathname, query, asPath, closeSidebar, closeModal])
+  const promoAds = 'FREE SHIPPING ALL ORDERS OVER $300'
   return (
     <CommerceProvider locale={locale}>
+      {!!promoAds && (
+        <div
+          className={cn(
+            'w-full text-center px-3 text-[12px] flex items-center justify-center h-[22px] overflow-hidden uppercase bg-primary text-white py-[3px]'
+          )}
+        >
+          FREE SHIPPING ALL ORDERS OVER $300
+        </div>
+      )}
       <div className={cn(s.root)}>
         {renderNavbar ? renderNavbar() : <Navbar />}
         <main className="fit">{children}</main>
