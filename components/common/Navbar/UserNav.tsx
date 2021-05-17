@@ -17,7 +17,19 @@ interface Props {
 }
 
 const countItem = (count: number, item: LineItem) => count + item.quantity
-
+export const BagItem: FC<{
+  className?: string
+  onClick?: () => void
+}> = ({ className, onClick }) => {
+  const { data, isLoading, isEmpty } = useCart()
+  const itemsCount = data?.lineItems.reduce(countItem, 0) ?? 0
+  return (
+    <div className={className} onClick={onClick}>
+      <Bag />
+      {itemsCount > 0 && <span className={s.bagCount}>{itemsCount}</span>}
+    </div>
+  )
+}
 const UserNav: FC<Props> = ({ className }) => {
   const { data } = useCart()
   const { data: customer } = useCustomer()
@@ -174,16 +186,13 @@ const UserNav: FC<Props> = ({ className }) => {
           </div>
         )}
 
-        <div
+        <BagItem
           className={s.item}
           onClick={() => {
             setModalView('CART')
             openSidebar()
           }}
-        >
-          <Bag />
-          {itemsCount > 0 && <span className={s.bagCount}>{itemsCount}</span>}
-        </div>
+        ></BagItem>
       </div>
     </nav>
   )

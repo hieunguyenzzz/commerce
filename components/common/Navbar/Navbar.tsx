@@ -1,15 +1,16 @@
 import useCustomer from '@commerce/customer/use-customer'
 import { UserNav } from '@components/common'
-import { Bag, Logo as LogoIcon, Menu, User } from '@components/icons'
+import { Logo as LogoIcon, Menu, User } from '@components/icons'
 import { CATEGORIES } from '@components/product/helpers'
 import { Container, Text, useUI } from '@components/ui'
 import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FC, ReactElement } from 'react'
+import React, { FC, ReactElement } from 'react'
 import s from './Navbar.module.css'
 import NavbarRoot from './NavbarRoot'
+import { BagItem } from './UserNav'
 export interface Props {
   modalView?: 'MENU' | 'SEARCH' | 'SHOP' | 'COLLECTION'
   transparent?: boolean
@@ -87,6 +88,7 @@ export const NavItem: React.FC<NavItemProps> = ({
 const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
   const { openSidebar, setModalView, displaySidebar, closeSidebar } = useUI()
   const { data: customer } = useCustomer()
+
   const router = useRouter()
   const smallNav = (
     <div className="flex w-full flex-1 py-4 items-center align-center">
@@ -147,16 +149,13 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
             </Link>
           </div>
         )}
-        <div
+        <BagItem
           className={classNames(s.item, 'flex items-center')}
           onClick={() => {
             setModalView('CART')
             openSidebar()
           }}
-        >
-          <Bag />
-          <span className={s.bagCount}>6</span>
-        </div>
+        ></BagItem>
       </div>
     </div>
   )

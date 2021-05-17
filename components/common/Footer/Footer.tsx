@@ -46,12 +46,12 @@ const Footer: FC<Props> = ({ className, pages }) => {
     <footer className={rootClassName}>
       <Container small>
         <div className="w-full grid grid-cols-3 lg:grid-cols-9 gap-y-[31px] md:gap-y-xl gap-6  transition-colors duration-150 py-[32px] md:py-11  border-b border-t border-accents-3 md:border-none">
-          <div className="col-span-3 space-y-[38px]  ">
+          <div className="col-span-3 space-y-4 lg:space-y-[38px]  ">
             <Text variant="h5">CUSTOMER CARE</Text>
             <ul
               className={classNames(
-                ' md:flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4',
-                pathname.includes('/customer-care') ? 'flex' : 'hidden'
+                ' flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4'
+                // pathname.includes('/customer-care') ? 'flex' : 'hidden'
               )}
             >
               {customercare.map(({ title, slug }) => (
@@ -70,9 +70,9 @@ const Footer: FC<Props> = ({ className, pages }) => {
               ))}
             </ul>
           </div>
-          <div className="col-span-3 space-y-[38px]  ">
+          <div className="col-span-3 space-y-4 lg:space-y-[38px]">
             <Text variant="h5">OUR BRAND</Text>
-            <ul className="hidden md:flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
+            <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
               {legalPages.map(({ title, slug }) => (
                 <Link key={slug} href={'/' + slug}>
                   <Text className="text-effect-1" variant="h7">

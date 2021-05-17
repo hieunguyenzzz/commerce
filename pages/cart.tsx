@@ -1,3 +1,4 @@
+import { LineItem } from '@commerce/types'
 import { FullCartItem } from '@components/cart'
 import { Breadcrumb, Layout } from '@components/common'
 import { Back, Bag, Check, CreditCard, Cross, MapPin } from '@components/icons'
@@ -18,11 +19,13 @@ export async function getStaticProps({
     props: { pages },
   }
 }
+const countItem = (count: number, item: LineItem) => count + item.quantity
 
 export default function Cart() {
   const error = null
   const success = null
   const { data, isLoading, isEmpty } = useCart()
+  const itemsCount = data?.lineItems.reduce(countItem, 0) ?? 0
 
   const { price: subTotal } = usePrice(
     data && {
@@ -74,9 +77,7 @@ export default function Cart() {
             </div>
           ) : (
             <div className=" flex-1 space-y-md lg:space-y-6  ">
-              <Text variant="sectionHeading">
-                Items: {data!.lineItems.length || 0}
-              </Text>
+              <Text variant="sectionHeading">Items: {itemsCount}</Text>
               <ul className="border-t border-black sm:py-0 sm:space-y-0 divide-y divide-black border-b border-accents-2">
                 {data!.lineItems.map((item) => (
                   <FullCartItem

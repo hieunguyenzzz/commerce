@@ -20,7 +20,7 @@ const DefaultSidebarView: FC<Props> = ({ pages }) => {
       title={
         <form className="w-full flex space-x-3 text-accents-6 focus-within:text-primary">
           <input
-            className="flex-1 bg-transparent appearance-none focus:outline-none block border-none p-0 "
+            className="flex-1 text-base bg-transparent appearance-none focus:outline-none block border-none p-0 "
             type="text"
             placeholder="Search..."
           ></input>
