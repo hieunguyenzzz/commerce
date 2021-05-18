@@ -12,27 +12,35 @@ interface Props {}
 
 const RecoveryView: FC<Props> = () => {
   // Form State
+  const [resetNumber, setResetNumber] = useState(0)
+  const [success, setSuccess] = useState(false)
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [dirty, setDirty] = useState(false)
   const [disabled, setDisabled] = useState(false)
   const recovery = useRecover()
-
-  const handleLogin = async (e: React.SyntheticEvent<EventTarget>) => {
+  useEffect(() => {
+    if (resetNumber) {
+      setSuccess(false)
+      setMessage('')
+    }
+  }, [resetNumber])
+  const handleSubmit = async (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault()
-
     if (!dirty && !disabled) {
       setDirty(true)
       handleValidation()
     }
 
     try {
+      setResetNumber(Date.now())
       setLoading(true)
       setMessage('')
       await recovery({
         email,
       })
+      setSuccess(true)
       setLoading(false)
     } catch ({ errors }) {
       setMessage(errors[0].message)
@@ -60,7 +68,7 @@ const RecoveryView: FC<Props> = () => {
         </div>
 
         <form
-          onSubmit={handleLogin}
+          onSubmit={handleSubmit}
           className="max-w-sm w-full flex flex-col justify-between"
         >
           <div className="flex justify-center py-12">
@@ -68,8 +76,11 @@ const RecoveryView: FC<Props> = () => {
           </div>
           <div className="flex flex-col space-y-8">
             {message && (
-              <div className="text-red border border-red p-3">{message}</div>
+              <div className="text-red-600 border border-red-600 p-3">
+                {message}
+              </div>
             )}
+            {success && <div className="border p-3">Email sent !</div>}
             <Input
               required
               type="email"

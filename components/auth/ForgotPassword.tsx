@@ -1,7 +1,7 @@
-import { FC, useEffect, useState, useCallback } from 'react'
-import { validate } from 'email-validator'
+import { Button, Input, Logo } from '@components/ui'
 import { useUI } from '@components/ui/context'
-import { Logo, Button, Input } from '@components/ui'
+import { validate } from 'email-validator'
+import { FC, useCallback, useEffect, useState } from 'react'
 
 interface Props {}
 
@@ -45,7 +45,9 @@ const ForgotPassword: FC<Props> = () => {
       </div>
       <div className="flex flex-col space-y-4">
         {message && (
-          <div className="text-red border border-red p-3">{message}</div>
+          <div className="text-red-600 border border-red-600 p-3">
+            {message}
+          </div>
         )}
 
         <Input placeholder="Email" onChange={setEmail} type="email" />

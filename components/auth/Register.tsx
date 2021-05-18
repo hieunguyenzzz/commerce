@@ -81,7 +81,7 @@ const RegisterView: FC<Props> = () => {
           </div>
           <div className="flex flex-col space-y-8">
             {message && (
-              <div className="text-red border border-red p-3">
+              <div className="text-red-600 border border-red-600 p-3">
                 {message}. Did you {` `}
                 <a
                   className="text-accent-9 inline font-bold hover:underline cursor-pointer"
