@@ -1,4 +1,4 @@
-import RecoveryView from '@components/auth/RecoverView'
+import { ResetView } from '@components/auth'
 import { Layout } from '@components/common'
 import { getConfig } from '@framework/api'
 import getAllPages from '@framework/common/get-all-pages'
@@ -19,17 +19,19 @@ export async function getStaticProps({
     },
   }
 }
-function Recovery(props: InferGetStaticPropsType<typeof getStaticProps>) {
+function Reset(props: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
+  const { query } = router
+  const { id, token } = query
   const customer = useCustomer()
   useEffect(() => {
     if (customer?.data) {
       router.replace('/')
     }
   }, [customer])
-  return <RecoveryView />
+  return <ResetView {...({ customerId: id, resetToken: token } as any)} />
 }
 
-export default Recovery
+export default Reset
 
-Recovery.Layout = Layout
+Reset.Layout = Layout

@@ -117,7 +117,6 @@ const CartItem = ({
           </span>
         </Link>
         {((options) => {
-          console.log({ item })
           return options
         })(options) && options.length > 0 ? (
           <div className="">

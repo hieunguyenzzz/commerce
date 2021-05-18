@@ -36,6 +36,7 @@ export type Provider = CommerceConfig & {
     useLogin?: MutationHook<any, any, any>
     useLogout?: MutationHook<any, any, any>
     useRecover?: MutationHook<any, any, any>
+    useReset?: MutationHook<any, any, any>
   }
 }
 

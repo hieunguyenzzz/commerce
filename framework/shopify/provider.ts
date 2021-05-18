@@ -1,6 +1,7 @@
 import { handler as useLogin } from './auth/use-login'
 import { handler as useLogout } from './auth/use-logout'
 import { handler as useRecover } from './auth/use-recover'
+import { handler as useReset } from './auth/use-reset'
 import { handler as useSignup } from './auth/use-signup'
 import { handler as useAddItem } from './cart/use-add-item'
 import { handler as useCart } from './cart/use-cart'
@@ -18,7 +19,7 @@ export const shopifyProvider = {
   cart: { useCart, useAddItem, useUpdateItem, useRemoveItem },
   customer: { useCustomer },
   products: { useSearch },
-  auth: { useLogin, useLogout, useSignup, useRecover },
+  auth: { useLogin, useLogout, useSignup, useRecover, useReset },
 }
 
 export type ShopifyProvider = typeof shopifyProvider
