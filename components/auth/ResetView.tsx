@@ -38,7 +38,6 @@ const ResetView: FC<Props> = ({ customerId, resetToken }) => {
     try {
       setResetNumber(Date.now())
       setLoading(true)
-      console.log({ customerId, resetToken, reset })
       await reset({
         id: window.btoa(`gid://shopify/Customer/${customerId}`),
         input: {
@@ -88,28 +87,36 @@ const ResetView: FC<Props> = ({ customerId, resetToken }) => {
                 {message}
               </div>
             )}
-            <Input
-              required
-              type="password"
-              placeholder="New password"
-              onChange={handleOnInputChange(setpassword)}
-            />
-            <Input
-              required
-              type="password"
-              placeholder="Confirm password"
-              onChange={handleOnInputChange(setconfirmpassword)}
-            />
-            <div className="space-y-2 flex flex-col">
-              <Button
-                className="block w-full"
-                type="submit"
-                loading={loading}
-                disabled={disabled}
-              >
-                Send
-              </Button>
-            </div>
+            {success ? (
+              <div className="text-blue-600 border border-blue-600 p-3">
+                your password had changed
+              </div>
+            ) : (
+              <>
+                <Input
+                  required
+                  type="password"
+                  placeholder="New password"
+                  onChange={handleOnInputChange(setpassword)}
+                />
+                <Input
+                  required
+                  type="password"
+                  placeholder="Confirm password"
+                  onChange={handleOnInputChange(setconfirmpassword)}
+                />
+                <div className="space-y-2 flex flex-col">
+                  <Button
+                    className="block w-full"
+                    type="submit"
+                    loading={loading}
+                    disabled={disabled}
+                  >
+                    Send
+                  </Button>
+                </div>
+              </>
+            )}
             <div className="space-y-2 flex flex-col">
               <Link href="/account/login">
                 <Button variant="ghost" className="block w-full">

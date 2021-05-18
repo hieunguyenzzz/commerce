@@ -6,7 +6,6 @@ import 'keen-slider/keen-slider.min.css'
 import { NextPageContext } from 'next'
 import type { AppProps } from 'next/app'
 import { FC, useEffect } from 'react'
-
 const Noop: FC = ({ children }) => <>{children}</>
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -39,6 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 // perform automatic static optimization, causing every page in your app to
 // be server-side rendered.
 //
+
 MyApp.getInitialProps = async (appContext: NextPageContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
   // const config = getConfig({ locale: 'en-US' })
@@ -49,6 +49,7 @@ MyApp.getInitialProps = async (appContext: NextPageContext) => {
       phone: '+84 077 277 0802',
       customerCareHours: 'Monday - Friday 8:00am - 4:30pm ICT',
       location: 'SAIGON, VIETNAM',
+
       socials: {
         instagram: 'https://www.instagram.com/_TESSJEAN_/',
         facebook: 'https://www.facebook.com/tessjeanwoman',

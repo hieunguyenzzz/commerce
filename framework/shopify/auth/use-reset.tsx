@@ -3,7 +3,7 @@ import type { MutationHook } from '@commerce/utils/types'
 import { useCallback } from 'react'
 import useCustomer from '../customer/use-customer'
 import { Mutation, MutationCustomerResetArgs } from '../schema'
-import { setCustomerToken, throwUserErrors } from '../utils'
+import { throwUserErrors } from '../utils'
 import { customerResetMutation } from '../utils/mutations'
 
 export default useReset as UseReset<typeof handler>
@@ -28,7 +28,7 @@ export const handler: MutationHook<
     const { customerReset } = await fetch<Mutation, MutationCustomerResetArgs>({
       ...options,
       variables: {
-        id: '',
+        id: id,
         input: {
           password,
           resetToken,
@@ -37,11 +37,11 @@ export const handler: MutationHook<
     })
 
     throwUserErrors(customerReset?.customerUserErrors)
-    const customerAccessToken = customerReset?.customerAccessToken
-    const accessToken = customerAccessToken?.accessToken
-    if (accessToken) {
-      setCustomerToken(accessToken)
-    }
+    // const customerAccessToken = customerReset?.customerAccessToken
+    // const accessToken = customerAccessToken?.accessToken
+    // if (accessToken) {
+    //   setCustomerToken(accessToken)
+    // }
 
     return null
   },

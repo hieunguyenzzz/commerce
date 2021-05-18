@@ -13,12 +13,20 @@ interface Props {
 }
 const DefaultSidebarView: FC<Props> = ({ pages }) => {
   const { sitePages, legalPages } = usePages(pages)
-
+  const router = useRouter()
   return (
     <SidebarLayout
       icon={<Search />}
       title={
-        <form className="w-full flex space-x-3 text-accents-6 focus-within:text-primary">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            router.push(
+              `/search?q=${e.currentTarget.querySelector('input')?.value}`
+            )
+          }}
+          className="w-full flex space-x-3 text-accents-6 focus-within:text-primary"
+        >
           <input
             className="flex-1 text-base bg-transparent appearance-none focus:outline-none block border-none p-0 "
             type="text"
@@ -29,15 +37,19 @@ const DefaultSidebarView: FC<Props> = ({ pages }) => {
       className={s.root}
     >
       <div className="space-y-md flex flex-col">
-        {['NEW ARRIVALS', 'SHOP', 'COLLECTIONS', 'ETHICS', 'JOURNAL'].map(
-          (str) => (
-            <Link key={str} href={decodeURI(`/${str.toLocaleLowerCase}`)}>
-              <a className={classNames('text-h7 hover:underline uppercase')}>
-                {str}
-              </a>
-            </Link>
-          )
-        )}
+        {[
+          { title: 'NEW ARRIVALS', slug: 'NEW-ARRIVALS' },
+          { title: 'SHOP', slug: 'SHOP' },
+          { title: 'COLLECTIONS', slug: 'COLLECTIONS' },
+          { title: 'ETHICS', slug: 'ETHICS' },
+          { title: 'JOURNAL', slug: 'blog' },
+        ].map(({ title, slug }) => (
+          <Link key={slug} href={decodeURI(`/${slug.toLocaleLowerCase()}`)}>
+            <a className={classNames('text-h7 hover:underline uppercase')}>
+              {title}
+            </a>
+          </Link>
+        ))}
       </div>
     </SidebarLayout>
   )

@@ -37,9 +37,10 @@ const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
   )
 }
 const HomeView: React.FC<{
+  instagramPosts?: any[]
   collection: Collection
   articles: Article[]
-}> = ({ collection, articles }) => (
+}> = ({ collection, articles, instagramPosts }) => (
   <div className={classNames(s.root, 'space-y-[17px]')} data-testid="HomeView">
     <div className="relative lg:h-screen flex items-center justify-center py-[60px] pt-[120px] px-[50px] w-full">
       <div className="absolute inset-0 ">
@@ -211,6 +212,26 @@ const HomeView: React.FC<{
         </ProductSlider2>
       </div>
     </Container>
+    {instagramPosts && (
+      <Container className="py-6 px-0 lg:py-12 space-y-[28px] lg:space-y-10 overflow-hidden">
+        <h3 className="text-[24px] text-center">FOLLOW US @_TESSJEAN_</h3>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-md">
+          {instagramPosts.map(({ node: post }: any, i) => (
+            <div
+              key={i}
+              className="flex relative items-center w-full bg-gray-100 border border-transparent hover:border-accents-5"
+            >
+              <div style={{ paddingTop: (297 / 200) * 100 + '%' }} />
+              <img
+                className="absolute inset-0 object-cover"
+                src={post?.display_url || placeholderImg}
+                alt={'instagram Image'}
+              />
+            </div>
+          ))}
+        </div>
+      </Container>
+    )}
     <Container small>
       <div className="h-24"></div>
       <AdsSignupView />
