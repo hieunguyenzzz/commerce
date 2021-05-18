@@ -1,4 +1,5 @@
 import type { Collection, Product } from '@commerce/types'
+import AdsSignupView from '@components/others/AdsSignup'
 import { Button, Container } from '@components/ui'
 import classNames from 'classnames'
 import Image from 'next/image'
@@ -129,6 +130,20 @@ const CollectionView: FC<Props> = ({ collection, categories, products }) => {
             <Button>SHOP THE COLLECTION</Button>
           </Link>
         </div>
+        <div className="h-4" />
+        <div
+          className="relative"
+          style={{ paddingTop: `${Math.floor((211 / 375) * 100)}%` }}
+        >
+          <div className="absolute inset-0">
+            <Image objectFit="cover" layout="fill" src={'/campaign-9.jpeg'} />
+          </div>
+        </div>
+        <Container small>
+          <div className="h-24"></div>
+          <AdsSignupView />
+          <div className="h-24"></div>
+        </Container>
       </div>
     </>
   )
