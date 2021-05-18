@@ -23,12 +23,7 @@ const ResetView: FC<Props> = ({ customerId, resetToken }) => {
   const [dirty, setDirty] = useState(false)
   const [disabled, setDisabled] = useState(false)
   const reset = useReset()
-  useEffect(() => {
-    if (resetNumber) {
-      setSuccess(false)
-      setMessage('')
-    }
-  }, [resetNumber])
+
   const handleSubmit = async (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault()
     if (!dirty && !disabled) {
@@ -36,7 +31,7 @@ const ResetView: FC<Props> = ({ customerId, resetToken }) => {
       handleValidation()
     }
     try {
-      setResetNumber(Date.now())
+      setMessage('')
       setLoading(true)
       await reset({
         id: window.btoa(`gid://shopify/Customer/${customerId}`),
@@ -61,7 +56,7 @@ const ResetView: FC<Props> = ({ customerId, resetToken }) => {
         setMessage('Your password and confirmation password do not match.')
       }
     }
-  }, [dirty])
+  }, [dirty, password, confirmpassword])
 
   useEffect(() => {
     handleValidation()
