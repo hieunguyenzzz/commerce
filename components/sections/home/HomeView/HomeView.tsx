@@ -15,27 +15,25 @@ const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
     amount: product.price.value,
   })
   return (
-    <a className="pl-[16px] md:px-[8px] block cursor-pointer ">
-      <div className="flex relative items-center w-full bg-gray-100 border border-transparent hover:border-accents-5">
-        <div style={{ paddingTop: (297 / 200) * 100 + '%' }} />
-        <Image
-          layout="fill"
-          objectFit="cover"
-          quality="85"
-          sizes="(max-width: 400px) 200px ,500px"
-          src={product.images[0].url || placeholderImg}
-          alt={product.name || 'Product Image'}
-        />
-        <div className="absolute py-4 bottom-0">
-          <div className="px-4 text-[14px] lg:text-header-2 bg-white bg-opacity-25 font-bold uppercase mt-[10px]">
-            {product.name}
-          </div>
-          <div className="px-4 text-[14x] bg-white bg-opacity-25 uppercase mt-[2px] mb-[10px]">
-            {currency} {price}
-          </div>
+    <div className="flex relative items-center w-full bg-gray-100 border border-transparent hover:border-accents-5">
+      <div style={{ paddingTop: (297 / 200) * 100 + '%' }} />
+      <Image
+        layout="fill"
+        objectFit="cover"
+        quality="85"
+        sizes="(max-width: 400px) 200px ,500px"
+        src={product.images[0].url || placeholderImg}
+        alt={product.name || 'Product Image'}
+      />
+      <div className="absolute py-4 bottom-0">
+        <div className="px-4 text-[14px] lg:text-header-2 bg-white bg-opacity-25 font-bold uppercase mt-[10px]">
+          {product.name}
+        </div>
+        <div className="px-4 text-[14x] bg-white bg-opacity-25 uppercase mt-[2px] mb-[10px]">
+          {currency} {price}
         </div>
       </div>
-    </a>
+    </div>
   )
 }
 const HomeView: React.FC<{
@@ -73,7 +71,9 @@ const HomeView: React.FC<{
             if (!product) return null
             return (
               <Link href={getProductLink(product.slug)} key={i}>
-                <ProductItem {...{ product }} />
+                <a className="pl-[16px] md:px-[8px] block cursor-pointer ">
+                  <ProductItem {...{ product }} />
+                </a>
               </Link>
             )
           })}
