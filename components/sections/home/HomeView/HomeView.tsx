@@ -216,7 +216,7 @@ const HomeView: React.FC<{
       <Container className="py-6 px-0 lg:py-12 space-y-[28px] lg:space-y-10 overflow-hidden">
         <h3 className="text-[24px] text-center">FOLLOW US @_TESSJEAN_</h3>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-md">
-          {instagramPosts.map(({ node: post }: any, i) => (
+          {instagramPosts.map((post: any, i) => (
             <div
               key={i}
               className="flex relative items-center w-full bg-gray-100 border border-transparent hover:border-accents-5"
@@ -224,7 +224,7 @@ const HomeView: React.FC<{
               <div style={{ paddingTop: (297 / 200) * 100 + '%' }} />
               <img
                 className="absolute inset-0 object-cover"
-                src={post?.display_url || placeholderImg}
+                src={post?.display_resources[0].src || placeholderImg}
                 alt={'instagram Image'}
               />
             </div>

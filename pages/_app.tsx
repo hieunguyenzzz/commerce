@@ -5,6 +5,7 @@ import { ManagedUIContext } from '@components/ui/context'
 import 'keen-slider/keen-slider.min.css'
 import { NextPageContext } from 'next'
 import type { AppProps } from 'next/app'
+import instagramPosts from 'public/instagramPosts.json'
 import { FC, useEffect } from 'react'
 const Noop: FC = ({ children }) => <>{children}</>
 
@@ -44,12 +45,12 @@ MyApp.getInitialProps = async (appContext: NextPageContext) => {
   // const config = getConfig({ locale: 'en-US' })
   // const siteInfoProps = await getSiteInfo({ config })
   return {
-    appProps: {
+    pageProps: {
       email: 'hello@tessjean.com',
       phone: '+84 077 277 0802',
       customerCareHours: 'Monday - Friday 8:00am - 4:30pm ICT',
       location: 'SAIGON, VIETNAM',
-
+      instagramPosts,
       socials: {
         instagram: 'https://www.instagram.com/_TESSJEAN_/',
         facebook: 'https://www.facebook.com/tessjeanwoman',

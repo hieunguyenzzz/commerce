@@ -18,15 +18,17 @@ interface Props {
 
 const countItem = (count: number, item: LineItem) => count + item.quantity
 export const BagItem: FC<{
+  limit?: number
   className?: string
   onClick?: () => void
-}> = ({ className, onClick }) => {
+}> = ({ className, onClick, limit = 9 }) => {
   const { data, isLoading, isEmpty } = useCart()
   const itemsCount = data?.lineItems.reduce(countItem, 0) ?? 0
+  const countStr = itemsCount > limit ? `${limit}+` : itemsCount
   return (
     <div className={className} onClick={onClick}>
       <Bag />
-      {itemsCount > 0 && <span className={s.bagCount}>{itemsCount}</span>}
+      {itemsCount > 0 && <span className={s.bagCount}>{countStr}</span>}
     </div>
   )
 }
