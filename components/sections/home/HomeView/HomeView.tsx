@@ -212,7 +212,7 @@ const HomeView: React.FC<{
         </ProductSlider2>
       </div>
     </Container>
-    {instagramPosts && (
+    {/* {instagramPosts && (
       <Container className="py-6 px-0 lg:py-12 space-y-[28px] lg:space-y-10 overflow-hidden">
         <h3 className="text-[24px] text-center">FOLLOW US @_TESSJEAN_</h3>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-md">
@@ -231,7 +231,7 @@ const HomeView: React.FC<{
           ))}
         </div>
       </Container>
-    )}
+    )} */}
     <Container small>
       <div className="h-24"></div>
       <AdsSignupView />
