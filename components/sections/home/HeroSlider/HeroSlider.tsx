@@ -13,7 +13,6 @@ const HeroSlider: FC<any> = ({ list }) => {
   const [ref, slider] = useKeenSlider<HTMLDivElement>({
     slides: list.length,
     loop: true,
-
     mounted: () => setIsMounted(true),
     slideChanged(s) {
       setCurrentSlide(s.details().relativeSlide)
