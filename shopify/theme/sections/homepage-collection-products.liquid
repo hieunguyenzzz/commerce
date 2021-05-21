@@ -1,0 +1,168 @@
+
+<div class="Container_root__3ON0K Container_small__3RbQv lg:col-span-12 order-2 py-xl flex flex-col lg:grid grid-cols-9 grid-rows-2 lg:gap-5">
+  <div  class="w-full row-start-1 row-end-1 lg:col-start-1 lg:col-end-6 pr-16 lg:pr-0">
+    <div class="bg-accents-1" style="display:block;overflow:hidden;position:relative;box-sizing:border-box;margin:0">
+      <div style="display:block;box-sizing:border-box;padding-top:72.05882352941177%"></div>
+      {% if section.blocks[0].settings.image %}
+      <img
+      src="{{section.blocks[0].settings.image  | img_url: "large" }}"
+      style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%;object-fit:cover"
+      >
+      {% else %}
+        <div class="absolute inset-0 flex items-center">
+          {% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
+          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endif %}
+        
+    </div>
+    <div class="text-sm font-bold uppercase mt-3">{{section.blocks[0].settings.title }}</div>
+    <a href="{{section.blocks[0].settings.url }}" class="text-xs uppercase mt-1 mb-3">shop now</a>
+  </div>
+  <div  class="w-full row-start-1 row-end-3 lg:col-start-6 lg:col-end-10 pl-40 lg:pl-0 lg:mt-24">
+    <div class="bg-accents-1" style="display:block;overflow:hidden;position:relative;box-sizing:border-box;margin:0">
+      <div style="display:block;box-sizing:border-box;padding-top:138.72549019607843%"></div>
+      {% if section.blocks[1].settings.image %}
+      <img
+      src="{{section.blocks[1].settings.image  | img_url: "large" }}"
+      style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%;object-fit:cover"
+      >
+      {% else %}
+        <div class="absolute inset-0 flex items-center">
+          {% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
+          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endif %}
+      
+    </div>
+    <div class="text-sm font-bold uppercase mt-3">{{section.blocks[1].settings.title }}</div>
+    <a href="{{section.blocks[1].settings.url }}" class="text-xs uppercase mt-1 mb-3">shop now</a>
+  </div>
+  <div  class="w-full mt-9 row-start-2 lg:col-start-1 lg:col-end-6 pr-28 lg:pr-0 lg:pl-20  lg:mt-0">
+    <div class="bg-accents-1" style="display:block;overflow:hidden;position:relative;box-sizing:border-box;margin:0">
+      <div style="display:block;box-sizing:border-box;padding-top:89.28571428571429%"></div>
+      {% if section.blocks[2].settings.image %}
+      <img
+        src="{{section.blocks[2].settings.image  | img_url: "large" }}"
+        style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%;object-fit:cover"
+        >
+      {% else %}
+        <div class="absolute inset-0 flex items-center">
+          {% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
+          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endif %}
+      
+    </div>
+    <div class="text-sm font-bold uppercase mt-3">{{section.blocks[2].settings.title }}</div>
+    <a href="{{section.blocks[2].settings.url }}" class="text-xs uppercase mt-1 mb-3">shop now</a>
+  </div>
+</div>
+{% schema %}
+{
+  "name": {
+    "cs": "homepage collection 2",
+    "da": "homepage collection 2",
+    "de": "homepage collection 2",
+    "en": "homepage collection 2",
+    "es": "homepage collection 2",
+    "fi": "homepage collection 2",
+    "fr": "Vidéo",
+    "hi": "वीडियो",
+    "it": "homepage collection 2",
+    "ja": "ビデオ",
+    "ko": "동영상",
+    "nb": "homepage collection 2",
+    "nl": "homepage collection 2",
+    "pl": "Film",
+    "pt-BR": "homepage collection 2",
+    "pt-PT": "homepage collection 2",
+    "sv": "homepage collection 2",
+    "th": "วิดีโอ",
+    "tr": "homepage collection 2",
+    "vi": "homepage collection 2",
+    "zh-CN": "视频",
+    "zh-TW": "影片"
+  },
+  "settings": [
+    
+  ],
+  "blocks":[
+    {
+      "name": "item 1",
+      "type": "product",
+      "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "title",
+            "default": "title"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "image"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "url",
+            "default": "/"
+          }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "cs": "homepage collection 2",
+        "da": "homepage collection 2",
+        "de": "homepage collection 2",
+        "en": "homepage collection 2",
+        "es": "homepage collection 2",
+        "fi": "homepage collection 2",
+        "fr": "Vidéo",
+        "hi": "वीडियो",
+        "it": "homepage collection 2",
+        "ja": "ビデオ",
+        "ko": "동영상",
+        "nb": "homepage collection 2",
+        "nl": "homepage collection 2",
+        "pl": "Film",
+        "pt-BR": "homepage collection 2",
+        "pt-PT": "homepage collection 2",
+        "sv": "homepage collection 2",
+        "th": "วิดีโอ",
+        "tr": "homepage collection 2",
+        "vi": "homepage collection 2",
+        "zh-CN": "视频",
+        "zh-TW": "影片"
+      },
+      "category": {
+        "cs": "collection",
+        "da": "collection",
+        "de": "collection",
+        "en": "collection",
+        "es": "collection",
+        "fi": "collection",
+        "fr": "collection",
+        "hi": "collection",
+        "it": "collection",
+        "ja": "collection",
+        "ko": "collection",
+        "nb": "collection",
+        "nl": "collection",
+        "pl": "collection",
+        "pt-BR": "collection",
+        "pt-PT": "collection",
+        "sv": "collection",
+        "th": "collection",
+        "tr": "collection",
+        "vi": "collection",
+        "zh-CN": "collection",
+        "zh-TW": "collection"
+      }
+    }
+  ]
+}
+{% endschema %}

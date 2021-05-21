@@ -19,8 +19,8 @@
   </div>
   <div class="text-center mx-auto  isolate flex flex-col items-center w-full space-y-3 text-white max-w-3xl">
     <div class="uppercase text-xs lg:text-sm">{{section.settings.label}}</div>
-    <div class="uppercase text-xl leading-2xl lg:text-4xl lg:leading-relaxed">{{section.settings.title}}</div><button data-variant="ghost"
-      class="Button_root__24MxS Button_small__123h_ Button_ghost__32qxu inline-block"><span class="text-white">{{section.settings.button}}</span></button>
+    <div class="uppercase text-xl leading-2xl lg:text-4xl lg:leading-relaxed">{{section.settings.title}}</div><a href="{{section.settings.buttonUrl}}" role="button" data-variant="ghost"
+      class="Button_root__24MxS Button_small__123h_ Button_ghost__32qxu inline-block"><span class="text-white">{{section.settings.button}}</span></a>
   </div>
 </div>
 
@@ -183,6 +183,12 @@
         "zh-CN": "视频",
         "zh-TW": "影片"
       }
+    },
+    {
+      "type": "url",
+      "id": "buttonUrl",
+      "label": "button url",
+      "default": "/"
     },
     {
       "type": "image_picker",
