@@ -1,86 +1,8 @@
 {
-  "current": {
-    "sections": {
-      "1621822577decf5d66": {
-        "type": "header",
-        "settings": {
-          "overlay": true
-        }
-      },
-      "1621822695d7681be2": {
-        "type": "herocover",
-        "settings": {
-          "label": "just landed",
-          "title": "FLEUR STORY: HAND PAINTED IN HOUSE EMBRACE SUMMER FLORALS",
-          "button": "View the collection",
-          "buttonUrl": "shopify://collections/001-softtest",
-          "cover": "shopify://shop_images/vintage-shopping.jpg"
-        }
-      },
-      "162182272585d777e5": {
-        "type": "collection-rows",
-        "settings": {
-          "title": "Featured collection",
-          "home_featured_row": "001-softtest"
-        }
-      },
-      "16218229459ad32f9c": {
-        "type": "homepage-collection",
-        "settings": {
-          "subtitle": "subtitle",
-          "heading": "title",
-          "description": "A story of exploration, slowing time, nurturing nature and growing up looking to the future, while being informed by the past. View and shop the campaign.",
-          "buttonText": "view the collection",
-          "buttonUrl": "/"
-        }
-      },
-      "1621822956ea85ce2a": {
-        "type": "journal-rows",
-        "settings": {}
-      },
-      "1621822994ae31dbad": {
-        "type": "homepage-collection-products",
-        "settings": {}
-      },
-      "16218230193061e77b": {
-        "type": "footer",
-        "settings": {}
-      },
-      "header": {
-        "type": "header",
-        "settings": {
-          "overlay": false
-        }
-      },
-      "product-template": {
-        "type": "product-template",
-        "settings": {
-          "grid": "4",
-          "rows": "6",
-          "collection_sidebar_filters": "tags",
-          "product_show_compare_at_price": false,
-          "product_show_saved_amount": true,
-          "product_reviews_enable": false,
-          "enable_sidebar": true
-        }
-      },
-      "footer": {
-        "type": "footer",
-        "settings": {}
-      }
-    },
-    "content_for_index": [
-      "1621822577decf5d66",
-      "1621822695d7681be2",
-      "162182272585d777e5",
-      "16218229459ad32f9c",
-      "1621822994ae31dbad",
-      "1621822956ea85ce2a",
-      "16218230193061e77b"
-    ]
-  },
+  "current": "Default",
   "presets": {
     "Default": {
+      "sections": {},
       "content_for_index": []
     }
   }
