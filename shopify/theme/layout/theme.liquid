@@ -16,6 +16,9 @@
   {{ 'application.js' | asset_url | script_tag }}
   <!-- CSS3 variables ================================================== -->
   {% render 'css-variables' %}
+
+  {{ 'jquery-2.2.3.min.js' | asset_url | script_tag }}
+
 </head>
 
 <body>
@@ -24,6 +27,7 @@
     {{ content_for_layout }}
   </main>
   {% section 'footer' %}
+  {{ 'theme.js' | asset_url | script_tag }}
 </body>
 
 </html>

@@ -1,7 +1,6 @@
 {% include 'advanced-tag-loop' %}
-
 {% unless request.page_type == 'index' or request.page_type == 'cart' %}
-<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+<nav class="Container_root__3ON0K pt-md mb-6 Breadcrumb_root__5AERJ" role="navigation" aria-label="breadcrumbs">
   <a href="{{ routes.root_url }}" title="{{ 'general.breadcrumbs.home_link_title' | t }}" id="breadcrumb-home">{{ 'general.breadcrumbs.home' | t }}</a>
 
   {% if request.page_type == 'product' %}

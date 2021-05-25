@@ -67,7 +67,6 @@
 
   {% endif %}
 {% else %}
-  <h2 class="h3">{{ 'collections.sidebar.shop_by' | t }}</h2>
   {% if request.page_type == 'collection' and collection.all_tags.size > 0 %}
 
     {% comment %}
@@ -76,7 +75,7 @@
     {% endcomment %}
     <ul>
       {%- if current_tags -%}
-        <li class="active-filter">
+        <li class="block py-2 px-0 tracking-widest text-h7 uppercase hover:underline xl: focus:outline-none focus:bg-gray-100 focus:text-gray-900 text-primary">
           {% comment %}
             Good for /collections/all collection and regular collections
           {% endcomment %}
@@ -120,18 +119,18 @@
           {% if cat_array contains cat %}
             {% assign is_advanced_tag = true %}
             {% if current_tags contains tag %}
-              <li class="active-filter">{{ tag | remove_first: cat | remove_first: '_' }}</li>
+              <li class="block py-2 px-0 tracking-widest text-h7 uppercase hover:underline xl: focus:outline-none focus:bg-gray-100 focus:text-gray-900 text-primary">{{ tag | remove_first: cat | remove_first: '_' }}</li>
             {% else %}
-              <li>{{ tag | remove_first: cat | remove_first: '_' | link_to_tag: tag }}</li>
+              <li class="block py-2 px-0 tracking-widest text-h7 uppercase hover:underline xl: focus:outline-none focus:bg-gray-100 focus:text-gray-900">{{ tag | remove_first: cat | remove_first: '_' | link_to_tag: tag }}</li>
             {% endif %}
           {% endif %}
         {% endunless %}
 
         {% if is_advanced_tag == false %}
           {% if current_tags contains tag %}
-            <li class="active-filter">{{ tag }}</li>
+            <li class="block py-2 px-0 tracking-widest text-h7 uppercase hover:underline xl: focus:outline-none focus:bg-gray-100 focus:text-gray-900 text-primary">{{ tag }}</li>
           {% else %}
-            <li>{{ tag | link_to_tag: tag }}</li>
+            <li class="block py-2 px-0 tracking-widest text-h7 uppercase hover:underline xl: focus:outline-none focus:bg-gray-100 focus:text-gray-900">{{ tag | link_to_tag: tag }}</li>
           {% endif %}
         {% endif %}
       {% endfor %}

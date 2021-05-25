@@ -2,173 +2,49 @@
 
 {% paginate collection.products by limit %}
 
-{% include 'breadcrumb' %}
-
 {% assign has_sidebar = false %}
 {% if collection.all_tags.size > 0 and section.settings.enable_sidebar %}
   {% assign has_sidebar = true %}
 {% endif %}
 
-<div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template">
-  <div class="grid grid-border">
+{% include 'breadcrumb' %}
+<div class="Container_root__3ON0K" data-section-id="{{ section.id }}" data-section-type="collection-template">
+  <div class="w-full lg:grid grid-cols-12 gap-5 lg:gap-16 mb-20">
 
     {% if has_sidebar %}
-    <aside class="sidebar grid-item large--one-fifth collection-filters" id="collectionFilters">
+    <aside class="hidden lg:block lg:col-span-3 space-y-6 order-1 lg:order-none lg:pr-8" id="collectionFilters">
       {% include 'collection-sidebar' %}
     </aside>
     {% endif %}
-
-    <div class="grid-item{% if has_sidebar %} large--four-fifths grid-border--left{% endif %}">
-
-      {% comment %}
-        Different markup if description is set
-      {% endcomment %}
-      {% if collection.description != blank %}
-        <header class="section-header">
-          <h1 class="section-header--title h1">{{ collection.title }}</h1>
-          <div class="rte rte--header">
-            {{ collection.description }}
-          </div>
-        </header>
-        <hr{% if has_sidebar %} class="hr--offset-left"{% endif %}>
-        <div class="section-header">
-          <div class="section-header--right">
-            {% include 'collection-sorting' %}
-            {% include 'collection-views' %}
-            {% include 'toggle-filters' %}
-          </div>
-        </div>
-      {% else %}
-      <header class="section-header">
-        <h1 class="section-header--title section-header--left h1">{{ collection.title }}</h1>
-        <div class="section-header--right">
-          {% include 'collection-sorting' %}
-          {% include 'collection-views' %}
-          {% include 'toggle-filters' %}
-        </div>
-      </header>
-      {% endif %}
-
-      <div class="grid-uniform">
-        {%- case section.settings.grid -%}
-          {%- when '2' -%}
-            {%- assign grid_item_width = 'medium--one-half large--one-half' -%}
-            {%- assign image_size = '540x600' -%}
-            {%- assign width = '540' -%}
-            {%- assign height = '600' -%}
-          {%- when '3' -%}
-            {%- assign grid_item_width = 'small--one-half medium--one-third large--one-third' -%}
-            {%- assign image_size = '345x550' -%}
-            {%- assign width = '345' -%}
-            {%- assign height = '550' -%}
-          {%- when '4' -%}
-            {%- assign grid_item_width = 'small--one-half medium--one-quarter large--one-quarter' -%}
-            {%- assign image_size = '250x' -%}
-            {%- assign width = '250' -%}
-            {%- assign height = '225' -%}
-          {%- when '5' -%}
-            {%- assign grid_item_width = 'small--one-half medium--one-fifth large--one-fifth' -%}
-            {%- assign image_size = '195x' -%}
-            {%- assign width = '195' -%}
-            {%- assign height = '125' -%}
-        {%- endcase -%}
-
+    <div class="lg:col-span-9 order-3 lg:order-none">
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-md xl:gap-xl">
         {% for product in collection.products %}
-          {% comment %}
-          {% if has_sidebar %}
-            {% assign grid_item_width = 'large--one-quarter medium--one-third small--one-half' %}
-          {% else %}
-            {% assign grid_item_width = 'large--one-fifth medium--one-third small--one-half' %}
-          {% endif %}
-          {% endcomment %}
-          {% include 'product-grid-item' with grid_item_width %}
-
+          {% include 'product-grid-item-2'  %}
         {% else %}
-
-          <div class="grid-item">
+          <div >
             <p>{{ 'collections.general.no_matches' | t }}</p>
           </div>
-
         {% endfor %}
-
       </div>
-
-    </div>
-
-    {% if paginate.pages > 1 %}
-    <div class="grid-item pagination-border-top">
-      <div class="grid">
-        <div class="grid-item{% if has_sidebar %} large--four-fifths push--large--one-fifth{% endif %}">
-            <div class="text-center">
-              {% include 'pagination-custom' %}
-            </div>
-        </div>
+      {% if paginate.pages > 1 %}
+      <div class=" py-6 lg:py-12 flex justify-center">
+        {% include 'pagination-custom' %}
       </div>
+      {% endif %}
     </div>
-    {% endif %}
-
   </div>
 </div>
-
 {% endpaginate %}
-
-
 
 {% schema %}
 {
-  "name": {
-    "cs": "Kolekce",
-    "da": "Kollektion",
-    "de": "Kategorie",
-    "en": "Collection",
-    "es": "Colección",
-    "fi": "Kokoelma",
-    "fr": "Collection",
-    "hi": "कलेक्शन",
-    "it": "Collezione",
-    "ja": "コレクション",
-    "ko": "컬렉션",
-    "nb": "Samling",
-    "nl": "Collectie",
-    "pl": "Kolekcja",
-    "pt-BR": "Coleção",
-    "pt-PT": "Coleção",
-    "sv": "Produktserie",
-    "th": "คอลเลกชัน",
-    "tr": "Koleksiyon",
-    "vi": "Bộ sưu tập",
-    "zh-CN": "收藏",
-    "zh-TW": "商品系列"
-  },
+  "name":"Collection",
   "class": "collection-template-section",
   "settings": [
     {
       "type": "select",
       "id": "grid",
-      "label": {
-        "cs": "Počet produktů na řádek",
-        "da": "Produkter pr. række",
-        "de": "Produkte per Reihe",
-        "en": "Products per row",
-        "es": "Productos por fila",
-        "fi": "Tuotteita per rivi",
-        "fr": "Produits par rangée",
-        "hi": "प्रति पंक्ति उत्पाद",
-        "it": "Prodotti per riga",
-        "ja": "行あたりの商品数",
-        "ko": "열 별 제품",
-        "nb": "Produkter per rad",
-        "nl": "Producten per rij",
-        "pl": "Liczba produktów na wiersz",
-        "pt-BR": "Produtos por linha",
-        "pt-PT": "Produtos por linha",
-        "sv": "Produkter per rad",
-        "th": "สินค้าต่อแถว",
-        "tr": "Satır başına ürün",
-        "vi": "Số sản phẩm trên một hàng",
-        "zh-CN": "每行产品数",
-        "zh-TW": "每列產品數"
-      },
+      "label": "Products per row",
       "default": "4",
       "options": [
         {

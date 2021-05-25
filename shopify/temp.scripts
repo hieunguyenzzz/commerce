@@ -4,7 +4,10 @@ theme get --list --password=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 --store=testj
   [122579157201][live] tessjeantheme
   [122828980433] tessjean Theme
   [122829013201] Supply
+  [122871251153] Expanse
+  [122973716689] Minimal
 theme get --password=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 --store=testjeantesting.myshopify.com --themeid=121898991825
 theme get --password=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 --store=testjeantesting.myshopify.com --themeid=122579157201
 theme get --password=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 --store=testjeantesting.myshopify.com --themeid=122828980433
 theme get --password=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 --store=testjeantesting.myshopify.com --themeid=122829013201
+theme get --password=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 --store=testjeantesting.myshopify.com --themeid=122973716689
