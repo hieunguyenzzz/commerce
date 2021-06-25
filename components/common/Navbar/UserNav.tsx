@@ -59,6 +59,7 @@ const UserNav: FC<Props> = ({ className }) => {
 
                     return (
                       <a
+                        key={i}
                         onClick={() => setCurrency(item)}
                         className="leading-extra-loose flex flex-col items-start py-2"
                       >

@@ -68,7 +68,7 @@ const CartMenu: FC = () => {
       ) : (
         <>
           <div className="flex-1">
-            <ul className="space-y-6 space-y-4 ">
+            <ul className="space-y-6">
               {data!.lineItems.map((item: any) => (
                 <CartItem
                   key={item.id}
@@ -79,9 +79,19 @@ const CartMenu: FC = () => {
             </ul>
           </div>
           <div className="flex-shrink-0 mt-5 sticky bottom-0">
-            <div className="flex justify-end  font-semibold text-primary">
+            <div className="flex justify-end  font-semibold text-primary space-x-3">
+              <Link href="/checkout">
+                <Button
+                  className="truncate flex-1"
+                  secondary
+                  Component="a"
+                  width="100%"
+                >
+                  CHECK OUT
+                </Button>
+              </Link>
               <Link href="/cart">
-                <Button Component="a" width="100%">
+                <Button className="truncate flex-1" Component="a" width="100%">
                   VIEW BAG
                 </Button>
               </Link>

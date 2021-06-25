@@ -26,7 +26,7 @@ const BlogSidebar: React.FC<Props> = ({
     >
       <SidebarLayout title={title}>
         <div className="space-y-md flex flex-col">
-          <Link href={`/blog`}>
+          <Link href={`/blog/journal`}>
             <a
               className={classNames('text-h7 hover:underline uppercase ', {
                 'text-primary': !!currentTag,
@@ -36,7 +36,7 @@ const BlogSidebar: React.FC<Props> = ({
             </a>
           </Link>
           {tags.map((str) => (
-            <Link key={str} href={`/blog/${str.toLowerCase()}`}>
+            <Link key={str} href={`/blog/journal/${str.toLowerCase()}`}>
               <a
                 className={classNames('text-h7 hover:underline uppercase', {
                   'text-primary': str === currentTag,

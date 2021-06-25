@@ -26,23 +26,24 @@ const ProductSlider: React.FC<{
   breakpoints,
   showNavigationButoon = true,
 }) => {
+  const itemCount = Children.count(children)
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
-    slidesPerView,
+    slidesPerView: Math.min(itemCount, slidesPerView),
     centered: false,
     loop: false,
     breakpoints: breakpoints
       ? breakpoints
       : {
           '(min-width: 600px)': {
-            slidesPerView: 3,
+            slidesPerView: Math.min(itemCount, 3),
             mode: 'free-snap',
           },
           '(min-width: 800px)': {
-            slidesPerView: 3,
+            slidesPerView: Math.min(itemCount, 3),
             mode: 'free-snap',
           },
           '(min-width: 1024px)': {
-            slidesPerView: 4,
+            slidesPerView: Math.min(itemCount, 4),
             mode: 'free-snap',
           },
         },

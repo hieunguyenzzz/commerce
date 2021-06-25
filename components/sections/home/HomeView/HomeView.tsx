@@ -15,7 +15,7 @@ const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
     amount: product.price.value,
   })
   return (
-    <div className="flex relative items-center w-full bg-gray-100 border border-transparent hover:border-accents-5">
+    <div className="flex relative items-center w-full bg-gray-100 group">
       <div style={{ paddingTop: (297 / 200) * 100 + '%' }} />
       <Image
         layout="fill"
@@ -26,10 +26,10 @@ const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
         alt={product.name || 'Product Image'}
       />
       <div className="absolute py-4 bottom-0">
-        <div className="px-4 text-[14px] lg:text-header-2 bg-white bg-opacity-25 font-bold uppercase mt-[10px]">
+        <div className="px-4 text-[14px]  uppercase mt-[10px]">
           {product.name}
         </div>
-        <div className="px-4 text-[14x] bg-white bg-opacity-25 uppercase mt-[2px] mb-[10px]">
+        <div className="px-4 text-[14px] uppercase mt-[2px]  mb-0 transform opacity-0  group-hover:opacity-100 group-hover:scale-100 group-hover:mb-[19px] transition-all duration-300 ease-in-out">
           {currency} {price}
         </div>
       </div>
@@ -177,7 +177,7 @@ const HomeView: React.FC<{
             const article = articles[i]
             if (!article) return null
             return (
-              <Link href={`/blog/${article.slug}`} key={i}>
+              <Link href={`/blog/journal/${article.slug}`} key={i}>
                 <a className=" md:mx-[8px] block ">
                   <div className="flex relative items-center w-full bg-gray-100">
                     <div style={{ paddingTop: (165 / 267) * 100 + '%' }} />

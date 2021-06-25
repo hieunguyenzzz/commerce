@@ -131,7 +131,7 @@ const ComingSoon: FC<Props> = ({}) => {
                 </a>
               </div>
               <div className="flex justify-center">
-                <Link href="/blog">
+                <Link href="/blog/journal">
                   <a className="text-effect-1 py-2">JOURNAL</a>
                 </Link>
               </div>

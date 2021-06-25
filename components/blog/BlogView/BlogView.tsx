@@ -31,12 +31,14 @@ const BlogView: React.FC<Props> = ({
     <>
       <Container className="pt-md mb-6">
         <Breadcrumb>
-          <Link href={`/blog`}>{title}</Link>
+          <Link href={`/blog/journal`}>{title}</Link>
           {'/ '}
           {article.tags[0] ? (
-            <Link href={`/blog/${article.tags[0]}`}>{article.tags[0]}</Link>
+            <Link href={`/blog/journal/${article.tags[0]}`}>
+              {article.tags[0]}
+            </Link>
           ) : (
-            <Link href={`/blog`}>all</Link>
+            <Link href={`/blog/journal`}>all</Link>
           )}
         </Breadcrumb>
       </Container>

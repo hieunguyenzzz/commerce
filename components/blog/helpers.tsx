@@ -1,7 +1,7 @@
 import { Article } from '@commerce/types'
 
 export function getLink(handle: string) {
-  return `/blog/${handle}`
+  return `/blog/journal/${handle}`
 }
 export function getAllTagsFromArticles(articles: Article[]) {
   return articles

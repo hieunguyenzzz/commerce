@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { FC, ReactElement } from 'react'
+import React, { FC, ReactElement, useState } from 'react'
 import s from './Navbar.module.css'
 import NavbarRoot from './NavbarRoot'
 import { BagItem } from './UserNav'
@@ -16,24 +16,13 @@ export interface Props {
   transparent?: boolean
 }
 const renderItem = (renderer: any, index: any) => renderer(index)
-const homeMenu = [
-  new Array(6).fill((index: any) => `Home v${index + 1}`).map(renderItem),
-  new Array(4).fill((index: any) => `Home v${index + 7}`).map(renderItem),
-]
 
 const shopMenu = CATEGORIES
-const pagesMenu = [
-  ['About', 'About Us', 'About Us v2', 'About Me'],
-  ['Contact', 'Contact Us', 'Contact Us v2', 'Contact Me'],
-  ['Our Team'],
-  ['FAQ'],
-  ['404'],
-  ['Coming Soon', 'Coming Soon v1', 'Coming Soon v2'],
-]
+
 export const Logo = () => (
   <Link href="/">
     <a className={classNames(s.logo)} aria-label="Logo">
-      <LogoIcon width="100%" height="29px" />
+      <LogoIcon width="139px" height="29px" />
     </a>
   </Link>
 )
@@ -54,6 +43,7 @@ export const NavItem: React.FC<NavItemProps> = ({
 }) => {
   return (
     <div
+      tabIndex={-1}
       className={classNames('group flex items-center h-header-lg', className)}
     >
       {href ? (
@@ -88,7 +78,7 @@ export const NavItem: React.FC<NavItemProps> = ({
 const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
   const { openSidebar, setModalView, displaySidebar, closeSidebar } = useUI()
   const { data: customer } = useCustomer()
-
+  const [update, setUpdate] = useState<number>()
   const router = useRouter()
   const smallNav = (
     <div className="flex w-full flex-1 py-4 items-center align-center">
@@ -160,60 +150,15 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
     </div>
   )
   const largeNav = (
-    <div className="flex w-full py-4 items-center align-center">
-      <div className="flex-1 justify-start space-x-[36px] h-header flex items-center">
-        <NavItem
-          placement="full"
-          active={router.pathname.startsWith('/new-arrivals')}
-          dropdown={
-            <div className="w-full bg-accents-0 shadow-magical">
-              <Container className="w-full text-xs py-6  relative">
-                <div className="w-full mx-auto max-w-2xl grid grid-cols-7 space-x-8 ">
-                  <div className="flex col-span-3 justify-end  space-x-6">
-                    {homeMenu.map((item, i) => {
-                      {
-                        return (
-                          <div
-                            key={i}
-                            className="leading-extra-loose  flex-1 flex flex-col items-start space-y-3"
-                          >
-                            {item.map((menu: any, i: any) => (
-                              <Link key={i} href={`/search?q=${menu}`}>
-                                <a
-                                  className={classNames(
-                                    'inline-block  text-effect-1 py-2 '
-                                  )}
-                                >
-                                  {menu as any}
-                                </a>
-                              </Link>
-                            ))}
-                          </div>
-                        )
-                      }
-                    })}
-                  </div>
-                  <div className="col-span-4 flex justify-start gap-8">
-                    <div className="flex-1 bg-accents-3 h-full relative">
-                      <Image
-                        layout="fill"
-                        objectFit="cover"
-                        src={'/mega-menu-v1-1.jpg'}
-                      ></Image>
-                    </div>
-                    <div className="flex-1 bg-accents-3 h-full relative">
-                      <Image
-                        layout="fill"
-                        objectFit="cover"
-                        src={'/mega-menu-v1-2.jpg'}
-                      ></Image>
-                    </div>
-                  </div>
-                </div>
-              </Container>
-            </div>
-          }
-        >
+    <div
+      key={update}
+      onClick={() => {
+        setUpdate(Date.now())
+      }}
+      className="flex w-full py-4 items-center align-center "
+    >
+      <div className="flex-1 justify-start space-x-[1.6vw] 2xl:space-x-[36px] h-header flex items-center">
+        <NavItem href="/" placement="full">
           NEW ARRIVALS
         </NavItem>
         <NavItem
@@ -223,7 +168,7 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
           dropdown={
             <div className="w-full py-6 bg-accents-0 shadow-magical">
               <Container className="w-full flex text-xs relative">
-                <div className="flex flex-1 space-x-24 justify-start  py-10 ">
+                <div className="flex flex-1 space-x-24 justify-start py-10 ">
                   <Text variant="h4">CLOTHING</Text>
                   <div className="space-y-6">
                     <div className="space-y-2  flex flex-col items-start">
@@ -260,21 +205,21 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex-1 space-y-4 flex flex-col items-start">
-                  <Image
-                    className="bg-accents-1"
-                    layout="intrinsic"
-                    width={447}
-                    height={276}
-                    objectFit="cover"
-                    src={'/mega-menu-v1-1.jpg'}
-                  ></Image>
-                  <Link href={`/search?q=${'softlines'}`}>
+                <Link href={`/search?q=${'softlines'}`}>
+                  <a className="flex-1 space-y-4 flex flex-col items-start">
+                    <Image
+                      className="bg-accents-1"
+                      layout="intrinsic"
+                      width={447}
+                      height={276}
+                      objectFit="cover"
+                      src={'/mega-menu-v1-1.jpg'}
+                    ></Image>
                     <div className="header-2 text-effect-1">
                       SOFTLINES JUST IN
                     </div>
-                  </Link>
-                </div>
+                  </a>
+                </Link>
               </Container>
             </div>
           }
@@ -289,34 +234,34 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
                 <div className="flex flex-1 space-x-24 justify-start py-10 ">
                   <Text variant="h4">collections</Text>
                   <div className="space-x-6 flex ">
-                    <div className="flex-1 flex items-start flex-col space-y-4">
-                      <Image
-                        className="bg-accents-1"
-                        layout="intrinsic"
-                        width={250}
-                        height={296}
-                        objectFit="cover"
-                        src={'/mega-menu-v1-1.jpg'}
-                      ></Image>
-                      <Link href={`/collection/${'001-softtest'}`}>
+                    <Link href={`/collection/${'001-softtest'}`}>
+                      <a className="flex-1 flex items-start flex-col space-y-4">
+                        <Image
+                          className="bg-accents-1"
+                          layout="intrinsic"
+                          width={250}
+                          height={296}
+                          objectFit="cover"
+                          src={'/mega-menu-v1-1.jpg'}
+                        ></Image>
                         <div className="header-2 text-effect-1">
                           001 SOFTLINES
                         </div>
-                      </Link>
-                    </div>
-                    <div className="flex-1 flex items-start flex-col space-y-4">
-                      <Image
-                        className="bg-accents-1"
-                        layout="intrinsic"
-                        width={250}
-                        height={296}
-                        objectFit="cover"
-                        src={'/mega-menu-v1-2.jpg'}
-                      ></Image>
-                      <Link href={`/collection/${'002-la-mar'}`}>
+                      </a>
+                    </Link>
+                    <Link href={`/collection/${'002-la-mar'}`}>
+                      <a className="flex-1 flex items-start flex-col space-y-4">
+                        <Image
+                          className="bg-accents-1"
+                          layout="intrinsic"
+                          width={250}
+                          height={296}
+                          objectFit="cover"
+                          src={'/mega-menu-v1-2.jpg'}
+                        ></Image>
                         <div className="header-2 text-effect-1">002 LA MAR</div>
-                      </Link>
-                    </div>
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </Container>
@@ -328,90 +273,15 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
         <NavItem
           className="relative"
           placement="left"
-          dropdown={
-            <Container className="text-xs shadow-lg bg-accents-0 flex flex-col py-6  relative space-y-3">
-              {new Array(5).fill(pagesMenu).map((menu, i) => {
-                {
-                  const item = menu[i]
-                  if (!item || !item.length) return null
-                  const [title, ...rest] = item
-                  return (
-                    <div
-                      key={i}
-                      className="leading-extra-loose flex flex-col items-start space-y-3"
-                    >
-                      <div
-                        className={classNames(
-                          'inline-block  text-effect-1 py-2 truncate   text-xs'
-                        )}
-                      >
-                        {title}
-                      </div>
-                      <div className="hidden">
-                        {rest.map((menu: any, i: any) => (
-                          <Link key={i} href={`/search?q=${menu}`}>
-                            <a
-                              className={classNames(
-                                'inline-block  text-effect-1 py-2 truncate   text-xs'
-                              )}
-                            >
-                              {menu as any}
-                            </a>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )
-                }
-              })}
-            </Container>
-          }
+          href="/customer-care/ethics"
         >
           ETHICS
         </NavItem>
         <NavItem
-          href="/blog"
+          href="/blog/journal"
           className="relative"
           placement="left"
-          active={router.pathname.startsWith('/blog')}
-          dropdown={
-            <Container className="text-xs shadow-lg bg-accents-0 flex flex-col py-6  relative space-y-3">
-              {new Array(5).fill(pagesMenu).map((menu, i) => {
-                {
-                  const item = menu[i]
-                  if (!item || !item.length) return null
-                  const [title, ...rest] = item
-                  return (
-                    <div
-                      key={i}
-                      className="leading-extra-loose flex flex-col items-start space-y-3"
-                    >
-                      <div
-                        className={classNames(
-                          'inline-block  text-effect-1 py-2 truncate   text-xs'
-                        )}
-                      >
-                        {title}
-                      </div>
-                      <div className="hidden">
-                        {rest.map((menu: any, i: any) => (
-                          <Link key={i} href={`/search?q=${menu}`}>
-                            <a
-                              className={classNames(
-                                'inline-block  text-effect-1 py-2 truncate   text-xs'
-                              )}
-                            >
-                              {menu as any}
-                            </a>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )
-                }
-              })}
-            </Container>
-          }
+          active={router.pathname.startsWith('/blog/journal')}
         >
           JOURNAL
         </NavItem>

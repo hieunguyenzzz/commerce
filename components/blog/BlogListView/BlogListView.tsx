@@ -55,7 +55,7 @@ const BlogListView: React.FC<Props> = ({
           {title}
         </Text>
         <div className="flex mx-auto mt-xl flex-wrap justify-center items-baseline space-y-sm">
-          <Link href={`/blog`}>
+          <Link href={`/blog/journal`}>
             <a
               className={classNames('mx-xl text-effect-1 text-h7 uppercase', {
                 'text-primary': !currentTag,
@@ -66,7 +66,7 @@ const BlogListView: React.FC<Props> = ({
           </Link>
           {tags.map((str: any, i: number) => {
             return (
-              <Link key={i} href={`/blog/${str.toLowerCase()}`}>
+              <Link key={i} href={`/blog/journal/${str.toLowerCase()}`}>
                 <a
                   className={classNames(
                     'mx-xl text-effect-1 text-h7 uppercase',
@@ -118,7 +118,7 @@ const BlogListView: React.FC<Props> = ({
                 <Link
                   key={i}
                   href={{
-                    pathname: `/blog/${currentTag ? currentTag : ''}`,
+                    pathname: `/blog/journal/${currentTag ? currentTag : ''}`,
                     query: { page },
                   }}
                 >

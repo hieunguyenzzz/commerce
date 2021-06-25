@@ -54,8 +54,8 @@ const Footer: FC<Props> = ({ className, pages }) => {
                 // pathname.includes('/customer-care') ? 'flex' : 'hidden'
               )}
             >
-              {customercare.map(({ title, slug }) => (
-                <Link key={slug} href={'/customer-care/' + slug}>
+              {customercare.map(({ title, slug }, i) => (
+                <Link key={i} href={'/customer-care/' + slug}>
                   <Text
                     className={classNames('text-effect-1', {
                       'text-primary': pathname.includes(
@@ -73,8 +73,8 @@ const Footer: FC<Props> = ({ className, pages }) => {
           <div className="col-span-3 space-y-4 lg:space-y-[38px]">
             <Text variant="h5">OUR BRAND</Text>
             <ul className="flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4">
-              {legalPages.map(({ title, slug }) => (
-                <Link key={slug} href={'/' + slug}>
+              {legalPages.map(({ title, slug }, i) => (
+                <Link key={i} href={'/' + slug}>
                   <Text className="text-effect-1" variant="h7">
                     {title}
                   </Text>

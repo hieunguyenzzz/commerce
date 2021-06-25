@@ -3,7 +3,7 @@ import { CartMenu } from '@components/cart'
 import { Footer, Navbar } from '@components/common'
 import { Close } from '@components/icons'
 import { MenuSidebarView } from '@components/menu'
-import { Button, Container, LoadingDots, Modal, Sidebar } from '@components/ui'
+import { Container, LoadingDots, Modal, Sidebar } from '@components/ui'
 import { useUI } from '@components/ui/context'
 import { CommerceProvider } from '@framework'
 import type { Page } from '@framework/common/get-all-pages'
@@ -79,13 +79,21 @@ const Layout: FC<Props> = ({
         <main className="fit">{children}</main>
         <Footer pages={pageProps.pages} />
         <FeatureBar
-          title="This site uses cookies to improve your experience. By clicking, you agree to our Privacy Policy."
-          hide={acceptedCookies}
-          action={
-            <Button className="mx-5" onClick={() => onAcceptCookies()}>
-              Accept cookies
-            </Button>
+          title={
+            <>
+              We use cookies to improve our website and your shopping
+              experience. By continuing to browse our website, you are
+              consenting to our use of cookies. To find out more read out{' '}
+              <span className="inline-block">
+                <a className="underline" href="/privacy-policy" target="_blank">
+                  Cookies & Privacy Policy
+                </a>
+              </span>{' '}
+              .
+            </>
           }
+          onClose={onAcceptCookies}
+          hide={acceptedCookies}
         />
         <Sidebar
           position="left"
@@ -113,7 +121,7 @@ const Layout: FC<Props> = ({
                 >
                   <CartMenu />
                   <div
-                    onClick={closeSidebar}
+                    onClick={onAcceptCookies}
                     className="text-[12px] bg-white bg-opacity-60 p-2 md:hidden absolute top-[12px] right-[12px] hover-effect-1 rounded-full"
                   >
                     <Close />

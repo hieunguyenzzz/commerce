@@ -35,7 +35,7 @@ const CollectionSidebar: React.FC<Props> = ({
                 height="170"
                 objectFit="cover"
                 layout="fixed"
-                src={'/blog-1.jpg'}
+                src={'/blog/journal-1.jpg'}
               ></Image>
               <div className="text-h6 py-[14px]  uppercase">001 sofflines</div>
             </div>
@@ -47,7 +47,7 @@ const CollectionSidebar: React.FC<Props> = ({
                 height="170"
                 objectFit="cover"
                 layout="fixed"
-                src={'/blog-2.jpg'}
+                src={'/blog/journal-2.jpg'}
               ></Image>
               <div className="text-h6 py-[14px] uppercase">002 la mar</div>
             </div>

@@ -51,7 +51,7 @@ const MenuSidebarView: FC<Props> = ({ pages }) => {
               </Link>
             </li>
             <li className="">
-              <Link href="/blog">
+              <Link href="/blog/journal">
                 <a className=" text-effect-2 font-semibold  transition ease-in-out duration-150">
                   Blog
                 </a>
