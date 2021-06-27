@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { FC, ReactElement, useState } from 'react'
+import React, { FC, ReactElement, useEffect, useState } from 'react'
 import s from './Navbar.module.css'
 import NavbarRoot from './NavbarRoot'
 import { BagItem } from './UserNav'
@@ -80,6 +80,9 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
   const { data: customer } = useCustomer()
   const [update, setUpdate] = useState<number>()
   const router = useRouter()
+  useEffect(() => {
+    setUpdate(Date.now())
+  }, [router])
   const smallNav = (
     <div className="flex w-full flex-1 py-4 items-center align-center">
       <div className="flex-1 flex items-center">
@@ -150,13 +153,7 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
     </div>
   )
   const largeNav = (
-    <div
-      key={update}
-      onClick={() => {
-        setUpdate(Date.now())
-      }}
-      className="flex w-full py-4 items-center align-center "
-    >
+    <div key={update} className="flex w-full py-4 items-center align-center ">
       <div className="flex-1 justify-start space-x-[1.6vw] 2xl:space-x-[36px] h-header flex items-center">
         <NavItem href="/" placement="full">
           NEW ARRIVALS

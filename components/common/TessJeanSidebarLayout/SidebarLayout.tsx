@@ -1,8 +1,8 @@
 import { Back, Down } from '@components/icons'
 import { Container } from '@components/ui'
 import { useUI } from '@components/ui/context'
+import { currencyList, useCurrency } from '@lib/hooks/useCurrency'
 import cn from 'classnames'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, ReactNode } from 'react'
 import s from './SidebarLayout.module.css'
@@ -23,8 +23,9 @@ const SidebarLayout: FC<Props> = ({
 }) => {
   const { closeSidebar } = useUI()
   const handleClose = () => closeSidebar()
+  const { currency, setCurrency } = useCurrency()
+
   const router = useRouter()
-  const { currency = 'USD' } = router.query
   return (
     <div className={cn(s.root, className)}>
       <header>
@@ -58,23 +59,20 @@ const SidebarLayout: FC<Props> = ({
               <Down />
             </span>
             <div className="hidden absolute bottom-0 min-w-full left-0 shadow-lg group-hover:flex flex-col bg-accents-1 py-2 z-10">
-              {new Array(5).fill(['NZD', 'AUD', 'VND']).map((menu, i) => {
-                {
-                  const item = menu[i]
-                  if (!item || !item.length) return null
+              {new Array(5)
+                .fill(currencyList)
+                .fill(currencyList.filter((str) => str !== currency))
+                .map((menu, i) => {
+                  {
+                    const item = menu[i]
+                    if (!item || !item.length) return null
 
-                  return (
-                    <Link
-                      key={i}
-                      href={{
-                        pathname: router.pathname,
-                        query: {
-                          ...router.query,
-                          currency: item,
-                        },
-                      }}
-                    >
-                      <a className="leading-extra-loose flex flex-col items-start py-1 hover:bg-accents-2  px-md">
+                    return (
+                      <a
+                        key={i}
+                        onClick={() => setCurrency(item)}
+                        className="leading-extra-loose flex flex-col items-start py-1 hover:bg-accents-2  px-md"
+                      >
                         <div
                           className={cn(
                             'inline-block truncate',
@@ -84,10 +82,9 @@ const SidebarLayout: FC<Props> = ({
                           {item}
                         </div>
                       </a>
-                    </Link>
-                  )
-                }
-              })}
+                    )
+                  }
+                })}
             </div>
           </div>
         </div>

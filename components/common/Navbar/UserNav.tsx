@@ -4,7 +4,7 @@ import { useUI } from '@components/ui/context'
 import useCart from '@framework/cart/use-cart'
 import { useCustomer } from '@framework/customer'
 import type { LineItem } from '@framework/types'
-import { useCurrency } from '@lib/hooks/useCurrency'
+import { currencyList, useCurrency } from '@lib/hooks/useCurrency'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -49,9 +49,7 @@ const UserNav: FC<Props> = ({ className }) => {
           dropdown={
             <div className="text-xs shadow-lg bg-accents-0 flex flex-col top-header px-md py-3">
               {new Array(5)
-                .fill(
-                  ['NZD', 'AUD', 'VND', 'USD'].filter((str) => str !== currency)
-                )
+                .fill(currencyList.filter((str) => str !== currency))
                 .map((menu, i) => {
                   {
                     const item = menu[i]

@@ -10,12 +10,16 @@ export function formatPrice({
   currencyCode: string
   locale: string
 }) {
-  const formatCurrency = new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: currencyCode,
-  })
-
-  return formatCurrency.format(amount)
+  try {
+    const formatCurrency = new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency: currencyCode,
+    })
+    return formatCurrency.format(amount)
+  } catch (error) {
+    console.error(error)
+    return 'Nan'
+  }
 }
 
 export function formatVariantPrice({

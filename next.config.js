@@ -1,3 +1,4 @@
+const { env } = require('process')
 const commerce = require('./commerce.config.json')
 const {
   withCommerceConfig,
@@ -14,8 +15,21 @@ module.exports = withCommerceConfig({
   },
   commerce,
   i18n: {
-    locales: ['en-US', 'es'],
-    defaultLocale: 'en-US',
+    locales: ['en-US', 'en-NZ'],
+    defaultLocale: env.LOCAL,
+    domains: [
+      {
+        domain: 'example.com',
+        defaultLocale: 'en-US',
+      },
+      {
+        domain: 'example.nz',
+        defaultLocale: 'en-NZ',
+        // an optional http field can also be used to test
+        // locale domains locally with http instead of https
+        http: true,
+      },
+    ],
   },
   images: {
     domains: ['example.com'],
