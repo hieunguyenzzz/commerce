@@ -37,7 +37,7 @@ export const useCurrency = (baseCurrency = 'USD') => {
     convert: (amount: number) => {
       return convert(amount, baseCurrency as any, currency as any)
     },
-    setCurrency: (item: any) => {
+    setCurrency: (item: "NZD"|"default") => {
       const selectLocale = currencyLocalMap[item] || currencyLocalMap.default
       if (locale !== selectLocale.locale) {
         if (window.confirm('wanaa change')) {
