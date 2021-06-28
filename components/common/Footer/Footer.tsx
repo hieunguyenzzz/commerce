@@ -51,7 +51,6 @@ const Footer: FC<Props> = ({ className, pages }) => {
             <ul
               className={classNames(
                 ' flex flex-initial flex-col md:flex-1 text-sm space-y-sm lg:space-y-4'
-                // pathname.includes('/customer-care') ? 'flex' : 'hidden'
               )}
             >
               {customercare.map(({ title, slug }, i) => (
