@@ -23,14 +23,14 @@ export const useCurrency = (baseCurrency = 'USD') => {
     },
     setCurrency: (item: 'default' | 'NZD') => {
       const selectLocale = currencyLocalMap[item] || currencyLocalMap.default
-
+      const urlObject = {
+        pathname: pathname,
+        query: {
+          ...query,
+          currency: item,
+        },
+      }
       if (locale !== selectLocale.locale) {
-        // if (window.confirm('wanaa change')) {
-        //   console.log({ selectLocale })
-        //   return push(asPath, asPath, {
-        //     locale: selectLocale.locale,
-        //   })
-        // }
         return setTimeout(() => {
           open(
             <SwitchLocaleModal
@@ -40,51 +40,19 @@ export const useCurrency = (baseCurrency = 'USD') => {
                 fromCurrencyCode: currency,
                 toCurrencyCode: item,
                 onSubmit: () => {
-                  push(
-                    {
-                      pathname: pathname,
-                      query: {
-                        ...query,
-                        currency: item,
-                      },
-                    },
-                    {
-                      pathname: pathname,
-                      query: {
-                        ...query,
-                        currency: item,
-                      },
-                    },
-                    {
-                      scroll: false,
-                      locale: selectLocale.locale,
-                    }
-                  )
+                  push(urlObject, urlObject, {
+                    scroll: false,
+                    locale: selectLocale.locale,
+                  })
                 },
               }}
             />
           )
         })
       } else {
-        return push(
-          {
-            pathname: pathname,
-            query: {
-              ...query,
-              currency: item,
-            },
-          },
-          {
-            pathname: pathname,
-            query: {
-              ...query,
-              currency: item,
-            },
-          },
-          {
-            scroll: false,
-          }
-        )
+        return push(urlObject, urlObject, {
+          scroll: false,
+        })
       }
     },
   }

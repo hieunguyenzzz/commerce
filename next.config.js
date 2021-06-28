@@ -35,7 +35,7 @@ module.exports = withCommerceConfig({
     ],
   },
   images: {
-    domains: ['example.com'],
+    domains: [''],
   },
   target: 'serverless',
   rewrites() {
