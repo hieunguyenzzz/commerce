@@ -119,7 +119,7 @@ const Layout: FC<Props> = ({
                 >
                   <CartMenu />
                   <div
-                    onClick={onAcceptCookies}
+                    onClick={closeSidebar}
                     className="text-[12px] bg-white bg-opacity-60 p-2 md:hidden absolute top-[12px] right-[12px] hover-effect-1 rounded-full"
                   >
                     <Close />
