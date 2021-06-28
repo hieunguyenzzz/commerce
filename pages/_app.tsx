@@ -41,9 +41,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 //
 
 MyApp.getInitialProps = async (appContext: NextPageContext) => {
-  // calls page's `getInitialProps` and fills `appProps.pageProps`
-  // const config = getConfig({ locale: 'en-US' })
-  // const siteInfoProps = await getSiteInfo({ config })
   return {
     pageProps: {
       email: 'hello@tessjean.com',

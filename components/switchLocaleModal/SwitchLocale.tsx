@@ -1,5 +1,6 @@
 import { Button, Text } from '@components/ui'
 import { getCurrentLocale } from '@lib/locale'
+import Image from 'next/image'
 import React from 'react'
 const SwitchLocale: React.FC<any> = ({
   fromCurrencyCode,
@@ -11,23 +12,29 @@ const SwitchLocale: React.FC<any> = ({
   const toCurrentLocale = getCurrentLocale(toCurrencyCode)
   return (
     <div
-      className="py-6  flex flex-col items-center space-y-6"
+      className="py-6  flex flex-col items-center space-y-8 px-6"
       data-testid="SwithLocale"
     >
       <div>
-        <Text variant="h2">TESSJEAN</Text>
+        <Image layout="intrinsic" width={113} height={125} src="/logo-2.png" />
       </div>
-      <Text variant="body" className="text-center max-w-md mx-auto">
-        You are currently shopping on the {fromCurrentLocale.name} store. Are
-        you sure you want to go to the International store
+      <Text variant="body" className="text-center max-w-lg mx-auto">
+        <span className="inline-block">
+          Hi, it looks like you are visiting from outside{' '}
+          {fromCurrentLocale.name}.
+        </span>{' '}
+        <span className="inline-block">
+          You can shop at our {toCurrentLocale.name} store{' '}
+          {toCurrentLocale.host}
+        </span>{' '}
+        for prices in your local currency and interntional shipping options.
       </Text>
-      <div className="flex-1 w-full flex flex-col items-center space-y-3">
-        <Button onClick={onSubmit} className="block w-full">
-          Continue to {toCurrentLocale.name}
+      <div className="flex-1 w-full flex flex-col items-center space-y-4">
+        <Button secondary onClick={onSubmit} className="block w-full">
+          Take me to the {toCurrentLocale.name} store
         </Button>
-        <div>or</div>
         <Button onClick={onClose} className="block w-full">
-          Stay in {fromCurrentLocale.name}
+          Stay on {fromCurrentLocale.name}
         </Button>
       </div>
     </div>

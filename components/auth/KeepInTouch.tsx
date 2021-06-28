@@ -1,24 +1,10 @@
 import { Button } from '@components/ui'
+import useSubscribe from '@lib/hooks/useSubscribe'
 import { validate } from 'email-validator'
 import { FC, useCallback, useEffect, useState } from 'react'
 import { Input } from './Form'
 import { handleOnInputChange } from './Form/helpers'
 
-interface Props {}
-const useSubscribe = () => {
-  return (data: any = {}) => {
-    return fetch('/api/subscribe', {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        profiles: [data],
-      }),
-    })
-  }
-}
 const KeepInTouch: FC<{ onNothank: () => void }> = ({ onNothank }) => {
   const [email, setEmail] = useState('')
   const [birthday, setBirthday] = useState('')

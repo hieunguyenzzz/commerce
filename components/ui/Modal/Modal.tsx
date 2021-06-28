@@ -48,7 +48,7 @@ const Modal: FC<Props> = ({
           fluid
           className={classNames(
             s.root,
-            'animated fadeIn',
+            'animated fadeIn faster',
             noBackgroud && s.noBackgroud
           )}
         >

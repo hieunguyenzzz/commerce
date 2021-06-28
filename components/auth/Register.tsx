@@ -2,6 +2,7 @@ import { Breadcrumb } from '@components/common'
 import { Button, Text } from '@components/ui'
 import { useUI } from '@components/ui/context'
 import useSignup from '@framework/auth/use-signup'
+import useSubscribe from '@lib/hooks/useSubscribe'
 import { validate } from 'email-validator'
 import Link from 'next/link'
 import { FC, useCallback, useEffect, useState } from 'react'
@@ -25,6 +26,7 @@ const RegisterView: FC<Props> = () => {
   const signup = useSignup()
   const { setModalView, closeModal } = useUI()
 
+  const subscribe = useSubscribe()
   const handleSignup = async (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault()
     if (!dirty && !disabled) {
@@ -107,11 +109,26 @@ const RegisterView: FC<Props> = () => {
               onChange={handleOnInputChange(setPassword)}
             />
             <div className="space-y-3 flex flex-col">
-              <label>
+              <label
+                onClick={() => {
+                  if (acceptsMarketing && validate(email)) {
+                    subscribe({
+                      email,
+                    })
+                  }
+                }}
+              >
                 <input
                   name="acceptsMarketing"
                   type="checkbox"
-                  onChange={handleOnCheckoxChange(setacceptsMarketing)}
+                  onChange={handleOnCheckoxChange((checked) => {
+                    setacceptsMarketing(checked)
+                    if (checked && validate(email)) {
+                      subscribe({
+                        email,
+                      })
+                    }
+                  })}
                 />
                 <div>
                   Sign up to the TessJean newsletter and receive 10% off your

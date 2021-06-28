@@ -1,9 +1,13 @@
 import SwitchLocaleModal from '@components/switchLocaleModal'
 import { useOpenDynamicModal } from '@components/ui/context'
 import { convert } from 'lib/currency'
+import getConfig from 'next/config'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { currencyLocalMap } from '../locale'
+import { CurrencyCodeType, currencyLocalMap } from '../locale'
+const {
+  serverRuntimeConfig: { sites },
+} = getConfig()
 export const useCurrency = (baseCurrency = 'USD') => {
   const { query, isReady, pathname, asPath, push, locale } = useRouter()
   const { open, onClose } = useOpenDynamicModal()
@@ -21,7 +25,7 @@ export const useCurrency = (baseCurrency = 'USD') => {
     convert: (amount: number) => {
       return convert(amount, baseCurrency as any, currency as any)
     },
-    setCurrency: (item: 'default' | 'NZD') => {
+    setCurrency: (item: CurrencyCodeType) => {
       const selectLocale = currencyLocalMap[item] || currencyLocalMap.default
       const urlObject = {
         pathname: pathname,

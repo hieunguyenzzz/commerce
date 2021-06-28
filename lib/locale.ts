@@ -1,15 +1,14 @@
+import getConfig from 'next/config'
+
 export const currencyList = ['NZD', 'AUD', 'VND', 'USD']
+const {
+  publicRuntimeConfig: { sites },
+} = getConfig()
 export const currencyLocalMap = {
-  default: {
-    locale: 'en-US',
-    name: 'International',
-    host: process.env.HOST_EN || '',
-  },
-  NZD: {
-    locale: 'en-NZ',
-    name: 'New Zealand',
-    host: process.env.HOST_NZ || '/en-NZ',
-  },
+  default: sites.international,
+  NZD: sites.nz,
+  AUD: sites.nz,
 }
-export const getCurrentLocale = (currency: 'default' | 'NZD') =>
+export type CurrencyCodeType = 'default' | 'NZD' | 'AUD'
+export const getCurrentLocale = (currency: CurrencyCodeType) =>
   currencyLocalMap[currency] || currencyLocalMap.default

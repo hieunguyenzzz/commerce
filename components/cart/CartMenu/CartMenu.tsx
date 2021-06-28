@@ -79,7 +79,7 @@ const CartMenu: FC = () => {
             </ul>
           </div>
           <div className="flex-shrink-0 mt-5 sticky bottom-0">
-            <div className="flex justify-end  font-semibold text-primary space-x-3">
+            <div className="flex justify-end flex-col  font-semibold text-primary space-y-3">
               <Link href="/checkout">
                 <Button
                   className="truncate flex-1"
