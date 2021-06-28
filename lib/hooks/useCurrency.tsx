@@ -1,0 +1,91 @@
+import SwitchLocaleModal from '@components/switchLocaleModal'
+import { useOpenDynamicModal } from '@components/ui/context'
+import { convert } from 'lib/currency'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { currencyLocalMap } from '../locale'
+export const useCurrency = (baseCurrency = 'USD') => {
+  const { query, isReady, pathname, asPath, push, locale } = useRouter()
+  const { open, onClose } = useOpenDynamicModal()
+  const currency =
+    query.currency ||
+    (isReady && localStorage.getItem('currency')) ||
+    baseCurrency
+
+  useEffect(() => {
+    isReady && localStorage.setItem('currency', currency as string)
+  }, [currency, isReady])
+
+  return {
+    currency,
+    convert: (amount: number) => {
+      return convert(amount, baseCurrency as any, currency as any)
+    },
+    setCurrency: (item: 'default' | 'NZD') => {
+      const selectLocale = currencyLocalMap[item] || currencyLocalMap.default
+
+      if (locale !== selectLocale.locale) {
+        // if (window.confirm('wanaa change')) {
+        //   console.log({ selectLocale })
+        //   return push(asPath, asPath, {
+        //     locale: selectLocale.locale,
+        //   })
+        // }
+        return setTimeout(() => {
+          open(
+            <SwitchLocaleModal
+              {...{
+                open: true,
+                onClose: onClose,
+                fromCurrencyCode: currency,
+                toCurrencyCode: item,
+                onSubmit: () => {
+                  push(
+                    {
+                      pathname: pathname,
+                      query: {
+                        ...query,
+                        currency: item,
+                      },
+                    },
+                    {
+                      pathname: pathname,
+                      query: {
+                        ...query,
+                        currency: item,
+                      },
+                    },
+                    {
+                      scroll: false,
+                      locale: selectLocale.locale,
+                    }
+                  )
+                },
+              }}
+            />
+          )
+        })
+      } else {
+        return push(
+          {
+            pathname: pathname,
+            query: {
+              ...query,
+              currency: item,
+            },
+          },
+          {
+            pathname: pathname,
+            query: {
+              ...query,
+              currency: item,
+            },
+          },
+          {
+            scroll: false,
+          }
+        )
+      }
+    },
+  }
+}

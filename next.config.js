@@ -10,13 +10,16 @@ const isBC = provider === 'bigcommerce'
 const isShopify = provider === 'shopify'
 
 module.exports = withCommerceConfig({
+  serverRuntimeConfig: {
+    emailSubscribeUrl: env.EMAIL_SUBSCRIBE_URL,
+  },
   future: {
     webpack5: true,
   },
   commerce,
   i18n: {
     locales: ['en-US', 'en-NZ'],
-    defaultLocale: env.LOCAL,
+    defaultLocale: env.LOCALE,
     domains: [
       {
         domain: 'example.com',

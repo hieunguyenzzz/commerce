@@ -3,7 +3,7 @@ import { CartMenu } from '@components/cart'
 import { Footer, Navbar } from '@components/common'
 import { Close } from '@components/icons'
 import { MenuSidebarView } from '@components/menu'
-import { Container, LoadingDots, Modal, Sidebar } from '@components/ui'
+import { Container, Modal, Sidebar } from '@components/ui'
 import { useUI } from '@components/ui/context'
 import { CommerceProvider } from '@framework'
 import type { Page } from '@framework/common/get-all-pages'
@@ -13,13 +13,8 @@ import cn from 'classnames'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React, { FC, ReactNode, useEffect } from 'react'
+import Loading from '../Loading'
 import s from './Layout.module.css'
-const Loading = () => (
-  <div className="w-80 h-80 flex items-center text-center justify-center p-3">
-    <LoadingDots />
-  </div>
-)
-
 const dynamicProps = {
   loading: () => <Loading />,
 }
@@ -54,6 +49,8 @@ const Layout: FC<Props> = ({
     displayModal,
     closeSidebar,
     closeModal,
+    dynamicModal,
+    setDynamicModal,
     modalView,
   } = useUI()
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies()
@@ -61,6 +58,7 @@ const Layout: FC<Props> = ({
   useEffect(() => {
     closeSidebar()
     closeModal()
+    setDynamicModal(null)
   }, [pathname, query, asPath, closeSidebar, closeModal])
   const promoAds = 'FREE SHIPPING ALL ORDERS OVER $300'
   return (
@@ -132,6 +130,7 @@ const Layout: FC<Props> = ({
           </ClickOutside>
         )}
       </div>
+      {!!dynamicModal && dynamicModal}
     </CommerceProvider>
   )
 }

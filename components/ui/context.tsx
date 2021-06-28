@@ -1,5 +1,5 @@
 import { ThemeProvider } from 'next-themes'
-import React, { FC, useCallback, useMemo } from 'react'
+import React, { FC, ReactNode, useCallback, useMemo, useState } from 'react'
 
 export interface State {
   displaySidebar: boolean
@@ -146,7 +146,7 @@ function uiReducer(state: State, action: Action) {
 export const UIProvider: FC = (props) => {
   const [state, dispatch] = React.useReducer(uiReducer, initialState)
   const scrollerRef = React.useRef()
-
+  const [dynamicModal, setDynamicModal] = useState<ReactNode | null>()
   const openSidebar = useCallback(() => dispatch({ type: 'OPEN_SIDEBAR' }), [])
   const closeSidebar = useCallback(
     () => dispatch({ type: 'CLOSE_SIDEBAR' }),
@@ -190,8 +190,10 @@ export const UIProvider: FC = (props) => {
       openToast,
       closeToast,
       setUserAvatar,
+      dynamicModal,
+      setDynamicModal,
     }),
-    [state]
+    [state, dynamicModal]
   )
 
   return <UIContext.Provider value={value} {...props} />
@@ -203,6 +205,14 @@ export const useUI = () => {
     throw new Error(`useUI must be used within a UIProvider`)
   }
   return context
+}
+export const useOpenDynamicModal = () => {
+  const { setDynamicModal } = useUI()
+
+  return {
+    open: (node: ReactNode) => setDynamicModal(node),
+    onClose: () => setDynamicModal(null),
+  }
 }
 
 export const ManagedUIContext: FC = ({ children }) => (

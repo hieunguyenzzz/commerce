@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-
+import getConfig from 'next/config'
+const { serverRuntimeConfig } = getConfig()
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const url = process.env.EMAIL_REGISTER_URL
+    const url = serverRuntimeConfig.emailSubscribeUrl
     if (!url) {
-      throw new Error('EMAIL_REGISTER_URL not found')
+      throw new Error('EMAIL_SUBSCRIBE_URL not found')
     }
     console.log(req.body)
     fetch(url, {
