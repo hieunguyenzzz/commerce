@@ -4,7 +4,6 @@ import { ProductView } from '@components/product'
 import { CATEGORIES } from '@components/product/helpers'
 import { getConfig } from '@framework/api'
 import getAllPages from '@framework/common/get-all-pages'
-import getAllProductPaths from '@framework/product/get-all-product-paths'
 import getAllProducts from '@framework/product/get-all-products'
 import getProduct from '@framework/product/get-product'
 import { getSearchVariables } from '@framework/utils'
@@ -52,19 +51,23 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths({ locales }: GetStaticPathsContext) {
-  const { products } = await getAllProductPaths()
   return {
-    paths: locales
-      ? locales.reduce<string[]>((arr, locale) => {
-          // Add a product path for every locale
-          products.forEach((product) => {
-            arr.push(`/${locale}/product${product.node.path}`)
-          })
-          return arr
-        }, [])
-      : products.map((product) => `/product${product.node.path}`),
-    fallback: 'blocking',
+    paths: [],
+    fallback: true,
   }
+  // const { products } = await getAllProductPaths()
+  // return {
+  //   paths: locales
+  //     ? locales.reduce<string[]>((arr, locale) => {
+  //         // Add a product path for every locale
+  //         products.forEach((product) => {
+  //           arr.push(`/${locale}/product${product.node.path}`)
+  //         })
+  //         return arr
+  //       }, [])
+  //     : products.map((product) => `/product${product.node.path}`),
+  //   fallback: 'blocking',
+  // }
 }
 const EnchancedShopSidebar = () => {
   return <ShopSidebar categories={CATEGORIES}></ShopSidebar>

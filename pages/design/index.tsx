@@ -1,5 +1,7 @@
 import { Text } from '@components/ui'
-const styles = {
+const styles: {
+  [key: string]: string
+} = {
   'h1 HEADLINE': `font-size: 36px;
 text-transform: uppercase;
 line-height: 43px;
@@ -67,7 +69,7 @@ export default function Typography() {
             </div>
             <div
               className="flex-1 whitespace-pre"
-              dangerouslySetInnerHTML={{ __html: styles[str] }}
+              dangerouslySetInnerHTML={{ __html: styles[str] || '' }}
             ></div>
           </div>
         )

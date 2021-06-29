@@ -21,7 +21,7 @@ export function formatPrice({
     return formaterCurrency.format(amount)
   } catch (error) {
     console.error(error)
-    return amount
+    return String(amount)
   }
 }
 

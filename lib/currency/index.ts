@@ -231,7 +231,7 @@ export const getCurrencySymbol = (currencyCode: string) => {
   //         "value": "$"
   //     }
   // ]
-  console.log(formater.formatToParts())
+  // console.log(formater.formatToParts())
   return (
     formater.formatToParts().find((item) => item.type === 'currency')?.value ||
     ''
