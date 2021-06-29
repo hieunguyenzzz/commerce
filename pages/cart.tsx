@@ -43,7 +43,7 @@ export default function Cart() {
   return (
     <>
       <Container className="pt-md mb-6">
-        <Breadcrumb>Bag</Breadcrumb>
+        <Breadcrumb>Cart</Breadcrumb>
       </Container>
       <Container small className="grid lg:grid-cols-12 gap-6  py-md lg:py-6">
         <div className="lg:col-span-12">

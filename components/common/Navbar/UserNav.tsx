@@ -4,6 +4,7 @@ import { useUI } from '@components/ui/context'
 import useCart from '@framework/cart/use-cart'
 import { useCustomer } from '@framework/customer'
 import type { LineItem } from '@framework/types'
+import { getCurrencySymbol } from '@lib/currency'
 import { useCurrency } from '@lib/hooks/useCurrency'
 import { currencyList } from '@lib/locale'
 import cn from 'classnames'
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const countItem = (count: number, item: LineItem) => count + item.quantity
+
 export const BagItem: FC<{
   limit?: number
   className?: string
@@ -40,6 +42,7 @@ const UserNav: FC<Props> = ({ className }) => {
   const { currency, setCurrency } = useCurrency()
   const { openSidebar, setModalView } = useUI()
   const itemsCount = (5 || data?.lineItems.reduce(countItem, 0)) ?? 0
+  const symbol = getCurrencySymbol(currency as string)
   const { push } = useRouter()
   return (
     <nav className={cn(s.root, className)}>
@@ -49,35 +52,35 @@ const UserNav: FC<Props> = ({ className }) => {
           className={cn(s.item, 'flex items-baseline relative')}
           dropdown={
             <div className="text-xs shadow-lg bg-accents-0 flex flex-col top-header px-md py-3">
-              {new Array(5)
-                .fill(currencyList.filter((str) => str !== currency))
-                .map((menu, i) => {
-                  {
-                    const item = menu[i]
-                    if (!item || !item.length) return null
+              {currencyList.map((item: any, i) => {
+                {
+                  if (!item || !item.length || item === currency) return null
 
-                    return (
-                      <a
-                        key={i}
-                        onClick={() => setCurrency(item)}
-                        className="leading-extra-loose flex flex-col items-start py-2"
+                  return (
+                    <a
+                      key={i}
+                      onClick={() => setCurrency(item)}
+                      className="leading-extra-loose flex flex-col items-start py-2"
+                    >
+                      <div
+                        className={cn(
+                          'inline-block text-effect-1 truncate text-h7',
+                          currency === item && 'text-primary'
+                        )}
                       >
-                        <div
-                          className={cn(
-                            'inline-block text-effect-1 truncate text-h7',
-                            currency === item && 'text-primary'
-                          )}
-                        >
-                          {item}
-                        </div>
-                      </a>
-                    )
-                  }
-                })}
+                        {item}
+                      </div>
+                    </a>
+                  )
+                }
+              })}
             </div>
           }
         >
-          <div className="text-h7">GLOBAL (${currency}) </div>
+          <div className="text-h7">
+            GLOBAL ({symbol}
+            {currency}){' '}
+          </div>
           <span>
             <Down />
           </span>

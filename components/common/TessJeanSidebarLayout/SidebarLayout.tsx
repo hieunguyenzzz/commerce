@@ -1,6 +1,7 @@
 import { Back, Down } from '@components/icons'
 import { Container } from '@components/ui'
 import { useUI } from '@components/ui/context'
+import { getCurrencySymbol } from '@lib/currency'
 import { useCurrency } from '@lib/hooks/useCurrency'
 import { currencyList } from '@lib/locale'
 import cn from 'classnames'
@@ -27,6 +28,7 @@ const SidebarLayout: FC<Props> = ({
   const { currency, setCurrency } = useCurrency()
 
   const router = useRouter()
+  const symbol = getCurrencySymbol(currency as string)
   return (
     <div className={cn(s.root, className)}>
       <header>
@@ -55,19 +57,19 @@ const SidebarLayout: FC<Props> = ({
         <div className="flex-1 p-6"></div>
         <div className="flex justify-start">
           <div className="group flex items-center relative">
-            <div className="text-h7">GLOBAL (${currency}) </div>
+            <div className="text-h7">
+              GLOBAL (${symbol}
+              {currency}){' '}
+            </div>
             <span>
               <Down />
             </span>
             <div className="hidden absolute bottom-0 min-w-full left-0 shadow-lg group-hover:flex flex-col bg-accents-1 py-2 z-10">
-              {new Array(5)
-                .fill(currencyList)
-                .fill(currencyList.filter((str) => str !== currency))
-                .map((menu, i) => {
+              {currencyList
+                .filter((str: string) => str !== currency)
+                .map((item: any, i) => {
                   {
-                    const item = menu[i]
                     if (!item || !item.length) return null
-
                     return (
                       <a
                         key={i}

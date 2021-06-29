@@ -1,6 +1,17 @@
 import getConfig from 'next/config'
 
-export const currencyList = ['NZD', 'AUD', 'VND', 'USD']
+export const currencyList = [
+  'USD',
+  'EUR',
+  'GBP',
+  'CAD',
+  'JPY',
+  'SGD',
+  'CNY',
+  'NZD',
+  'AUD',
+  'VND',
+]
 const {
   publicRuntimeConfig: { sites },
 } = getConfig()

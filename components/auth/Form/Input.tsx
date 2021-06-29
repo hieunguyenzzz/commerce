@@ -5,7 +5,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
   onChange?: (...args: any[]) => any
 }
-const Form: React.FC<Props> = ({ className, placeholder, ...props }) => (
+const Input: React.FC<Props> = ({ className, placeholder, ...props }) => (
   <div className={classNames(s.inputmain, className)}>
     <div className={s.inputbox}>
       <input {...props} placeholder={placeholder} className={s.input} />
@@ -16,4 +16,4 @@ const Form: React.FC<Props> = ({ className, placeholder, ...props }) => (
     </div>
   </div>
 )
-export default Form
+export default Input

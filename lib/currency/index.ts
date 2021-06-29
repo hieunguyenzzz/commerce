@@ -1,3 +1,5 @@
+// source: https://cdn.shopify.com/s/javascripts/currencies.js
+
 export const rates = {
   USD: 1.0,
   EUR: 1.21636,
@@ -184,10 +186,54 @@ export const rates = {
   VES: 3.50142e-7,
   MXV: 0.333691,
 }
+
 export const convert = function (
   amount: number,
   from: keyof typeof rates,
   to: keyof typeof rates
 ) {
   return (amount * rates[from]) / rates[to]
+}
+
+export const getCurrencySymbol = (currencyCode: string) => {
+  const formater = new Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: currencyCode,
+    currencyDisplay: 'narrowSymbol',
+  })
+  //   [
+  //     {
+  //         "type": "integer",
+  //         "value": "3"
+  //     },
+  //     {
+  //         "type": "group",
+  //         "value": "."
+  //     },
+  //     {
+  //         "type": "integer",
+  //         "value": "333"
+  //     },
+  //     {
+  //         "type": "decimal",
+  //         "value": ","
+  //     },
+  //     {
+  //         "type": "fraction",
+  //         "value": "00"
+  //     },
+  //     {
+  //         "type": "literal",
+  //         "value": " "
+  //     },
+  //     {
+  //         "type": "currency",
+  //         "value": "$"
+  //     }
+  // ]
+  console.log(formater.formatToParts())
+  return (
+    formater.formatToParts().find((item) => item.type === 'currency')?.value ||
+    ''
+  )
 }

@@ -1,16 +1,14 @@
-import isAllowedMethod from '../utils/is-allowed-method'
-import createApiHandler, {
-  ShopifyApiHandler,
-} from '../utils/create-api-handler'
-
+import { getConfig } from '..'
 import {
   SHOPIFY_CHECKOUT_ID_COOKIE,
   SHOPIFY_CHECKOUT_URL_COOKIE,
   SHOPIFY_CUSTOMER_TOKEN_COOKIE,
 } from '../../const'
-
-import { getConfig } from '..'
 import associateCustomerWithCheckoutMutation from '../../utils/mutations/associate-customer-with-checkout'
+import createApiHandler, {
+  ShopifyApiHandler,
+} from '../utils/create-api-handler'
+import isAllowedMethod from '../utils/is-allowed-method'
 
 const METHODS = ['GET']
 

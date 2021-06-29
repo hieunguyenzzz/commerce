@@ -5,20 +5,23 @@ export function formatPrice({
   amount,
   currencyCode,
   locale,
+  currencyDisplay = 'narrowSymbol',
 }: {
   amount: number
   currencyCode: string
   locale: string
+  currencyDisplay?: string
 }) {
   try {
-    const formatCurrency = new Intl.NumberFormat(locale, {
+    const formaterCurrency = new Intl.NumberFormat(locale, {
       style: 'currency',
       currency: currencyCode,
+      currencyDisplay,
     })
-    return formatCurrency.format(amount)
+    return formaterCurrency.format(amount)
   } catch (error) {
     console.error(error)
-    return 'Nan'
+    return amount
   }
 }
 
@@ -41,9 +44,9 @@ export function formatVariantPrice({
     ? formatDiscount.format((baseAmount - amount) / baseAmount)
     : null
 
-  const price = formatPrice({ amount, currencyCode, locale })
+  const price = formatPrice({ amount, currencyCode, locale, currencyDisplay })
   const basePrice = hasDiscount
-    ? formatPrice({ amount: baseAmount, currencyCode, locale })
+    ? formatPrice({ amount: baseAmount, currencyCode, locale, currencyDisplay })
     : null
 
   return { price, basePrice, discount }

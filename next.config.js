@@ -37,19 +37,19 @@ module.exports = withCommerceConfig({
   i18n: {
     locales: ['en-US', 'en-NZ'],
     defaultLocale: env.LOCALE,
-    // domains: [
-    //   {
-    //     domain: 'example.com',
-    //     defaultLocale: 'en-US',
-    //   },
-    //   {
-    //     domain: 'example.nz',
-    //     defaultLocale: 'en-NZ',
-    //     // an optional http field can also be used to test
-    //     // locale domains locally with http instead of https
-    //     http: true,
-    //   },
-    // ],
+    domains: [
+      {
+        domain: 'example.com',
+        defaultLocale: 'en-US',
+      },
+      {
+        domain: 'example.nz',
+        defaultLocale: 'en-NZ',
+        // an optional http field can also be used to test
+        // locale domains locally with http instead of https
+        http: true,
+      },
+    ],
   },
   images: {
     domains: [''],
