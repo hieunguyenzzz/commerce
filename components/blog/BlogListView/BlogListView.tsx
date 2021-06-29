@@ -66,7 +66,7 @@ const BlogListView: React.FC<Props> = ({
           </Link>
           {tags.map((str: any, i: number) => {
             return (
-              <Link key={i} href={`/blog/journal/${str.toLowerCase()}`}>
+              <Link key={i} href={`/blog/journal/tagged/${str.toLowerCase()}`}>
                 <a
                   className={classNames(
                     'mx-xl text-effect-1 text-h7 uppercase',
@@ -118,7 +118,9 @@ const BlogListView: React.FC<Props> = ({
                 <Link
                   key={i}
                   href={{
-                    pathname: `/blog/journal/${currentTag ? currentTag : ''}`,
+                    pathname: `/blog/journal/${
+                      currentTag ? `tagged/${currentTag}` : ''
+                    }`,
                     query: { page },
                   }}
                 >
