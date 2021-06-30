@@ -1,5 +1,5 @@
 import { Layout } from '@components/common'
-import CustomercareLayout from '@components/sections/pages/Layout'
+import CustomercareLayout from '@components/sections/customer-care/Layout'
 import { Button } from '@components/ui'
 import { getConfig } from '@framework/api'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
