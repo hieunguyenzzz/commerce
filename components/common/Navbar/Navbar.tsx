@@ -231,7 +231,7 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
                 <div className="flex flex-1 space-x-24 justify-start py-10 ">
                   <Text variant="h4">collections</Text>
                   <div className="space-x-6 flex ">
-                    <Link href={`/collection/${'001-softtest'}`}>
+                    <Link href={`/collections/${'001-softtest'}`}>
                       <a className="flex-1 flex items-start flex-col space-y-4">
                         <Image
                           className="bg-accents-1"
@@ -246,7 +246,7 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
                         </div>
                       </a>
                     </Link>
-                    <Link href={`/collection/${'002-la-mar'}`}>
+                    <Link href={`/collections/${'002-la-mar'}`}>
                       <a className="flex-1 flex items-start flex-col space-y-4">
                         <Image
                           className="bg-accents-1"
@@ -267,11 +267,7 @@ const Navbar: FC<Props> = ({ transparent, modalView = 'MENU' }) => {
         >
           COLLECTIONS
         </NavItem>
-        <NavItem
-          className="relative"
-          placement="left"
-          href="/customer-care/ethics"
-        >
+        <NavItem className="relative" placement="left" href="/pages/ethics">
           ETHICS
         </NavItem>
         <NavItem

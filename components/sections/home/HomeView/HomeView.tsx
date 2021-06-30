@@ -132,7 +132,7 @@ const HomeView: React.FC<{
               and shop the campaign.
             </div>
           </div>
-          <Link href="/collection/001-softtest">
+          <Link href="/collections/001-softtest">
             <Button className="inline-block mt-[20px]">
               VIEW THE COLLECTION
             </Button>

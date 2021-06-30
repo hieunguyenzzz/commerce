@@ -28,7 +28,7 @@ const CollectionSidebar: React.FC<Props> = ({
     >
       <SidebarLayout title={title}>
         <div className="flex flex-col pt-[41px] space-y-[41px]">
-          <Link href={'/collection/001-softtest'}>
+          <Link href={'/collections/001-softtest'}>
             <div className="self-end">
               <Image
                 width="160"
@@ -40,7 +40,7 @@ const CollectionSidebar: React.FC<Props> = ({
               <div className="text-h6 py-[14px]  uppercase">001 sofflines</div>
             </div>
           </Link>
-          <Link href={'/collection/002-la-mar'}>
+          <Link href={'/collections/002-la-mar'}>
             <div className="self-start">
               <Image
                 width="160"

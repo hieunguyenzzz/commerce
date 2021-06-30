@@ -1,5 +1,5 @@
 import { Layout } from '@components/common'
-import CustomercareLayout from '@components/sections/customer-care/Layout'
+import CustomercareLayout from '@components/sections/pages/Layout'
 import { Accordion } from '@components/ui'
 import { getConfig } from '@framework/api'
 import getArticle from '@framework/blog/get-article'

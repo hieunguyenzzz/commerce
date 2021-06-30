@@ -54,12 +54,10 @@ const Footer: FC<Props> = ({ className, pages }) => {
               )}
             >
               {customercare.map(({ title, slug }, i) => (
-                <Link key={i} href={'/customer-care/' + slug}>
+                <Link key={i} href={'/pages/' + slug}>
                   <Text
                     className={classNames('text-effect-1', {
-                      'text-primary': pathname.includes(
-                        '/customer-care/' + slug
-                      ),
+                      'text-primary': pathname.includes('/pages/' + slug),
                     })}
                     variant="h7"
                   >

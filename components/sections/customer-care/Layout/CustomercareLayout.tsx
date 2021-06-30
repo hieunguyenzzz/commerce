@@ -27,7 +27,7 @@ const CustomercareLayout = ({
       <div className="w-full flex">
         <div className="hidden w-1/4 md:flex flex-col items-start space-y-5 pr-md border-r border-black">
           {customercare.map(({ title: str, slug }: any) => (
-            <Link href={'/customer-care/' + slug}>
+            <Link href={'/pages/' + slug}>
               <a
                 className={classNames(
                   'text-effect-1 py-1',
