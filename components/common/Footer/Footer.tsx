@@ -36,11 +36,11 @@ const Footer: FC<Props> = ({ className, pages }) => {
     { title: 'CONTACT US', slug: 'contact-us' },
   ]
   const legalPages = [
-    { title: 'ABOUT', slug: '#' },
-    { title: 'ETHICS', slug: '#' },
-    { title: 'JOURNAL', slug: '#' },
-    { title: 'PRIVACY POLICY', slug: '#' },
-    { title: 'TERMS & CONDITIONS', slug: '#' },
+    { title: 'ABOUT', slug: 'about' },
+    { title: 'ETHICS', slug: 'pages/ethics' },
+    { title: 'JOURNAL', slug: 'blog/journal' },
+    { title: 'PRIVACY POLICY', slug: 'privacy-policy' },
+    { title: 'TERMS & CONDITIONS', slug: 'terms' },
   ]
   return (
     <footer className={rootClassName}>
