@@ -1,33 +1,30 @@
 {
   "schema": {
-    "https://master.staging.saleor.cloud/graphql/": {}
+    "https://strapi.hieunguyen.dev/graphql/": {}
   },
   "documents": [
     {
-      "./framework/saleor/utils/queries/get-all-products-query.ts": {
-        "noRequire": true
-      }
-    },
-    {
-      "./framework/saleor/utils/queries/get-all-products-paths-query.ts": {
-        "noRequire": true
-      }
-    },
-    {
-      "./framework/saleor/utils/queries/get-products.ts": {
+      "./framework/strapi/**/*.{ts,tsx}": {
         "noRequire": true
       }
     }
   ],
   "generates": {
-    "./framework/saleor/schema.d.ts": {
-      "plugins": ["typescript", "typescript-operations"]
+    "./framework/strapi/schema.d.ts": {
+      "plugins": [
+        "typescript",
+        "typescript-operations"
+      ]
     },
-    "./framework/saleor/schema.graphql": {
-      "plugins": ["schema-ast"]
+    "./framework/strapi/schema.graphql": {
+      "plugins": [
+        "schema-ast"
+      ]
     }
   },
   "hooks": {
-    "afterAllFileWrite": ["prettier --write"]
+    "afterAllFileWrite": [
+      "prettier --write"
+    ]
   }
 }
