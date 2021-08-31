@@ -1,8 +1,7 @@
-import type { LocalConfig } from '../index'
-import { Product } from '@commerce/types/product'
-import { GetProductOperation } from '@commerce/types/product'
-import data from '../../data.json'
 import type { OperationContext } from '@commerce/api/operations'
+import { GetProductOperation, Product } from '@commerce/types/product'
+import { StrapiConfig } from '..'
+import data from '../../data.json'
 
 export default function getProductOperation({
   commerce,
@@ -14,7 +13,7 @@ export default function getProductOperation({
   }: {
     query?: string
     variables?: T['variables']
-    config?: Partial<LocalConfig>
+    config?: Partial<StrapiConfig>
     preview?: boolean
   } = {}): Promise<Product | {} | any> {
     return {

@@ -1,18 +1,19 @@
 import type { CommerceAPI, CommerceAPIConfig } from '@commerce/api'
 import { getCommerceApi as commerceApi } from '@commerce/api'
-import createFetcher from './utils/fetch-local'
-
+import { STRAPI_URL } from '@framework/const'
 import getAllPages from './operations/get-all-pages'
-import getPage from './operations/get-page'
-import getSiteInfo from './operations/get-site-info'
-import getCustomerWishlist from './operations/get-customer-wishlist'
 import getAllProductPaths from './operations/get-all-product-paths'
 import getAllProducts from './operations/get-all-products'
+import getCustomerWishlist from './operations/get-customer-wishlist'
+import getPage from './operations/get-page'
 import getProduct from './operations/get-product'
+import getSiteInfo from './operations/get-site-info'
+import createFetcher from './utils/fetch-local'
 
-export interface LocalConfig extends CommerceAPIConfig {}
-const config: LocalConfig = {
-  commerceUrl: '',
+
+export interface StrapiConfig extends CommerceAPIConfig {}
+const config: StrapiConfig = {
+  commerceUrl: STRAPI_URL,
   apiToken: '',
   cartCookie: '',
   customerCookie: '',
@@ -33,10 +34,11 @@ const operations = {
 export const provider = { config, operations }
 
 export type Provider = typeof provider
-export type LocalAPI<P extends Provider = Provider> = CommerceAPI<P | any>
+
+export type StrapiAPI<P extends Provider = Provider> = CommerceAPI<P | any>
 
 export function getCommerceApi<P extends Provider>(
   customProvider: P = provider as any
-): LocalAPI<P> {
+): StrapiAPI<P> {
   return commerceApi(customProvider as any)
 }

@@ -1,13 +1,13 @@
-import * as React from 'react'
-import { ReactNode } from 'react'
-import { localProvider } from './provider'
 import {
   CommerceConfig,
   CommerceProvider as CoreCommerceProvider,
   useCommerce as useCoreCommerce,
 } from '@commerce'
+import * as React from 'react'
+import { ReactNode } from 'react'
+import { localProvider } from './provider'
 
-export const localConfig: CommerceConfig = {
+export const StrapiConfig: CommerceConfig = {
   locale: 'en-us',
   cartCookie: 'session',
 }
@@ -22,7 +22,7 @@ export function CommerceProvider({
   return (
     <CoreCommerceProvider
       provider={localProvider}
-      config={{ ...localConfig, ...config }}
+      config={{ ...StrapiConfig, ...config }}
     >
       {children}
     </CoreCommerceProvider>

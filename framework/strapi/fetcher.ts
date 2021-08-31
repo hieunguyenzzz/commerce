@@ -1,11 +1,43 @@
-import { Fetcher } from '@commerce/utils/types'
+import { FetcherError } from '@commerce/utils/errors'
+import type { Fetcher } from '@commerce/utils/types'
+import { STRAPI_URL } from './const'
 
-export const fetcher: Fetcher = async () => {
-  console.log('FETCHER')
-  const res = await fetch('./data.json')
+async function getText(res: Response) {
+  try {
+    return (await res.text()) || res.statusText
+  } catch (error) {
+    return res.statusText
+  }
+}
+
+async function getError(res: Response) {
+  if (res.headers.get('Content-Type')?.includes('application/json')) {
+    const data = await res.json()
+    return new FetcherError({ errors: data.errors, status: res.status })
+  }
+  return new FetcherError({ message: await getText(res), status: res.status })
+}
+
+const fetcher: Fetcher = async ({
+  url=STRAPI_URL,
+  method = 'GET',
+  variables,
+  body: bodyObj,
+}) => {
+  console.log('fetcher')
+  const hasBody = Boolean(variables || bodyObj)
+  const body = hasBody
+    ? JSON.stringify(variables ? { variables } : bodyObj)
+    : undefined
+  const headers = hasBody ? { 'Content-Type': 'application/json' } : undefined
+  const res = await fetch(url!, { method, body, headers })
+
   if (res.ok) {
     const { data } = await res.json()
     return data
   }
-  throw res
+
+  throw await getError(res)
 }
+
+export default fetcher

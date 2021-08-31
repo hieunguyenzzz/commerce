@@ -1,9 +1,9 @@
-import { FetcherError } from '@commerce/utils/errors'
 import type { GraphQLFetcher } from '@commerce/api'
-import type { LocalConfig } from '../index'
+import { FetcherError } from '@commerce/utils/errors'
+import { StrapiConfig } from '..'
 import fetch from './fetch'
 
-const fetchGraphqlApi: (getConfig: () => LocalConfig) => GraphQLFetcher =
+const fetchGraphqlApi: (getConfig: () => StrapiConfig) => GraphQLFetcher =
   (getConfig) =>
   async (query: string, { variables, preview } = {}, fetchOptions) => {
     const config = getConfig()
@@ -19,7 +19,6 @@ const fetchGraphqlApi: (getConfig: () => LocalConfig) => GraphQLFetcher =
         variables,
       }),
     })
-
     const json = await res.json()
     if (json.errors) {
       throw new FetcherError({
