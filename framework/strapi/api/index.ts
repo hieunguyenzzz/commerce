@@ -10,6 +10,12 @@ import getProduct from './operations/get-product'
 import getSiteInfo from './operations/get-site-info'
 import createFetcher from './utils/fetch-local'
 
+if (!STRAPI_URL) {
+  throw new Error(
+    `The environment variable STRAPI_URL is missing and it's required to access your store`
+  )
+}
+
 
 export interface StrapiConfig extends CommerceAPIConfig {}
 const config: StrapiConfig = {

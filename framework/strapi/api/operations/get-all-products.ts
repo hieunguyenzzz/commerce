@@ -1,7 +1,13 @@
-import type { OperationContext } from '@commerce/api/operations'
+
+import { OperationContext, OperationOptions } from '@commerce/api/operations'
 import { GetAllProductsOperation } from '@commerce/types/product'
-import { Product as StrapiProduct } from 'framework/strapi/schema'
-import type { StrapiConfig } from '../index'
+import { normalizeProduct } from '@framework/utils/normalize'
+import type { Provider, StrapiConfig } from '..'
+import {
+  GetAllProductsQuery,
+  GetAllProductsQueryVariables,
+  Product
+} from '../../schema'
 
 const getAllProductsQuery = /* GraphQL */ `
   query getAllProducts($first: Int = 0 $start: Int=0){
@@ -23,22 +29,23 @@ const getAllProductsQuery = /* GraphQL */ `
 
 `
 
-export function normalizeProduct({
-  id,
-  title: name,
-  description,
-  images,
-}: StrapiProduct): Product {
-  return {
-    id,
-    name,
-    description,
-    
-  }
-}
 export default function getAllProductsOperation({
   commerce,
-}: OperationContext<any>) {
+}: OperationContext<Provider>) {
+  async function getAllProducts<T extends GetAllProductsOperation>(opts?: {
+    variables?: T['variables']
+    config?: Partial<StrapiConfig>
+    preview?: boolean
+  }): Promise<T['data']>
+
+  async function getAllProducts<T extends GetAllProductsOperation>(
+    opts: {
+      variables?: T['variables']
+      config?: Partial<StrapiConfig>
+      preview?: boolean
+    } & OperationOptions
+  ): Promise<T['data']>
+
   async function getAllProducts<T extends GetAllProductsOperation>({
     query = getAllProductsQuery,
     variables,
@@ -48,12 +55,15 @@ export default function getAllProductsOperation({
     variables?: T['variables']
     config?: Partial<StrapiConfig>
     preview?: boolean
-  } = {}): Promise<{ products: T['data'] }> {
+  } = {}): Promise<T['data']> {
     const { fetch, locale } = commerce.getConfig(config)
 
-    const { data } = await fetch(
+    const { data } = await fetch<
+      GetAllProductsQuery,
+      GetAllProductsQueryVariables
+    >(
       query,
-      { variables  },
+      { variables },
       {
         ...(locale && {
           headers: {
@@ -63,8 +73,9 @@ export default function getAllProductsOperation({
       }
     )
     return {
-        products: data.products.map(normalizeProduct),
+      products: data?.products?.filter(Boolean).map(product=>normalizeProduct(product as Product))||[],
     }
   }
+
   return getAllProducts
 }
