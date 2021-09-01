@@ -35,6 +35,128 @@ export type AdminUser = {
   lastname: Scalars['String']
 }
 
+export type Collection = {
+  __typename?: 'Collection'
+  id: Scalars['ID']
+  created_at: Scalars['DateTime']
+  updated_at: Scalars['DateTime']
+  title?: Maybe<Scalars['String']>
+  slug?: Maybe<Scalars['String']>
+  published_at?: Maybe<Scalars['DateTime']>
+  products?: Maybe<Array<Maybe<Product>>>
+}
+
+export type CollectionProductsArgs = {
+  sort?: Maybe<Scalars['String']>
+  limit?: Maybe<Scalars['Int']>
+  start?: Maybe<Scalars['Int']>
+  where?: Maybe<Scalars['JSON']>
+}
+
+export type CollectionAggregator = {
+  __typename?: 'CollectionAggregator'
+  count?: Maybe<Scalars['Int']>
+  totalCount?: Maybe<Scalars['Int']>
+}
+
+export type CollectionConnection = {
+  __typename?: 'CollectionConnection'
+  values?: Maybe<Array<Maybe<Collection>>>
+  groupBy?: Maybe<CollectionGroupBy>
+  aggregate?: Maybe<CollectionAggregator>
+}
+
+export type CollectionConnectionCreated_At = {
+  __typename?: 'CollectionConnectionCreated_at'
+  key?: Maybe<Scalars['DateTime']>
+  connection?: Maybe<CollectionConnection>
+}
+
+export type CollectionConnectionId = {
+  __typename?: 'CollectionConnectionId'
+  key?: Maybe<Scalars['ID']>
+  connection?: Maybe<CollectionConnection>
+}
+
+export type CollectionConnectionPublished_At = {
+  __typename?: 'CollectionConnectionPublished_at'
+  key?: Maybe<Scalars['DateTime']>
+  connection?: Maybe<CollectionConnection>
+}
+
+export type CollectionConnectionSlug = {
+  __typename?: 'CollectionConnectionSlug'
+  key?: Maybe<Scalars['String']>
+  connection?: Maybe<CollectionConnection>
+}
+
+export type CollectionConnectionTitle = {
+  __typename?: 'CollectionConnectionTitle'
+  key?: Maybe<Scalars['String']>
+  connection?: Maybe<CollectionConnection>
+}
+
+export type CollectionConnectionUpdated_At = {
+  __typename?: 'CollectionConnectionUpdated_at'
+  key?: Maybe<Scalars['DateTime']>
+  connection?: Maybe<CollectionConnection>
+}
+
+export type CollectionGroupBy = {
+  __typename?: 'CollectionGroupBy'
+  id?: Maybe<Array<Maybe<CollectionConnectionId>>>
+  created_at?: Maybe<Array<Maybe<CollectionConnectionCreated_At>>>
+  updated_at?: Maybe<Array<Maybe<CollectionConnectionUpdated_At>>>
+  title?: Maybe<Array<Maybe<CollectionConnectionTitle>>>
+  slug?: Maybe<Array<Maybe<CollectionConnectionSlug>>>
+  published_at?: Maybe<Array<Maybe<CollectionConnectionPublished_At>>>
+}
+
+export type CollectionInput = {
+  title?: Maybe<Scalars['String']>
+  products?: Maybe<Array<Maybe<Scalars['ID']>>>
+  slug?: Maybe<Scalars['String']>
+  published_at?: Maybe<Scalars['DateTime']>
+  created_by?: Maybe<Scalars['ID']>
+  updated_by?: Maybe<Scalars['ID']>
+}
+
+export type ComponentProductConfiguration = {
+  __typename?: 'ComponentProductConfiguration'
+  id: Scalars['ID']
+  option?: Maybe<Array<Maybe<ComponentProductOption>>>
+}
+
+export type ComponentProductConfigurationInput = {
+  option?: Maybe<Array<Maybe<ComponentProductOptionInput>>>
+}
+
+export type ComponentProductOption = {
+  __typename?: 'ComponentProductOption'
+  id: Scalars['ID']
+  label?: Maybe<Scalars['String']>
+  variant?: Maybe<Array<Maybe<ComponentProductVariant>>>
+}
+
+export type ComponentProductOptionInput = {
+  label?: Maybe<Scalars['String']>
+  variant?: Maybe<Array<Maybe<ComponentProductVariantInput>>>
+}
+
+export type ComponentProductVariant = {
+  __typename?: 'ComponentProductVariant'
+  id: Scalars['ID']
+  title?: Maybe<Scalars['String']>
+  price?: Maybe<Scalars['Float']>
+  swatch_image?: Maybe<UploadFile>
+}
+
+export type ComponentProductVariantInput = {
+  title?: Maybe<Scalars['String']>
+  price?: Maybe<Scalars['Float']>
+  swatch_image?: Maybe<Scalars['ID']>
+}
+
 export type Customer = {
   __typename?: 'Customer'
   id: Scalars['ID']
@@ -139,6 +261,11 @@ export type CustomerInput = {
   updated_by?: Maybe<Scalars['ID']>
 }
 
+export enum Enum_Global_Currency {
+  Usd = 'USD',
+  Vnd = 'VND',
+}
+
 export type FileInfoInput = {
   name?: Maybe<Scalars['String']>
   alternativeText?: Maybe<Scalars['String']>
@@ -161,6 +288,22 @@ export type FileInput = {
   provider: Scalars['String']
   provider_metadata?: Maybe<Scalars['JSON']>
   related?: Maybe<Array<Maybe<Scalars['ID']>>>
+  created_by?: Maybe<Scalars['ID']>
+  updated_by?: Maybe<Scalars['ID']>
+}
+
+export type Global = {
+  __typename?: 'Global'
+  id: Scalars['ID']
+  created_at: Scalars['DateTime']
+  updated_at: Scalars['DateTime']
+  Currency?: Maybe<Enum_Global_Currency>
+  published_at?: Maybe<Scalars['DateTime']>
+}
+
+export type GlobalInput = {
+  Currency?: Maybe<Enum_Global_Currency>
+  published_at?: Maybe<Scalars['DateTime']>
   created_by?: Maybe<Scalars['ID']>
   updated_by?: Maybe<Scalars['ID']>
 }
@@ -190,6 +333,19 @@ export type Morph =
   | UsersPermissionsMeRole
   | UsersPermissionsLoginPayload
   | UserPermissionsPasswordPayload
+  | Collection
+  | CollectionConnection
+  | CollectionAggregator
+  | CollectionGroupBy
+  | CollectionConnectionId
+  | CollectionConnectionCreated_At
+  | CollectionConnectionUpdated_At
+  | CollectionConnectionTitle
+  | CollectionConnectionSlug
+  | CollectionConnectionPublished_At
+  | CreateCollectionPayload
+  | UpdateCollectionPayload
+  | DeleteCollectionPayload
   | Customer
   | CustomerConnection
   | CustomerAggregator
@@ -205,6 +361,9 @@ export type Morph =
   | CreateCustomerPayload
   | UpdateCustomerPayload
   | DeleteCustomerPayload
+  | Global
+  | UpdateGlobalPayload
+  | DeleteGlobalPayload
   | Note
   | NoteConnection
   | NoteAggregator
@@ -234,12 +393,19 @@ export type Morph =
   | Product
   | ProductConnection
   | ProductAggregator
+  | ProductAggregatorSum
+  | ProductAggregatorAvg
+  | ProductAggregatorMin
+  | ProductAggregatorMax
   | ProductGroupBy
   | ProductConnectionId
   | ProductConnectionCreated_At
   | ProductConnectionUpdated_At
   | ProductConnectionTitle
   | ProductConnectionDescription
+  | ProductConnectionPrice
+  | ProductConnectionSlug
+  | ProductConnectionConfiguration
   | ProductConnectionPublished_At
   | CreateProductPayload
   | UpdateProductPayload
@@ -311,12 +477,20 @@ export type Morph =
   | CreateUserPayload
   | UpdateUserPayload
   | DeleteUserPayload
+  | ComponentProductConfiguration
+  | ComponentProductOption
+  | ComponentProductVariant
 
 export type Mutation = {
   __typename?: 'Mutation'
+  createCollection?: Maybe<CreateCollectionPayload>
+  updateCollection?: Maybe<UpdateCollectionPayload>
+  deleteCollection?: Maybe<DeleteCollectionPayload>
   createCustomer?: Maybe<CreateCustomerPayload>
   updateCustomer?: Maybe<UpdateCustomerPayload>
   deleteCustomer?: Maybe<DeleteCustomerPayload>
+  updateGlobal?: Maybe<UpdateGlobalPayload>
+  deleteGlobal?: Maybe<DeleteGlobalPayload>
   createNote?: Maybe<CreateNotePayload>
   updateNote?: Maybe<UpdateNotePayload>
   deleteNote?: Maybe<DeleteNotePayload>
@@ -353,6 +527,18 @@ export type Mutation = {
   emailConfirmation?: Maybe<UsersPermissionsLoginPayload>
 }
 
+export type MutationCreateCollectionArgs = {
+  input?: Maybe<CreateCollectionInput>
+}
+
+export type MutationUpdateCollectionArgs = {
+  input?: Maybe<UpdateCollectionInput>
+}
+
+export type MutationDeleteCollectionArgs = {
+  input?: Maybe<DeleteCollectionInput>
+}
+
 export type MutationCreateCustomerArgs = {
   input?: Maybe<CreateCustomerInput>
 }
@@ -363,6 +549,10 @@ export type MutationUpdateCustomerArgs = {
 
 export type MutationDeleteCustomerArgs = {
   input?: Maybe<DeleteCustomerInput>
+}
+
+export type MutationUpdateGlobalArgs = {
+  input?: Maybe<UpdateGlobalInput>
 }
 
 export type MutationCreateNoteArgs = {
@@ -664,11 +854,30 @@ export type Product = {
   updated_at: Scalars['DateTime']
   title?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
+  price?: Maybe<Scalars['Float']>
+  slug?: Maybe<Scalars['String']>
+  configuration?: Maybe<ComponentProductConfiguration>
   published_at?: Maybe<Scalars['DateTime']>
   images?: Maybe<Array<Maybe<UploadFile>>>
+  relate_products?: Maybe<Array<Maybe<Product>>>
+  collections?: Maybe<Array<Maybe<Collection>>>
 }
 
 export type ProductImagesArgs = {
+  sort?: Maybe<Scalars['String']>
+  limit?: Maybe<Scalars['Int']>
+  start?: Maybe<Scalars['Int']>
+  where?: Maybe<Scalars['JSON']>
+}
+
+export type ProductRelate_ProductsArgs = {
+  sort?: Maybe<Scalars['String']>
+  limit?: Maybe<Scalars['Int']>
+  start?: Maybe<Scalars['Int']>
+  where?: Maybe<Scalars['JSON']>
+}
+
+export type ProductCollectionsArgs = {
   sort?: Maybe<Scalars['String']>
   limit?: Maybe<Scalars['Int']>
   start?: Maybe<Scalars['Int']>
@@ -679,6 +888,30 @@ export type ProductAggregator = {
   __typename?: 'ProductAggregator'
   count?: Maybe<Scalars['Int']>
   totalCount?: Maybe<Scalars['Int']>
+  sum?: Maybe<ProductAggregatorSum>
+  avg?: Maybe<ProductAggregatorAvg>
+  min?: Maybe<ProductAggregatorMin>
+  max?: Maybe<ProductAggregatorMax>
+}
+
+export type ProductAggregatorAvg = {
+  __typename?: 'ProductAggregatorAvg'
+  price?: Maybe<Scalars['Float']>
+}
+
+export type ProductAggregatorMax = {
+  __typename?: 'ProductAggregatorMax'
+  price?: Maybe<Scalars['Float']>
+}
+
+export type ProductAggregatorMin = {
+  __typename?: 'ProductAggregatorMin'
+  price?: Maybe<Scalars['Float']>
+}
+
+export type ProductAggregatorSum = {
+  __typename?: 'ProductAggregatorSum'
+  price?: Maybe<Scalars['Float']>
 }
 
 export type ProductConnection = {
@@ -686,6 +919,12 @@ export type ProductConnection = {
   values?: Maybe<Array<Maybe<Product>>>
   groupBy?: Maybe<ProductGroupBy>
   aggregate?: Maybe<ProductAggregator>
+}
+
+export type ProductConnectionConfiguration = {
+  __typename?: 'ProductConnectionConfiguration'
+  key?: Maybe<Scalars['ID']>
+  connection?: Maybe<ProductConnection>
 }
 
 export type ProductConnectionCreated_At = {
@@ -706,9 +945,21 @@ export type ProductConnectionId = {
   connection?: Maybe<ProductConnection>
 }
 
+export type ProductConnectionPrice = {
+  __typename?: 'ProductConnectionPrice'
+  key?: Maybe<Scalars['Float']>
+  connection?: Maybe<ProductConnection>
+}
+
 export type ProductConnectionPublished_At = {
   __typename?: 'ProductConnectionPublished_at'
   key?: Maybe<Scalars['DateTime']>
+  connection?: Maybe<ProductConnection>
+}
+
+export type ProductConnectionSlug = {
+  __typename?: 'ProductConnectionSlug'
+  key?: Maybe<Scalars['String']>
   connection?: Maybe<ProductConnection>
 }
 
@@ -731,6 +982,9 @@ export type ProductGroupBy = {
   updated_at?: Maybe<Array<Maybe<ProductConnectionUpdated_At>>>
   title?: Maybe<Array<Maybe<ProductConnectionTitle>>>
   description?: Maybe<Array<Maybe<ProductConnectionDescription>>>
+  price?: Maybe<Array<Maybe<ProductConnectionPrice>>>
+  slug?: Maybe<Array<Maybe<ProductConnectionSlug>>>
+  configuration?: Maybe<Array<Maybe<ProductConnectionConfiguration>>>
   published_at?: Maybe<Array<Maybe<ProductConnectionPublished_At>>>
 }
 
@@ -738,6 +992,11 @@ export type ProductInput = {
   title?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
   images?: Maybe<Array<Maybe<Scalars['ID']>>>
+  relate_products?: Maybe<Array<Maybe<Scalars['ID']>>>
+  price?: Maybe<Scalars['Float']>
+  slug?: Maybe<Scalars['String']>
+  configuration?: Maybe<ComponentProductConfigurationInput>
+  collections?: Maybe<Array<Maybe<Scalars['ID']>>>
   published_at?: Maybe<Scalars['DateTime']>
   created_by?: Maybe<Scalars['ID']>
   updated_by?: Maybe<Scalars['ID']>
@@ -750,9 +1009,13 @@ export enum PublicationState {
 
 export type Query = {
   __typename?: 'Query'
+  collection?: Maybe<Collection>
+  collections?: Maybe<Array<Maybe<Collection>>>
+  collectionsConnection?: Maybe<CollectionConnection>
   customer?: Maybe<Customer>
   customers?: Maybe<Array<Maybe<Customer>>>
   customersConnection?: Maybe<CustomerConnection>
+  global?: Maybe<Global>
   note?: Maybe<Note>
   notes?: Maybe<Array<Maybe<Note>>>
   notesConnection?: Maybe<NoteConnection>
@@ -777,6 +1040,26 @@ export type Query = {
   me?: Maybe<UsersPermissionsMe>
 }
 
+export type QueryCollectionArgs = {
+  id: Scalars['ID']
+  publicationState?: Maybe<PublicationState>
+}
+
+export type QueryCollectionsArgs = {
+  sort?: Maybe<Scalars['String']>
+  limit?: Maybe<Scalars['Int']>
+  start?: Maybe<Scalars['Int']>
+  where?: Maybe<Scalars['JSON']>
+  publicationState?: Maybe<PublicationState>
+}
+
+export type QueryCollectionsConnectionArgs = {
+  sort?: Maybe<Scalars['String']>
+  limit?: Maybe<Scalars['Int']>
+  start?: Maybe<Scalars['Int']>
+  where?: Maybe<Scalars['JSON']>
+}
+
 export type QueryCustomerArgs = {
   id: Scalars['ID']
   publicationState?: Maybe<PublicationState>
@@ -795,6 +1078,10 @@ export type QueryCustomersConnectionArgs = {
   limit?: Maybe<Scalars['Int']>
   start?: Maybe<Scalars['Int']>
   where?: Maybe<Scalars['JSON']>
+}
+
+export type QueryGlobalArgs = {
+  publicationState?: Maybe<PublicationState>
 }
 
 export type QueryNoteArgs = {
@@ -1444,6 +1731,15 @@ export type UsersPermissionsUserGroupBy = {
   role?: Maybe<Array<Maybe<UsersPermissionsUserConnectionRole>>>
 }
 
+export type CreateCollectionInput = {
+  data?: Maybe<CollectionInput>
+}
+
+export type CreateCollectionPayload = {
+  __typename?: 'createCollectionPayload'
+  collection?: Maybe<Collection>
+}
+
 export type CreateCustomerInput = {
   data?: Maybe<CustomerInput>
 }
@@ -1507,6 +1803,15 @@ export type CreateUserPayload = {
   user?: Maybe<UsersPermissionsUser>
 }
 
+export type DeleteCollectionInput = {
+  where?: Maybe<InputId>
+}
+
+export type DeleteCollectionPayload = {
+  __typename?: 'deleteCollectionPayload'
+  collection?: Maybe<Collection>
+}
+
 export type DeleteCustomerInput = {
   where?: Maybe<InputId>
 }
@@ -1523,6 +1828,11 @@ export type DeleteFileInput = {
 export type DeleteFilePayload = {
   __typename?: 'deleteFilePayload'
   file?: Maybe<UploadFile>
+}
+
+export type DeleteGlobalPayload = {
+  __typename?: 'deleteGlobalPayload'
+  global?: Maybe<Global>
 }
 
 export type DeleteNoteInput = {
@@ -1579,6 +1889,33 @@ export type DeleteUserPayload = {
   user?: Maybe<UsersPermissionsUser>
 }
 
+export type EditCollectionInput = {
+  title?: Maybe<Scalars['String']>
+  products?: Maybe<Array<Maybe<Scalars['ID']>>>
+  slug?: Maybe<Scalars['String']>
+  published_at?: Maybe<Scalars['DateTime']>
+  created_by?: Maybe<Scalars['ID']>
+  updated_by?: Maybe<Scalars['ID']>
+}
+
+export type EditComponentProductConfigurationInput = {
+  id?: Maybe<Scalars['ID']>
+  option?: Maybe<Array<Maybe<EditComponentProductOptionInput>>>
+}
+
+export type EditComponentProductOptionInput = {
+  id?: Maybe<Scalars['ID']>
+  label?: Maybe<Scalars['String']>
+  variant?: Maybe<Array<Maybe<EditComponentProductVariantInput>>>
+}
+
+export type EditComponentProductVariantInput = {
+  id?: Maybe<Scalars['ID']>
+  title?: Maybe<Scalars['String']>
+  price?: Maybe<Scalars['Float']>
+  swatch_image?: Maybe<Scalars['ID']>
+}
+
 export type EditCustomerInput = {
   first_name?: Maybe<Scalars['String']>
   last_name?: Maybe<Scalars['String']>
@@ -1606,6 +1943,13 @@ export type EditFileInput = {
   provider?: Maybe<Scalars['String']>
   provider_metadata?: Maybe<Scalars['JSON']>
   related?: Maybe<Array<Maybe<Scalars['ID']>>>
+  created_by?: Maybe<Scalars['ID']>
+  updated_by?: Maybe<Scalars['ID']>
+}
+
+export type EditGlobalInput = {
+  Currency?: Maybe<Enum_Global_Currency>
+  published_at?: Maybe<Scalars['DateTime']>
   created_by?: Maybe<Scalars['ID']>
   updated_by?: Maybe<Scalars['ID']>
 }
@@ -1639,6 +1983,11 @@ export type EditProductInput = {
   title?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
   images?: Maybe<Array<Maybe<Scalars['ID']>>>
+  relate_products?: Maybe<Array<Maybe<Scalars['ID']>>>
+  price?: Maybe<Scalars['Float']>
+  slug?: Maybe<Scalars['String']>
+  configuration?: Maybe<EditComponentProductConfigurationInput>
+  collections?: Maybe<Array<Maybe<Scalars['ID']>>>
   published_at?: Maybe<Scalars['DateTime']>
   created_by?: Maybe<Scalars['ID']>
   updated_by?: Maybe<Scalars['ID']>
@@ -1676,6 +2025,16 @@ export type EditUserInput = {
   updated_by?: Maybe<Scalars['ID']>
 }
 
+export type UpdateCollectionInput = {
+  where?: Maybe<InputId>
+  data?: Maybe<EditCollectionInput>
+}
+
+export type UpdateCollectionPayload = {
+  __typename?: 'updateCollectionPayload'
+  collection?: Maybe<Collection>
+}
+
 export type UpdateCustomerInput = {
   where?: Maybe<InputId>
   data?: Maybe<EditCustomerInput>
@@ -1684,6 +2043,15 @@ export type UpdateCustomerInput = {
 export type UpdateCustomerPayload = {
   __typename?: 'updateCustomerPayload'
   customer?: Maybe<Customer>
+}
+
+export type UpdateGlobalInput = {
+  data?: Maybe<EditGlobalInput>
+}
+
+export type UpdateGlobalPayload = {
+  __typename?: 'updateGlobalPayload'
+  global?: Maybe<Global>
 }
 
 export type UpdateNoteInput = {
@@ -1752,12 +2120,13 @@ export type GetAllProductsQueryVariables = Exact<{
 }>
 
 export type GetAllProductsQuery = { __typename?: 'Query' } & {
+  global?: Maybe<{ __typename?: 'Global' } & Pick<Global, 'Currency'>>
   products?: Maybe<
     Array<
       Maybe<
         { __typename?: 'Product' } & Pick<
           Product,
-          'id' | 'title' | 'description'
+          'id' | 'title' | 'description' | 'price' | 'slug'
         > & {
             images?: Maybe<
               Array<
@@ -1776,6 +2145,57 @@ export type GetAllProductsQuery = { __typename?: 'Query' } & {
               >
             >
           }
+      >
+    >
+  >
+}
+
+export type GetProductQueryVariables = Exact<{
+  slug?: Maybe<Scalars['String']>
+}>
+
+export type GetProductQuery = { __typename?: 'Query' } & {
+  global?: Maybe<{ __typename?: 'Global' } & Pick<Global, 'Currency'>>
+  products?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'Product' } & Pick<
+          Product,
+          'id' | 'title' | 'description' | 'price' | 'slug'
+        > & {
+            images?: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'UploadFile' } & Pick<
+                    UploadFile,
+                    | 'width'
+                    | 'height'
+                    | 'url'
+                    | 'previewUrl'
+                    | 'formats'
+                    | 'alternativeText'
+                    | 'caption'
+                  >
+                >
+              >
+            >
+          }
+      >
+    >
+  >
+}
+
+export type GetSiteInfoQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetSiteInfoQuery = { __typename?: 'Query' } & {
+  global?: Maybe<{ __typename?: 'Global' } & Pick<Global, 'Currency'>>
+  collections?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'Collection' } & Pick<
+          Collection,
+          'id' | 'title' | 'slug'
+        >
       >
     >
   >

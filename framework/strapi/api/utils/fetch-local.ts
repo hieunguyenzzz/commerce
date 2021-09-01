@@ -7,7 +7,7 @@ const fetchGraphqlApi: (getConfig: () => StrapiConfig) => GraphQLFetcher =
   (getConfig) =>
   async (query: string, { variables, preview } = {}, fetchOptions) => {
     const config = getConfig()
-    const res = await fetch(config.commerceUrl, {
+    const res = await fetch(config.commerceUrl+'/graphql', {
       ...fetchOptions,
       method: 'POST',
       headers: {

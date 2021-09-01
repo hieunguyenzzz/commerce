@@ -1,4 +1,3 @@
-
 import { OperationContext, OperationOptions } from '@commerce/api/operations'
 import { GetAllProductsOperation } from '@commerce/types/product'
 import { normalizeProduct } from '@framework/utils/normalize'
@@ -6,16 +5,22 @@ import type { Provider, StrapiConfig } from '..'
 import {
   GetAllProductsQuery,
   GetAllProductsQueryVariables,
-  Product
+  Global,
+  Product,
 } from '../../schema'
 
 const getAllProductsQuery = /* GraphQL */ `
-  query getAllProducts($first: Int = 0 $start: Int=0){
-    products(start:$start limit:$first){ 
+  query getAllProducts($first: Int = 0, $start: Int = 0) {
+    global {
+      Currency
+    }
+    products(start: $start, limit: $first) {
       id
       title
       description
-      images{
+      price
+      slug
+      images {
         width
         height
         url
@@ -26,7 +31,6 @@ const getAllProductsQuery = /* GraphQL */ `
       }
     }
   }
-
 `
 
 export default function getAllProductsOperation({
@@ -73,7 +77,12 @@ export default function getAllProductsOperation({
       }
     )
     return {
-      products: data?.products?.filter(Boolean).map(product=>normalizeProduct(product as Product))||[],
+      products:
+        data?.products
+          ?.filter(Boolean)
+          .map((product) =>
+            normalizeProduct(product as Product, data?.global as Global)
+          ) || [],
     }
   }
 

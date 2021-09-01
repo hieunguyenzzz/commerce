@@ -1,6 +1,6 @@
 import { FetcherError } from '@commerce/utils/errors'
 import type { Fetcher } from '@commerce/utils/types'
-import { STRAPI_URL } from './const'
+import { NEXT_PUBLIC_STRAPI_URL } from './const'
 
 async function getText(res: Response) {
   try {
@@ -19,18 +19,23 @@ async function getError(res: Response) {
 }
 
 const fetcher: Fetcher = async ({
-  url=STRAPI_URL,
-  method = 'GET',
+  url = NEXT_PUBLIC_STRAPI_URL + '/graphql',
+  method = 'POST',
   variables,
-  body: bodyObj,
+  query,
 }) => {
-  console.log('fetcher')
-  const hasBody = Boolean(variables || bodyObj)
-  const body = hasBody
-    ? JSON.stringify(variables ? { variables } : bodyObj)
-    : undefined
-  const headers = hasBody ? { 'Content-Type': 'application/json' } : undefined
-  const res = await fetch(url!, { method, body, headers })
+  console.log('fetcher', url)
+  const { locale, ...vars } = variables ?? {}
+  const res = await fetch(url, {
+    method,
+    body: JSON.stringify({ query, variables: vars }),
+    headers: {
+      'Content-Type': 'application/json',
+      ...(locale && {
+        'Accept-Language': locale,
+      }),
+    },
+  })
 
   if (res.ok) {
     const { data } = await res.json()

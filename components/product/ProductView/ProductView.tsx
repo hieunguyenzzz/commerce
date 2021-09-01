@@ -1,15 +1,15 @@
-import cn from 'classnames'
-import Image from 'next/image'
-import { NextSeo } from 'next-seo'
-import s from './ProductView.module.css'
-import { FC } from 'react'
 import type { Product } from '@commerce/types/product'
-import usePrice from '@framework/product/use-price'
-import { WishlistButton } from '@components/wishlist'
-import { ProductSlider, ProductCard } from '@components/product'
+import { ProductCard, ProductSlider } from '@components/product'
 import { Container, Text } from '@components/ui'
+import { WishlistButton } from '@components/wishlist'
+import usePrice from '@framework/product/use-price'
+import cn from 'classnames'
+import { NextSeo } from 'next-seo'
+import Image from 'next/image'
+import { FC } from 'react'
 import ProductSidebar from '../ProductSidebar'
 import ProductTag from '../ProductTag'
+import s from './ProductView.module.css'
 interface ProductViewProps {
   product: Product
   relatedProducts: Product[]

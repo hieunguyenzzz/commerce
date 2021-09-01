@@ -5,6 +5,108 @@ type AdminUser {
   lastname: String!
 }
 
+type Collection {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String
+  slug: String
+  published_at: DateTime
+  products(sort: String, limit: Int, start: Int, where: JSON): [Product]
+}
+
+type CollectionAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type CollectionConnection {
+  values: [Collection]
+  groupBy: CollectionGroupBy
+  aggregate: CollectionAggregator
+}
+
+type CollectionConnectionCreated_at {
+  key: DateTime
+  connection: CollectionConnection
+}
+
+type CollectionConnectionId {
+  key: ID
+  connection: CollectionConnection
+}
+
+type CollectionConnectionPublished_at {
+  key: DateTime
+  connection: CollectionConnection
+}
+
+type CollectionConnectionSlug {
+  key: String
+  connection: CollectionConnection
+}
+
+type CollectionConnectionTitle {
+  key: String
+  connection: CollectionConnection
+}
+
+type CollectionConnectionUpdated_at {
+  key: DateTime
+  connection: CollectionConnection
+}
+
+type CollectionGroupBy {
+  id: [CollectionConnectionId]
+  created_at: [CollectionConnectionCreated_at]
+  updated_at: [CollectionConnectionUpdated_at]
+  title: [CollectionConnectionTitle]
+  slug: [CollectionConnectionSlug]
+  published_at: [CollectionConnectionPublished_at]
+}
+
+input CollectionInput {
+  title: String
+  products: [ID]
+  slug: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+type ComponentProductConfiguration {
+  id: ID!
+  option: [ComponentProductOption]
+}
+
+input ComponentProductConfigurationInput {
+  option: [ComponentProductOptionInput]
+}
+
+type ComponentProductOption {
+  id: ID!
+  label: String
+  variant: [ComponentProductVariant]
+}
+
+input ComponentProductOptionInput {
+  label: String
+  variant: [ComponentProductVariantInput]
+}
+
+type ComponentProductVariant {
+  id: ID!
+  title: String
+  price: Float
+  swatch_image: UploadFile
+}
+
+input ComponentProductVariantInput {
+  title: String
+  price: Float
+  swatch_image: ID
+}
+
 type Customer {
   id: ID!
   created_at: DateTime!
@@ -100,6 +202,11 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+enum ENUM_GLOBAL_CURRENCY {
+  USD
+  VND
+}
+
 input FileInfoInput {
   name: String
   alternativeText: String
@@ -122,6 +229,21 @@ input FileInput {
   provider: String!
   provider_metadata: JSON
   related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+type Global {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Currency: ENUM_GLOBAL_CURRENCY
+  published_at: DateTime
+}
+
+input GlobalInput {
+  Currency: ENUM_GLOBAL_CURRENCY
+  published_at: DateTime
   created_by: ID
   updated_by: ID
 }
@@ -160,6 +282,19 @@ union Morph =
   | UsersPermissionsMeRole
   | UsersPermissionsLoginPayload
   | UserPermissionsPasswordPayload
+  | Collection
+  | CollectionConnection
+  | CollectionAggregator
+  | CollectionGroupBy
+  | CollectionConnectionId
+  | CollectionConnectionCreated_at
+  | CollectionConnectionUpdated_at
+  | CollectionConnectionTitle
+  | CollectionConnectionSlug
+  | CollectionConnectionPublished_at
+  | createCollectionPayload
+  | updateCollectionPayload
+  | deleteCollectionPayload
   | Customer
   | CustomerConnection
   | CustomerAggregator
@@ -175,6 +310,9 @@ union Morph =
   | createCustomerPayload
   | updateCustomerPayload
   | deleteCustomerPayload
+  | Global
+  | updateGlobalPayload
+  | deleteGlobalPayload
   | Note
   | NoteConnection
   | NoteAggregator
@@ -204,12 +342,19 @@ union Morph =
   | Product
   | ProductConnection
   | ProductAggregator
+  | ProductAggregatorSum
+  | ProductAggregatorAvg
+  | ProductAggregatorMin
+  | ProductAggregatorMax
   | ProductGroupBy
   | ProductConnectionId
   | ProductConnectionCreated_at
   | ProductConnectionUpdated_at
   | ProductConnectionTitle
   | ProductConnectionDescription
+  | ProductConnectionPrice
+  | ProductConnectionSlug
+  | ProductConnectionConfiguration
   | ProductConnectionPublished_at
   | createProductPayload
   | updateProductPayload
@@ -281,11 +426,19 @@ union Morph =
   | createUserPayload
   | updateUserPayload
   | deleteUserPayload
+  | ComponentProductConfiguration
+  | ComponentProductOption
+  | ComponentProductVariant
 
 type Mutation {
+  createCollection(input: createCollectionInput): createCollectionPayload
+  updateCollection(input: updateCollectionInput): updateCollectionPayload
+  deleteCollection(input: deleteCollectionInput): deleteCollectionPayload
   createCustomer(input: createCustomerInput): createCustomerPayload
   updateCustomer(input: updateCustomerInput): updateCustomerPayload
   deleteCustomer(input: deleteCustomerInput): deleteCustomerPayload
+  updateGlobal(input: updateGlobalInput): updateGlobalPayload
+  deleteGlobal: deleteGlobalPayload
   createNote(input: createNoteInput): createNotePayload
   updateNote(input: updateNoteInput): updateNotePayload
   deleteNote(input: deleteNoteInput): deleteNotePayload
@@ -504,19 +657,49 @@ type Product {
   updated_at: DateTime!
   title: String
   description: String
+  price: Float
+  slug: String
+  configuration: ComponentProductConfiguration
   published_at: DateTime
   images(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  relate_products(sort: String, limit: Int, start: Int, where: JSON): [Product]
+  collections(sort: String, limit: Int, start: Int, where: JSON): [Collection]
 }
 
 type ProductAggregator {
   count: Int
   totalCount: Int
+  sum: ProductAggregatorSum
+  avg: ProductAggregatorAvg
+  min: ProductAggregatorMin
+  max: ProductAggregatorMax
+}
+
+type ProductAggregatorAvg {
+  price: Float
+}
+
+type ProductAggregatorMax {
+  price: Float
+}
+
+type ProductAggregatorMin {
+  price: Float
+}
+
+type ProductAggregatorSum {
+  price: Float
 }
 
 type ProductConnection {
   values: [Product]
   groupBy: ProductGroupBy
   aggregate: ProductAggregator
+}
+
+type ProductConnectionConfiguration {
+  key: ID
+  connection: ProductConnection
 }
 
 type ProductConnectionCreated_at {
@@ -534,8 +717,18 @@ type ProductConnectionId {
   connection: ProductConnection
 }
 
+type ProductConnectionPrice {
+  key: Float
+  connection: ProductConnection
+}
+
 type ProductConnectionPublished_at {
   key: DateTime
+  connection: ProductConnection
+}
+
+type ProductConnectionSlug {
+  key: String
   connection: ProductConnection
 }
 
@@ -555,6 +748,9 @@ type ProductGroupBy {
   updated_at: [ProductConnectionUpdated_at]
   title: [ProductConnectionTitle]
   description: [ProductConnectionDescription]
+  price: [ProductConnectionPrice]
+  slug: [ProductConnectionSlug]
+  configuration: [ProductConnectionConfiguration]
   published_at: [ProductConnectionPublished_at]
 }
 
@@ -562,6 +758,11 @@ input ProductInput {
   title: String
   description: String
   images: [ID]
+  relate_products: [ID]
+  price: Float
+  slug: String
+  configuration: ComponentProductConfigurationInput
+  collections: [ID]
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -573,6 +774,20 @@ enum PublicationState {
 }
 
 type Query {
+  collection(id: ID!, publicationState: PublicationState): Collection
+  collections(
+    sort: String
+    limit: Int
+    start: Int
+    where: JSON
+    publicationState: PublicationState
+  ): [Collection]
+  collectionsConnection(
+    sort: String
+    limit: Int
+    start: Int
+    where: JSON
+  ): CollectionConnection
   customer(id: ID!, publicationState: PublicationState): Customer
   customers(
     sort: String
@@ -587,6 +802,7 @@ type Query {
     start: Int
     where: JSON
   ): CustomerConnection
+  global(publicationState: PublicationState): Global
   note(id: ID!, publicationState: PublicationState): Note
   notes(
     sort: String
@@ -1135,6 +1351,14 @@ type UsersPermissionsUserGroupBy {
   role: [UsersPermissionsUserConnectionRole]
 }
 
+input createCollectionInput {
+  data: CollectionInput
+}
+
+type createCollectionPayload {
+  collection: Collection
+}
+
 input createCustomerInput {
   data: CustomerInput
 }
@@ -1191,6 +1415,14 @@ type createUserPayload {
   user: UsersPermissionsUser
 }
 
+input deleteCollectionInput {
+  where: InputID
+}
+
+type deleteCollectionPayload {
+  collection: Collection
+}
+
 input deleteCustomerInput {
   where: InputID
 }
@@ -1205,6 +1437,10 @@ input deleteFileInput {
 
 type deleteFilePayload {
   file: UploadFile
+}
+
+type deleteGlobalPayload {
+  global: Global
 }
 
 input deleteNoteInput {
@@ -1255,6 +1491,33 @@ type deleteUserPayload {
   user: UsersPermissionsUser
 }
 
+input editCollectionInput {
+  title: String
+  products: [ID]
+  slug: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editComponentProductConfigurationInput {
+  id: ID
+  option: [editComponentProductOptionInput]
+}
+
+input editComponentProductOptionInput {
+  id: ID
+  label: String
+  variant: [editComponentProductVariantInput]
+}
+
+input editComponentProductVariantInput {
+  id: ID
+  title: String
+  price: Float
+  swatch_image: ID
+}
+
 input editCustomerInput {
   first_name: String
   last_name: String
@@ -1282,6 +1545,13 @@ input editFileInput {
   provider: String
   provider_metadata: JSON
   related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editGlobalInput {
+  Currency: ENUM_GLOBAL_CURRENCY
+  published_at: DateTime
   created_by: ID
   updated_by: ID
 }
@@ -1315,6 +1585,11 @@ input editProductInput {
   title: String
   description: String
   images: [ID]
+  relate_products: [ID]
+  price: Float
+  slug: String
+  configuration: editComponentProductConfigurationInput
+  collections: [ID]
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -1352,6 +1627,15 @@ input editUserInput {
   updated_by: ID
 }
 
+input updateCollectionInput {
+  where: InputID
+  data: editCollectionInput
+}
+
+type updateCollectionPayload {
+  collection: Collection
+}
+
 input updateCustomerInput {
   where: InputID
   data: editCustomerInput
@@ -1359,6 +1643,14 @@ input updateCustomerInput {
 
 type updateCustomerPayload {
   customer: Customer
+}
+
+input updateGlobalInput {
+  data: editGlobalInput
+}
+
+type updateGlobalPayload {
+  global: Global
 }
 
 input updateNoteInput {

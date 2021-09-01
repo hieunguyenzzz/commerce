@@ -1,6 +1,6 @@
 import type { Product } from '@commerce/types/product'
-export type SelectedOptions = Record<string, string | null>
 import { Dispatch, SetStateAction } from 'react'
+export type SelectedOptions = Record<string, string | null>
 
 export function getProductVariant(product: Product, opts: SelectedOptions) {
   const variant = product.variants.find((variant) => {
@@ -23,10 +23,11 @@ export function selectDefaultOptionFromProduct(
   updater: Dispatch<SetStateAction<SelectedOptions>>
 ) {
   // Selects the default option
-  product.variants[0].options?.forEach((v) => {
-    updater((choices) => ({
-      ...choices,
-      [v.displayName.toLowerCase()]: v.values[0].label.toLowerCase(),
-    }))
-  })
+  product.variants?.[0] &&
+    product.variants?.[0].options?.forEach((v) => {
+      updater((choices) => ({
+        ...choices,
+        [v.displayName.toLowerCase()]: v.values[0].label.toLowerCase(),
+      }))
+    })
 }
