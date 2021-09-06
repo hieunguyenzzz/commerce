@@ -4,7 +4,7 @@ import { SWRHook } from '@commerce/utils/types'
 import { normalizeProduct } from '@framework/utils/normalize'
 import { Global, Product } from '../schema'
 const getAllSearchQuery = /* GraphQL */ `
-  query getSiteInfo {
+  query getAllSearch {
     global {
       Currency
     }
@@ -77,7 +77,7 @@ export const handler: SWRHook<SearchProductsHook> = {
     } else {
       products = data?.product
     }
-    console.log({ input, options, fetch, data, products })
+    // console.log({ input, options, fetch, data, products })
 
     return {
       products:

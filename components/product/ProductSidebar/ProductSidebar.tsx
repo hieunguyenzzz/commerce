@@ -1,14 +1,14 @@
-import s from './ProductSidebar.module.css'
+import type { Product } from '@commerce/types/product'
+import { ProductOptions } from '@components/product'
+import { Button, Collapse, Rating, Text, useUI } from '@components/ui'
 import { useAddItem } from '@framework/cart'
 import { FC, useEffect, useState } from 'react'
-import { ProductOptions } from '@components/product'
-import type { Product } from '@commerce/types/product'
-import { Button, Text, Rating, Collapse, useUI } from '@components/ui'
 import {
   getProductVariant,
   selectDefaultOptionFromProduct,
-  SelectedOptions,
+  SelectedOptions
 } from '../helpers'
+import s from './ProductSidebar.module.css'
 
 interface ProductSidebarProps {
   product: Product
@@ -56,7 +56,7 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }) => {
         <div className="text-accent-6 pr-1 font-medium text-sm">36 reviews</div>
       </div>
       <div>
-        {process.env.COMMERCE_CART_ENABLED && (
+        {true && (
           <Button
             aria-label="Add to Cart"
             type="button"

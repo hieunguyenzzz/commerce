@@ -405,7 +405,7 @@ export type Morph =
   | ProductConnectionDescription
   | ProductConnectionPrice
   | ProductConnectionSlug
-  | ProductConnectionConfiguration
+  | ProductConnectionVariants
   | ProductConnectionPublished_At
   | CreateProductPayload
   | UpdateProductPayload
@@ -856,7 +856,7 @@ export type Product = {
   description?: Maybe<Scalars['String']>
   price?: Maybe<Scalars['Float']>
   slug?: Maybe<Scalars['String']>
-  configuration?: Maybe<ComponentProductConfiguration>
+  variants?: Maybe<ComponentProductConfiguration>
   published_at?: Maybe<Scalars['DateTime']>
   images?: Maybe<Array<Maybe<UploadFile>>>
   relate_products?: Maybe<Array<Maybe<Product>>>
@@ -921,12 +921,6 @@ export type ProductConnection = {
   aggregate?: Maybe<ProductAggregator>
 }
 
-export type ProductConnectionConfiguration = {
-  __typename?: 'ProductConnectionConfiguration'
-  key?: Maybe<Scalars['ID']>
-  connection?: Maybe<ProductConnection>
-}
-
 export type ProductConnectionCreated_At = {
   __typename?: 'ProductConnectionCreated_at'
   key?: Maybe<Scalars['DateTime']>
@@ -975,6 +969,12 @@ export type ProductConnectionUpdated_At = {
   connection?: Maybe<ProductConnection>
 }
 
+export type ProductConnectionVariants = {
+  __typename?: 'ProductConnectionVariants'
+  key?: Maybe<Scalars['ID']>
+  connection?: Maybe<ProductConnection>
+}
+
 export type ProductGroupBy = {
   __typename?: 'ProductGroupBy'
   id?: Maybe<Array<Maybe<ProductConnectionId>>>
@@ -984,7 +984,7 @@ export type ProductGroupBy = {
   description?: Maybe<Array<Maybe<ProductConnectionDescription>>>
   price?: Maybe<Array<Maybe<ProductConnectionPrice>>>
   slug?: Maybe<Array<Maybe<ProductConnectionSlug>>>
-  configuration?: Maybe<Array<Maybe<ProductConnectionConfiguration>>>
+  variants?: Maybe<Array<Maybe<ProductConnectionVariants>>>
   published_at?: Maybe<Array<Maybe<ProductConnectionPublished_At>>>
 }
 
@@ -995,7 +995,7 @@ export type ProductInput = {
   relate_products?: Maybe<Array<Maybe<Scalars['ID']>>>
   price?: Maybe<Scalars['Float']>
   slug?: Maybe<Scalars['String']>
-  configuration?: Maybe<ComponentProductConfigurationInput>
+  variants?: Maybe<ComponentProductConfigurationInput>
   collections?: Maybe<Array<Maybe<Scalars['ID']>>>
   published_at?: Maybe<Scalars['DateTime']>
   created_by?: Maybe<Scalars['ID']>
@@ -1986,7 +1986,7 @@ export type EditProductInput = {
   relate_products?: Maybe<Array<Maybe<Scalars['ID']>>>
   price?: Maybe<Scalars['Float']>
   slug?: Maybe<Scalars['String']>
-  configuration?: Maybe<EditComponentProductConfigurationInput>
+  variants?: Maybe<EditComponentProductConfigurationInput>
   collections?: Maybe<Array<Maybe<Scalars['ID']>>>
   published_at?: Maybe<Scalars['DateTime']>
   created_by?: Maybe<Scalars['ID']>
@@ -2196,6 +2196,77 @@ export type GetSiteInfoQuery = { __typename?: 'Query' } & {
           Collection,
           'id' | 'title' | 'slug'
         >
+      >
+    >
+  >
+}
+
+export type GetAllSearchQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetAllSearchQuery = { __typename?: 'Query' } & {
+  global?: Maybe<{ __typename?: 'Global' } & Pick<Global, 'Currency'>>
+  products?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'Product' } & Pick<
+          Product,
+          'id' | 'title' | 'description' | 'price' | 'slug'
+        > & {
+            images?: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'UploadFile' } & Pick<
+                    UploadFile,
+                    | 'width'
+                    | 'height'
+                    | 'url'
+                    | 'previewUrl'
+                    | 'formats'
+                    | 'alternativeText'
+                    | 'caption'
+                  >
+                >
+              >
+            >
+          }
+      >
+    >
+  >
+  collections?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'Collection' } & Pick<
+          Collection,
+          'id' | 'title' | 'slug'
+        > & {
+            products?: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'Product' } & Pick<
+                    Product,
+                    'id' | 'title' | 'description' | 'price' | 'slug'
+                  > & {
+                      images?: Maybe<
+                        Array<
+                          Maybe<
+                            { __typename?: 'UploadFile' } & Pick<
+                              UploadFile,
+                              | 'width'
+                              | 'height'
+                              | 'url'
+                              | 'previewUrl'
+                              | 'formats'
+                              | 'alternativeText'
+                              | 'caption'
+                            >
+                          >
+                        >
+                      >
+                    }
+                >
+              >
+            >
+          }
       >
     >
   >

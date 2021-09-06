@@ -1,11 +1,11 @@
-import type { GetStaticPropsContext } from 'next'
+import { CartItem } from '@components/cart'
+import { Layout } from '@components/common'
+import { Bag, Check, CreditCard, Cross, MapPin } from '@components/icons'
+import { Button, Text } from '@components/ui'
 import useCart from '@framework/cart/use-cart'
 import usePrice from '@framework/product/use-price'
 import commerce from '@lib/api/commerce'
-import { Layout } from '@components/common'
-import { Button, Text } from '@components/ui'
-import { Bag, Cross, Check, MapPin, CreditCard } from '@components/icons'
-import { CartItem } from '@components/cart'
+import type { GetStaticPropsContext } from 'next'
 
 export async function getStaticProps({
   preview,
@@ -162,7 +162,7 @@ export default function Cart() {
                   Continue Shopping
                 </Button>
               ) : (
-                <Button href="/checkout" Component="a" width="100%">
+                <Button href="/api/checkout" Component="a" width="100%">
                   Proceed to Checkout
                 </Button>
               )}

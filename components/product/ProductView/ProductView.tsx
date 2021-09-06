@@ -21,7 +21,6 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
     baseAmount: product.price.retailPrice,
     currencyCode: product.price.currencyCode!,
   })
-
   return (
     <>
       <Container className="max-w-none w-full" clean>

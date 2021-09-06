@@ -354,7 +354,7 @@ union Morph =
   | ProductConnectionDescription
   | ProductConnectionPrice
   | ProductConnectionSlug
-  | ProductConnectionConfiguration
+  | ProductConnectionVariants
   | ProductConnectionPublished_at
   | createProductPayload
   | updateProductPayload
@@ -659,7 +659,7 @@ type Product {
   description: String
   price: Float
   slug: String
-  configuration: ComponentProductConfiguration
+  variants: ComponentProductConfiguration
   published_at: DateTime
   images(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   relate_products(sort: String, limit: Int, start: Int, where: JSON): [Product]
@@ -695,11 +695,6 @@ type ProductConnection {
   values: [Product]
   groupBy: ProductGroupBy
   aggregate: ProductAggregator
-}
-
-type ProductConnectionConfiguration {
-  key: ID
-  connection: ProductConnection
 }
 
 type ProductConnectionCreated_at {
@@ -742,6 +737,11 @@ type ProductConnectionUpdated_at {
   connection: ProductConnection
 }
 
+type ProductConnectionVariants {
+  key: ID
+  connection: ProductConnection
+}
+
 type ProductGroupBy {
   id: [ProductConnectionId]
   created_at: [ProductConnectionCreated_at]
@@ -750,7 +750,7 @@ type ProductGroupBy {
   description: [ProductConnectionDescription]
   price: [ProductConnectionPrice]
   slug: [ProductConnectionSlug]
-  configuration: [ProductConnectionConfiguration]
+  variants: [ProductConnectionVariants]
   published_at: [ProductConnectionPublished_at]
 }
 
@@ -761,7 +761,7 @@ input ProductInput {
   relate_products: [ID]
   price: Float
   slug: String
-  configuration: ComponentProductConfigurationInput
+  variants: ComponentProductConfigurationInput
   collections: [ID]
   published_at: DateTime
   created_by: ID
@@ -1588,7 +1588,7 @@ input editProductInput {
   relate_products: [ID]
   price: Float
   slug: String
-  configuration: editComponentProductConfigurationInput
+  variants: editComponentProductConfigurationInput
   collections: [ID]
   published_at: DateTime
   created_by: ID

@@ -24,6 +24,23 @@ const getProductQuery = /* GraphQL */ `
         alternativeText
         caption
       }
+      variants{
+        id
+        option{
+          id
+          label
+          variant{
+            id
+            title
+            price
+            swatch_image{
+               width
+              height
+              url
+            }
+          }
+        }
+      }
     }
   }
 `
@@ -52,12 +69,12 @@ export default function getProductOperation({
         }),
       }
     )
-    console.log(
-      'variables',
-      JSON.stringify({
-        product: data?.products?.[0],
-      })
-    )
+    // console.log(
+    //   'variables',
+    //   JSON.stringify({
+    //     product: data?.products?.[0],
+    //   })
+    // )
 
     return {
       product: normalizeProduct(data?.products?.[0] as Product, data?.global),
