@@ -30,7 +30,7 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({
 		  }
         },
       ],
-      cancel_url: 'http://localhost:3000/checkout/cancel',
+      cancel_url: 'http://localhost:3000/cart',
       success_url: 'http://localhost:3000/checkout/success',
       shipping_address_collection: { allowed_countries: ['VN', 'US'] },
     })

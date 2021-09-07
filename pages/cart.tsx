@@ -162,7 +162,7 @@ export default function Cart() {
                   Continue Shopping
                 </Button>
               ) : (
-                <Button href="/api/checkout" Component="a" width="100%">
+                <Button href="/checkout" Component="a" width="100%">
                   Proceed to Checkout
                 </Button>
               )}

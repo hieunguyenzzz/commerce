@@ -10,6 +10,7 @@ const isShopify = provider === 'shopify'
 const isSaleor = provider === 'saleor'
 const isSwell = provider === 'swell'
 const isVendure = provider === 'vendure'
+const isStrapi = provider === 'strapi'
 
 module.exports = withCommerceConfig({
   commerce,
@@ -19,7 +20,7 @@ module.exports = withCommerceConfig({
   },
   rewrites() {
     return [
-      (isBC || isShopify || isSwell || isVendure) && {
+      (isBC || isShopify || isSwell || isVendure || isStrapi) && {
         source: '/checkout',
         destination: '/api/checkout',
       },
