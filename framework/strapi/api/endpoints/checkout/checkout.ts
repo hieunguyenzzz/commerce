@@ -1,6 +1,6 @@
 import { Stripe } from 'stripe'
 import type { CheckoutEndpoint } from '.'
-import { STRIPE_SECRET_KEY } from '../../../const'
+import { NEXT_PUBLIC_HOST_URL, STRIPE_SECRET_KEY } from '../../../const'
 const stripe = new Stripe(STRIPE_SECRET_KEY)
 
 const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({
@@ -41,8 +41,8 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({
 		  }
         },
       ],
-      cancel_url: 'http://localhost:3000/cart',
-      success_url: 'http://localhost:3000/checkout/success',
+      cancel_url: NEXT_PUBLIC_HOST_URL+'/cart',
+      success_url: NEXT_PUBLIC_HOST_URL+'/checkout/success',
       shipping_address_collection: { allowed_countries: ['VN', 'US'] },
     })
     console.log(session)
