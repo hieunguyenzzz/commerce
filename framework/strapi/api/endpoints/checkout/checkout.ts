@@ -20,12 +20,23 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({
       line_items: [
         {
 			quantity:1,
-          price_data:{
+          	price_data:{
 			currency: 'USD',
-			unit_amount:200,
+			unit_amount:160,
 			product_data:{
-				name:'Lua',
-				description:'description'
+				name:'T-Shirt',
+				images:["https://cdn11.bigcommerce.com/s-qfzerv205w/products/117/images/534/Men-TShirt-Black-Front__70046.1603748348.220.290.png?c=1"]
+			}
+		  }
+        },
+		{
+			quantity:1,
+          	price_data:{
+			currency: 'USD',
+			unit_amount:249,
+			product_data:{
+				name:'Lightweight Jacket',
+				images:["https://cdn11.bigcommerce.com/s-qfzerv205w/products/116/images/512/Men-Jacket-Front-Black__15466.1603283963.220.290.png?c=1"]
 			}
 		  }
         },
