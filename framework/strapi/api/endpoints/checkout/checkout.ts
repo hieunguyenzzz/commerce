@@ -1,7 +1,11 @@
 import { Stripe } from 'stripe'
 import type { CheckoutEndpoint } from '.'
 import { NEXT_PUBLIC_HOST_URL, STRIPE_SECRET_KEY } from '../../../const'
-const stripe = new Stripe(STRIPE_SECRET_KEY)
+
+/* tslint:disable-next-line */
+const stripe = new Stripe(STRIPE_SECRET_KEY||'',{
+
+} as Stripe.StripeConfig) 
 
 const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({
   req,
