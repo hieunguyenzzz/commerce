@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { NEXT_PUBLIC_STRAPI_URL } from '@framework/const'
 import { UpdateQuoteItemMutation } from '@framework/schema'
 import { Cart } from '@framework/types/cart'
@@ -111,12 +112,22 @@ const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
   let result: { data?: any } = {}
   const { cookies } = req
   const cartId = cookies[config.cartCookie]
+=======
+import type { CartEndpoint } from '.'
+
+const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
+  res,
+  body: { cartId, itemId, item },
+  config,
+}) => {
+>>>>>>> 1f5c670e9483a0337d9868cd78aefdd8b4861edd
   if (!cartId || !itemId || !item) {
     return res.status(400).json({
       data: null,
       errors: [{ message: 'Invalid request' }],
     })
   }
+<<<<<<< HEAD
   if (cartId) {
     try {
       console.log({item,itemId})
@@ -133,6 +144,25 @@ const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
     }
   }
   res.status(200).json({ data:nomalizeCart(result.data?.updateQuoteItem?.quoteItem?.quote) })
+=======
+
+  // const { data } = await config.storeApiFetch(
+  //   `/v3/carts/${cartId}/items/${itemId}?include=line_items.physical_items.options`,
+  //   {
+  //     method: 'PUT',
+  //     body: JSON.stringify({
+  //       line_item: parseCartItem(item),
+  //     }),
+  //   }
+  // )
+
+  // // Update the cart cookie
+  // res.setHeader(
+  //   'Set-Cookie',
+  //   getCartCookie(config.cartCookie, cartId, config.cartCookieMaxAge)
+  // )
+  // res.status(200).json({ data: normalizeCart(data) })
+>>>>>>> 1f5c670e9483a0337d9868cd78aefdd8b4861edd
 }
 
 export default updateItem
