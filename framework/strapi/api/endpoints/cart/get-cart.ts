@@ -64,17 +64,18 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
   let result: { data?: any } = {}
   const { cookies } = req
   const cartId = cookies[config.cartCookie]
-  // if (cartId) {
-  //   try {
-  //     result = await config.fetchStore(
-  //       getQuoteQuery,{
-  //         id:cartId
-  //       }
-  //     )
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
+  if (cartId) {
+    try {
+      result = await config.fetchStore(
+        getQuoteQuery,{
+          id:cartId
+        }
+      )
+      console.log({result})
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   res.status(200).json({
     data:  {
