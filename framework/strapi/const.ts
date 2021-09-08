@@ -10,4 +10,16 @@ export const STRAPI_PASSWORD = process.env.STRAPI_PASSWORD
 
 export const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY 
 
+export const STRAPI_TOKEN = process.env.STRAPI_TOKEN 
+
+console.log({
+  STRAPI_URL,
+  NEXT_PUBLIC_STRAPI_URL,
+  NEXT_PUBLIC_HOST_URL,
+  STRAPI_USERNAME,
+  STRAPI_PASSWORD,
+  STRIPE_SECRET_KEY,
+  STRAPI_TOKEN,
+})
+
 
