@@ -94,6 +94,25 @@ input ComponentProductOptionInput {
   variant: [ComponentProductVariantInput]
 }
 
+type ComponentProductQuoteVariant {
+  id: ID!
+  sku: String
+  name: String
+  image: UploadFile
+  requiresShipping: Boolean
+  price: Float
+  listPrice: Float
+}
+
+input ComponentProductQuoteVariantInput {
+  sku: String
+  name: String
+  image: ID
+  requiresShipping: Boolean
+  price: Float
+  listPrice: Float
+}
+
 type ComponentProductVariant {
   id: ID!
   title: String
@@ -359,6 +378,50 @@ union Morph =
   | createProductPayload
   | updateProductPayload
   | deleteProductPayload
+  | QuoteItem
+  | QuoteItemConnection
+  | QuoteItemAggregator
+  | QuoteItemAggregatorSum
+  | QuoteItemAggregatorAvg
+  | QuoteItemAggregatorMin
+  | QuoteItemAggregatorMax
+  | QuoteItemGroupBy
+  | QuoteItemConnectionId
+  | QuoteItemConnectionCreated_at
+  | QuoteItemConnectionUpdated_at
+  | QuoteItemConnectionProductId
+  | QuoteItemConnectionQuantity
+  | QuoteItemConnectionName
+  | QuoteItemConnectionVariantId
+  | QuoteItemConnectionPath
+  | QuoteItemConnectionQuote
+  | QuoteItemConnectionVariant
+  | QuoteItemConnectionPublished_at
+  | createQuoteItemPayload
+  | updateQuoteItemPayload
+  | deleteQuoteItemPayload
+  | Quote
+  | QuoteConnection
+  | QuoteAggregator
+  | QuoteAggregatorSum
+  | QuoteAggregatorAvg
+  | QuoteAggregatorMin
+  | QuoteAggregatorMax
+  | QuoteGroupBy
+  | QuoteConnectionId
+  | QuoteConnectionCreated_at
+  | QuoteConnectionUpdated_at
+  | QuoteConnectionCustomer
+  | QuoteConnectionEmail
+  | QuoteConnectionCurrency
+  | QuoteConnectionTaxesIncluded
+  | QuoteConnectionLineItemsSubtotalPrice
+  | QuoteConnectionSubtotalPrice
+  | QuoteConnectionTotalPrice
+  | QuoteConnectionActive
+  | createQuotePayload
+  | updateQuotePayload
+  | deleteQuotePayload
   | Tag
   | TagConnection
   | TagAggregator
@@ -428,6 +491,7 @@ union Morph =
   | deleteUserPayload
   | ComponentProductConfiguration
   | ComponentProductOption
+  | ComponentProductQuoteVariant
   | ComponentProductVariant
 
 type Mutation {
@@ -448,6 +512,12 @@ type Mutation {
   createProduct(input: createProductInput): createProductPayload
   updateProduct(input: updateProductInput): updateProductPayload
   deleteProduct(input: deleteProductInput): deleteProductPayload
+  createQuoteItem(input: createQuoteItemInput): createQuoteItemPayload
+  updateQuoteItem(input: updateQuoteItemInput): updateQuoteItemPayload
+  deleteQuoteItem(input: deleteQuoteItemInput): deleteQuoteItemPayload
+  createQuote(input: createQuoteInput): createQuotePayload
+  updateQuote(input: updateQuoteInput): updateQuotePayload
+  deleteQuote(input: deleteQuoteInput): deleteQuotePayload
   createTag(input: createTagInput): createTagPayload
   updateTag(input: updateTagInput): updateTagPayload
   deleteTag(input: deleteTagInput): deleteTagPayload
@@ -486,30 +556,13 @@ type Mutation {
   Delete an existing user
   """
   deleteUser(input: deleteUserInput): deleteUserPayload
-  upload(
-    refId: ID
-    ref: String
-    field: String
-    source: String
-    info: FileInfoInput
-    file: Upload!
-  ): UploadFile!
-  multipleUpload(
-    refId: ID
-    ref: String
-    field: String
-    source: String
-    files: [Upload]!
-  ): [UploadFile]!
+  upload(refId: ID, ref: String, field: String, source: String, info: FileInfoInput, file: Upload!): UploadFile!
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
   updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
   login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
   register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
   forgotPassword(email: String!): UserPermissionsPasswordPayload
-  resetPassword(
-    password: String!
-    passwordConfirmation: String!
-    code: String!
-  ): UsersPermissionsLoginPayload
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
   emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
 }
 
@@ -775,136 +828,311 @@ enum PublicationState {
 
 type Query {
   collection(id: ID!, publicationState: PublicationState): Collection
-  collections(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-    publicationState: PublicationState
-  ): [Collection]
-  collectionsConnection(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-  ): CollectionConnection
+  collections(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Collection]
+  collectionsConnection(sort: String, limit: Int, start: Int, where: JSON): CollectionConnection
   customer(id: ID!, publicationState: PublicationState): Customer
-  customers(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-    publicationState: PublicationState
-  ): [Customer]
-  customersConnection(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-  ): CustomerConnection
+  customers(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Customer]
+  customersConnection(sort: String, limit: Int, start: Int, where: JSON): CustomerConnection
   global(publicationState: PublicationState): Global
   note(id: ID!, publicationState: PublicationState): Note
-  notes(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-    publicationState: PublicationState
-  ): [Note]
-  notesConnection(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-  ): NoteConnection
+  notes(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Note]
+  notesConnection(sort: String, limit: Int, start: Int, where: JSON): NoteConnection
   order(id: ID!, publicationState: PublicationState): Order
-  orders(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-    publicationState: PublicationState
-  ): [Order]
-  ordersConnection(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-  ): OrderConnection
+  orders(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Order]
+  ordersConnection(sort: String, limit: Int, start: Int, where: JSON): OrderConnection
   product(id: ID!, publicationState: PublicationState): Product
-  products(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-    publicationState: PublicationState
-  ): [Product]
-  productsConnection(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-  ): ProductConnection
+  products(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Product]
+  productsConnection(sort: String, limit: Int, start: Int, where: JSON): ProductConnection
+  quoteItem(id: ID!, publicationState: PublicationState): QuoteItem
+  quoteItems(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [QuoteItem]
+  quoteItemsConnection(sort: String, limit: Int, start: Int, where: JSON): QuoteItemConnection
+  quote(id: ID!, publicationState: PublicationState): Quote
+  quotes(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Quote]
+  quotesConnection(sort: String, limit: Int, start: Int, where: JSON): QuoteConnection
   tag(id: ID!, publicationState: PublicationState): Tag
-  tags(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-    publicationState: PublicationState
-  ): [Tag]
-  tagsConnection(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-  ): TagConnection
-  files(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-    publicationState: PublicationState
-  ): [UploadFile]
-  filesConnection(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-  ): UploadFileConnection
+  tags(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Tag]
+  tagsConnection(sort: String, limit: Int, start: Int, where: JSON): TagConnection
+  files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile]
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
   role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
 
   """
   Retrieve all the existing roles. You can't apply filters on this query.
   """
-  roles(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-    publicationState: PublicationState
-  ): [UsersPermissionsRole]
-  rolesConnection(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-  ): UsersPermissionsRoleConnection
+  roles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsRole]
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
   user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
-  users(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-    publicationState: PublicationState
-  ): [UsersPermissionsUser]
-  usersConnection(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-  ): UsersPermissionsUserConnection
+  users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser]
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
   me: UsersPermissionsMe
+}
+
+type Quote {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  customer: Customer
+  email: String
+  currency: JSON
+  taxesIncluded: Boolean
+  lineItemsSubtotalPrice: Float
+  subtotalPrice: Float
+  totalPrice: Float
+  active: Boolean
+  lineItems(sort: String, limit: Int, start: Int, where: JSON): [QuoteItem]
+}
+
+type QuoteAggregator {
+  count: Int
+  totalCount: Int
+  sum: QuoteAggregatorSum
+  avg: QuoteAggregatorAvg
+  min: QuoteAggregatorMin
+  max: QuoteAggregatorMax
+}
+
+type QuoteAggregatorAvg {
+  lineItemsSubtotalPrice: Float
+  subtotalPrice: Float
+  totalPrice: Float
+}
+
+type QuoteAggregatorMax {
+  lineItemsSubtotalPrice: Float
+  subtotalPrice: Float
+  totalPrice: Float
+}
+
+type QuoteAggregatorMin {
+  lineItemsSubtotalPrice: Float
+  subtotalPrice: Float
+  totalPrice: Float
+}
+
+type QuoteAggregatorSum {
+  lineItemsSubtotalPrice: Float
+  subtotalPrice: Float
+  totalPrice: Float
+}
+
+type QuoteConnection {
+  values: [Quote]
+  groupBy: QuoteGroupBy
+  aggregate: QuoteAggregator
+}
+
+type QuoteConnectionActive {
+  key: Boolean
+  connection: QuoteConnection
+}
+
+type QuoteConnectionCreated_at {
+  key: DateTime
+  connection: QuoteConnection
+}
+
+type QuoteConnectionCurrency {
+  key: JSON
+  connection: QuoteConnection
+}
+
+type QuoteConnectionCustomer {
+  key: ID
+  connection: QuoteConnection
+}
+
+type QuoteConnectionEmail {
+  key: String
+  connection: QuoteConnection
+}
+
+type QuoteConnectionId {
+  key: ID
+  connection: QuoteConnection
+}
+
+type QuoteConnectionLineItemsSubtotalPrice {
+  key: Float
+  connection: QuoteConnection
+}
+
+type QuoteConnectionSubtotalPrice {
+  key: Float
+  connection: QuoteConnection
+}
+
+type QuoteConnectionTaxesIncluded {
+  key: Boolean
+  connection: QuoteConnection
+}
+
+type QuoteConnectionTotalPrice {
+  key: Float
+  connection: QuoteConnection
+}
+
+type QuoteConnectionUpdated_at {
+  key: DateTime
+  connection: QuoteConnection
+}
+
+type QuoteGroupBy {
+  id: [QuoteConnectionId]
+  created_at: [QuoteConnectionCreated_at]
+  updated_at: [QuoteConnectionUpdated_at]
+  customer: [QuoteConnectionCustomer]
+  email: [QuoteConnectionEmail]
+  currency: [QuoteConnectionCurrency]
+  taxesIncluded: [QuoteConnectionTaxesIncluded]
+  lineItemsSubtotalPrice: [QuoteConnectionLineItemsSubtotalPrice]
+  subtotalPrice: [QuoteConnectionSubtotalPrice]
+  totalPrice: [QuoteConnectionTotalPrice]
+  active: [QuoteConnectionActive]
+}
+
+input QuoteInput {
+  customer: ID
+  lineItems: [ID]
+  email: String
+  currency: JSON
+  taxesIncluded: Boolean
+  lineItemsSubtotalPrice: Float
+  subtotalPrice: Float
+  totalPrice: Float
+  active: Boolean
+  created_by: ID
+  updated_by: ID
+}
+
+type QuoteItem {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  productId: Product
+  quantity: Int
+  name: String
+  variantId: Int
+  path: String
+  quote: Quote
+  variant: ComponentProductQuoteVariant
+  published_at: DateTime
+}
+
+type QuoteItemAggregator {
+  count: Int
+  totalCount: Int
+  sum: QuoteItemAggregatorSum
+  avg: QuoteItemAggregatorAvg
+  min: QuoteItemAggregatorMin
+  max: QuoteItemAggregatorMax
+}
+
+type QuoteItemAggregatorAvg {
+  quantity: Float
+  variantId: Float
+}
+
+type QuoteItemAggregatorMax {
+  quantity: Float
+  variantId: Float
+}
+
+type QuoteItemAggregatorMin {
+  quantity: Float
+  variantId: Float
+}
+
+type QuoteItemAggregatorSum {
+  quantity: Float
+  variantId: Float
+}
+
+type QuoteItemConnection {
+  values: [QuoteItem]
+  groupBy: QuoteItemGroupBy
+  aggregate: QuoteItemAggregator
+}
+
+type QuoteItemConnectionCreated_at {
+  key: DateTime
+  connection: QuoteItemConnection
+}
+
+type QuoteItemConnectionId {
+  key: ID
+  connection: QuoteItemConnection
+}
+
+type QuoteItemConnectionName {
+  key: String
+  connection: QuoteItemConnection
+}
+
+type QuoteItemConnectionPath {
+  key: String
+  connection: QuoteItemConnection
+}
+
+type QuoteItemConnectionProductId {
+  key: ID
+  connection: QuoteItemConnection
+}
+
+type QuoteItemConnectionPublished_at {
+  key: DateTime
+  connection: QuoteItemConnection
+}
+
+type QuoteItemConnectionQuantity {
+  key: Int
+  connection: QuoteItemConnection
+}
+
+type QuoteItemConnectionQuote {
+  key: ID
+  connection: QuoteItemConnection
+}
+
+type QuoteItemConnectionUpdated_at {
+  key: DateTime
+  connection: QuoteItemConnection
+}
+
+type QuoteItemConnectionVariant {
+  key: ID
+  connection: QuoteItemConnection
+}
+
+type QuoteItemConnectionVariantId {
+  key: Int
+  connection: QuoteItemConnection
+}
+
+type QuoteItemGroupBy {
+  id: [QuoteItemConnectionId]
+  created_at: [QuoteItemConnectionCreated_at]
+  updated_at: [QuoteItemConnectionUpdated_at]
+  productId: [QuoteItemConnectionProductId]
+  quantity: [QuoteItemConnectionQuantity]
+  name: [QuoteItemConnectionName]
+  variantId: [QuoteItemConnectionVariantId]
+  path: [QuoteItemConnectionPath]
+  quote: [QuoteItemConnectionQuote]
+  variant: [QuoteItemConnectionVariant]
+  published_at: [QuoteItemConnectionPublished_at]
+}
+
+input QuoteItemInput {
+  productId: ID
+  quantity: Int
+  name: String
+  variantId: Int
+  path: String
+  quote: ID
+  variant: ComponentProductQuoteVariantInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
 }
 
 input RoleInput {
@@ -1219,18 +1447,8 @@ type UsersPermissionsRole {
   name: String!
   description: String
   type: String
-  permissions(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-  ): [UsersPermissionsPermission]
-  users(
-    sort: String
-    limit: Int
-    start: Int
-    where: JSON
-  ): [UsersPermissionsUser]
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
 }
 
 type UsersPermissionsRoleAggregator {
@@ -1391,6 +1609,22 @@ type createProductPayload {
   product: Product
 }
 
+input createQuoteInput {
+  data: QuoteInput
+}
+
+input createQuoteItemInput {
+  data: QuoteItemInput
+}
+
+type createQuoteItemPayload {
+  quoteItem: QuoteItem
+}
+
+type createQuotePayload {
+  quote: Quote
+}
+
 input createRoleInput {
   data: RoleInput
 }
@@ -1467,6 +1701,22 @@ type deleteProductPayload {
   product: Product
 }
 
+input deleteQuoteInput {
+  where: InputID
+}
+
+input deleteQuoteItemInput {
+  where: InputID
+}
+
+type deleteQuoteItemPayload {
+  quoteItem: QuoteItem
+}
+
+type deleteQuotePayload {
+  quote: Quote
+}
+
 input deleteRoleInput {
   where: InputID
 }
@@ -1509,6 +1759,16 @@ input editComponentProductOptionInput {
   id: ID
   label: String
   variant: [editComponentProductVariantInput]
+}
+
+input editComponentProductQuoteVariantInput {
+  id: ID
+  sku: String
+  name: String
+  image: ID
+  requiresShipping: Boolean
+  price: Float
+  listPrice: Float
 }
 
 input editComponentProductVariantInput {
@@ -1590,6 +1850,33 @@ input editProductInput {
   slug: String
   variants: editComponentProductConfigurationInput
   collections: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editQuoteInput {
+  customer: ID
+  lineItems: [ID]
+  email: String
+  currency: JSON
+  taxesIncluded: Boolean
+  lineItemsSubtotalPrice: Float
+  subtotalPrice: Float
+  totalPrice: Float
+  active: Boolean
+  created_by: ID
+  updated_by: ID
+}
+
+input editQuoteItemInput {
+  productId: ID
+  quantity: Int
+  name: String
+  variantId: Int
+  path: String
+  quote: ID
+  variant: editComponentProductQuoteVariantInput
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -1678,6 +1965,24 @@ input updateProductInput {
 
 type updateProductPayload {
   product: Product
+}
+
+input updateQuoteInput {
+  where: InputID
+  data: editQuoteInput
+}
+
+input updateQuoteItemInput {
+  where: InputID
+  data: editQuoteItemInput
+}
+
+type updateQuoteItemPayload {
+  quoteItem: QuoteItem
+}
+
+type updateQuotePayload {
+  quote: Quote
 }
 
 input updateRoleInput {

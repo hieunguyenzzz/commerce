@@ -47,7 +47,7 @@ export const provider = { config, operations }
 
 export type Provider = typeof provider
 
-export type StrapiAPI<P extends Provider = Provider> = CommerceAPI<P | any>
+export type StrapiAPI<P extends Provider = Provider> = CommerceAPI<P|any>
 
 export function getCommerceApi<P extends Provider>(
   customProvider: P = provider as any

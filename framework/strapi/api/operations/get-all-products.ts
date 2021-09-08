@@ -6,7 +6,7 @@ import {
   GetAllProductsQuery,
   GetAllProductsQueryVariables,
   Global,
-  Product,
+  Product
 } from '../../schema'
 
 const getAllProductsQuery = /* GraphQL */ `

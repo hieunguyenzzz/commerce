@@ -21,7 +21,7 @@ export const handler: MutationHook<AddItemHook> = {
         message: 'The item quantity has to be a valid integer greater than 0',
       })
     }
-
+    console.log(item)
     const data = await fetch({
       ...options,
       body: { item },

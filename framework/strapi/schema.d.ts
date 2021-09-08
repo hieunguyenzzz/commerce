@@ -1,11 +1,7 @@
 export type Maybe<T> = T | null
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K]
-}
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]?: Maybe<T[SubKey]> }
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]: Maybe<T[SubKey]> }
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> }
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -141,6 +137,26 @@ export type ComponentProductOption = {
 export type ComponentProductOptionInput = {
   label?: Maybe<Scalars['String']>
   variant?: Maybe<Array<Maybe<ComponentProductVariantInput>>>
+}
+
+export type ComponentProductQuoteVariant = {
+  __typename?: 'ComponentProductQuoteVariant'
+  id: Scalars['ID']
+  sku?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  image?: Maybe<UploadFile>
+  requiresShipping?: Maybe<Scalars['Boolean']>
+  price?: Maybe<Scalars['Float']>
+  listPrice?: Maybe<Scalars['Float']>
+}
+
+export type ComponentProductQuoteVariantInput = {
+  sku?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  image?: Maybe<Scalars['ID']>
+  requiresShipping?: Maybe<Scalars['Boolean']>
+  price?: Maybe<Scalars['Float']>
+  listPrice?: Maybe<Scalars['Float']>
 }
 
 export type ComponentProductVariant = {
@@ -410,6 +426,50 @@ export type Morph =
   | CreateProductPayload
   | UpdateProductPayload
   | DeleteProductPayload
+  | QuoteItem
+  | QuoteItemConnection
+  | QuoteItemAggregator
+  | QuoteItemAggregatorSum
+  | QuoteItemAggregatorAvg
+  | QuoteItemAggregatorMin
+  | QuoteItemAggregatorMax
+  | QuoteItemGroupBy
+  | QuoteItemConnectionId
+  | QuoteItemConnectionCreated_At
+  | QuoteItemConnectionUpdated_At
+  | QuoteItemConnectionProductId
+  | QuoteItemConnectionQuantity
+  | QuoteItemConnectionName
+  | QuoteItemConnectionVariantId
+  | QuoteItemConnectionPath
+  | QuoteItemConnectionQuote
+  | QuoteItemConnectionVariant
+  | QuoteItemConnectionPublished_At
+  | CreateQuoteItemPayload
+  | UpdateQuoteItemPayload
+  | DeleteQuoteItemPayload
+  | Quote
+  | QuoteConnection
+  | QuoteAggregator
+  | QuoteAggregatorSum
+  | QuoteAggregatorAvg
+  | QuoteAggregatorMin
+  | QuoteAggregatorMax
+  | QuoteGroupBy
+  | QuoteConnectionId
+  | QuoteConnectionCreated_At
+  | QuoteConnectionUpdated_At
+  | QuoteConnectionCustomer
+  | QuoteConnectionEmail
+  | QuoteConnectionCurrency
+  | QuoteConnectionTaxesIncluded
+  | QuoteConnectionLineItemsSubtotalPrice
+  | QuoteConnectionSubtotalPrice
+  | QuoteConnectionTotalPrice
+  | QuoteConnectionActive
+  | CreateQuotePayload
+  | UpdateQuotePayload
+  | DeleteQuotePayload
   | Tag
   | TagConnection
   | TagAggregator
@@ -479,6 +539,7 @@ export type Morph =
   | DeleteUserPayload
   | ComponentProductConfiguration
   | ComponentProductOption
+  | ComponentProductQuoteVariant
   | ComponentProductVariant
 
 export type Mutation = {
@@ -500,6 +561,12 @@ export type Mutation = {
   createProduct?: Maybe<CreateProductPayload>
   updateProduct?: Maybe<UpdateProductPayload>
   deleteProduct?: Maybe<DeleteProductPayload>
+  createQuoteItem?: Maybe<CreateQuoteItemPayload>
+  updateQuoteItem?: Maybe<UpdateQuoteItemPayload>
+  deleteQuoteItem?: Maybe<DeleteQuoteItemPayload>
+  createQuote?: Maybe<CreateQuotePayload>
+  updateQuote?: Maybe<UpdateQuotePayload>
+  deleteQuote?: Maybe<DeleteQuotePayload>
   createTag?: Maybe<CreateTagPayload>
   updateTag?: Maybe<UpdateTagPayload>
   deleteTag?: Maybe<DeleteTagPayload>
@@ -589,6 +656,30 @@ export type MutationUpdateProductArgs = {
 
 export type MutationDeleteProductArgs = {
   input?: Maybe<DeleteProductInput>
+}
+
+export type MutationCreateQuoteItemArgs = {
+  input?: Maybe<CreateQuoteItemInput>
+}
+
+export type MutationUpdateQuoteItemArgs = {
+  input?: Maybe<UpdateQuoteItemInput>
+}
+
+export type MutationDeleteQuoteItemArgs = {
+  input?: Maybe<DeleteQuoteItemInput>
+}
+
+export type MutationCreateQuoteArgs = {
+  input?: Maybe<CreateQuoteInput>
+}
+
+export type MutationUpdateQuoteArgs = {
+  input?: Maybe<UpdateQuoteInput>
+}
+
+export type MutationDeleteQuoteArgs = {
+  input?: Maybe<DeleteQuoteInput>
 }
 
 export type MutationCreateTagArgs = {
@@ -1025,6 +1116,12 @@ export type Query = {
   product?: Maybe<Product>
   products?: Maybe<Array<Maybe<Product>>>
   productsConnection?: Maybe<ProductConnection>
+  quoteItem?: Maybe<QuoteItem>
+  quoteItems?: Maybe<Array<Maybe<QuoteItem>>>
+  quoteItemsConnection?: Maybe<QuoteItemConnection>
+  quote?: Maybe<Quote>
+  quotes?: Maybe<Array<Maybe<Quote>>>
+  quotesConnection?: Maybe<QuoteConnection>
   tag?: Maybe<Tag>
   tags?: Maybe<Array<Maybe<Tag>>>
   tagsConnection?: Maybe<TagConnection>
@@ -1144,6 +1241,46 @@ export type QueryProductsConnectionArgs = {
   where?: Maybe<Scalars['JSON']>
 }
 
+export type QueryQuoteItemArgs = {
+  id: Scalars['ID']
+  publicationState?: Maybe<PublicationState>
+}
+
+export type QueryQuoteItemsArgs = {
+  sort?: Maybe<Scalars['String']>
+  limit?: Maybe<Scalars['Int']>
+  start?: Maybe<Scalars['Int']>
+  where?: Maybe<Scalars['JSON']>
+  publicationState?: Maybe<PublicationState>
+}
+
+export type QueryQuoteItemsConnectionArgs = {
+  sort?: Maybe<Scalars['String']>
+  limit?: Maybe<Scalars['Int']>
+  start?: Maybe<Scalars['Int']>
+  where?: Maybe<Scalars['JSON']>
+}
+
+export type QueryQuoteArgs = {
+  id: Scalars['ID']
+  publicationState?: Maybe<PublicationState>
+}
+
+export type QueryQuotesArgs = {
+  sort?: Maybe<Scalars['String']>
+  limit?: Maybe<Scalars['Int']>
+  start?: Maybe<Scalars['Int']>
+  where?: Maybe<Scalars['JSON']>
+  publicationState?: Maybe<PublicationState>
+}
+
+export type QueryQuotesConnectionArgs = {
+  sort?: Maybe<Scalars['String']>
+  limit?: Maybe<Scalars['Int']>
+  start?: Maybe<Scalars['Int']>
+  where?: Maybe<Scalars['JSON']>
+}
+
 export type QueryTagArgs = {
   id: Scalars['ID']
   publicationState?: Maybe<PublicationState>
@@ -1217,6 +1354,319 @@ export type QueryUsersConnectionArgs = {
   limit?: Maybe<Scalars['Int']>
   start?: Maybe<Scalars['Int']>
   where?: Maybe<Scalars['JSON']>
+}
+
+export type Quote = {
+  __typename?: 'Quote'
+  id: Scalars['ID']
+  created_at: Scalars['DateTime']
+  updated_at: Scalars['DateTime']
+  customer?: Maybe<Customer>
+  email?: Maybe<Scalars['String']>
+  currency?: Maybe<Scalars['JSON']>
+  taxesIncluded?: Maybe<Scalars['Boolean']>
+  lineItemsSubtotalPrice?: Maybe<Scalars['Float']>
+  subtotalPrice?: Maybe<Scalars['Float']>
+  totalPrice?: Maybe<Scalars['Float']>
+  active?: Maybe<Scalars['Boolean']>
+  lineItems?: Maybe<Array<Maybe<QuoteItem>>>
+}
+
+export type QuoteLineItemsArgs = {
+  sort?: Maybe<Scalars['String']>
+  limit?: Maybe<Scalars['Int']>
+  start?: Maybe<Scalars['Int']>
+  where?: Maybe<Scalars['JSON']>
+}
+
+export type QuoteAggregator = {
+  __typename?: 'QuoteAggregator'
+  count?: Maybe<Scalars['Int']>
+  totalCount?: Maybe<Scalars['Int']>
+  sum?: Maybe<QuoteAggregatorSum>
+  avg?: Maybe<QuoteAggregatorAvg>
+  min?: Maybe<QuoteAggregatorMin>
+  max?: Maybe<QuoteAggregatorMax>
+}
+
+export type QuoteAggregatorAvg = {
+  __typename?: 'QuoteAggregatorAvg'
+  lineItemsSubtotalPrice?: Maybe<Scalars['Float']>
+  subtotalPrice?: Maybe<Scalars['Float']>
+  totalPrice?: Maybe<Scalars['Float']>
+}
+
+export type QuoteAggregatorMax = {
+  __typename?: 'QuoteAggregatorMax'
+  lineItemsSubtotalPrice?: Maybe<Scalars['Float']>
+  subtotalPrice?: Maybe<Scalars['Float']>
+  totalPrice?: Maybe<Scalars['Float']>
+}
+
+export type QuoteAggregatorMin = {
+  __typename?: 'QuoteAggregatorMin'
+  lineItemsSubtotalPrice?: Maybe<Scalars['Float']>
+  subtotalPrice?: Maybe<Scalars['Float']>
+  totalPrice?: Maybe<Scalars['Float']>
+}
+
+export type QuoteAggregatorSum = {
+  __typename?: 'QuoteAggregatorSum'
+  lineItemsSubtotalPrice?: Maybe<Scalars['Float']>
+  subtotalPrice?: Maybe<Scalars['Float']>
+  totalPrice?: Maybe<Scalars['Float']>
+}
+
+export type QuoteConnection = {
+  __typename?: 'QuoteConnection'
+  values?: Maybe<Array<Maybe<Quote>>>
+  groupBy?: Maybe<QuoteGroupBy>
+  aggregate?: Maybe<QuoteAggregator>
+}
+
+export type QuoteConnectionActive = {
+  __typename?: 'QuoteConnectionActive'
+  key?: Maybe<Scalars['Boolean']>
+  connection?: Maybe<QuoteConnection>
+}
+
+export type QuoteConnectionCreated_At = {
+  __typename?: 'QuoteConnectionCreated_at'
+  key?: Maybe<Scalars['DateTime']>
+  connection?: Maybe<QuoteConnection>
+}
+
+export type QuoteConnectionCurrency = {
+  __typename?: 'QuoteConnectionCurrency'
+  key?: Maybe<Scalars['JSON']>
+  connection?: Maybe<QuoteConnection>
+}
+
+export type QuoteConnectionCustomer = {
+  __typename?: 'QuoteConnectionCustomer'
+  key?: Maybe<Scalars['ID']>
+  connection?: Maybe<QuoteConnection>
+}
+
+export type QuoteConnectionEmail = {
+  __typename?: 'QuoteConnectionEmail'
+  key?: Maybe<Scalars['String']>
+  connection?: Maybe<QuoteConnection>
+}
+
+export type QuoteConnectionId = {
+  __typename?: 'QuoteConnectionId'
+  key?: Maybe<Scalars['ID']>
+  connection?: Maybe<QuoteConnection>
+}
+
+export type QuoteConnectionLineItemsSubtotalPrice = {
+  __typename?: 'QuoteConnectionLineItemsSubtotalPrice'
+  key?: Maybe<Scalars['Float']>
+  connection?: Maybe<QuoteConnection>
+}
+
+export type QuoteConnectionSubtotalPrice = {
+  __typename?: 'QuoteConnectionSubtotalPrice'
+  key?: Maybe<Scalars['Float']>
+  connection?: Maybe<QuoteConnection>
+}
+
+export type QuoteConnectionTaxesIncluded = {
+  __typename?: 'QuoteConnectionTaxesIncluded'
+  key?: Maybe<Scalars['Boolean']>
+  connection?: Maybe<QuoteConnection>
+}
+
+export type QuoteConnectionTotalPrice = {
+  __typename?: 'QuoteConnectionTotalPrice'
+  key?: Maybe<Scalars['Float']>
+  connection?: Maybe<QuoteConnection>
+}
+
+export type QuoteConnectionUpdated_At = {
+  __typename?: 'QuoteConnectionUpdated_at'
+  key?: Maybe<Scalars['DateTime']>
+  connection?: Maybe<QuoteConnection>
+}
+
+export type QuoteGroupBy = {
+  __typename?: 'QuoteGroupBy'
+  id?: Maybe<Array<Maybe<QuoteConnectionId>>>
+  created_at?: Maybe<Array<Maybe<QuoteConnectionCreated_At>>>
+  updated_at?: Maybe<Array<Maybe<QuoteConnectionUpdated_At>>>
+  customer?: Maybe<Array<Maybe<QuoteConnectionCustomer>>>
+  email?: Maybe<Array<Maybe<QuoteConnectionEmail>>>
+  currency?: Maybe<Array<Maybe<QuoteConnectionCurrency>>>
+  taxesIncluded?: Maybe<Array<Maybe<QuoteConnectionTaxesIncluded>>>
+  lineItemsSubtotalPrice?: Maybe<Array<Maybe<QuoteConnectionLineItemsSubtotalPrice>>>
+  subtotalPrice?: Maybe<Array<Maybe<QuoteConnectionSubtotalPrice>>>
+  totalPrice?: Maybe<Array<Maybe<QuoteConnectionTotalPrice>>>
+  active?: Maybe<Array<Maybe<QuoteConnectionActive>>>
+}
+
+export type QuoteInput = {
+  customer?: Maybe<Scalars['ID']>
+  lineItems?: Maybe<Array<Maybe<Scalars['ID']>>>
+  email?: Maybe<Scalars['String']>
+  currency?: Maybe<Scalars['JSON']>
+  taxesIncluded?: Maybe<Scalars['Boolean']>
+  lineItemsSubtotalPrice?: Maybe<Scalars['Float']>
+  subtotalPrice?: Maybe<Scalars['Float']>
+  totalPrice?: Maybe<Scalars['Float']>
+  active?: Maybe<Scalars['Boolean']>
+  created_by?: Maybe<Scalars['ID']>
+  updated_by?: Maybe<Scalars['ID']>
+}
+
+export type QuoteItem = {
+  __typename?: 'QuoteItem'
+  id: Scalars['ID']
+  created_at: Scalars['DateTime']
+  updated_at: Scalars['DateTime']
+  productId?: Maybe<Product>
+  quantity?: Maybe<Scalars['Int']>
+  name?: Maybe<Scalars['String']>
+  variantId?: Maybe<Scalars['Int']>
+  path?: Maybe<Scalars['String']>
+  quote?: Maybe<Quote>
+  variant?: Maybe<ComponentProductQuoteVariant>
+  published_at?: Maybe<Scalars['DateTime']>
+}
+
+export type QuoteItemAggregator = {
+  __typename?: 'QuoteItemAggregator'
+  count?: Maybe<Scalars['Int']>
+  totalCount?: Maybe<Scalars['Int']>
+  sum?: Maybe<QuoteItemAggregatorSum>
+  avg?: Maybe<QuoteItemAggregatorAvg>
+  min?: Maybe<QuoteItemAggregatorMin>
+  max?: Maybe<QuoteItemAggregatorMax>
+}
+
+export type QuoteItemAggregatorAvg = {
+  __typename?: 'QuoteItemAggregatorAvg'
+  quantity?: Maybe<Scalars['Float']>
+  variantId?: Maybe<Scalars['Float']>
+}
+
+export type QuoteItemAggregatorMax = {
+  __typename?: 'QuoteItemAggregatorMax'
+  quantity?: Maybe<Scalars['Float']>
+  variantId?: Maybe<Scalars['Float']>
+}
+
+export type QuoteItemAggregatorMin = {
+  __typename?: 'QuoteItemAggregatorMin'
+  quantity?: Maybe<Scalars['Float']>
+  variantId?: Maybe<Scalars['Float']>
+}
+
+export type QuoteItemAggregatorSum = {
+  __typename?: 'QuoteItemAggregatorSum'
+  quantity?: Maybe<Scalars['Float']>
+  variantId?: Maybe<Scalars['Float']>
+}
+
+export type QuoteItemConnection = {
+  __typename?: 'QuoteItemConnection'
+  values?: Maybe<Array<Maybe<QuoteItem>>>
+  groupBy?: Maybe<QuoteItemGroupBy>
+  aggregate?: Maybe<QuoteItemAggregator>
+}
+
+export type QuoteItemConnectionCreated_At = {
+  __typename?: 'QuoteItemConnectionCreated_at'
+  key?: Maybe<Scalars['DateTime']>
+  connection?: Maybe<QuoteItemConnection>
+}
+
+export type QuoteItemConnectionId = {
+  __typename?: 'QuoteItemConnectionId'
+  key?: Maybe<Scalars['ID']>
+  connection?: Maybe<QuoteItemConnection>
+}
+
+export type QuoteItemConnectionName = {
+  __typename?: 'QuoteItemConnectionName'
+  key?: Maybe<Scalars['String']>
+  connection?: Maybe<QuoteItemConnection>
+}
+
+export type QuoteItemConnectionPath = {
+  __typename?: 'QuoteItemConnectionPath'
+  key?: Maybe<Scalars['String']>
+  connection?: Maybe<QuoteItemConnection>
+}
+
+export type QuoteItemConnectionProductId = {
+  __typename?: 'QuoteItemConnectionProductId'
+  key?: Maybe<Scalars['ID']>
+  connection?: Maybe<QuoteItemConnection>
+}
+
+export type QuoteItemConnectionPublished_At = {
+  __typename?: 'QuoteItemConnectionPublished_at'
+  key?: Maybe<Scalars['DateTime']>
+  connection?: Maybe<QuoteItemConnection>
+}
+
+export type QuoteItemConnectionQuantity = {
+  __typename?: 'QuoteItemConnectionQuantity'
+  key?: Maybe<Scalars['Int']>
+  connection?: Maybe<QuoteItemConnection>
+}
+
+export type QuoteItemConnectionQuote = {
+  __typename?: 'QuoteItemConnectionQuote'
+  key?: Maybe<Scalars['ID']>
+  connection?: Maybe<QuoteItemConnection>
+}
+
+export type QuoteItemConnectionUpdated_At = {
+  __typename?: 'QuoteItemConnectionUpdated_at'
+  key?: Maybe<Scalars['DateTime']>
+  connection?: Maybe<QuoteItemConnection>
+}
+
+export type QuoteItemConnectionVariant = {
+  __typename?: 'QuoteItemConnectionVariant'
+  key?: Maybe<Scalars['ID']>
+  connection?: Maybe<QuoteItemConnection>
+}
+
+export type QuoteItemConnectionVariantId = {
+  __typename?: 'QuoteItemConnectionVariantId'
+  key?: Maybe<Scalars['Int']>
+  connection?: Maybe<QuoteItemConnection>
+}
+
+export type QuoteItemGroupBy = {
+  __typename?: 'QuoteItemGroupBy'
+  id?: Maybe<Array<Maybe<QuoteItemConnectionId>>>
+  created_at?: Maybe<Array<Maybe<QuoteItemConnectionCreated_At>>>
+  updated_at?: Maybe<Array<Maybe<QuoteItemConnectionUpdated_At>>>
+  productId?: Maybe<Array<Maybe<QuoteItemConnectionProductId>>>
+  quantity?: Maybe<Array<Maybe<QuoteItemConnectionQuantity>>>
+  name?: Maybe<Array<Maybe<QuoteItemConnectionName>>>
+  variantId?: Maybe<Array<Maybe<QuoteItemConnectionVariantId>>>
+  path?: Maybe<Array<Maybe<QuoteItemConnectionPath>>>
+  quote?: Maybe<Array<Maybe<QuoteItemConnectionQuote>>>
+  variant?: Maybe<Array<Maybe<QuoteItemConnectionVariant>>>
+  published_at?: Maybe<Array<Maybe<QuoteItemConnectionPublished_At>>>
+}
+
+export type QuoteItemInput = {
+  productId?: Maybe<Scalars['ID']>
+  quantity?: Maybe<Scalars['Int']>
+  name?: Maybe<Scalars['String']>
+  variantId?: Maybe<Scalars['Int']>
+  path?: Maybe<Scalars['String']>
+  quote?: Maybe<Scalars['ID']>
+  variant?: Maybe<ComponentProductQuoteVariantInput>
+  published_at?: Maybe<Scalars['DateTime']>
+  created_by?: Maybe<Scalars['ID']>
+  updated_by?: Maybe<Scalars['ID']>
 }
 
 export type RoleInput = {
@@ -1776,6 +2226,24 @@ export type CreateProductPayload = {
   product?: Maybe<Product>
 }
 
+export type CreateQuoteInput = {
+  data?: Maybe<QuoteInput>
+}
+
+export type CreateQuoteItemInput = {
+  data?: Maybe<QuoteItemInput>
+}
+
+export type CreateQuoteItemPayload = {
+  __typename?: 'createQuoteItemPayload'
+  quoteItem?: Maybe<QuoteItem>
+}
+
+export type CreateQuotePayload = {
+  __typename?: 'createQuotePayload'
+  quote?: Maybe<Quote>
+}
+
 export type CreateRoleInput = {
   data?: Maybe<RoleInput>
 }
@@ -1862,6 +2330,24 @@ export type DeleteProductPayload = {
   product?: Maybe<Product>
 }
 
+export type DeleteQuoteInput = {
+  where?: Maybe<InputId>
+}
+
+export type DeleteQuoteItemInput = {
+  where?: Maybe<InputId>
+}
+
+export type DeleteQuoteItemPayload = {
+  __typename?: 'deleteQuoteItemPayload'
+  quoteItem?: Maybe<QuoteItem>
+}
+
+export type DeleteQuotePayload = {
+  __typename?: 'deleteQuotePayload'
+  quote?: Maybe<Quote>
+}
+
 export type DeleteRoleInput = {
   where?: Maybe<InputId>
 }
@@ -1907,6 +2393,16 @@ export type EditComponentProductOptionInput = {
   id?: Maybe<Scalars['ID']>
   label?: Maybe<Scalars['String']>
   variant?: Maybe<Array<Maybe<EditComponentProductVariantInput>>>
+}
+
+export type EditComponentProductQuoteVariantInput = {
+  id?: Maybe<Scalars['ID']>
+  sku?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  image?: Maybe<Scalars['ID']>
+  requiresShipping?: Maybe<Scalars['Boolean']>
+  price?: Maybe<Scalars['Float']>
+  listPrice?: Maybe<Scalars['Float']>
 }
 
 export type EditComponentProductVariantInput = {
@@ -1988,6 +2484,33 @@ export type EditProductInput = {
   slug?: Maybe<Scalars['String']>
   variants?: Maybe<EditComponentProductConfigurationInput>
   collections?: Maybe<Array<Maybe<Scalars['ID']>>>
+  published_at?: Maybe<Scalars['DateTime']>
+  created_by?: Maybe<Scalars['ID']>
+  updated_by?: Maybe<Scalars['ID']>
+}
+
+export type EditQuoteInput = {
+  customer?: Maybe<Scalars['ID']>
+  lineItems?: Maybe<Array<Maybe<Scalars['ID']>>>
+  email?: Maybe<Scalars['String']>
+  currency?: Maybe<Scalars['JSON']>
+  taxesIncluded?: Maybe<Scalars['Boolean']>
+  lineItemsSubtotalPrice?: Maybe<Scalars['Float']>
+  subtotalPrice?: Maybe<Scalars['Float']>
+  totalPrice?: Maybe<Scalars['Float']>
+  active?: Maybe<Scalars['Boolean']>
+  created_by?: Maybe<Scalars['ID']>
+  updated_by?: Maybe<Scalars['ID']>
+}
+
+export type EditQuoteItemInput = {
+  productId?: Maybe<Scalars['ID']>
+  quantity?: Maybe<Scalars['Int']>
+  name?: Maybe<Scalars['String']>
+  variantId?: Maybe<Scalars['Int']>
+  path?: Maybe<Scalars['String']>
+  quote?: Maybe<Scalars['ID']>
+  variant?: Maybe<EditComponentProductQuoteVariantInput>
   published_at?: Maybe<Scalars['DateTime']>
   created_by?: Maybe<Scalars['ID']>
   updated_by?: Maybe<Scalars['ID']>
@@ -2084,6 +2607,26 @@ export type UpdateProductPayload = {
   product?: Maybe<Product>
 }
 
+export type UpdateQuoteInput = {
+  where?: Maybe<InputId>
+  data?: Maybe<EditQuoteInput>
+}
+
+export type UpdateQuoteItemInput = {
+  where?: Maybe<InputId>
+  data?: Maybe<EditQuoteItemInput>
+}
+
+export type UpdateQuoteItemPayload = {
+  __typename?: 'updateQuoteItemPayload'
+  quoteItem?: Maybe<QuoteItem>
+}
+
+export type UpdateQuotePayload = {
+  __typename?: 'updateQuotePayload'
+  quote?: Maybe<Quote>
+}
+
 export type UpdateRoleInput = {
   where?: Maybe<InputId>
   data?: Maybe<EditRoleInput>
@@ -2114,6 +2657,288 @@ export type UpdateUserPayload = {
   user?: Maybe<UsersPermissionsUser>
 }
 
+export type CreateQuoteItemMutationVariables = Exact<{
+  productId: Scalars['ID']
+  id?: Maybe<Scalars['ID']>
+}>
+
+export type CreateQuoteItemMutation = { __typename?: 'Mutation' } & {
+  createQuoteItem?: Maybe<
+    { __typename?: 'createQuoteItemPayload' } & {
+      quoteItem?: Maybe<
+        { __typename?: 'QuoteItem' } & Pick<QuoteItem, 'id'> & {
+            quote?: Maybe<
+              { __typename?: 'Quote' } & Pick<
+                Quote,
+                'id' | 'email' | 'active' | 'taxesIncluded' | 'lineItemsSubtotalPrice' | 'subtotalPrice' | 'totalPrice'
+              > & {
+                  customer?: Maybe<{ __typename?: 'Customer' } & Pick<Customer, 'last_name' | 'first_name' | 'id'>>
+                  lineItems?: Maybe<
+                    Array<
+                      Maybe<
+                        { __typename?: 'QuoteItem' } & Pick<
+                          QuoteItem,
+                          'id' | 'quantity' | 'name' | 'variantId' | 'path'
+                        > & {
+                            productId?: Maybe<
+                              { __typename?: 'Product' } & Pick<
+                                Product,
+                                'id' | 'title' | 'description' | 'slug' | 'price'
+                              > & {
+                                  images?: Maybe<
+                                    Array<
+                                      Maybe<
+                                        { __typename?: 'UploadFile' } & Pick<UploadFile, 'url' | 'width' | 'height'>
+                                      >
+                                    >
+                                  >
+                                }
+                            >
+                            variant?: Maybe<
+                              { __typename?: 'ComponentProductQuoteVariant' } & Pick<
+                                ComponentProductQuoteVariant,
+                                'id' | 'sku' | 'name'
+                              > & {
+                                  image?: Maybe<
+                                    { __typename?: 'UploadFile' } & Pick<UploadFile, 'url' | 'width' | 'height'>
+                                  >
+                                }
+                            >
+                          }
+                      >
+                    >
+                  >
+                }
+            >
+          }
+      >
+    }
+  >
+}
+
+export type CreateQuoteMutationVariables = Exact<{ [key: string]: never }>
+
+export type CreateQuoteMutation = { __typename?: 'Mutation' } & {
+  createQuote?: Maybe<
+    { __typename?: 'createQuotePayload' } & {
+      quote?: Maybe<
+        { __typename?: 'Quote' } & Pick<
+          Quote,
+          'id' | 'email' | 'active' | 'taxesIncluded' | 'lineItemsSubtotalPrice' | 'subtotalPrice' | 'totalPrice'
+        > & {
+            customer?: Maybe<{ __typename?: 'Customer' } & Pick<Customer, 'last_name' | 'first_name' | 'id'>>
+            lineItems?: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'QuoteItem' } & Pick<QuoteItem, 'id' | 'quantity' | 'name' | 'variantId' | 'path'> & {
+                      productId?: Maybe<
+                        { __typename?: 'Product' } & Pick<
+                          Product,
+                          'id' | 'title' | 'description' | 'price' | 'slug'
+                        > & {
+                            images?: Maybe<
+                              Array<Maybe<{ __typename?: 'UploadFile' } & Pick<UploadFile, 'url' | 'width' | 'height'>>>
+                            >
+                          }
+                      >
+                      variant?: Maybe<
+                        { __typename?: 'ComponentProductQuoteVariant' } & Pick<
+                          ComponentProductQuoteVariant,
+                          'id' | 'sku' | 'name'
+                        > & {
+                            image?: Maybe<{ __typename?: 'UploadFile' } & Pick<UploadFile, 'url' | 'width' | 'height'>>
+                          }
+                      >
+                    }
+                >
+              >
+            >
+          }
+      >
+    }
+  >
+}
+
+export type GetQuoteQueryVariables = Exact<{
+  id: Scalars['ID']
+}>
+
+export type GetQuoteQuery = { __typename?: 'Query' } & {
+  quote?: Maybe<
+    { __typename?: 'Quote' } & Pick<
+      Quote,
+      'id' | 'email' | 'active' | 'taxesIncluded' | 'lineItemsSubtotalPrice' | 'subtotalPrice' | 'totalPrice'
+    > & {
+        customer?: Maybe<{ __typename?: 'Customer' } & Pick<Customer, 'last_name' | 'first_name' | 'id'>>
+        lineItems?: Maybe<
+          Array<
+            Maybe<
+              { __typename?: 'QuoteItem' } & Pick<QuoteItem, 'id' | 'quantity' | 'name' | 'variantId' | 'path'> & {
+                  productId?: Maybe<
+                    { __typename?: 'Product' } & Pick<Product, 'id' | 'title' | 'slug' | 'description' | 'price'> & {
+                        images?: Maybe<
+                          Array<Maybe<{ __typename?: 'UploadFile' } & Pick<UploadFile, 'url' | 'width' | 'height'>>>
+                        >
+                      }
+                  >
+                  variant?: Maybe<
+                    { __typename?: 'ComponentProductQuoteVariant' } & Pick<
+                      ComponentProductQuoteVariant,
+                      'id' | 'sku' | 'name'
+                    > & { image?: Maybe<{ __typename?: 'UploadFile' } & Pick<UploadFile, 'url' | 'width' | 'height'>> }
+                  >
+                }
+            >
+          >
+        >
+      }
+  >
+}
+
+export type DeleteQuoteItemMutationVariables = Exact<{
+  id: Scalars['ID']
+}>
+
+export type DeleteQuoteItemMutation = { __typename?: 'Mutation' } & {
+  deleteQuoteItem?: Maybe<
+    { __typename?: 'deleteQuoteItemPayload' } & {
+      quoteItem?: Maybe<
+        { __typename?: 'QuoteItem' } & Pick<QuoteItem, 'id'> & {
+            quote?: Maybe<
+              { __typename?: 'Quote' } & Pick<
+                Quote,
+                'id' | 'email' | 'active' | 'taxesIncluded' | 'lineItemsSubtotalPrice' | 'subtotalPrice' | 'totalPrice'
+              > & {
+                  customer?: Maybe<{ __typename?: 'Customer' } & Pick<Customer, 'last_name' | 'first_name' | 'id'>>
+                  lineItems?: Maybe<
+                    Array<
+                      Maybe<
+                        { __typename?: 'QuoteItem' } & Pick<
+                          QuoteItem,
+                          'id' | 'quantity' | 'name' | 'variantId' | 'path'
+                        > & {
+                            productId?: Maybe<
+                              { __typename?: 'Product' } & Pick<
+                                Product,
+                                'id' | 'title' | 'description' | 'slug' | 'price'
+                              > & {
+                                  images?: Maybe<
+                                    Array<
+                                      Maybe<
+                                        { __typename?: 'UploadFile' } & Pick<UploadFile, 'url' | 'width' | 'height'>
+                                      >
+                                    >
+                                  >
+                                }
+                            >
+                            variant?: Maybe<
+                              { __typename?: 'ComponentProductQuoteVariant' } & Pick<
+                                ComponentProductQuoteVariant,
+                                'id' | 'sku' | 'name'
+                              > & {
+                                  image?: Maybe<
+                                    { __typename?: 'UploadFile' } & Pick<UploadFile, 'url' | 'width' | 'height'>
+                                  >
+                                }
+                            >
+                          }
+                      >
+                    >
+                  >
+                }
+            >
+          }
+      >
+    }
+  >
+}
+
+export type UpdateQuoteItemMutationVariables = Exact<{
+  id: Scalars['ID']
+  quantity?: Maybe<Scalars['Int']>
+}>
+
+export type UpdateQuoteItemMutation = { __typename?: 'Mutation' } & {
+  updateQuoteItem?: Maybe<
+    { __typename?: 'updateQuoteItemPayload' } & {
+      quoteItem?: Maybe<
+        { __typename?: 'QuoteItem' } & Pick<QuoteItem, 'id'> & {
+            quote?: Maybe<
+              { __typename?: 'Quote' } & Pick<
+                Quote,
+                'id' | 'email' | 'active' | 'taxesIncluded' | 'lineItemsSubtotalPrice' | 'subtotalPrice' | 'totalPrice'
+              > & {
+                  customer?: Maybe<{ __typename?: 'Customer' } & Pick<Customer, 'last_name' | 'first_name' | 'id'>>
+                  lineItems?: Maybe<
+                    Array<
+                      Maybe<
+                        { __typename?: 'QuoteItem' } & Pick<
+                          QuoteItem,
+                          'id' | 'quantity' | 'name' | 'variantId' | 'path'
+                        > & {
+                            productId?: Maybe<
+                              { __typename?: 'Product' } & Pick<
+                                Product,
+                                'id' | 'title' | 'description' | 'slug' | 'price'
+                              > & {
+                                  images?: Maybe<
+                                    Array<
+                                      Maybe<
+                                        { __typename?: 'UploadFile' } & Pick<UploadFile, 'url' | 'width' | 'height'>
+                                      >
+                                    >
+                                  >
+                                }
+                            >
+                            variant?: Maybe<
+                              { __typename?: 'ComponentProductQuoteVariant' } & Pick<
+                                ComponentProductQuoteVariant,
+                                'id' | 'sku' | 'name'
+                              > & {
+                                  image?: Maybe<
+                                    { __typename?: 'UploadFile' } & Pick<UploadFile, 'url' | 'width' | 'height'>
+                                  >
+                                }
+                            >
+                          }
+                      >
+                    >
+                  >
+                }
+            >
+          }
+      >
+    }
+  >
+}
+
+export type GetAllProductPathsQueryVariables = Exact<{
+  first?: Maybe<Scalars['Int']>
+  start?: Maybe<Scalars['Int']>
+}>
+
+export type GetAllProductPathsQuery = { __typename?: 'Query' } & {
+  global?: Maybe<{ __typename?: 'Global' } & Pick<Global, 'Currency'>>
+  products?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'Product' } & Pick<Product, 'id' | 'title' | 'description' | 'price' | 'slug'> & {
+            images?: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'UploadFile' } & Pick<
+                    UploadFile,
+                    'width' | 'height' | 'url' | 'previewUrl' | 'formats' | 'alternativeText' | 'caption'
+                  >
+                >
+              >
+            >
+          }
+      >
+    >
+  >
+}
+
 export type GetAllProductsQueryVariables = Exact<{
   first?: Maybe<Scalars['Int']>
   start?: Maybe<Scalars['Int']>
@@ -2124,22 +2949,13 @@ export type GetAllProductsQuery = { __typename?: 'Query' } & {
   products?: Maybe<
     Array<
       Maybe<
-        { __typename?: 'Product' } & Pick<
-          Product,
-          'id' | 'title' | 'description' | 'price' | 'slug'
-        > & {
+        { __typename?: 'Product' } & Pick<Product, 'id' | 'title' | 'description' | 'price' | 'slug'> & {
             images?: Maybe<
               Array<
                 Maybe<
                   { __typename?: 'UploadFile' } & Pick<
                     UploadFile,
-                    | 'width'
-                    | 'height'
-                    | 'url'
-                    | 'previewUrl'
-                    | 'formats'
-                    | 'alternativeText'
-                    | 'caption'
+                    'width' | 'height' | 'url' | 'previewUrl' | 'formats' | 'alternativeText' | 'caption'
                   >
                 >
               >
@@ -2159,25 +2975,42 @@ export type GetProductQuery = { __typename?: 'Query' } & {
   products?: Maybe<
     Array<
       Maybe<
-        { __typename?: 'Product' } & Pick<
-          Product,
-          'id' | 'title' | 'description' | 'price' | 'slug'
-        > & {
+        { __typename?: 'Product' } & Pick<Product, 'id' | 'title' | 'description' | 'price' | 'slug'> & {
             images?: Maybe<
               Array<
                 Maybe<
                   { __typename?: 'UploadFile' } & Pick<
                     UploadFile,
-                    | 'width'
-                    | 'height'
-                    | 'url'
-                    | 'previewUrl'
-                    | 'formats'
-                    | 'alternativeText'
-                    | 'caption'
+                    'width' | 'height' | 'url' | 'previewUrl' | 'formats' | 'alternativeText' | 'caption'
                   >
                 >
               >
+            >
+            variants?: Maybe<
+              { __typename?: 'ComponentProductConfiguration' } & Pick<ComponentProductConfiguration, 'id'> & {
+                  option?: Maybe<
+                    Array<
+                      Maybe<
+                        { __typename?: 'ComponentProductOption' } & Pick<ComponentProductOption, 'id' | 'label'> & {
+                            variant?: Maybe<
+                              Array<
+                                Maybe<
+                                  { __typename?: 'ComponentProductVariant' } & Pick<
+                                    ComponentProductVariant,
+                                    'id' | 'title' | 'price'
+                                  > & {
+                                      swatch_image?: Maybe<
+                                        { __typename?: 'UploadFile' } & Pick<UploadFile, 'width' | 'height' | 'url'>
+                                      >
+                                    }
+                                >
+                              >
+                            >
+                          }
+                      >
+                    >
+                  >
+                }
             >
           }
       >
@@ -2189,16 +3022,7 @@ export type GetSiteInfoQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetSiteInfoQuery = { __typename?: 'Query' } & {
   global?: Maybe<{ __typename?: 'Global' } & Pick<Global, 'Currency'>>
-  collections?: Maybe<
-    Array<
-      Maybe<
-        { __typename?: 'Collection' } & Pick<
-          Collection,
-          'id' | 'title' | 'slug'
-        >
-      >
-    >
-  >
+  collections?: Maybe<Array<Maybe<{ __typename?: 'Collection' } & Pick<Collection, 'id' | 'title' | 'slug'>>>>
 }
 
 export type GetAllSearchQueryVariables = Exact<{ [key: string]: never }>
@@ -2208,22 +3032,13 @@ export type GetAllSearchQuery = { __typename?: 'Query' } & {
   products?: Maybe<
     Array<
       Maybe<
-        { __typename?: 'Product' } & Pick<
-          Product,
-          'id' | 'title' | 'description' | 'price' | 'slug'
-        > & {
+        { __typename?: 'Product' } & Pick<Product, 'id' | 'title' | 'description' | 'price' | 'slug'> & {
             images?: Maybe<
               Array<
                 Maybe<
                   { __typename?: 'UploadFile' } & Pick<
                     UploadFile,
-                    | 'width'
-                    | 'height'
-                    | 'url'
-                    | 'previewUrl'
-                    | 'formats'
-                    | 'alternativeText'
-                    | 'caption'
+                    'width' | 'height' | 'url' | 'previewUrl' | 'formats' | 'alternativeText' | 'caption'
                   >
                 >
               >
@@ -2235,29 +3050,17 @@ export type GetAllSearchQuery = { __typename?: 'Query' } & {
   collections?: Maybe<
     Array<
       Maybe<
-        { __typename?: 'Collection' } & Pick<
-          Collection,
-          'id' | 'title' | 'slug'
-        > & {
+        { __typename?: 'Collection' } & Pick<Collection, 'id' | 'title' | 'slug'> & {
             products?: Maybe<
               Array<
                 Maybe<
-                  { __typename?: 'Product' } & Pick<
-                    Product,
-                    'id' | 'title' | 'description' | 'price' | 'slug'
-                  > & {
+                  { __typename?: 'Product' } & Pick<Product, 'id' | 'title' | 'description' | 'price' | 'slug'> & {
                       images?: Maybe<
                         Array<
                           Maybe<
                             { __typename?: 'UploadFile' } & Pick<
                               UploadFile,
-                              | 'width'
-                              | 'height'
-                              | 'url'
-                              | 'previewUrl'
-                              | 'formats'
-                              | 'alternativeText'
-                              | 'caption'
+                              'width' | 'height' | 'url' | 'previewUrl' | 'formats' | 'alternativeText' | 'caption'
                             >
                           >
                         >

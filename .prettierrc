@@ -5,7 +5,7 @@
   "useTabs": false,
   "overrides": [
     {
-      "files": ["framework/saleor/**/*"],
+      "files": ["framework/strapi/**/*"],
       "options": {
         "printWidth": 120
       }
