@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { nomalizeCart } from '@framework/utils/normalize'
 import type { CartEndpoint } from '.'
 
@@ -61,22 +60,12 @@ const removeItem: CartEndpoint['handlers']['removeItem'] = async ({ res, req, bo
   let result: { data?: any } = {}
   const { cookies } = req
   const cartId = cookies[config.cartCookie]
-=======
-import type { CartEndpoint } from '.'
-
-const removeItem: CartEndpoint['handlers']['removeItem'] = async ({
-  res,
-  body: { cartId, itemId },
-  config,
-}) => {
->>>>>>> 1f5c670e9483a0337d9868cd78aefdd8b4861edd
   if (!cartId || !itemId) {
     return res.status(400).json({
       data: null,
       errors: [{ message: 'Invalid request' }],
     })
   }
-<<<<<<< HEAD
   if (cartId) {
     try {
       console.log({ itemId })
@@ -90,24 +79,6 @@ const removeItem: CartEndpoint['handlers']['removeItem'] = async ({
     }
   }
   res.status(200).json({ data: nomalizeCart(result.data?.deleteQuoteItem?.quoteItem?.quote) })
-=======
-
-  // const result = await config.storeApiFetch<{ data: any } | null>(
-  //   `/v3/carts/${cartId}/items/${itemId}?include=line_items.physical_items.options`,
-  //   { method: 'DELETE' }
-  // )
-  // const data = result?.data ?? null
-
-  // res.setHeader(
-  //   'Set-Cookie',
-  //   data
-  //     ? // Update the cart cookie
-  //       getCartCookie(config.cartCookie, cartId, config.cartCookieMaxAge)
-  //     : // Remove the cart cookie if the cart was removed (empty items)
-  //       getCartCookie(config.cartCookie)
-  // )
-  // res.status(200).json({ data: data && normalizeCart(data) })
->>>>>>> 1f5c670e9483a0337d9868cd78aefdd8b4861edd
 }
 
 export default removeItem
