@@ -61,54 +61,57 @@ const createQuoteMutation = /* GraphQl */ `mutation createQuote ($userId: ID) {
     }
   }
 }`
-const getQuoteQuery = /* GraphQl */ `query getQuote($id: ID!) {
-  quote(id: $id){
-  id
-  customer{
-    last_name
-    first_name
-  }
-  email
-  customer{
+const getQuoteQuery = /* GraphQl */ `query getQuote($id: ID!, $userId: ID) {
+  quotes(where: { id: $id, users_permissions_user: $userId }) {
     id
-    first_name
-    last_name
-  }
-  active
-  taxesIncluded
-  lineItemsSubtotalPrice
-  lineItems{
-    id
-    productId{
-      id
-      title
-      slug
-      description
-      price
-      images{
-        url
-        width
-        height
-      }
+    customer {
+      last_name
+      first_name
     }
-    quantity
-    name
-    variantId
-    path
-    variant{
+    email
+    customer {
       id
-      sku
+      first_name
+      last_name
+    }
+    active
+    taxesIncluded
+    lineItemsSubtotalPrice
+    lineItems {
+      id
+      productId {
+        id
+        title
+        description
+        price
+        images {
+          url
+          width
+          height
+        }
+      }
+      quantity
       name
-      image{
-        url
-        width
-        height
+      variantId
+      path
+      variant {
+        id
+        sku
+        name
+        image {
+          url
+          width
+          height
+        }
       }
     }
+    users_permissions_user {
+      id
+      email
+    }
+    subtotalPrice
+    totalPrice
   }
-  subtotalPrice
-  totalPrice
-}
 }`
 
 export function getCartCookie(name: string, cartId?: string, maxAge?: number) {
@@ -131,20 +134,9 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
   let result: { data?: any } = {}
   const { cookies } = req
   debugParams({cookies})
-  let userId =null
+  let userId = null
   const cartId = cookies[config.cartCookie]
   const token = cookies[STRAPI_JWT]
-  if (cartId) {
-    try {
-      result = await config.fetch(getQuoteQuery, {
-        variables: {
-          id: cartId,
-        },
-      })
-    } catch (error) {
-      console.error(error)
-    }
-  }
   if (token) {
     try {
       const result = await config.fetch(loginQuery, undefined, {
@@ -158,7 +150,20 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
       console.error({ result })
     }
   }
-  if (!cartId || !result.data?.quote?.id) {
+  if (cartId) {
+    try {
+      result = await config.fetch(getQuoteQuery, {
+        variables: {
+          id: cartId,
+          userId
+        },
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  if (!cartId || !result.data?.quotes?.[0]) {
     try {
       let result = await config.fetch(createQuoteMutation,{
         variables:{
