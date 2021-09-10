@@ -1,7 +1,7 @@
 {
-//   "editor.formatOnSave": false,
-//   "editor.codeActionsOnSave": {
-//     "source.organizeImports": false,
-//     "source.fixAll.eslint": false
-//   },
-// }
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": false,
+    "source.fixAll.eslint": false
+  }
+}
