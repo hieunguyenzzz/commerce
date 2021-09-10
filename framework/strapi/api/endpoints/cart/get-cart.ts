@@ -1,8 +1,7 @@
-
 import { nomalizeCart } from '@framework/utils/normalize'
 import { CookieSerializeOptions, serialize } from 'cookie'
 import type { CartEndpoint } from '.'
-const createQuoteMutation = /* GraphQl */`mutation createQuote {
+const createQuoteMutation = /* GraphQl */ `mutation createQuote {
   createQuote{
     quote{
       id
@@ -53,7 +52,7 @@ const createQuoteMutation = /* GraphQl */`mutation createQuote {
     }
   }
 }`
-const getQuoteQuery = /* GraphQl */`query getQuote($id: ID!) {
+const getQuoteQuery = /* GraphQl */ `query getQuote($id: ID!) {
   quote(id: $id){
   id
   customer{
@@ -103,13 +102,7 @@ const getQuoteQuery = /* GraphQl */`query getQuote($id: ID!) {
 }
 }`
 
-
-
-export function getCartCookie(
-  name: string,
-  cartId?: string,
-  maxAge?: number
-) {
+export function getCartCookie(name: string, cartId?: string, maxAge?: number) {
   const options: CookieSerializeOptions =
     cartId && maxAge
       ? {
@@ -125,33 +118,27 @@ export function getCartCookie(
 }
 
 // Return current cart info
-const getCart: CartEndpoint['handlers']['getCart'] = async ({
-  res,
-  req,
-  config,
-}) => {
+const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }) => {
   let result: { data?: any } = {}
   const { cookies } = req
   const cartId = cookies[config.cartCookie]
+  console.log({ cartId })
   if (cartId) {
     try {
-      result = await config.fetch(
-        getQuoteQuery,{
-          variables:{
-            id:cartId
-          }
-        }
-      )
+      result = await config.fetch(getQuoteQuery, {
+        variables: {
+          id: cartId,
+        },
+      })
     } catch (error) {
       console.error(error)
     }
   }
-  
-  if(!cartId||!result.data?.quote?.id){
+
+  console.log({ result })
+  if (!cartId || !result.data?.quote?.id) {
     try {
-      let result = await config.fetch(
-        createQuoteMutation,
-      )
+      let result = await config.fetch(createQuoteMutation)
       if (result.data.createQuote?.quote?.id) {
         res.setHeader(
           'Set-Cookie',
@@ -163,7 +150,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
     }
   }
   res.status(200).json({
-    data:nomalizeCart(result.data?.quote )
+    data: nomalizeCart(result.data?.quote),
   })
 }
 

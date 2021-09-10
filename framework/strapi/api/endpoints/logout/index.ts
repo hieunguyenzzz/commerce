@@ -1,10 +1,10 @@
-import { GetAPISchema, createEndpoint } from '@commerce/api'
+import { createEndpoint, GetAPISchema } from '@commerce/api'
 import logoutEndpoint from '@commerce/api/endpoints/logout'
+import { LogoutSchema } from '@commerce/types/logout'
 import { StrapiAPI } from '@framework/api'
-
 import logout from './logout'
 
-export type LogoutAPI = GetAPISchema<StrapiAPI, any>
+export type LogoutAPI = GetAPISchema<StrapiAPI, LogoutSchema>
 
 export type LogoutEndpoint = LogoutAPI['endpoint']
 

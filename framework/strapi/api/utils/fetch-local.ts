@@ -1,6 +1,5 @@
 import type { GraphQLFetcher } from '@commerce/api'
 import { FetcherError } from '@commerce/utils/errors'
-import { STRAPI_TOKEN } from '@framework/const'
 import { StrapiConfig } from '..'
 import fetch from './fetch'
 
@@ -8,13 +7,12 @@ const fetchGraphqlApi: (getConfig: () => StrapiConfig) => GraphQLFetcher =
   (getConfig) =>
   async (query: string, { variables, preview } = {}, fetchOptions) => {
     const config = getConfig()
-    const res = await fetch(config.commerceUrl+'/graphql', {
+    const res = await fetch(config.commerceUrl + '/graphql', {
       ...fetchOptions,
       method: 'POST',
       headers: {
         ...fetchOptions?.headers,
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + STRAPI_TOKEN,
       },
       body: JSON.stringify({
         query,

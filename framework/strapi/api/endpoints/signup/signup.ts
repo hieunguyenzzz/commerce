@@ -1,21 +1,20 @@
 import { STRAPI_JWT } from '@framework/const'
-import { UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsRegisterInput } from '@framework/schema'
 import { serialize } from 'cookie'
 import type { SignupEndpoint } from '.'
-import { getCartCookie } from '../cart/get-cart'
-const signupMutation = /* GraphQl */`mutation signupMutation ($email:String! $username:String! $password:String!) {
-  register(input:{
-    email: $email,
-    username:$username,
-    password:$password
-  }){
-    jwt
-    user{
-      email
-      username
+const signupMutation = /* GraphQl */ `mutation signupMutation ($email:String! $username:String! $password:String! ) {
+    register(input:{
+      email: $email,
+      username:$username,
+      password:$password
+    }){
+      jwt
+      user{
+        email
+        username
+      }
     }
-  }
-}`
+  }`
+
 const signup: SignupEndpoint['handlers']['signup'] = async ({
   res,
   body: { firstName, lastName, email, password },
@@ -32,28 +31,25 @@ const signup: SignupEndpoint['handlers']['signup'] = async ({
   // TODO: validate the password and email
   // Passwords must be at least 7 characters and contain both alphabetic
   // and numeric characters.
-  let result 
+  let result
   try {
-    result = await config.fetch(
-      signupMutation,{
-        variables:{
-          email, username:email, password
-        }
-      }
-    )
+    result = await config.fetch(signupMutation, {
+      variables: {
+        email,
+        username: email,
+        password,
+      },
+    })
   } catch (error) {
     // throw new Error("Email is already taken.")
     return res.status(400).json({
       data: null,
-      errors: [{ message: "Email is already taken." }],
+      errors: [{ message: 'Email is already taken.' }],
     })
   }
-  res.setHeader(
-    'Set-Cookie',
-    serialize(STRAPI_JWT, result.data.register.jwt || '', {})
-  )
+  res.setHeader('Set-Cookie', serialize(STRAPI_JWT, result.data.register.jwt || '', {}))
   return res.status(200).json({
-    data:result?.data?.register
+    data: result?.data?.register,
   })
 }
 

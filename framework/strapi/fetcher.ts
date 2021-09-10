@@ -23,15 +23,13 @@ const fetcher: Fetcher = async ({
   method = 'POST',
   variables,
   query,
-  body:bodyObj
+  body: bodyObj,
 }) => {
   // console.log('fetcher',url,query)
   const hasBody = Boolean(variables || bodyObj)
   const { locale, ...vars } = variables ?? {}
-  const body = hasBody
-  ? JSON.stringify(variables ? { query, variables: vars } : bodyObj)
-  : undefined
-const headers = hasBody ? { 'Content-Type': 'application/json' } : undefined
+  const body = hasBody ? JSON.stringify(variables ? { query, variables: vars } : bodyObj) : undefined
+  const headers = hasBody ? { 'Content-Type': 'application/json' } : undefined
   const res = await fetch(url, {
     method,
     body,
