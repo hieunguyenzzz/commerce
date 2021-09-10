@@ -10,7 +10,7 @@ export const fetcher: HookFetcherFn<GetCartHook> = async ({
   input: { cartId },
   fetch,
 }) => {
-  console.log({options})
+  // console.log({options})
   return await fetch(options)
 }
 

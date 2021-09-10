@@ -68,7 +68,6 @@ const removeItem: CartEndpoint['handlers']['removeItem'] = async ({ res, req, bo
   }
   if (cartId) {
     try {
-      console.log({ itemId })
       result = await config.fetch(deleteQuoteItemMutation, {
         variables: {
           id: itemId,

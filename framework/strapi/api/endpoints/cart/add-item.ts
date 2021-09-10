@@ -61,7 +61,6 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
   body: { item },
   config,
 }) => {
-  console.log({item})
   if (!item) {
     return res.status(400).json({
       data: null,

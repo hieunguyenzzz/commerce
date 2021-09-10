@@ -78,7 +78,7 @@ const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
   }
   if (cartId) {
     try {
-      console.log({item,itemId})
+      // console.log({item,itemId})
       result = await config.fetch(
         updateQuoteItemMutation,{
           variables:{

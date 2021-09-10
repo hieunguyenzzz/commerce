@@ -25,7 +25,7 @@ const fetcher: Fetcher = async ({
   query,
   body:bodyObj
 }) => {
-  console.log('fetcher',url,query)
+  // console.log('fetcher',url,query)
   const hasBody = Boolean(variables || bodyObj)
   const { locale, ...vars } = variables ?? {}
   const body = hasBody

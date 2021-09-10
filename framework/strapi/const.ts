@@ -13,4 +13,6 @@ export const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
 export const STRAPI_TOKEN = process.env.STRAPI_TOKEN 
 
 
+export const STRAPI_JWT = 'strapi_jwt'
+
 
