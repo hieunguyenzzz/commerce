@@ -2,7 +2,7 @@ export function debugParams(arg:any) {
     if (process.env.NODE_ENV === 'production') {
         throw new Error("This can use on development only")
       }
-    console.log('debugParams',arg)
+      console.log('debugParams',JSON.stringify({arg},null,2))
     return arg
 }
 export const debugFunction =(fn:any)=>(...args:any)=> {
@@ -10,8 +10,8 @@ export const debugFunction =(fn:any)=>(...args:any)=> {
         throw new Error("This can use on development only")
       }
     console.log('debugFunction','fn',fn)
-    console.log('debugFunction','f...argsn',...args)
+    console.log('debugFunction',JSON.stringify({args},null,2))
     const result =fn(...args)
-    console.log('debugFunction','result',result)
+    console.log('debugFunction',JSON.stringify({result},null,2))
     return result
 }

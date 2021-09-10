@@ -15,7 +15,6 @@ const fetchStoreApi =
       headers: {
         ...options?.headers,
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + STRAPI_TOKEN,
       },
     })
     const json = await res.json()

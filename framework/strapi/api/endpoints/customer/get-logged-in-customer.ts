@@ -1,4 +1,5 @@
 import { STRAPI_JWT } from '@framework/const'
+import { debugParams } from '@lib/debug'
 import type { CustomerEndpoint } from '.'
 const loginQuery = /* GraphQl */ `query{
   me{
@@ -7,7 +8,7 @@ const loginQuery = /* GraphQl */ `query{
     email
   }
 }`
-const signup: CustomerEndpoint['handlers']['getLoggedInCustomer'] = async ({ res, config, req }) => {
+const getLoggedInCustomer: CustomerEndpoint['handlers']['getLoggedInCustomer'] = async ({ res, config, req }) => {
   const { cookies } = req
   const token = cookies[STRAPI_JWT]
   // TODO: Add proper validations with something like Ajv
@@ -31,4 +32,4 @@ const signup: CustomerEndpoint['handlers']['getLoggedInCustomer'] = async ({ res
   res.status(200).json({ data: null })
 }
 
-export default signup
+export default getLoggedInCustomer

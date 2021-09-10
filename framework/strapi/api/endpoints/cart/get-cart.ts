@@ -1,8 +1,17 @@
+import { STRAPI_JWT } from '@framework/const'
 import { nomalizeCart } from '@framework/utils/normalize'
+import { debugParams } from '@lib/debug'
 import { CookieSerializeOptions, serialize } from 'cookie'
 import type { CartEndpoint } from '.'
-const createQuoteMutation = /* GraphQl */ `mutation createQuote {
-  createQuote{
+const loginQuery = /* GraphQl */ `query{
+  me{
+    id
+    username
+    email
+  }
+}`
+const createQuoteMutation = /* GraphQl */ `mutation createQuote ($userId: ID) {
+  createQuote(input:{data:{users_permissions_user:$userId}}){
     quote{
       id
   customer{
@@ -121,8 +130,10 @@ export function getCartCookie(name: string, cartId?: string, maxAge?: number) {
 const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }) => {
   let result: { data?: any } = {}
   const { cookies } = req
+  debugParams({cookies})
+  let userId =null
   const cartId = cookies[config.cartCookie]
-  console.log({ cartId })
+  const token = cookies[STRAPI_JWT]
   if (cartId) {
     try {
       result = await config.fetch(getQuoteQuery, {
@@ -134,11 +145,26 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
       console.error(error)
     }
   }
-
-  console.log({ result })
+  if (token) {
+    try {
+      const result = await config.fetch(loginQuery, undefined, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      debugParams({ result })
+      userId = result?.data?.me.id
+    } catch (error) {
+      console.error({ result })
+    }
+  }
   if (!cartId || !result.data?.quote?.id) {
     try {
-      let result = await config.fetch(createQuoteMutation)
+      let result = await config.fetch(createQuoteMutation,{
+        variables:{
+          userId:userId
+        }
+      })
       if (result.data.createQuote?.quote?.id) {
         res.setHeader(
           'Set-Cookie',

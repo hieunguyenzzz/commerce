@@ -1,8 +1,18 @@
+import { UsersPermissionsUser } from '@framework/schema'
 import { nomalizeCart } from '@framework/utils/normalize'
+import { debugParams } from '@lib/debug'
 import { Stripe } from 'stripe'
 import type { CheckoutEndpoint } from '.'
-import { NEXT_PUBLIC_HOST_URL, STRIPE_SECRET_KEY } from '../../../const'
-const getQuoteQuery = /* GraphQl */`query getQuote($id: ID!) {
+import { NEXT_PUBLIC_HOST_URL, STRAPI_JWT, STRIPE_SECRET_KEY } from '../../../const'
+
+const loginQuery = /* GraphQl */ `query{
+  me{
+    id
+    username
+    email
+  }
+}`
+const getQuoteQuery = /* GraphQl */ `query getQuote($id: ID!) {
   quote(id: $id){
   id
   customer{
@@ -47,6 +57,10 @@ const getQuoteQuery = /* GraphQl */`query getQuote($id: ID!) {
       }
     }
   }
+  users_permissions_user{
+    id
+    email
+  }
   subtotalPrice
   totalPrice
 }
@@ -54,52 +68,54 @@ const getQuoteQuery = /* GraphQl */`query getQuote($id: ID!) {
 /* tslint:disable-next-line */
 const stripe = new Stripe(STRIPE_SECRET_KEY || '', {} as Stripe.StripeConfig)
 
-const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, config }) => {
-  console.log('checkout')
+const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, config, ...rest }) => {
+  // console.log('checkout')
   let result: { data?: any } = {}
   const { cookies } = req
+  debugParams({cookies})
+  let email = 'guest@gmail.com'
+  const token = cookies[STRAPI_JWT]
   const cartId = cookies[config.cartCookie]
   if (cartId) {
     try {
-      result = await config.fetch(
-        getQuoteQuery,{
-          variables:{
-            id:cartId
-          }
-        }
-      )
+      result = await config.fetch(getQuoteQuery, {
+        variables: {
+          id: cartId,
+        },
+      })
     } catch (error) {
       console.error(error)
     }
   }
-  let cart = nomalizeCart(result.data?.quote )
+  let cart = nomalizeCart(result.data?.quote)
   let checkoutUrl
   let session
+  debugParams({token,cookies})
   try {
-    session = await stripe.checkout.sessions.create({
-      customer_email: cart.email,
-      payment_method_types: ['card'],
-      mode: 'payment',
-      line_items: [
-        ...cart.lineItems.map(lineItem=>({
-          quantity: lineItem.quantity,
-          price_data: {
-            currency: cart.currency.code,
-            unit_amount: lineItem.variant.price,
-            product_data: {
-              name: lineItem.name,
-              images: [
-                lineItem.variant.image?.url+'',
-              ],
+    session = await stripe.checkout.sessions.create(
+      debugParams({
+        customer_email: cart.email||'guest@gmail.com',
+        payment_method_types: ['card'],
+        mode: 'payment',
+        line_items: [
+          ...cart.lineItems.map((lineItem) => ({
+            quantity: lineItem.quantity,
+            price_data: {
+              currency: cart.currency.code,
+              unit_amount: lineItem.variant.price,
+              product_data: {
+                name: lineItem.name,
+                images: [lineItem.variant.image?.url + ''],
+              },
             },
-          },
-        })),
-      ],
-      cancel_url: NEXT_PUBLIC_HOST_URL + '/cart',
-      success_url: NEXT_PUBLIC_HOST_URL + '/checkout/success',
-      shipping_address_collection: { allowed_countries: ['VN', 'US'] },
-    })
-    console.log(session)
+          })),
+        ],
+        cancel_url: NEXT_PUBLIC_HOST_URL + '/cart',
+        success_url: NEXT_PUBLIC_HOST_URL + '/checkout/success',
+        shipping_address_collection: { allowed_countries: ['VN', 'US'] },
+      })
+    )
+    // console.log(session)
 
     // res.status(200).json({ data: { sessionId: session?.id } })
     checkoutUrl = session.url

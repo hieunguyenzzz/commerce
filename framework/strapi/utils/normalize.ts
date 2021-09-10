@@ -1,5 +1,5 @@
 import { NEXT_PUBLIC_STRAPI_URL } from '@framework/const'
-import { Global, Product as StrapiProduct } from 'framework/strapi/schema'
+import { Global, Product as StrapiProduct, Quote } from 'framework/strapi/schema'
 import type { Product, ProductVariant } from '../types/product'
 import type {Cart } from '../types/cart'
 export const nomalizeCart = (quote: any): Cart => {
@@ -8,7 +8,7 @@ export const nomalizeCart = (quote: any): Cart => {
   const cart: any = {
     id: '' + quote?.id,
     customerId: '0',
-    email: 'no.noo.nooo.yes@gmail.com',
+    email: quote?.users_permissions_user?.email,
     currency: { code: 'USD' },
     taxesIncluded: quote?.taxesIncluded || false,
     lineItems: [],
