@@ -47,7 +47,7 @@ const signup: SignupEndpoint['handlers']['signup'] = async ({
       errors: [{ message: 'Email is already taken.' }],
     })
   }
-  res.setHeader('Set-Cookie', serialize(STRAPI_JWT, result.data.register.jwt || '', {}))
+  res.setHeader('Set-Cookie', serialize(STRAPI_JWT, result.data.register.jwt || '', {path:'/'}))
   return res.status(200).json({
     data: result?.data?.register,
   })
