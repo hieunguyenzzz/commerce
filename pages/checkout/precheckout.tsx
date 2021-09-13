@@ -44,7 +44,7 @@ export default function Checkout() {
   useEffect(() => {
     if(!isLoading){
       if(customer) {
-        router.push('/checkout')
+        router.push('/cart')
       }else{
         setModalView('LOGIN_VIEW')
       }

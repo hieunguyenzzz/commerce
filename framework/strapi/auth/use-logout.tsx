@@ -1,6 +1,7 @@
 import useLogout, { UseLogout } from '@commerce/auth/use-logout'
 import { LogoutHook } from '@commerce/types/logout'
 import type { MutationHook } from '@commerce/utils/types'
+import { useCart } from 'framework/local/cart'
 import { useCallback } from 'react'
 import useCustomer from '../customer/use-customer'
 
@@ -14,11 +15,13 @@ export const handler: MutationHook<LogoutHook> = {
   useHook:
     ({ fetch }) =>
     () => {
-      const { mutate, revalidate } = useCustomer()
+      const { mutate, } = useCustomer()
+      const { mutate:mutateCart,revalidate } = useCart()
       return useCallback(
         async function logout() {
           const data = await fetch()
           await mutate(null, false)
+          await revalidate()
           return data
         },
         [fetch, mutate]
