@@ -70,6 +70,7 @@ const stripe = new Stripe(STRIPE_SECRET_KEY || '', {} as Stripe.StripeConfig)
 const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, config, ...rest }) => {
   // console.log('checkout')
   let result: { data?: any } = {}
+  let email
   const { cookies } = req
   // debugParams({cookies})
   const token = cookies[STRAPI_JWT]
@@ -89,6 +90,15 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, co
   let checkoutUrl
   let session
   // debugParams({token,cookies})
+  if (token) {
+    const result = await config.fetch(loginQuery, undefined, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+    console.log({ result })
+    email=result?.data?.me?.email
+  }
   try {
     session = await stripe.checkout.sessions.create(
       {
