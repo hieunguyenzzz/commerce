@@ -73,7 +73,6 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, co
   let result: { data?: any } = {}
   const { cookies } = req
   debugParams({cookies})
-  let email = 'guest@gmail.com'
   const token = cookies[STRAPI_JWT]
   const cartId = cookies[config.cartCookie]
   if (cartId) {

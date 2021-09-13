@@ -42,7 +42,7 @@ const login: LoginEndpoint['handlers']['login'] = async ({ res, body: { email, p
       errors: [{ message: 'Cannot find an account that matches the provided credentials' }],
     })
   }
-  res.setHeader('Set-Cookie', serialize(STRAPI_JWT, result.data.login.jwt || '', {}))
+  res.setHeader('Set-Cookie', serialize(STRAPI_JWT, result.data.login.jwt || '', {path: '/'}))
   return res.status(200).json({
     data: result?.data?.login,
   })
