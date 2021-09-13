@@ -1,5 +1,4 @@
 import { STRAPI_JWT } from '@framework/const'
-import { debugParams } from '@lib/debug'
 import type { CustomerEndpoint } from '.'
 const loginQuery = /* GraphQl */ `query{
   me{

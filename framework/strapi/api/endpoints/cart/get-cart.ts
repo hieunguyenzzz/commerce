@@ -1,8 +1,6 @@
 import { STRAPI_JWT } from '@framework/const'
 import { getCartCookie } from '@framework/utils'
 import { nomalizeCart } from '@framework/utils/normalize'
-import { debugParams } from '@lib/debug'
-import { CookieSerializeOptions, serialize } from 'cookie'
 import type { CartEndpoint } from '.'
 const loginQuery = /* GraphQl */ `query{
   me{
@@ -135,7 +133,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
   let result: { data?: any } = {}
   let cart 
   const { cookies } = req
-  debugParams({cookies})
+  // debugParams({cookies})
   let userId
   let cartId = cookies[config.cartCookie]
   const token = cookies[STRAPI_JWT]
@@ -146,7 +144,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
           authorization: `Bearer ${token}`,
         },
       })
-      debugParams({ result })
+      // debugParams({ result })
       userId = result?.data?.me.id
       const customerQueryData = await config.fetch(
         customerQuery,
@@ -178,7 +176,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
       console.error(error)
     }
   }
-  debugParams({cartId,result})
+  // debugParams({cartId,result})
   if (!cartId || !result.data?.quotes?.[0]) {
     try {
       let result = await config.fetch(createQuoteMutation,{

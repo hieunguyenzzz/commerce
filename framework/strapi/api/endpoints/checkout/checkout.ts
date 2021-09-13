@@ -1,6 +1,5 @@
 import { UsersPermissionsUser } from '@framework/schema'
 import { nomalizeCart } from '@framework/utils/normalize'
-import { debugParams } from '@lib/debug'
 import { Stripe } from 'stripe'
 import type { CheckoutEndpoint } from '.'
 import { NEXT_PUBLIC_HOST_URL, STRAPI_JWT, STRIPE_SECRET_KEY } from '../../../const'
@@ -72,7 +71,7 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, co
   // console.log('checkout')
   let result: { data?: any } = {}
   const { cookies } = req
-  debugParams({cookies})
+  // debugParams({cookies})
   const token = cookies[STRAPI_JWT]
   const cartId = cookies[config.cartCookie]
   if (cartId) {
@@ -89,10 +88,10 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, co
   let cart = nomalizeCart(result.data?.quote)
   let checkoutUrl
   let session
-  debugParams({token,cookies})
+  // debugParams({token,cookies})
   try {
     session = await stripe.checkout.sessions.create(
-      debugParams({
+      {
         customer_email: cart.email||'guest@gmail.com',
         payment_method_types: ['card'],
         mode: 'payment',
@@ -112,7 +111,7 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, co
         cancel_url: NEXT_PUBLIC_HOST_URL + '/cart',
         success_url: NEXT_PUBLIC_HOST_URL + '/checkout/success',
         shipping_address_collection: { allowed_countries: ['VN', 'US'] },
-      })
+      }
     )
     // console.log(session)
 
