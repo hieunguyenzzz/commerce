@@ -31,7 +31,7 @@ export const handler: MutationHook<LoginHook> = {
     return useCallback(
       async function login(input) {
         const data = await fetch({ input })
-        await revalidate()
+        window.location.reload()
         return data
       },
       [fetch, revalidate]

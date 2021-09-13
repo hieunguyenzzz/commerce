@@ -20,8 +20,7 @@ export const handler: MutationHook<LogoutHook> = {
       return useCallback(
         async function logout() {
           const data = await fetch()
-          await mutate(null, false)
-          await revalidate()
+          window.location.reload()
           return data
         },
         [fetch, mutate]
