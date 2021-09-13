@@ -1,6 +1,7 @@
 import { STRAPI_JWT } from '@framework/const'
 import { serialize } from 'cookie'
 import type { LogoutEndpoint } from '.'
+import { getCartCookie } from '../cart/get-cart'
 
 const logout: LogoutEndpoint['handlers']['logout'] = async ({ res, body: { redirectTo }, config }) => {
   // Remove the cookie

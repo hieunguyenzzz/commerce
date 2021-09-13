@@ -134,7 +134,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
   let result: { data?: any } = {}
   const { cookies } = req
   debugParams({cookies})
-  let userId = null
+  let userId
   const cartId = cookies[config.cartCookie]
   const token = cookies[STRAPI_JWT]
   if (token) {
@@ -162,7 +162,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
       console.error(error)
     }
   }
-
+  debugParams({cartId,result})
   if (!cartId || !result.data?.quotes?.[0]) {
     try {
       let result = await config.fetch(createQuoteMutation,{
@@ -181,7 +181,7 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
     }
   }
   res.status(200).json({
-    data: nomalizeCart(result.data?.quote),
+    data: nomalizeCart(result.data?.quotes?.[0]),
   })
 }
 
