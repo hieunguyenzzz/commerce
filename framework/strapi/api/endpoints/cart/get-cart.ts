@@ -10,6 +10,19 @@ const loginQuery = /* GraphQl */ `query{
     email
   }
 }`
+const customerQuery = /* GraphQl */ `query($id:ID!){
+  user(id:$id){
+    id
+    username
+    email
+    first_name
+    last_name
+    quotes(limit:1) {
+    	id
+    }
+    
+  }
+}`
 const createQuoteMutation = /* GraphQl */ `mutation createQuote ($userId: ID) {
   createQuote(input:{data:{users_permissions_user:$userId}}){
     quote{
@@ -132,10 +145,11 @@ export function getCartCookie(name: string, cartId?: string, maxAge?: number) {
 // Return current cart info
 const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }) => {
   let result: { data?: any } = {}
+  let cart 
   const { cookies } = req
   debugParams({cookies})
   let userId
-  const cartId = cookies[config.cartCookie]
+  let cartId = cookies[config.cartCookie]
   const token = cookies[STRAPI_JWT]
   if (token) {
     try {
@@ -146,6 +160,20 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
       })
       debugParams({ result })
       userId = result?.data?.me.id
+      const customerQueryData = await config.fetch(
+        customerQuery,
+        {
+          variables: {
+            id: userId,
+          },
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      cartId = customerQueryData?.data?.user?.quotes?.[0].id
     } catch (error) {
       console.error({ result })
     }
@@ -180,6 +208,10 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
       console.error(error)
     }
   }
+  res.setHeader(
+    'Set-Cookie',
+    getCartCookie(config.cartCookie, cartId, config.cartCookieMaxAge)
+  )
   res.status(200).json({
     data: nomalizeCart(result.data?.quotes?.[0]),
   })

@@ -8,6 +8,19 @@ const loginQuery = /* GraphQl */ `query{
     email
   }
 }`
+const customerQuery = /* GraphQl */ `query($id:ID!){
+  user(id:$id){
+    id
+    username
+    email
+    first_name
+    last_name
+    quotes(limit:1) {
+    	id
+    }
+    
+  }
+}`
 const getLoggedInCustomer: CustomerEndpoint['handlers']['getLoggedInCustomer'] = async ({ res, config, req }) => {
   const { cookies } = req
   const token = cookies[STRAPI_JWT]
@@ -20,14 +33,29 @@ const getLoggedInCustomer: CustomerEndpoint['handlers']['getLoggedInCustomer'] =
       },
     })
     console.log({ result })
-    const customer = result?.data?.me
-    if (!customer) {
+    const userID = result?.data?.me?.id
+    if (!userID) {
       return res.status(400).json({
         data: null,
         errors: [{ message: 'Customer not found', code: 'not_found' }],
       })
     }
-    return res.status(200).json({ data: { customer } })
+    const customerQueryData = await config.fetch(
+      customerQuery,
+      {
+        variables: {
+          id: userID,
+        },
+      },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    return res.status(200).json({ data: {
+      customer:customerQueryData?.data?.user
+    } })
   }
   res.status(200).json({ data: null })
 }

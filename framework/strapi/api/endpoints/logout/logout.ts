@@ -7,6 +7,7 @@ const logout: LogoutEndpoint['handlers']['logout'] = async ({ res, body: { redir
   // Remove the cookie
   res.setHeader('Set-Cookie', serialize(STRAPI_JWT, '', { maxAge: -1 }))
 
+
   // Only allow redirects to a relative URL
   res.status(200).json({ data: null })
 }
