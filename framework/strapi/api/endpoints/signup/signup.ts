@@ -1,4 +1,5 @@
 import { STRAPI_JWT } from '@framework/const'
+import { getCartAuth } from '@framework/utils'
 import { serialize } from 'cookie'
 import type { SignupEndpoint } from '.'
 const signupMutation = /* GraphQl */ `mutation signupMutation ($email:String! $username:String! $password:String! ) {
@@ -47,7 +48,7 @@ const signup: SignupEndpoint['handlers']['signup'] = async ({
       errors: [{ message: 'Email is already taken.' }],
     })
   }
-  res.setHeader('Set-Cookie', serialize(STRAPI_JWT, result.data.register.jwt || '', {path:'/'}))
+  res.setHeader('Set-Cookie',getCartAuth(STRAPI_JWT,result.data.register.jwt || '') )
   return res.status(200).json({
     data: result?.data?.register,
   })

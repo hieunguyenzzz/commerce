@@ -1,4 +1,5 @@
 import { STRAPI_JWT } from '@framework/const'
+import { getCartCookie } from '@framework/utils'
 import { nomalizeCart } from '@framework/utils/normalize'
 import { debugParams } from '@lib/debug'
 import { CookieSerializeOptions, serialize } from 'cookie'
@@ -127,20 +128,7 @@ const getQuoteQuery = /* GraphQl */ `query getQuote($id: ID!, $userId: ID) {
   }
 }`
 
-export function getCartCookie(name: string, cartId?: string, maxAge?: number) {
-  const options: CookieSerializeOptions =
-    cartId && maxAge
-      ? {
-          maxAge,
-          expires: new Date(Date.now() + maxAge * 1000),
-          secure: process.env.NODE_ENV === 'production',
-          path: '/',
-          sameSite: 'lax',
-        }
-      : { maxAge: -1, path: '/' } // Removes the cookie
 
-  return serialize(name, cartId || '', options)
-}
 
 // Return current cart info
 const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }) => {

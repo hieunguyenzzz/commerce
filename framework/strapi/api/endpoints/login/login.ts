@@ -1,4 +1,5 @@
 import { STRAPI_JWT } from '@framework/const'
+import { getCartAuth } from '@framework/utils'
 import { serialize } from 'cookie'
 import type { LoginEndpoint } from '.'
 
@@ -42,7 +43,7 @@ const login: LoginEndpoint['handlers']['login'] = async ({ res, body: { email, p
       errors: [{ message: 'Cannot find an account that matches the provided credentials' }],
     })
   }
-  res.setHeader('Set-Cookie', serialize(STRAPI_JWT, result.data.login.jwt || '', {path: '/'}))
+  res.setHeader('Set-Cookie',getCartAuth(STRAPI_JWT, result.data.login.jwt || '') )
   return res.status(200).json({
     data: result?.data?.login,
   })
