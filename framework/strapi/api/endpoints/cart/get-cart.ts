@@ -207,11 +207,13 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }
     } catch (error) {
       console.error(error)
     }
+  }else{
+    res.setHeader(
+      'Set-Cookie',
+      getCartCookie(config.cartCookie, cartId, config.cartCookieMaxAge)
+    )
   }
-  res.setHeader(
-    'Set-Cookie',
-    getCartCookie(config.cartCookie, cartId, config.cartCookieMaxAge)
-  )
+
   res.status(200).json({
     data: nomalizeCart(result.data?.quotes?.[0]),
   })
