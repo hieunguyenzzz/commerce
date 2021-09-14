@@ -102,7 +102,7 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, co
   try {
     session = await stripe.checkout.sessions.create(
       {
-        customer_email: cart.email||'guest@gmail.com',
+        customer_email: email||cart.email||'guest@gmail.com',
         payment_method_types: ['card'],
         mode: 'payment',
         line_items: [
