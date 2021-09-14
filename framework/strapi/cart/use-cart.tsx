@@ -8,11 +8,13 @@ export default useCart as UseCart<typeof handler>
 
 export const fetcher: HookFetcherFn<GetCartHook> = async ({
   options,
-  input: { cartId },
+  input,
   fetch,
 }) => {
   // console.log({options})
-  return await fetch(options)
+  return await fetch({
+    ...options,
+  })
 }
 
 export const handler: SWRHook<GetCartHook> = {
@@ -23,10 +25,7 @@ export const handler: SWRHook<GetCartHook> = {
   fetcher,
   useHook: ({ useData, }) => (input) => {
     const response = useData({
-      input:{
-        cartId:123
-      },
-      swrOptions: { revalidateOnFocus: false, ...input?.swrOptions },
+      swrOptions: { revalidateOnFocus: false, ...input?.swrOptions, },
     })
     return useMemo(
       () =>

@@ -2,6 +2,7 @@ import { STRAPI_JWT } from '@framework/const'
 import { getCartCookie } from '@framework/utils'
 import { nomalizeCart } from '@framework/utils/normalize'
 import { customerQuery, getQuoteQuery, loginQuery } from '@framework/utils/queries'
+import { copyFileSync } from 'fs'
 import type { CartEndpoint } from '.'
 
 const createQuoteMutation = /* GraphQl */ `mutation createQuote ($userId: ID) {
@@ -60,7 +61,7 @@ const createQuoteMutation = /* GraphQl */ `mutation createQuote ($userId: ID) {
 
 
 // Return current cart info
-const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, config }) => {
+const getCart: CartEndpoint['handlers']['getCart'] = async ({ res, req, body,config }) => {
   let result: { data?: any } = {}
   let cart 
   const { cookies } = req

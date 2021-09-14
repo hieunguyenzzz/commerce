@@ -31,7 +31,6 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, co
       result = await config.fetch(getQuoteQuery, {
         variables: {
           id: cartId,
-          userId
         },
       })
     } catch (error) {
