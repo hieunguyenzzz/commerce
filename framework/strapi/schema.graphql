@@ -133,7 +133,6 @@ type Customer {
   first_name: String
   last_name: String
   email: String
-  password: String
   published_at: DateTime
   orders(sort: String, limit: Int, start: Int, where: JSON): [Order]
 }
@@ -174,11 +173,6 @@ type CustomerConnectionLast_name {
   connection: CustomerConnection
 }
 
-type CustomerConnectionPassword {
-  key: String
-  connection: CustomerConnection
-}
-
 type CustomerConnectionPublished_at {
   key: DateTime
   connection: CustomerConnection
@@ -196,7 +190,6 @@ type CustomerGroupBy {
   first_name: [CustomerConnectionFirst_name]
   last_name: [CustomerConnectionLast_name]
   email: [CustomerConnectionEmail]
-  password: [CustomerConnectionPassword]
   published_at: [CustomerConnectionPublished_at]
 }
 
@@ -324,7 +317,6 @@ union Morph =
   | CustomerConnectionFirst_name
   | CustomerConnectionLast_name
   | CustomerConnectionEmail
-  | CustomerConnectionPassword
   | CustomerConnectionPublished_at
   | createCustomerPayload
   | updateCustomerPayload
@@ -346,6 +338,24 @@ union Morph =
   | createNotePayload
   | updateNotePayload
   | deleteNotePayload
+  | OrderItem
+  | OrderItemConnection
+  | OrderItemAggregator
+  | OrderItemAggregatorSum
+  | OrderItemAggregatorAvg
+  | OrderItemAggregatorMin
+  | OrderItemAggregatorMax
+  | OrderItemGroupBy
+  | OrderItemConnectionId
+  | OrderItemConnectionCreated_at
+  | OrderItemConnectionUpdated_at
+  | OrderItemConnectionProductId
+  | OrderItemConnectionQuantity
+  | OrderItemConnectionOrder
+  | OrderItemConnectionPublished_at
+  | createOrderItemPayload
+  | updateOrderItemPayload
+  | deleteOrderItemPayload
   | Order
   | OrderConnection
   | OrderAggregator
@@ -419,6 +429,7 @@ union Morph =
   | QuoteConnectionSubtotalPrice
   | QuoteConnectionTotalPrice
   | QuoteConnectionActive
+  | QuoteConnectionUsers_permissions_user
   | createQuotePayload
   | updateQuotePayload
   | deleteQuotePayload
@@ -486,6 +497,8 @@ union Morph =
   | UsersPermissionsUserConnectionConfirmed
   | UsersPermissionsUserConnectionBlocked
   | UsersPermissionsUserConnectionRole
+  | UsersPermissionsUserConnectionFirst_name
+  | UsersPermissionsUserConnectionLast_name
   | createUserPayload
   | updateUserPayload
   | deleteUserPayload
@@ -506,6 +519,9 @@ type Mutation {
   createNote(input: createNoteInput): createNotePayload
   updateNote(input: updateNoteInput): updateNotePayload
   deleteNote(input: deleteNoteInput): deleteNotePayload
+  createOrderItem(input: createOrderItemInput): createOrderItemPayload
+  updateOrderItem(input: updateOrderItemInput): updateOrderItemPayload
+  deleteOrderItem(input: deleteOrderItemInput): deleteOrderItemPayload
   createOrder(input: createOrderInput): createOrderPayload
   updateOrder(input: updateOrderInput): updateOrderPayload
   deleteOrder(input: deleteOrderInput): deleteOrderPayload
@@ -650,6 +666,7 @@ type Order {
   customer: Customer
   published_at: DateTime
   products(sort: String, limit: Int, start: Int, where: JSON): [Product]
+  lineItems(sort: String, limit: Int, start: Int, where: JSON): [OrderItem]
 }
 
 type OrderAggregator {
@@ -699,6 +716,102 @@ type OrderGroupBy {
 input OrderInput {
   customer: ID
   products: [ID]
+  lineItems: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+type OrderItem {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  productId: Product
+  Quantity: Int
+  order: Order
+  published_at: DateTime
+}
+
+type OrderItemAggregator {
+  count: Int
+  totalCount: Int
+  sum: OrderItemAggregatorSum
+  avg: OrderItemAggregatorAvg
+  min: OrderItemAggregatorMin
+  max: OrderItemAggregatorMax
+}
+
+type OrderItemAggregatorAvg {
+  Quantity: Float
+}
+
+type OrderItemAggregatorMax {
+  Quantity: Float
+}
+
+type OrderItemAggregatorMin {
+  Quantity: Float
+}
+
+type OrderItemAggregatorSum {
+  Quantity: Float
+}
+
+type OrderItemConnection {
+  values: [OrderItem]
+  groupBy: OrderItemGroupBy
+  aggregate: OrderItemAggregator
+}
+
+type OrderItemConnectionCreated_at {
+  key: DateTime
+  connection: OrderItemConnection
+}
+
+type OrderItemConnectionId {
+  key: ID
+  connection: OrderItemConnection
+}
+
+type OrderItemConnectionOrder {
+  key: ID
+  connection: OrderItemConnection
+}
+
+type OrderItemConnectionProductId {
+  key: ID
+  connection: OrderItemConnection
+}
+
+type OrderItemConnectionPublished_at {
+  key: DateTime
+  connection: OrderItemConnection
+}
+
+type OrderItemConnectionQuantity {
+  key: Int
+  connection: OrderItemConnection
+}
+
+type OrderItemConnectionUpdated_at {
+  key: DateTime
+  connection: OrderItemConnection
+}
+
+type OrderItemGroupBy {
+  id: [OrderItemConnectionId]
+  created_at: [OrderItemConnectionCreated_at]
+  updated_at: [OrderItemConnectionUpdated_at]
+  productId: [OrderItemConnectionProductId]
+  Quantity: [OrderItemConnectionQuantity]
+  order: [OrderItemConnectionOrder]
+  published_at: [OrderItemConnectionPublished_at]
+}
+
+input OrderItemInput {
+  productId: ID
+  Quantity: Int
+  order: ID
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -837,6 +950,9 @@ type Query {
   note(id: ID!, publicationState: PublicationState): Note
   notes(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Note]
   notesConnection(sort: String, limit: Int, start: Int, where: JSON): NoteConnection
+  orderItem(id: ID!, publicationState: PublicationState): OrderItem
+  orderItems(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [OrderItem]
+  orderItemsConnection(sort: String, limit: Int, start: Int, where: JSON): OrderItemConnection
   order(id: ID!, publicationState: PublicationState): Order
   orders(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Order]
   ordersConnection(sort: String, limit: Int, start: Int, where: JSON): OrderConnection
@@ -879,6 +995,7 @@ type Quote {
   subtotalPrice: Float
   totalPrice: Float
   active: Boolean
+  users_permissions_user: UsersPermissionsUser
   lineItems(sort: String, limit: Int, start: Int, where: JSON): [QuoteItem]
 }
 
@@ -976,6 +1093,11 @@ type QuoteConnectionUpdated_at {
   connection: QuoteConnection
 }
 
+type QuoteConnectionUsers_permissions_user {
+  key: ID
+  connection: QuoteConnection
+}
+
 type QuoteGroupBy {
   id: [QuoteConnectionId]
   created_at: [QuoteConnectionCreated_at]
@@ -988,6 +1110,7 @@ type QuoteGroupBy {
   subtotalPrice: [QuoteConnectionSubtotalPrice]
   totalPrice: [QuoteConnectionTotalPrice]
   active: [QuoteConnectionActive]
+  users_permissions_user: [QuoteConnectionUsers_permissions_user]
 }
 
 input QuoteInput {
@@ -1000,6 +1123,7 @@ input QuoteInput {
   subtotalPrice: Float
   totalPrice: Float
   active: Boolean
+  users_permissions_user: ID
   created_by: ID
   updated_by: ID
 }
@@ -1391,6 +1515,9 @@ input UserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
+  first_name: String
+  last_name: String
+  quotes: [ID]
   created_by: ID
   updated_by: ID
 }
@@ -1499,6 +1626,9 @@ type UsersPermissionsUser {
   confirmed: Boolean
   blocked: Boolean
   role: UsersPermissionsRole
+  first_name: String
+  last_name: String
+  quotes(sort: String, limit: Int, start: Int, where: JSON): [Quote]
 }
 
 type UsersPermissionsUserAggregator {
@@ -1532,8 +1662,18 @@ type UsersPermissionsUserConnectionEmail {
   connection: UsersPermissionsUserConnection
 }
 
+type UsersPermissionsUserConnectionFirst_name {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
 type UsersPermissionsUserConnectionId {
   key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionLast_name {
+  key: String
   connection: UsersPermissionsUserConnection
 }
 
@@ -1567,6 +1707,8 @@ type UsersPermissionsUserGroupBy {
   confirmed: [UsersPermissionsUserConnectionConfirmed]
   blocked: [UsersPermissionsUserConnectionBlocked]
   role: [UsersPermissionsUserConnectionRole]
+  first_name: [UsersPermissionsUserConnectionFirst_name]
+  last_name: [UsersPermissionsUserConnectionLast_name]
 }
 
 input createCollectionInput {
@@ -1595,6 +1737,14 @@ type createNotePayload {
 
 input createOrderInput {
   data: OrderInput
+}
+
+input createOrderItemInput {
+  data: OrderItemInput
+}
+
+type createOrderItemPayload {
+  orderItem: OrderItem
 }
 
 type createOrderPayload {
@@ -1687,6 +1837,14 @@ type deleteNotePayload {
 
 input deleteOrderInput {
   where: InputID
+}
+
+input deleteOrderItemInput {
+  where: InputID
+}
+
+type deleteOrderItemPayload {
+  orderItem: OrderItem
 }
 
 type deleteOrderPayload {
@@ -1836,6 +1994,16 @@ input editNoteInput {
 input editOrderInput {
   customer: ID
   products: [ID]
+  lineItems: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editOrderItemInput {
+  productId: ID
+  Quantity: Int
+  order: ID
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -1865,6 +2033,7 @@ input editQuoteInput {
   subtotalPrice: Float
   totalPrice: Float
   active: Boolean
+  users_permissions_user: ID
   created_by: ID
   updated_by: ID
 }
@@ -1910,6 +2079,9 @@ input editUserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
+  first_name: String
+  last_name: String
+  quotes: [ID]
   created_by: ID
   updated_by: ID
 }
@@ -1952,6 +2124,15 @@ type updateNotePayload {
 input updateOrderInput {
   where: InputID
   data: editOrderInput
+}
+
+input updateOrderItemInput {
+  where: InputID
+  data: editOrderItemInput
+}
+
+type updateOrderItemPayload {
+  orderItem: OrderItem
 }
 
 type updateOrderPayload {

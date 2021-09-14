@@ -1,25 +1,7 @@
 import { STRAPI_JWT } from '@framework/const'
+import { customerQuery, loginQuery } from '@framework/utils/queries'
 import type { CustomerEndpoint } from '.'
-const loginQuery = /* GraphQl */ `query{
-  me{
-    id
-    username
-    email
-  }
-}`
-const customerQuery = /* GraphQl */ `query($id:ID!){
-  user(id:$id){
-    id
-    username
-    email
-    first_name
-    last_name
-    quotes(limit:1) {
-    	id
-    }
-    
-  }
-}`
+
 const getLoggedInCustomer: CustomerEndpoint['handlers']['getLoggedInCustomer'] = async ({ res, config, req }) => {
   const { cookies } = req
   const token = cookies[STRAPI_JWT]

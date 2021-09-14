@@ -1,69 +1,10 @@
 import { UsersPermissionsUser } from '@framework/schema'
 import { nomalizeCart } from '@framework/utils/normalize'
+import { getQuoteQuery, loginQuery } from '@framework/utils/queries'
 import { Stripe } from 'stripe'
 import type { CheckoutEndpoint } from '.'
 import { NEXT_PUBLIC_HOST_URL, STRAPI_JWT, STRIPE_SECRET_KEY } from '../../../const'
 
-const loginQuery = /* GraphQl */ `query{
-  me{
-    id
-    username
-    email
-  }
-}`
-const getQuoteQuery = /* GraphQl */ `query getQuote($id: ID!) {
-  quote(id: $id){
-  id
-  customer{
-    last_name
-    first_name
-  }
-  email
-  customer{
-    id
-    first_name
-    last_name
-  }
-  active
-  taxesIncluded
-  lineItemsSubtotalPrice
-  lineItems{
-    id
-    productId{
-      id
-      title
-      slug
-      description
-      price
-      images{
-        url
-        width
-        height
-      }
-    }
-    quantity
-    name
-    variantId
-    path
-    variant{
-      id
-      sku
-      name
-      image{
-        url
-        width
-        height
-      }
-    }
-  }
-  users_permissions_user{
-    id
-    email
-  }
-  subtotalPrice
-  totalPrice
-}
-}`
 /* tslint:disable-next-line */
 const stripe = new Stripe(STRIPE_SECRET_KEY || '', {} as Stripe.StripeConfig)
 

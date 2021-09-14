@@ -1,27 +1,9 @@
 import { STRAPI_JWT } from '@framework/const'
 import { getCartCookie } from '@framework/utils'
 import { nomalizeCart } from '@framework/utils/normalize'
+import { customerQuery, getQuoteQuery, loginQuery } from '@framework/utils/queries'
 import type { CartEndpoint } from '.'
-const loginQuery = /* GraphQl */ `query{
-  me{
-    id
-    username
-    email
-  }
-}`
-const customerQuery = /* GraphQl */ `query($id:ID!){
-  user(id:$id){
-    id
-    username
-    email
-    first_name
-    last_name
-    quotes(limit:1) {
-    	id
-    }
-    
-  }
-}`
+
 const createQuoteMutation = /* GraphQl */ `mutation createQuote ($userId: ID) {
   createQuote(input:{data:{users_permissions_user:$userId}}){
     quote{
@@ -73,58 +55,7 @@ const createQuoteMutation = /* GraphQl */ `mutation createQuote ($userId: ID) {
     }
   }
 }`
-const getQuoteQuery = /* GraphQl */ `query getQuote($id: ID!, $userId: ID) {
-  quotes(where: { id: $id, users_permissions_user: $userId }) {
-    id
-    customer {
-      last_name
-      first_name
-    }
-    email
-    customer {
-      id
-      first_name
-      last_name
-    }
-    active
-    taxesIncluded
-    lineItemsSubtotalPrice
-    lineItems {
-      id
-      productId {
-        id
-        title
-        description
-        price
-        images {
-          url
-          width
-          height
-        }
-      }
-      quantity
-      name
-      variantId
-      path
-      variant {
-        id
-        sku
-        name
-        image {
-          url
-          width
-          height
-        }
-      }
-    }
-    users_permissions_user {
-      id
-      email
-    }
-    subtotalPrice
-    totalPrice
-  }
-}`
+
 
 
 
