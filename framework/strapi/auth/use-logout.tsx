@@ -1,6 +1,7 @@
 import useLogout, { UseLogout } from '@commerce/auth/use-logout'
 import { LogoutHook } from '@commerce/types/logout'
 import type { MutationHook } from '@commerce/utils/types'
+import { CART_COOKIE, STRAPI_JWT } from '@framework/const'
 import { useCart } from 'framework/local/cart'
 import Cookies from 'js-cookie'
 import { useCallback } from 'react'
@@ -21,8 +22,8 @@ export const handler: MutationHook<LogoutHook> = {
       return useCallback(
         async function logout() {
           // const data = await fetch()
-          Cookies.remove('strapi_jwt')
-          Cookies.remove('cartCookie')
+          Cookies.remove(STRAPI_JWT)
+          Cookies.remove(CART_COOKIE)
           window.location.reload()
           return null
         },

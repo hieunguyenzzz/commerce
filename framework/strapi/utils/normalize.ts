@@ -36,12 +36,10 @@ export const nomalizeCart = (quote: any): Cart => {
     discounts: [],
   }))
   cart.totalPrice = cart.lineItems.reduce((result = 0, value: any) => {
-    console.log(result, value.quantity * value.variant.price, result + value.quantity * value.variant.price)
     return result + Number(value.quantity * value.variant.price)
   }, 0)
   cart.subtotalPrice = cart.totalPrice
   cart.lineItemsSubtotalPrice = cart.totalPrice
-  console.log({ cart })
   return cart
 }
 

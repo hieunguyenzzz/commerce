@@ -14,5 +14,6 @@ export const STRAPI_TOKEN = process.env.STRAPI_TOKEN
 
 
 export const STRAPI_JWT = 'strapi_jwt'
+export const CART_COOKIE = 'cartCookie'
 
 
