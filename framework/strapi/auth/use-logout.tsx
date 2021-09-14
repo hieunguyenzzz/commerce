@@ -2,6 +2,7 @@ import useLogout, { UseLogout } from '@commerce/auth/use-logout'
 import { LogoutHook } from '@commerce/types/logout'
 import type { MutationHook } from '@commerce/utils/types'
 import { useCart } from 'framework/local/cart'
+import Cookies from 'js-cookie'
 import { useCallback } from 'react'
 import useCustomer from '../customer/use-customer'
 
@@ -19,9 +20,11 @@ export const handler: MutationHook<LogoutHook> = {
       const { mutate:mutateCart,revalidate } = useCart()
       return useCallback(
         async function logout() {
-          const data = await fetch()
+          // const data = await fetch()
+          Cookies.remove('strapi_jwt')
+          Cookies.remove('cartCookie')
           window.location.reload()
-          return data
+          return null
         },
         [fetch, mutate]
       )
