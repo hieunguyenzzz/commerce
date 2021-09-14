@@ -9,6 +9,7 @@ import { Bag, Cross, Check } from '@components/icons'
 import useCart from '@framework/cart/use-cart'
 import usePrice from '@framework/product/use-price'
 import SidebarLayout from '@components/common/SidebarLayout'
+import cart from 'pages/api/cart'
 
 const CartSidebarView: FC = () => {
   const { closeSidebar, setSidebarView } = useUI()
@@ -114,7 +115,7 @@ const CartSidebarView: FC = () => {
                   Proceed to Checkout ({total})
                 </Button>
               ) : (
-                <Button href="/checkout/precheckout" Component="a" width="100%">
+                <Button href={"/checkout/precheckout?cartId="+data?.id} Component="a" width="100%">
                   Proceed to Checkout
                 </Button>
               )}

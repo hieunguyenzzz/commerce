@@ -13,10 +13,10 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, co
   let result: { data?: any } = {}
   let email
   let userId
-  const { cookies } = req
-  // debugParams({cookies})
+  const { cookies,query } = req
+  console.log({cookies,query})
   const token = cookies[STRAPI_JWT]
-  const cartId = cookies[CART_COOKIE]
+  const cartId =query?.cartId|| cookies[CART_COOKIE]
   if (token) {
     const result = await config.fetch(loginQuery, undefined, {
       headers: {
@@ -63,8 +63,8 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({ req, res, co
             },
           })),
         ],
-        cancel_url: NEXT_PUBLIC_HOST_URL + '/cart',
-        success_url: NEXT_PUBLIC_HOST_URL + '/checkout/success',
+        cancel_url: NEXT_PUBLIC_HOST_URL + '/cart?cartId='+cartId,
+        success_url: NEXT_PUBLIC_HOST_URL + '/checkout/success?cartId='+cartId,
         shipping_address_collection: { allowed_countries: ['VN', 'US'] },
       }
     )

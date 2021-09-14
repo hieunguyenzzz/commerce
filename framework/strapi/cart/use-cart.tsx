@@ -5,6 +5,7 @@ import { HookFetcherFn, SWRHook } from '@commerce/utils/types'
 import { useMemo } from 'react'
 
 export default useCart as UseCart<typeof handler>
+
 export const fetcher: HookFetcherFn<GetCartHook> = async ({
   options,
   input: { cartId },
@@ -20,8 +21,11 @@ export const handler: SWRHook<GetCartHook> = {
     method: 'GET',
   },
   fetcher,
-  useHook: ({ useData }) => (input) => {
+  useHook: ({ useData, }) => (input) => {
     const response = useData({
+      input:{
+        cartId:123
+      },
       swrOptions: { revalidateOnFocus: false, ...input?.swrOptions },
     })
     return useMemo(

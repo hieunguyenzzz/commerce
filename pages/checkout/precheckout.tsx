@@ -1,6 +1,7 @@
 import { ForgotPassword, LoginView, SignUpView } from '@components/auth'
 import { Layout } from '@components/common'
 import { LoadingDots, useUI } from '@components/ui'
+import { useCart } from '@framework/cart'
 import { useCustomer } from '@framework/customer'
 import commerce from '@lib/api/commerce'
 import type { GetStaticPropsContext } from 'next'
@@ -34,22 +35,27 @@ const AuthView: FC<{ modalView: string; closeModal(): any }> = ({
 }
 
 const AuthUI: FC = () => {
-  const { displayModal, closeModal, modalView } = useUI()
+  const { closeModal, modalView } = useUI()
   return <AuthView modalView={modalView} closeModal={closeModal} />
 }
 export default function Checkout() {
-  const { setModalView,openModal,displayModal} = useUI()
+  const { setModalView} = useUI()
   const router  = useRouter()
+  const cartId=  router.query.cartId
   const {data:customer,isLoading} = useCustomer()
   useEffect(() => {
     if(!isLoading){
       if(customer) {
-        router.push('/checkout')
+        if(cartId){
+          router.push('/checkout?cartId='+cartId)
+        }else{
+          router.push('/checkout')
+        }
       }else{
         setModalView('LOGIN_VIEW')
       }
     }
-  }, [customer,isLoading])
+  }, [customer,isLoading,cartId])
   return (
     <div className="flex w-full  fit justify-center items-center py-12">
       {isLoading||customer&&<LoadingDots/>}

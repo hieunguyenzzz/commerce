@@ -15,7 +15,7 @@ export function getCartCookie(name: string, cartId?: string, maxAge?: number) {
     return serialize(name, cartId || '', options)
   }
 
-  export function getCartAuth(name: string, token?: string) {
+  export function getAuthCookie(name: string, token?: string) {
     const options: CookieSerializeOptions =
     token 
         ? {
