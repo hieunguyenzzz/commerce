@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'jit',
   future: {
     purgeLayersByDefault: true,
     applyComplexClasses: true,
@@ -37,15 +38,6 @@ module.exports = {
         'accent-7': 'var(--accent-7)',
         'accent-8': 'var(--accent-8)',
         'accent-9': 'var(--accent-9)',
-        violet: 'var(--violet)',
-        'violet-light': 'var(--violet-light)',
-        'violet-dark': 'var(--violet-dark)',
-        pink: 'var(--pink)',
-        'pink-light': 'var(--pink-light)',
-        cyan: 'var(--cyan)',
-        blue: 'var(--blue)',
-        green: 'var(--green)',
-        red: 'var(--red)',
       },
       textColor: {
         base: 'var(--text-base)',
