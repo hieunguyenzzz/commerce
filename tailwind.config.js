@@ -7,7 +7,7 @@ module.exports = {
   purge: {
     content: [
       './pages/**/*.{js,ts,jsx,tsx}',
-      './components/**/*.{js,ts,jsx,tsx}',
+      './theme/components/**/*.{js,ts,jsx,tsx}',
     ],
     options: {
       safelist: {
@@ -16,6 +16,9 @@ module.exports = {
     },
   },
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
       maxWidth: {
         '8xl': '1920px',

@@ -21,11 +21,11 @@
       "@config/*": ["config/*"],
       "@assets/*": ["assets/*"],
       "@components/*": ["theme/components/*"],
+      "components/*": ["theme/components/*"],
       "@commerce": ["framework/commerce"],
       "@commerce/*": ["framework/commerce/*"],
       "@framework": ["framework/strapi"],
-      "@framework/*": ["framework/strapi/*"],
-      "tailwind.config.js": ["theme/tailwind.config.js"]
+      "@framework/*": ["framework/strapi/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
@@ -35,6 +35,7 @@
     "./framework/shopify",
     "./framework/swell",
     "./framework/vendure",
-    "./framework/saleor"
+    "./framework/saleor",
+    "./components"
   ]
 }
