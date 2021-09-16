@@ -1,13 +1,17 @@
 // import DashboardAllProductsGrid from '@components/common/DashboardAllProductsGrid'
 import { Layout } from '@components/common'
+import { useCustomer } from '@framework/customer'
 
 export default function Dashboard() {
+  const { data: customer } = useCustomer()
   return (
     <section className="flex-1 felx flex-col bg-gray-50 ">
       <div className="py-20  radius-for-skewed flex-1">
         <div className="border-b">
           <div className="mb-16 max-w-xl mx-auto px-4 text-center">
-            <span className="text-green-600 font-bold">Hello, Hieu Nguyen</span>
+            <span className="text-green-600 font-bold">
+              Hello, {customer?.username}
+            </span>
             <h2 className="text-4xl lg:text-5xl font-bold font-heading lg:leading-normal">
               Dashboard
             </h2>

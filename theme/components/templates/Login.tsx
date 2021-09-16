@@ -1,26 +1,37 @@
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
-import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+import AuthWrap from '@components/common/AuthWrap'
+import { useUI } from '@components/ui/context'
+import { useLogin } from '@framework/auth'
+import classNames from 'classnames'
+import { validate } from 'email-validator'
+import { useCallback, useEffect, useState } from 'react'
 import logoImage from '../../profile-html-templates/atis-assets/logo/atis/atis-mono-black.svg'
 import faImage from '../../profile-html-templates/atis-assets/social/facebook-logo.png'
 import goimage from '../../profile-html-templates/atis-assets/social/google-logo.png'
-export async function getStaticProps({
-  preview,
-  locale,
-  locales,
-}: GetStaticPropsContext) {
-  const config = { locale, locales }
-  return {
-    props: {},
-    revalidate: 60,
-  }
-}
-
-export default function Login({}: InferGetStaticPropsType<
-  typeof getStaticProps
->) {
+function LoginView({
+  handleLogin,
+  message,
+  setModalView,
+  setEmail,
+  setPassword,
+  loading,
+  disabled,
+}: {
+  handleLogin: (e: React.SyntheticEvent<EventTarget>) => Promise<void>
+  message: string
+  setModalView: any
+  setEmail: any
+  setPassword: any
+  loading: boolean
+  disabled: boolean
+}) {
   return (
-    <div className="">
-      <section className="py-10 lg:py-20 bg-gray-50 min-h-screen">
+    <div onSubmit={handleLogin}>
+      <section
+        className={classNames('py-10 lg:py-20 bg-gray-50 min-h-screen', {
+          'opacity-25 pointer-events-none': loading,
+        })}
+      >
         <div className="container mx-auto px-4">
           <div className="max-w-xl mx-auto">
             <div className="mb-10">
@@ -32,6 +43,17 @@ export default function Login({}: InferGetStaticPropsType<
                 />
               </a>
             </div>
+            {message && (
+              <div className="text-red border border-red p-3">
+                {message}. Did you {` `}
+                <a
+                  className="text-accent-9 inline font-bold hover:underline cursor-pointer"
+                  onClick={() => setModalView('FORGOT_VIEW')}
+                >
+                  forgot your password?
+                </a>
+              </div>
+            )}
             <div className="mb-6 lg:mb-10 p-6 lg:p-12 bg-white shadow rounded">
               <div className="mb-6">
                 <span className="text-gray-500">Sign In</span>
@@ -43,6 +65,7 @@ export default function Login({}: InferGetStaticPropsType<
                     className="w-full text-xs bg-gray-50 outline-none"
                     type="email"
                     placeholder="name@email.com"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   <svg
                     className="h-6 w-6 ml-4 my-auto text-gray-300"
@@ -64,6 +87,7 @@ export default function Login({}: InferGetStaticPropsType<
                     className="w-full text-xs bg-gray-50 outline-none"
                     type="password"
                     placeholder="Enter your password"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <button>
                     <svg
@@ -89,12 +113,15 @@ export default function Login({}: InferGetStaticPropsType<
                   </button>
                 </div>
                 <div className="text-center">
-                  <button className="mb-4 w-full py-4 bg-green-600 hover:bg-green-700 rounded text-sm font-bold text-gray-50">
+                  <button
+                    type="submit"
+                    className="mb-4 w-full py-4 bg-green-600 hover:bg-green-700 rounded text-sm font-bold text-gray-50"
+                  >
                     Sign In
                   </button>
                   <a
                     className="text-xs text-green-600 hover:underline"
-                    href="#"
+                    href="/forgot-password"
                   >
                     Forgot password?
                   </a>
@@ -125,3 +152,70 @@ export default function Login({}: InferGetStaticPropsType<
     </div>
   )
 }
+const Login = () => {
+  // Form State
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+  const [dirty, setDirty] = useState(false)
+  const [disabled, setDisabled] = useState(false)
+  const { setModalView, closeModal } = useUI()
+
+  const login = useLogin()
+
+  const handleLogin = async (e: React.SyntheticEvent<EventTarget>) => {
+    e.preventDefault()
+
+    if (!dirty && !disabled) {
+      setDirty(true)
+      handleValidation()
+    }
+
+    try {
+      setLoading(true)
+      setMessage('')
+      await login({
+        email,
+        password,
+      })
+      setLoading(false)
+      closeModal()
+    } catch ({ errors }) {
+      // setMessage(errors?.[0].message)
+      setLoading(false)
+      setDisabled(false)
+    }
+  }
+
+  const handleValidation = useCallback(() => {
+    // Test for Alphanumeric password
+    const validPassword = /^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password)
+
+    // Unable to send form unless fields are valid.
+    if (dirty) {
+      setDisabled(!validate(email) || password.length < 7 || !validPassword)
+    }
+  }, [email, password, dirty])
+
+  useEffect(() => {
+    handleValidation()
+  }, [handleValidation])
+
+  return (
+    <LoginView
+      {...{
+        handleLogin,
+        message,
+        setModalView,
+        setEmail,
+        setPassword,
+        loading,
+        disabled,
+      }}
+    />
+  )
+}
+
+export default Login
+Login.Layout = AuthWrap

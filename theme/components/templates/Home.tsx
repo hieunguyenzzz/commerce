@@ -2,12 +2,16 @@
 import { Container, Layout } from '@components/common'
 import Button from '@components/common/Button'
 import Image from '@components/common/Image'
+import Link from '@components/common/Link'
+import { useDATA } from '@components/data/context'
+import { Product } from '@framework/types/product'
 
 function CardList({
   subHeading = 'Dolor sit amet consectutar',
   heading = 'Featured Projects',
   url = '/projects',
 }) {
+  const { products = [] } = useDATA()
   return (
     <div>
       <div className="mb-16 flex flex-wrap justify-center md:justify-between items-center">
@@ -22,7 +26,17 @@ function CardList({
         </Button>
       </div>
       <div className="flex flex-wrap -mx-4 mb-4">
-        {new Array(12).fill(<Card />)}
+        {products.map((p: Product, i: number) => (
+          <Card
+            key={i}
+            {...{
+              buttonUrl: '/product/' + p.slug,
+              heading: p.name,
+              imageUrl: p.images?.[0]?.url,
+              subHeading: `${p.price.value} ${p.price.currencyCode}`,
+            }}
+          />
+        ))}
       </div>
       <div className="text-center">
         <a
@@ -49,13 +63,16 @@ function Card({
   buttonText?: string
 }) {
   return (
-    <div className="mb-8 w-full md:w-1/2 lg:w-1/3 px-4">
-      <div className="bg-white rounded">
-        <Image className="rounded-t object-cover h-[32rem]" src={imageUrl} />
+    <Link href={buttonUrl} className="mb-8 w-full md:w-1/2 lg:w-1/3 px-4">
+      <div className="bg-white rounded hover:shadow-xl transition-all">
+        <Image
+          className="rounded-t object-cover h-[32rem] w-full"
+          src={imageUrl}
+        />
         <div className="p-6">
           <span className="text-gray-400">{subHeading}</span>
           <h3 className="mb-4 text-2xl font-bold font-heading">{heading}</h3>
-          <Button variant="link" className="flex" href={buttonUrl}>
+          <Button variant="link" className="flex">
             <svg
               className="mr-3 w-6 h-6"
               xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +89,7 @@ function Card({
           </Button>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

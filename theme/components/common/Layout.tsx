@@ -1,4 +1,8 @@
 import { useDATA } from '@components/data/context'
+import { useLogout } from '@framework/auth'
+import { useCustomer } from '@framework/customer'
+import { useAcceptCookies } from '@lib/hooks/useAcceptCookies'
+import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import { Container } from '.'
 import logoImage from '../../profile-html-templates/atis-assets/logo/atis/atis-mono-black.svg'
@@ -6,7 +10,11 @@ import Button from './Button'
 import Link from './Link'
 
 const Layout: React.FC = ({ children }) => {
+  const { acceptedCookies, onAcceptCookies } = useAcceptCookies()
+  const { locale = 'en-US' } = useRouter()
   const { navigation } = useDATA()
+  const logout = useLogout()
+  const { data: customer } = useCustomer()
   return (
     <div>
       <header>
@@ -14,27 +22,77 @@ const Layout: React.FC = ({ children }) => {
           <div className="flex items-center">
             <ul className="hidden overflow-auto lg:flex  lg:items-center lg:w-auto lg:space-x-5"></ul>
             <div className="lg:absolute lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-y-1/2 lg:-translate-x-1/2">
-              <a className="text-3xl font-bold leading-none" href="#">
+              <Link className="text-3xl font-bold leading-none" href="/">
                 <img className="h-12" src={logoImage.src} width="auto" />
-              </a>
+              </Link>
             </div>
-            <Button
-              size="sm"
-              variant="secoundary"
-              Component={Link}
-              className="hidden lg:inline-block lg:ml-auto lg:mr-3 "
-              href="/login"
-            >
-              Sign In
-            </Button>
-            <Button
-              size="sm"
-              Component={Link}
-              className="hidden lg:inline-block"
-              href="/signup"
-            >
-              Sign up
-            </Button>
+            {customer ? (
+              <div className="hidden lg:inline-block group relative lg:ml-auto">
+                <Button
+                  size="sm"
+                  variant="secoundary"
+                  Component={Link}
+                  className="lg:ml-auto lg:mr-3 inline-block "
+                  href="/dashboard"
+                >
+                  <div className="text-xl">
+                    <svg
+                      stroke="currentColor"
+                      fill="currentColor"
+                      strokeWidth={0}
+                      viewBox="0 0 24 24"
+                      height="1em"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle fill="none" cx={12} cy={7} r={3} />
+                      <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
+                    </svg>
+                  </div>
+                </Button>
+                <div className="hidden absolute top-full py-3 group-hover:block bg-white shadow-xl right-0">
+                  <ul className="flex flex-col">
+                    <li>
+                      <Link
+                        className="py-2 px-6 hover:bg-gray-100 block"
+                        href="/dashboard"
+                      >
+                        Dashboard
+                      </Link>
+                    </li>
+                    <li>
+                      <div
+                        className="py-2 px-6 hover:bg-gray-100 block"
+                        onClick={logout}
+                      >
+                        Logout
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              <>
+                <Button
+                  size="sm"
+                  variant="secoundary"
+                  Component={Link}
+                  className="hidden lg:inline-block lg:ml-auto lg:mr-3 "
+                  href="/login"
+                >
+                  Sign In
+                </Button>
+                <Button
+                  size="sm"
+                  Component={Link}
+                  className="hidden lg:inline-block"
+                  href="/signup"
+                >
+                  Sign up
+                </Button>
+              </>
+            )}
+
             <div className="lg:hidden ml-auto">
               <button className="navbar-burger flex items-center text-green-600 p-3">
                 <svg

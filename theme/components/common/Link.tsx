@@ -1,6 +1,6 @@
 import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 type Props = NextLinkProps & {
-  className: string
+  className?: string
 }
 const Link: React.FC<Props> = ({ href, children, ...props }) => {
   return (
