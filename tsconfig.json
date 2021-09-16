@@ -36,6 +36,7 @@
     "./framework/swell",
     "./framework/vendure",
     "./framework/saleor",
-    "./components"
+    "./components",
+    "./pages_old"
   ]
 }
