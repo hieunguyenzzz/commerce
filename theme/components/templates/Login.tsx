@@ -1,5 +1,6 @@
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import AuthWrap from '@components/common/AuthWrap'
+import Link from '@components/common/Link'
 import { useUI } from '@components/ui/context'
 import { useLogin } from '@framework/auth'
 import classNames from 'classnames'
@@ -35,13 +36,13 @@ function LoginView({
         <div className="container mx-auto px-4">
           <div className="max-w-xl mx-auto">
             <div className="mb-10">
-              <a className="text-3xl font-bold leading-none" href="#">
+              <Link className="text-3xl font-bold leading-none" href="/">
                 <img
                   className="h-12 mx-auto"
                   src={logoImage.src}
                   width="auto"
                 />
-              </a>
+              </Link>
             </div>
             {message && (
               <div className="text-red border border-red p-3">
