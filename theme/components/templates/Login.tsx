@@ -27,7 +27,7 @@ function LoginView({
   disabled: boolean
 }) {
   return (
-    <div onSubmit={handleLogin}>
+    <div>
       <section
         className={classNames('py-10 lg:py-20 bg-gray-50 min-h-screen', {
           'opacity-25 pointer-events-none': loading,
@@ -115,6 +115,7 @@ function LoginView({
                 </div>
                 <div className="text-center">
                   <button
+                    onClick={handleLogin}
                     type="submit"
                     className="mb-4 w-full py-4 bg-green-600 hover:bg-green-700 rounded text-sm font-bold text-gray-50"
                   >

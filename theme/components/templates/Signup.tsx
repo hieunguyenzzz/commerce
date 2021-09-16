@@ -30,7 +30,7 @@ export function SignupView({
   setModalView: any
 }) {
   return (
-    <div onSubmit={handleSignup}>
+    <div>
       <section
         className={classNames('py-10 lg:py-20 bg-gray-50 min-h-screen', {
           'opacity-25 pointer-events-none': loading,
@@ -144,6 +144,7 @@ export function SignupView({
                 </div>
                 <div className="text-center">
                   <button
+                    onClick={handleSignup}
                     type="submit"
                     className="mb-2 w-full py-4 bg-green-600 hover:bg-green-700 rounded text-sm font-bold text-gray-50 transition duration-200"
                   >
