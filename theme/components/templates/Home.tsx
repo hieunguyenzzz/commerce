@@ -4,7 +4,7 @@ import Button from '@components/common/Button'
 import Image from '@components/common/Image'
 import Link from '@components/common/Link'
 import { useDATA } from '@components/data/context'
-import { Product } from '@framework/types/product'
+import type { Product } from '@framework/types/product'
 
 function CardList({
   subHeading = 'Dolor sit amet consectutar',
