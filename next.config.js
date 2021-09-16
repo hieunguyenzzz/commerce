@@ -14,6 +14,9 @@ const isStrapi = provider === 'strapi'
 
 module.exports = withCommerceConfig({
   commerce,
+  images: {
+    domains: ['strapi.hieunguyen.dev'],
+  },
   i18n: {
     locales: ['en-US', 'es'],
     defaultLocale: 'en-US',
