@@ -64,10 +64,14 @@ function Card({
   return (
     <Link href={buttonUrl} className="mb-8 w-full md:w-1/2 lg:w-1/3 px-4">
       <div className="bg-white rounded hover:shadow-xl transition-all">
-        <Image
-          className="rounded-t object-cover h-[32rem] w-full"
-          src={imageUrl}
-        />
+        <div className="rounded-t object-cover h-[32rem] w-full relative rounded-t ">
+          <Image
+            layout="fill"
+            className="object-cover h-full w-full relative rounded-t "
+            src={imageUrl}
+          />
+        </div>
+
         <div className="p-6">
           <span className="text-gray-400">{subHeading}</span>
           <h3 className="mb-4 text-2xl font-bold font-heading">{heading}</h3>
