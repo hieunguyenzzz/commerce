@@ -183,8 +183,9 @@ const Login = () => {
       })
       setLoading(false)
       closeModal()
-    } catch ({ errors }) {
+    } catch (errors) {
       // setMessage(errors?.[0].message)
+      console.error(errors)
       setLoading(false)
       setDisabled(false)
     }

@@ -213,6 +213,7 @@ const Signup = () => {
       setLoading(false)
       closeModal()
     } catch (e: any) {
+      console.error(e)
       setMessage(e?.errors?.[0].message)
       setLoading(false)
     }
