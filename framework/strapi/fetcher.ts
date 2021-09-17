@@ -26,27 +26,31 @@ const fetcher: Fetcher = async ({
   body: bodyObj,
 }) => {
   // console.log('fetcher',url,query)
-  const hasBody = Boolean(variables || bodyObj)
-  const { locale, ...vars } = variables ?? {}
-  const body = hasBody ? JSON.stringify(variables ? { query, variables: vars } : bodyObj) : undefined
-  const headers = hasBody ? { 'Content-Type': 'application/json' } : undefined
-  const res = await fetch(url, {
-    method,
-    body,
-    headers: {
-      ...headers,
-      ...(locale && {
-        'Accept-Language': locale,
-      }),
-    },
-  })
+  try {
+    const hasBody = Boolean(variables || bodyObj)
+    const { locale, ...vars } = variables ?? {}
+    const body = hasBody ? JSON.stringify(variables ? { query, variables: vars } : bodyObj) : undefined
+    const headers = hasBody ? { 'Content-Type': 'application/json' } : undefined
+    const res = await fetch(url, {
+      method,
+      body,
+      headers: {
+        ...headers,
+        ...(locale && {
+          'Accept-Language': locale,
+        }),
+      },
+    })
 
-  if (res.ok) {
-    const { data } = await res.json()
-    return data
+    if (res.ok) {
+      const { data } = await res.json()
+      return data
+    }
+
+    throw await getError(res)
+  } catch (error) {
+    console.error(error)
   }
-
-  throw await getError(res)
 }
 
 export default fetcher
