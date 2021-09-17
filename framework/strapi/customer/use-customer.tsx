@@ -16,7 +16,7 @@ export const handler: SWRHook<CustomerHook> = {
   useHook:
     ({ useData }) =>
     (input) => {
-      console.log({ useData, input })
+      console.log(JSON.stringify({ useData, input }))
       return useData({
         swrOptions: {
           revalidateOnFocus: false,
