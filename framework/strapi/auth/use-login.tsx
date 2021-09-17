@@ -18,7 +18,7 @@ export const handler: MutationHook<LoginHook> = {
         message: 'An email and password are required to login',
       })
     }
-
+    alert(123)
     return fetch({
       ...options,
       body: { email, password },

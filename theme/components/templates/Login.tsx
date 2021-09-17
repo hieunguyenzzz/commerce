@@ -172,7 +172,7 @@ const Login = () => {
 
   const login = useLogin()
 
-  const handleLogin = async (e: React.SyntheticEvent<EventTarget>) => {
+  const handleLogin = async () => {
     if (!dirty && !disabled) {
       setDirty(true)
       handleValidation()
