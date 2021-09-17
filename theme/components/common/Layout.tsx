@@ -140,13 +140,9 @@ const Layout: React.FC = ({ children }) => {
           <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25" />
           <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
             <div className="flex items-center mb-8">
-              <a className="mr-auto text-3xl font-bold leading-none" href="#">
-                <img
-                  className="h-10"
-                  src="atis-assets/logo/atis/atis-mono-black.svg"
-                  width="auto"
-                />
-              </a>
+              <Link className="text-3xl font-bold leading-none" href="/">
+                <img className="h-12" src={logoImage.src} width="auto" />
+              </Link>
               <button className="navbar-close">
                 <svg
                   className="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
@@ -191,36 +187,6 @@ const Layout: React.FC = ({ children }) => {
                   </a>
                 </li>
               </ul>
-            </div>
-            <div className="mt-auto">
-              <div className="pt-6">
-                <a
-                  className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold  bg-gray-50 hover:bg-gray-100 rounded-l-xl rounded-t-xl"
-                  href="#"
-                >
-                  Sign in
-                </a>
-                <a
-                  className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700 rounded-l-xl rounded-t-xl"
-                  href="#"
-                >
-                  Sign Up
-                </a>
-              </div>
-              <p className="my-4 text-xs text-center text-gray-400">
-                <span>© 2020 All rights reserved.</span>
-              </p>
-              <div className="text-center">
-                <a className="inline-block px-1" href="#">
-                  <img src="atis-assets/social/facebook.svg" />
-                </a>
-                <a className="inline-block px-1" href="#">
-                  <img src="atis-assets/social/twitter.svg" />
-                </a>
-                <a className="inline-block px-1" href="#">
-                  <img src="atis-assets/social/instagram.svg" />
-                </a>
-              </div>
             </div>
           </nav>
         </div>
