@@ -60,7 +60,14 @@ function LoginView({
                 <span className="text-gray-500">Sign In</span>
                 <h3 className="text-2xl font-bold">Join our community</h3>
               </div>
-              <form>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  handleLogin(e)
+                  return false
+                }}
+              >
                 <div className="mb-3 flex p-4 bg-gray-50 rounded">
                   <input
                     className="w-full text-xs bg-gray-50 outline-none"
@@ -115,7 +122,6 @@ function LoginView({
                 </div>
                 <div className="text-center">
                   <button
-                    onClick={handleLogin}
                     type="submit"
                     className="mb-4 w-full py-4 bg-green-600 hover:bg-green-700 rounded text-sm font-bold text-gray-50"
                   >
@@ -167,8 +173,6 @@ const Login = () => {
   const login = useLogin()
 
   const handleLogin = async (e: React.SyntheticEvent<EventTarget>) => {
-    e.preventDefault()
-
     if (!dirty && !disabled) {
       setDirty(true)
       handleValidation()
